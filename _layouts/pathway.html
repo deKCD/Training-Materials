@@ -1,0 +1,52 @@
+---
+layout: base
+---
+
+{% assign pathway = page %}
+
+<section class="learning-pathway">
+  <h1>{{ pathway.title }}</h1>
+    
+  <p>{{ pathway.description | markdownify }}</p>
+  <p>{{ content | markdownify }}</p>
+
+  {% if pathway.requirements %}
+    <h2>Requirements</h2>
+    <ul>
+      {% for req in pathway.requirements %}
+        <li>{{ req }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  {% for section in pathway.pathway %}
+    <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
+    <p>{{ section.description | markdownify }}</p>
+
+    {% if section.tutorials %}
+      <ul>
+        {% for tut in section.tutorials %}
+          <li>{{ tut.name }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endfor %}
+
+  <hr>
+
+  <h2>Editorial Board</h2>
+  <ul>
+    {% for person in pathway.editorial_board %}
+      <li>{{ person.name }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if pathway.funding %}
+    <h2>Funding</h2>
+    <ul>
+      {% for f in pathway.funding %}
+        <li>{{ f.name }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>

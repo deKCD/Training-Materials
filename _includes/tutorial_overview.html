@@ -1,0 +1,54 @@
+{% comment %}
+    Display tutorial's timings and learning objectives.
+{% endcomment %}
+
+{% if page.time_estimation == nil %}
+{% assign time_estimation = include.time_estimation %}
+{% else %}
+{% assign time_estimation = page.time_estimation %}
+{% endif %}
+
+{% if page.questions == nil %}
+{% assign tutorial_questions = include.tutorial_questions %}
+{% else %}
+{% assign tutorial_questions = page.questions %}
+{% endif %}
+
+{% if page.objectives == nil %}
+{% assign tutorial_objectives = include.tutorial_objectivess %}
+{% else %}
+{% assign tutorial_objectives = page.objectives %}
+{% endif %}
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Time estimation:</strong> {{ time_estimation }}
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	{% for question in tutorial_questions %}
+	<li>{{ question|markdownify }}</li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	{% for objective in tutorial_objectives %}
+	<li>{{ objective|markdownify }}</li>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+</blockquote>

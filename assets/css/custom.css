@@ -1,0 +1,138 @@
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+}
+
+.justify-text {
+  text-align: justify;
+}
+
+/* Custom CSS for Home Page button */
+
+.btn-small {
+  display: inline-block;
+  padding: 0.3em 0.8em;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 0.3em;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-small:hover {
+  background-color: #105a87;
+}
+
+/* Custom CSS for footer */
+
+.custom-footer {
+  padding: 1em 2em;
+  font-size: 0.9em;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ccc;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.footer-left,
+.footer-right {
+  flex: 1 1 auto;
+  min-width: 250px;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-right a {
+  color: #157878;
+  text-decoration: none;
+  margin-left: 0.5em;
+}
+
+.footer-right a:hover {
+  text-decoration: underline;
+}
+
+/* Custom CSS for Table */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+/* Bigger font size for header */
+th {
+  background-color: #157878;
+  color: white;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Smaller font size for table cells */
+td {
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+
+/* Custom CSS for a 3x3 grid and Caymanesque cards */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.grid-item {
+  background-color: #fff;
+  border: 2px solid #157878;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.grid-item:hover {
+  transform: scale(1.02);
+}
+
+.grid-item summary {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #157878;
+  margin-bottom: 0.5rem;
+}
+
+.grid-item .module {
+  padding-top: 0.5rem;
+  border-top: 1px dashed #ccc;
+  margin-top: 0.5rem;
+}
+
+/* Custom CSS for learning pathway layout */
+
+.learning-pathway {
+  margin-top: 2rem;
+}
+
+.learning-pathway h1,
+.learning-pathway h2,
+.learning-pathway h3 {
+  color: #157878;
+}
+
+.learning-pathway ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}

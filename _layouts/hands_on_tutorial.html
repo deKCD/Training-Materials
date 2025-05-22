@@ -1,0 +1,63 @@
+---
+layout: null
+---
+
+{% include base_path.html %}
+{% include gh_variables.html %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+    
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/bootstrap-theme.css" />
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/lesson.css" />
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/syntax.css" />
+  {% if page.math %}
+    <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/katex.min.css" />
+  {% endif %}
+    
+  {% include favicons.html %}
+</head>
+
+<body>
+  <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+  <header class="page-header" role="banner">
+    <h1 class="project-name">{{ page.title | default: site.title }}</h1>
+    <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
+    <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
+  </header>
+    
+    <div class="container">
+        {{ content }}
+      {% include tutorial_footer.html %}
+    </div>
+    {% include javascript.html %}
+    
+
+  <footer class="site-footer">
+    {% if site.github.is_project_page %}
+      <span class="site-footer-owner">
+        <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by
+        <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.
+      </span>
+    {% endif %}
+      
+    <span class="site-footer-credits">
+      {% include tutorial_footer.html %}
+    </span>
+      
+  </footer>
+
+</body>
+    
+</html>
