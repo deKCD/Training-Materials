@@ -9,18 +9,28 @@ permalink: /tutorials/
   <thead>
     <tr>
       <th>Tutorial Title</th>
+      <th>Versions</th>
       <th>Description</th>
       <th>Contributors</th>
       <th>Estimated Time</th>
     </tr>
   </thead>
   <tbody>
-    {% for tutorial in site.tutorials %}
+    {% assign tutorials = site.tutorials | where: "layout", "hands_on_tutorial" %}
+    {% assign tutorials_grouped = tutorials | group_by: "title" %}
+    {% for group in tutorials_grouped %}
+      {% assign first = group.items[0] %}
       <tr>
-        <td><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></td>
-          <td>{{ tutorial.description }}</td>
-          <td>{{ tutorial.contributors | join: ", "}}</td>
-          <td>{{ tutorial.time_estimation }}</td>
+        <td>{{ group.name }}</td>
+        <td>
+          {% assign sorted_versions = group.items | sort: "version" %}
+          {% for version in sorted_versions %}
+            <a href="{{ version.url }}">{{ version.version }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </td>
+        <td>{{ first.description }}</td>
+        <td>{{ first.contributors | join: ", " }}</td>
+        <td>{{ first.time_estimation }}</td>
       </tr>
     {% endfor %}
   </tbody>
