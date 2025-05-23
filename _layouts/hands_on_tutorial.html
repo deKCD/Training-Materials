@@ -35,10 +35,13 @@ layout: null
     <h1 class="project-name">{{ page.title | default: site.title }}</h1>
     <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
     <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
+    <a href="{{ '/tutorials/' | relative_url }}" class="btn btn-small">Collection of Tutorials</a>
   </header>
     
     <div class="container">
+      {% include tutorial_overview.html %}
         {{ content }}
+      {% include tutorial_keypoints.html %}
       {% include tutorial_footer.html %}
     </div>
     {% include javascript.html %}

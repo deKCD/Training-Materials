@@ -17,10 +17,10 @@ permalink: /tutorials/
   <tbody>
     {% for tutorial in site.tutorials %}
       <tr>
-        <td><a href="{{ tutorial.url }}">{{ tutorial.title | default: tutorial.title }}</a></td>
-        <td>{{ tutorial.description }}</td>
-        <td>{{ tutorial.contributors | join: ", "}}</td>
-        <td>{{ tutorial.time_estimation }}</td>
+        <td><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></td>
+          <td>{{ tutorial.description }}</td>
+          <td>{{ tutorial.contributors | join: ", "}}</td>
+          <td>{{ tutorial.time_estimation }}</td>
       </tr>
     {% endfor %}
   </tbody>

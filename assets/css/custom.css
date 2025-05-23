@@ -18,11 +18,14 @@
   font-weight: bold;
   border-radius: 0.3em;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  color: #fff;
+  background-color: transparent;
+  transition: 0.2s ease;
 }
 
 .btn-small:hover {
-  background-color: #105a87;
+  background-color: #d3d3d3;
+  color: #333333;
 }
 
 /* Custom CSS for footer */

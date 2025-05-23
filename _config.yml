@@ -22,3 +22,8 @@ collections:
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
+
+exclude:
+  - "**/.ipynb_checkpoints"
+  - "**/.ipynb_checkpoints/**"
+
