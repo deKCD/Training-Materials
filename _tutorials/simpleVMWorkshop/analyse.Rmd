@@ -1,0 +1,52 @@
+
+# Pathogen detection in metagenomic datasets
+
+Plot the hashed K-mer matches of the datasets you have found.
+
+```{r mash}
+library(ggplot2)
+mash = read.table("/vol/data/output.tsv")
+
+publications = read.table("/vol/data/publications.tsv")
+
+ggplot(mash) + geom_histogram(aes(x=V3)) +
+  xlab("Matched K-mer hashes") +
+  ylab("Found datasets")
+```
+
+It is also important to check the mash identity.
+Plot the number of matched k-mer hashes against the mash identity.
+
+```{r scatter}
+ggplot(mash) + geom_point(aes(x=V2, y=V3))
+```
+
+We are interested in matches with at least 90% mash identity and
+700 matched k-mer hashes. Let's filter for those matches
+
+```{r filter}
+mash_filtered <- mash[mash$V2 >= 0.90 & mash$V3 >= 100,]
+mash_filtered$V1
+```
+
+It would be good to know which environment your hits belong to.
+We could join both datasets and plot the environments.
+
+```{r join}
+mash_publications <- merge(mash_filtered, publications, by="V1")
+ggplot(mash_publications) + geom_bar(aes(x=V2.y)) +
+  xlab("Environment") + ylab("Number of Hits") +
+  theme(axis.text.x = element_text(angle = 60, vjust = 0.5, hjust=1))
+```
+
+Finally we should plot which pathogens we have found in which environment
+
+```{r join_patho}
+ggplot(mash_publications) +
+  geom_bar(aes(x=V2.y, fill=V7.x)) +
+  xlab("Environment") +
+  ylab("Number of Hits") +
+  theme(axis.text.x = element_text(angle = 60, vjust = 0.5, hjust=1)) +
+  scale_fill_brewer(palette="Paired")
+```
+

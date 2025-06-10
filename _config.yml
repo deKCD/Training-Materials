@@ -27,3 +27,6 @@ exclude:
   - "**/.ipynb_checkpoints"
   - "**/.ipynb_checkpoints/**"
 
+plugins:
+  - jekyll-last-modified-at
+

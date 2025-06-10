@@ -22,33 +22,34 @@
 
 
 <blockquote class="objectives">
+    
   <h2>Overview</h2>
 
   <div class="row">
     <div class="col-md-3">
-      <strong>Time estimation:</strong> {{ time_estimation }}
+      <p><strong>Time estimation:</strong> {{ time_estimation }}</p>
+      <p><strong>Last update:</strong> {{ page.last_modified_at | date: "%Y-%m-%d" }}</p>
     </div>
+      
     <div class="col-md-9">
-      <strong>Questions</strong>
-      <ul>
-	{% for question in tutorial_questions %}
-	<li>{{ question|markdownify }}</li>
-	{% endfor %}
-      </ul>
+        <strong>Questions</strong>
+        <ul>
+            {% for question in tutorial_questions %}
+            <li>{{ question | markdownify }}</li>
+            {% endfor %}
+        </ul
     </div>
   </div>
-
+    
   <div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-9">
-      <strong>Objectives</strong>
-      <ul>
-	{% for objective in tutorial_objectives %}
-	<li>{{ objective|markdownify }}</li>
-	{% endfor %}
-      </ul>
+      <div class="col-md-3"></div>
+      <div class="col-md-9">
+          <strong>Objectives</strong>
+          <ul>
+              {% for objective in tutorial_objectives %}
+              <li>{{ objective | markdownify }}</li>
+              {% endfor %}
+          </ul>
     </div>
   </div>
-
 </blockquote>

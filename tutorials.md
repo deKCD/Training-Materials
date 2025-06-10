@@ -8,7 +8,7 @@ permalink: /tutorials/
 <table>
   <thead>
     <tr>
-      <th>Tutorial Title</th>
+      <th>Tutorial</th>
       <th>Versions</th>
       <th>Description</th>
       <th>Contributors</th>
@@ -29,7 +29,17 @@ permalink: /tutorials/
           {% endfor %}
         </td>
         <td>{{ first.description }}</td>
-        <td>{{ first.contributors | join: ", " }}</td>
+        <td>
+            <ul>
+                {% for contributor in first.contributors %}
+                    {% if contributor.orcid %}
+                    <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor.name }}</a>
+                    {% else %}
+                    {{ contributor.name }}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </td>
         <td>{{ first.time_estimation }}</td>
       </tr>
     {% endfor %}
