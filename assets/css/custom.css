@@ -88,54 +88,99 @@ td {
 }
 
 
-/* Custom CSS for a 3x3 grid and Caymanesque cards */
+/* Custom CSS for Pathways */
 
-.grid-container {
+.pathway-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5em;
+  margin-top: 1em;
 }
 
-.grid-item {
-  background-color: #fff;
-  border: 2px solid #157878;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+.pathway-card {
+  border-radius: 12px;
+  padding: 1.2em;
+  background-color: #2a8d8d; /* light Cayman blue */
+  color: white;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
 }
 
-.grid-item:hover {
-  transform: scale(1.02);
+.pathway-card:hover {
+  background-color: #106060;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-.grid-item summary {
-  cursor: pointer;
-  font-size: 1.2rem;
-  color: #157878;
-  margin-bottom: 0.5rem;
-}
-
-.grid-item .module {
-  padding-top: 0.5rem;
-  border-top: 1px dashed #ccc;
-  margin-top: 0.5rem;
-}
-
-/* Custom CSS for learning pathway layout */
-
-.learning-pathway {
-  margin-top: 2rem;
-}
-
-.learning-pathway h1,
-.learning-pathway h2,
-.learning-pathway h3 {
+.pathway-card h3 {
+  margin-top: 0;
+  font-size: 1.3em;
+  font-weight: bold;
   color: #157878;
 }
 
-.learning-pathway ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
+.pathway-card h3 a {
+  color: white;          
+  text-decoration: none;   /* Optional: remove underline */
+}
+
+.pathway-card h3 a:hover {
+  text-decoration: underline;  /* Optional: underline on hover */
+}
+
+.pathway-card p {
+  margin: 0.5em 0;
+  color: #eaeaea; /* Lighter text for body */
+  font-size: 0.9em;
+}
+
+.pathway-card .tags {
+  margin-top: 0.5em;
+}
+
+.pathway-card .tags span {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #157878;
+  font-size: 0.65em;
+  font-weight: bold;
+  padding: 0.3em 0.6em;
+  margin: 0.2em 0.2em 0 0;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+
+/* Custom CSS for Pathway content */
+
+.pathway-content {
+  max-width: 960px;
+  margin: 0 auto; /* center horizontally */
+  padding: 20px;
+}
+
+.pathway-content p {
+  font-size: 1.1em;  /* Or any size you prefer */
+  line-height: 1.6;  /* Optional: improves readability */
+  margin-bottom: 1em;
+}
+
+.pathway-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.pathway-content table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  vertical-align: top;
+  font-size: 1em;
+}
+
+.pathway-content table th {
+  border: 1px solid #ddd;
+  vertical-align: top;
+  font-weight: bold;
+  font-size: 1.1em; /* increase this value for even larger text */
+  padding: 10px;
 }
