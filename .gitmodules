@@ -1,4 +1,0 @@
-[submodule "_tutorials/simpleVMWorkshop"]
-	path = _tutorials/simpleVMWorkshop
-	url = https://github.com/deNBI/simpleVMWorkshop.git
-	branch = main
