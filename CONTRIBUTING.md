@@ -1,35 +1,26 @@
 ---
-layout: base
+layout: contributing
 title: "Contributing"
 ---
 
-## Instructions to add a new tutorial
+## **Add a new tutorial**
+-------------------------
+To add a new tutorial, create a new folder in `_tutorials` folder and  place the tutorial content in a single `tutorial.md` in the tutorial directory (or subdirectory if you have several versions of the same tutorial). 
 
-To add a new tutorial from the original tutorial repository, run the following command:
+Commit changes to the new branch and pull a request.
 
-```
-git submodule add https://github.com/<user>/<tutorial> _tutorials/<tutorial>
-```
-
-By default, it adds content from the `main` branch. To select the specific branch, use `-b` argument, *e.g.*:
-
-```
-git submodule add -b <branch_name> https://github.com/<user>/<tutorial> _tutorials/<tutorial>
-```
-
-Place the tutorial content in a single `tutorial.md` in the tutorial root directory. To format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes)
-
-### Edit the tutorial
-
+### **Edit the tutorial**
+-------------------------
 The `tutorial.md` should have the following structure:
 
 ```
 ---
-layout: hands_on_tutorial
+layout: tutorial_hands_on
+
 title: Title of the tutorial
 description: Description of the tutorial
 slug: slugified title
-time_estimation: ""
+time_estimation: HM
 questions:
   - Which questions are addressed by the tutorial?
 objectives:
@@ -38,9 +29,12 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 version: tutorial version
-contributors:
-  - name: Full name
-    orcid: ORCID ID
+contributions:
+  authorship:
+  - author 1
+  - author 2
+  editing: 
+  funding: 
 ---
 
 ## Section title
@@ -48,16 +42,71 @@ contributors:
 Enter your tutorial content here.
 ```
 
-Leave the `layout: hands_on_tutorial` as default. 
+Leave the `layout: tutorial_hands_on` as default. 
 
-To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-folder>/<image-folder>/<image>){: .responsive-img }`. Add `{: .responsive-img }` to place the image within the text width. 
+If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
 
 
-## Instructions to create a new learning pathway
+#### **Format the content**
 
+##### **Boxes**
+
+To improve the learning experience in our tutorial, we define some boxes to highlight content. Below is an example of the "Task box with solutions":
+
+```markdown
+> ## Questions
+> 1. Question 1
+> 2. Question 2
+>  
+> > ## Answers
+> > 1. Answer 1
+> > 2. Answer 2
+> > 
+> {: .solution}
+>
+{: .question}
+```
+which will look like this:
+
+> ## Questions
+> 1. Question 1
+> 2. Question 2
+>  
+> > ## Answers
+> > 1. Answer 1
+> > 2. Answer 2
+> > 
+> {: .solution}
+>
+{: .question}
+
+There are several boxes that you can use to format the content of your training material: `{: .overview}`, `{: .key_points}`, `{: .tip}`, `{: .warning}`, `{: .comment}`, `{: .hands_on}`, `{: .question}`, `{: .solution}`, `{: .details}`, `{: .feedback}`, `{: .code-in}`, and `{: .code-out}`.
+
+> ## Tasks
+> 1. Create each box and see how it looks.
+> 2. Create one with a nested box.
+> 
+{: .hands_on}
+
+
+##### **Images**
+
+To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-folder>/<image-folder>/<image>){: .responsive-img }`. Add `{: .responsive-img }` to place the image within the text width.
+
+
+> ## Additional resources
+> If you need an additional materials to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes).
+> 
+> Please also refer to the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
+> 
+{: .details}
+
+
+## **Create a new learning pathway**
+------------------------------------
 To add a new learning pathway, create `<pathway_title>.md` file in `_pathways` folder. The `<pathway_title>.md` should have the following structure:
 
-```
+```markdown
 ---
 layout: pathway
 title: Title of the Learning Pathway
@@ -81,4 +130,4 @@ editorial_board:
 ---
 ```
 
-Leave the `layout: pathway` as default. 
+Leave the `layout: pathway` as default. Commit changes to the new branch and pull a request.
