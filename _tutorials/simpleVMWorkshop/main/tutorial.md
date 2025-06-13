@@ -1,24 +1,28 @@
 ---
-layout: hands_on_tutorial
+layout: tutorial_hands_on
+
 title: SimpleVM Workshop
 description: "FIXME"
 slug: simplevmworkshop
 time_estimation: "FIXME"
 questions:
   - "FIXME"
+  - "FIXME"
 objectives:
   - "FIXME"
-keypoints:
+  - "FIXME"
+key_points:
+  - "FIXME"
   - "FIXME"
 version:
   - main
-contributors:
-  - name: Peter Belmann
-    orcid: 
-  - name: nilshoffmann
-    orcid:
-  - name: dweinholz
-    orcid: 
+contributions:
+  authorship:
+  - Peter Belmann
+  - Nils Hoffmann
+  - dweinholz
+  editing: 
+  funding:
 ---
 
 ## Table of Contents
@@ -81,45 +85,50 @@ you should be able to log in to the [de.NBI Cloud Portal](https://cloud.denbi.de
 
 ### **1.2 Select the SimpleVMIntro23 project**
 
-1. Click on the `New Instance` tab.
-
-2. If you are already member of a SimpleVM project then you are offered a drop down menu to select
-a project. In this case please select the **SimpleVMIntro23** project. If this is
-your first SimpleVM project, you are now able to select/generate a key (next point) or directly start a VM.
-
-3. If you have no SSH key set so far, just click on generate key and save the
-private key. During this workshop you will not need this file because 
-you will access all VMs via the browser. However, for your future work using
-SimpleVM, we highly recommend to read our de.NBI Cloud wiki regarding
-[SSH keys](https://cloud.denbi.de/wiki/portal/user_information/#ssh-key)
+> ## Hands On: Select the SimpleVMIntro23 project
+> 1. Click on the `New Instance` tab.
+> 
+> 2. If you are already member of a SimpleVM project then you are offered a drop down menu to select
+> a project. In this case please select the **SimpleVMIntro23** project. If this is
+> your first SimpleVM project, you are now able to select/generate a key (next point) or directly start a VM.
+> 
+> 3. If you have no SSH key set so far, just click on generate key and save the
+> private key. During this workshop you will not need this file because 
+> you will access all VMs via the browser. However, for your future work using
+> SimpleVM, we highly recommend to read our de.NBI Cloud wiki regarding
+> [SSH keys](https://cloud.denbi.de/wiki/portal/user_information/#ssh-key)
+>
+{: .hands_on}
 
 ### **1.3 Start a VM**
 
-1. Choose a name for your VM.
-2. Select **de.NBI default**.
-3. In the image section, please click on the *Research Environments* tab 
-   and select the **TheiaIDE-ubuntu22.04** image.
-   ![](/tutorials/simpleVMWorkshop/figures/theiaImage.png){: .responsive-img }
-4. Select the Conda tab and choose the following tools with their version numbers given below for installation via Conda:
-   * ncbi-genome-download (0.3.3)
-   * mash (2.2)
-   * csvtk (0.28.0)
-   * entrez-direct (16.2)
-   * jq (1.6)
-   * parallel (20230922)
-   ![](/tutorials/simpleVMWorkshop/figures/bioconda.png){: .responsive-img }
-   
-   The filter in the name column can be used to search for the packages.
-   You will learn in the next sections how to apply these tools.
-
-4. Select a URL path for Theia. You will access Theia via this URL.
-   ![](/tutorials/simpleVMWorkshop/figures/researchenvironment_url.png){: .responsive-img }
-5. Grant access to all project members with a `Cloud-portal-support` tag.
-   This way these members get ssh access to your VM and can help you in case
-   something does not work as expected.
-   ![](/tutorials/simpleVMWorkshop/figures/grantAccess.png){: .responsive-img }
-6. Confirm the checkboxes and click on Start.
-
+> ## Hands On: Start a VM
+> 1. Choose a name for your VM.
+> 2. Select **de.NBI default**.
+> 3. In the image section, please click on the *Research Environments* tab 
+>    and select the **TheiaIDE-ubuntu22.04** image.
+>    ![](/tutorials/simpleVMWorkshop/figures/theiaImage.png){: .responsive-img }
+> 4. Select the Conda tab and choose the following tools with their version numbers given below for installation via Conda:
+>    * ncbi-genome-download (0.3.3)
+>    * mash (2.2)
+>    * csvtk (0.28.0)
+>    * entrez-direct (16.2)
+>    * jq (1.6)
+>    * parallel (20230922)
+>    ![](/tutorials/simpleVMWorkshop/figures/bioconda.png){: .responsive-img }
+>    
+>    The filter in the name column can be used to search for the packages.
+>    You will learn in the next sections how to apply these tools.
+> 
+> 5. Select a URL path for Theia. You will access Theia via this URL.
+>    ![](/tutorials/simpleVMWorkshop/figures/researchenvironment_url.png){: .responsive-img }
+> 6. Grant access to all project members with a `Cloud-portal-support` tag.
+>    This way these members get ssh access to your VM and can help you in case
+>    something does not work as expected.
+>    ![](/tutorials/simpleVMWorkshop/figures/grantAccess.png){: .responsive-img }
+> 7. Confirm the checkboxes and click on Start.
+>
+{: .hands_on}
 
 ## **Section 2: Verify your VM properties and tools**
 
@@ -134,70 +143,73 @@ you scale up your analysis in the next section.
 
 Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
-1. Click on the Instances tab (Overview -> Instances). After you have initiated the start-up of the machine, you should have been automatically redirected there. Now open the "How to connect"
-   dropdown of your machine. Click on the Theia ide URL which opens a new browser tab.
-   ![](/tutorials/simpleVMWorkshop/figures/howtoconnect.png){: .responsive-img }
-2. Click on `Terminal` in the upper menu and select `New Terminal`.
-   ![](/tutorials/simpleVMWorkshop/figure/terminal.png){: .responsive-img }
-3. Inspect the VM before starting to work with it. Let's check whether the VM
-   has the properties that SimpleVM promised you by typing the following commands
-   in your newly opened terminal window.
-   `nproc` tells you the number of processing units.
-
-   ```
-   nproc
-   ```
-   
-   Does that correspond to the actual number of cores of the flavor you selected?
-   `free -h` tells you the amount of RAM that is available to your VM. You will see
-   that the sum of the total amount of Mem (`total` column, `Mem` row) corresponds 
-   roughly to the RAM size of your selected flavor.
-   
-   ```
-   free -h
-   ```
-   
-   You can also check what kind of processes are running on your VM by executing `top`
-   or `htop`.
-   
-   ```
-   htop
-   ```
-   
-   Exit `htop` by typing `q` or `F10`.
-
-5. You can use the tools you selected in the previous part by running `conda activate denbi`.
-
-6. Test if the needed commands are installed by running all of them with `-h` parameter.
-   You will get an explanation of their usage in the next chapter.
-
-   * `ncbi-genome-download -h`
-   * `mash -h`
-   * `csvtk -h`
-   * `jq -h`
-   
-   If there is an error reported, then something went wrong, and we have to either
-   repeat the conda installation manually or install it a different way.
-
-7. Remember that you have root permissions on the VM. You can install any
-   tool that you need for your research.
-   Let's test this statement by first fetching the latest information about available packages and installing the following commands (`fortune-mod`, `cowsay`) via `sudo`.
-
-   Update:
-   ```
-   sudo apt update
-   ```
-
-   Install the commands:
-   
-   ```
-   sudo apt install -y fortune-mod cowsay
-   ```
-   
-   You can run both commands via
-   ```
-   /usr/games/fortune | /usr/games/cowsay 
-   ```
+> ## Hands On: Verify VM properties and tools
+> 1. Click on the Instances tab (Overview -> Instances). After you have initiated the start-up of the machine, you should have been automatically redirected there.
+>    Now > open the "How to connect"
+>    dropdown of your machine. Click on the Theia ide URL which opens a new browser tab.
+>    ![](/tutorials/simpleVMWorkshop/figures/howtoconnect.png){: .responsive-img }
+> 2. Click on `Terminal` in the upper menu and select `New Terminal`.
+>    ![](/tutorials/simpleVMWorkshop/figure/terminal.png){: .responsive-img }
+> 3. Inspect the VM before starting to work with it. Let's check whether the VM
+>    has the properties that SimpleVM promised you by typing the following commands
+>    in your newly opened terminal window.
+>    `nproc` tells you the number of processing units.
+> 
+>    ```bash
+>    nproc
+>    ```
+>    
+>    Does that correspond to the actual number of cores of the flavor you selected?
+>    `free -h` tells you the amount of RAM that is available to your VM. You will see
+>    that the sum of the total amount of Mem (`total` column, `Mem` row) corresponds 
+>    roughly to the RAM size of your selected flavor.
+>    
+>    ```bash
+>    free -h
+>    ```
+>    
+>    You can also check what kind of processes are running on your VM by executing `top`
+>    or `htop`.
+>    
+>    ```bash
+>    htop
+>    ```
+>    
+>    Exit `htop` by typing `q` or `F10`.
+> 
+> 4. You can use the tools you selected in the previous part by running `conda activate denbi`.
+> 
+> 5. Test if the needed commands are installed by running all of them with `-h` parameter.
+>    You will get an explanation of their usage in the next chapter.
+> 
+>    * `ncbi-genome-download -h`
+>    * `mash -h`
+>    * `csvtk -h`
+>    * `jq -h`
+>    
+>    If there is an error reported, then something went wrong, and we have to either
+>    repeat the conda installation manually or install it a different way.
+> 
+> 6. Remember that you have root permissions on the VM. You can install any
+>    tool that you need for your research.
+>    Let's test this statement by first fetching the latest information about available packages and installing the following commands (`fortune-mod`, `cowsay`) via > > `sudo`.
+> 
+>    Update:
+>    ```bash
+>    sudo apt update
+>    ```
+>    Install the commands:
+>    
+>    ```bash
+>    sudo apt install -y fortune-mod cowsay
+>    ```
+>    
+>    You can run both commands via
+>    ```bash
+>    /usr/games/fortune | /usr/games/cowsay 
+>    ```
+>
+{: .hands_on}
 
 ## **Section 3: Scale up your analysis**
 
@@ -211,99 +223,106 @@ and scale up our analysis by providing more cores to mash.
 
 ### **3.1 Create a new VM based on your snapshot**
 
-1. Click on `Overviews` -> `Snapshots` in left menu and check which status
-   your snapshot has. You can also filter of the name in the top menu. 
-   If it has the status `active`, you can 
-   navigate to the `New Instance` tab (and select the SimpleVMIntro23 project).
-
-2. Provide again a name for your instance.
-3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available.
-   ![](/tutorials/simpleVMWorkshop/figures/large_flavor.PNG){: .responsive-img }
-
-   Click on the Snapshot tab to select the snapshot **SimpleVMIntro23**.
-   ![](/tutorials/simpleVMWorkshop/figures/startsnap.png){: .responsive-img }
-
-5. Please create a volume for your VM and enter your name without whitespace 
-   (Example: Max Mustermann -> MaxMusterman) as the volume name. 
-   Enter `data` (`/vol/data`) as mountpath and provide 1 GB as the storage size.
-   ![](/tutorials/simpleVMWorkshop/figures/createVolume.png){: .responsive-img }
-
-6. Grant again access to all project members with a `Cloud-portal-support` tag.
-   This way these members get ssh access to your VM and can help you in case
-   something does not work as expected.
-   ![](/tutorials/simpleVMWorkshop/figures/grantAccess.png){: .responsive-img }
-
-7. Confirm the checkboxes and click on Start.
-   While the VM is starting please fill out our [user survey](https://cloud.denbi.de/survey/index.php/638945?lang=en).
+> ## Hands On: Create a new VM based on snapshot
+> 1. Click on `Overviews` -> `Snapshots` in left menu and check which status
+>    your snapshot has. You can also filter of the name in the top menu. 
+>    If it has the status `active`, you can 
+>    navigate to the `New Instance` tab (and select the SimpleVMIntro23 project).
+> 
+> 2. Provide again a name for your instance.
+> 3. In the flavors sections please choose the **de.NBI large** flavor which has 28 cores available.
+>    ![](/tutorials/simpleVMWorkshop/figures/large_flavor.PNG){: .responsive-img }
+> 
+>    Click on the Snapshot tab to select the snapshot **SimpleVMIntro23**.
+>    ![](/tutorials/simpleVMWorkshop/figures/startsnap.png){: .responsive-img }
+> 
+> 5. Please create a volume for your VM and enter your name without whitespace 
+>    (Example: Max Mustermann -> MaxMusterman) as the volume name. 
+>    Enter `data` (`/vol/data`) as mountpath and provide 1 GB as the storage size.
+>    ![](/tutorials/simpleVMWorkshop/figures/createVolume.png){: .responsive-img }
+> 
+> 6. Grant again access to all project members with a `Cloud-portal-support` tag.
+>    This way these members get ssh access to your VM and can help you in case
+>    something does not work as expected.
+>    ![](/tutorials/simpleVMWorkshop/figures/grantAccess.png){: .responsive-img }
+> 
+> 7. Confirm the checkboxes and click on Start.
+>    While the VM is starting please fill out our [user survey](https://cloud.denbi.de/survey/index.php/638945?lang=en).
+>
+{: .hands_on}
 
 ### **3.2 Interact with the SRA Mirror and search for more datasets to analyse**
 
-1. You are now on the `Instance Overview` page. You can delete your old VM which
-   we used to create your snapshot. To do this, open the action selection of the old machine again
-   by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
-   
-2. On your new VM, please click on `how to connect`.
-   You should see again a link. Please click on the link to open Theia-IDE on a new
-   browser tab.
-   ![](/tutorials/simpleVMWorkshop/figures/howtoconnect.png){: .responsive-img }
-
-3. Click on `Terminal` in the upper menu and select `New Terminal`.
-   ![](/tutorials/simpleVMWorkshop/figures/terminal.png){: .responsive-img }
-
-4. Activate the conda environment by running:
-   ```
-   conda activate denbi
-   ```
-   
-5. Unfortunately, conda does not offer a minio cli binary,
-   which means that we would have to install it manually.
-   Download the binary:
-   ```
-   wget https://dl.min.io/client/mc/release/linux-amd64/mc
-   ```
-   Move it to a folder where other binaries usually are stored:
-   ```
-   sudo mv mc /usr/local/bin/
-   ```
-   Change file permissions:
-   ```
-   chmod a+x /usr/local/bin/mc
-   ```
-
-6. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
-   ```
-   mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
-   ```
-
-7. List which files are available for SRA number `SRR3984908`:
-   ```
-   mc ls sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
-   ```
-
-8. Check the size of these files
-   ```
-   mc du sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
-   ```
-
-9. You can read the first lines of these files by using `mc cat`.
-   ```
-   mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
-   ```
-
-10. Search for SRA run accessions we want to analyse and check the sum of their size
-   (this may take a while to complete):
-   ```
-   mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
-      |  jq -s 'map(.size) | add'  \
-      | numfmt --to=iec-i --suffix=B --padding=7
-   ```
+> ## Hands On
+> 1. You are now on the `Instance Overview` page. You can delete your old VM which
+>    we used to create your snapshot. To do this, open the action selection of the old machine again
+>    by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
+>    
+> 2. On your new VM, please click on `how to connect`.
+>    You should see again a link. Please click on the link to open Theia-IDE on a new
+>    browser tab.
+>    ![](/tutorials/simpleVMWorkshop/figures/howtoconnect.png){: .responsive-img }
+> 
+> 3. Click on `Terminal` in the upper menu and select `New Terminal`.
+>    ![](/tutorials/simpleVMWorkshop/figures/terminal.png){: .responsive-img }
+> 
+> 4. Activate the conda environment by running:
+>    ```bash
+>    conda activate denbi
+>    ```
+>    
+> 5. Unfortunately, conda does not offer a minio cli binary,
+>    which means that we would have to install it manually.
+>    Download the binary:
+>    ```bash
+>    wget https://dl.min.io/client/mc/release/linux-amd64/mc
+>    ```
+>    Move it to a folder where other binaries usually are stored:
+>    ```bash
+>    sudo mv mc /usr/local/bin/
+>    ```
+>    Change file permissions:
+>    ```bash
+>    chmod a+x /usr/local/bin/mc
+>    ```
+> 
+> 6. Add S3 config for our public SRA mirror on our Bielefeld Cloud site:
+>    ```bash
+>    mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
+>    ```
+> 
+> 7. List which files are available for SRA number `SRR3984908`:
+>    ```bash
+>    mc ls sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
+>    ```
+> 
+> 8. Check the size of these files
+>    ```bash
+>    mc du sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908
+>    ```
+> 
+> 9. You can read the first lines of these files by using `mc cat`.
+>    ```bash
+>    mc cat sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz | zcat | head
+>    ```
+> 
+> 10. Search for SRA run accessions we want to analyse and check the sum of their size
+>    (this may take a while to complete):
+>    ```bash
+>    mc find --regex "SRR6439511.*|SRR6439513.*|ERR3277263.*|ERR929737.*|ERR929724.*"  sra/ftp.era.ebi.ac.uk/vol1/fastq  -exec "  mc ls -r --json  {} " \
+>       |  jq -s 'map(.size) | add'  \
+>       | numfmt --to=iec-i --suffix=B --padding=7
+>    ```
+>
+{: .hands_on}
 
 > ## Explanation
 >    * `mc find` reports all files that have one of the following prefixes in their file name: `SRR6439511.`, `SRR6439513.`, `ERR3277263.`, `ERR929737.`, `ERR929724.`.
 >    *  `jq` uses the json that is produced by `mc find` and sums up the size of all files (`.size` field).
 >    * `numfmt` transforms the sum to a human-readable string.
 >   
-{: .keypoints}
+{: .details}
+
 
 ### **3.3 Run commands with more cores and plot your result**
 
@@ -311,28 +330,28 @@ and scale up our analysis by providing more cores to mash.
    "greatest threat to human health" by the [World Health Organisation (WHO)
    in 2017](https://www.who.int/news/item/27-02-2017-who-publishes-list-of-bacteria-for-which-new-antibiotics-are-urgently-needed)
    Please download the index:
-   ```
+   ```bash
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
    ```
 
 2. We created a file that points to the datasets that you have found in the previous chapter.
    Download the input file via:
-   ```
+   ```bash
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads.tsv
    ```
    You can inspect the file by using `cat`:
-   ```
+   ```bash
    cat reads.tsv
    ```
 3. We will create a directory for the output for the following command. We will place an output
    file for every SRA ID.
-   ```
+   ```bash
    mkdir -p output
    ```
 
 4. You can now run the commands from the first part with found datasets as input (this may take a while to complete):
    Create a function that we will run in prallel:
-   ```
+   ```bash
    search(){ 
       left_read=$(echo $1 | cut -d ' '  -f 1);  
       right_read=$(echo $1 | cut -d ' ' -f 2); 
@@ -346,7 +365,7 @@ and scale up our analysis by providing more cores to mash.
 > ## Explanation
 >   In order to understand what this function does let's take the following datasets as an example:
 > 
-> >```
+> >```bash
 > > sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_1.fastq.gz
 > > sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR643/001/SRR6439511/SRR6439511_2.fastq.gz
 > > ```
@@ -358,14 +377,14 @@ and scale up our analysis by providing more cores to mash.
 >       to filter the datasets.
 >    * Both `sed`s are just post-processing the output and place every match in the `output` folder.
 >      
-{: .keypoints}  
+{: .details}  
 
    Export this function, so that we can use it in the next command.
-   ```
+   ```bash
    export -f search
    ```
    Run your analysis in parallel.
-   ```
+   ```bash
    parallel -a reads.tsv search
    ```
    where
@@ -378,19 +397,19 @@ and scale up our analysis by providing more cores to mash.
    ![](/tutorials/simpleVMWorkshop/figures/htop.png){: .responsive-img }
 
 6. Concatenate all results into one file via 
-   ```
+   ```bash
    cat output/*.txt > output.tsv
    ```
 
 7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
-   ```
+   ```bash
    csvtk -t plot hist -H -f 3 output.tsv -o output.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf. 
    ![](/tutorials/simpleVMWorkshop/figures/openpdf.png){: .responsive-img }
 
 8. Get the title and the environment name about the found datasets by using Entrez tools
-   ```
+   ```bash
    for sraid in $(ls -1 output/ | cut -f 1 -d '.'); do  
      esearch -db sra -query ${sraid} \
        | esummary \
@@ -408,15 +427,15 @@ and scale up our analysis by providing more cores to mash.
 >       the scientific name and the third column is the study title.
 >    * All results are stored the `publications.tsv` file.
 >
-{: .keypoints}
+{: .details}
 
 9. Set correct permissions on your volume:
-   ```
+   ```bash
    sudo chown ubuntu:ubuntu /vol/data/
    ```
 
 10. Copy your results to the volume for later use:
-    ```
+    ```bash
     cp publications.tsv output.tsv /vol/data
     ```
 
@@ -467,7 +486,7 @@ in order to inspect and visualize our results.
    `Tools` -> `Terminal` -> `New Terminal`.
 
 3. Download the Script by running wget:
-   ```
+   ```bash
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/analyse.Rmd
    ```   
    
@@ -476,7 +495,7 @@ in order to inspect and visualize our results.
    ![](/tutorials/simpleVMWorkshop/figures/rconsole.png){: .responsive-img }
    
    Install the following libraries: 
-   ```
+   ```R
    install.packages(c("ggplot2","RColorBrewer","rmarkdown"))
    ```
 5. You can now open the `analyse.Rmd` R notebook via `File` -> `Open File`.
@@ -535,14 +554,17 @@ In the following you will configure a cluster and submit your tools to a SLURM j
 
 3. Check how many nodes are part of your cluster by using `sinfo`
 
-```
+```bash
 sinfo
 ```
 which will produce the following example output
-```
-PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-debug*       up   infinite      2   idle bibigrid-worker-1-1-us6t5hdtlklq7h9,bibigrid-worker-1-2-us6t5hdtlklq7h9
-```
+
+> ## Code Out
+> ```
+> PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+> debug*       up   infinite      2   idle bibigrid-worker-1-1-us6t5hdtlklq7h9,bibigrid-worker-1-2-us6t5hdtlklq7h9
+> ```
+{: .code-out}
 
 The important columns here are `STATE` which tells you if the worker nodes are processing jobs
 or are just in `idle` state and the column `NODELIST` which is just a list of nodes.
@@ -550,12 +572,12 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
 4. You could now submit a job and test if your cluster is working as expected.
    `/vol/spool` is the folder which is shared between all nodes. You should always submit jobs
    from that directory.
-   ```
+   ```bash
    cd /vol/spool
    ```
 
 5. Please fetch the script that we want to execute
-   ```
+   ```bash
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/basic.sh
    ```
    The script contains the following content:
@@ -575,35 +597,42 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    check if SLURM is executing your script with `squeue`.
 
    sbatch:
-   ```
+   ```bash
    sbatch basic.sh
    ```
    
    squeue:
-   ```
+   ```bash
    squeue
    ```
    which will produce the following example output:
-   ```
-   JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-   212     debug basic.sh   ubuntu  R       0:03      1 bibigrid-worker-1-1-us6t5hdtlklq7h9
-   ```
+
+
+> ## Code Out
+> ```
+>    JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+>    212     debug basic.sh   ubuntu  R       0:03      1 bibigrid-worker-1-1-us6t5hdtlklq7h9
+> ```
+{: .code-out}
+
    Squeue tells you the state of your jobs and which nodes are actually executing them.
    In this example you should see that `bibigrid-worker-1-1-us6t5hdtlklq7h9` is running (`ST` column) your job
    with the name `basic.sh`.
 
-7. Once the job has finished you should see a slurm output file in your directory (Example: `slurm-212.out`)
+8. Once the job has finished you should see a slurm output file in your directory (Example: `slurm-212.out`)
    which will contain the name of the worker node which executed your script.
    Open the file with the following command:
-   ```
+   ```bash
    cat slurm-*.out
    ```
-   Example output:
-   ```
-   bibigrid-worker-1-1-us6t5hdtlklq7h9
-   ```
+   
+> ## Code Out: Example output
+>    ```
+>    bibigrid-worker-1-1-us6t5hdtlklq7h9
+>    ```
+{: .code-out}
 
-8. One way to distribute jobs is to use so-called array jobs. With array jobs you specify how many times
+9. One way to distribute jobs is to use so-called array jobs. With array jobs you specify how many times
    your script should be executed. Every time the script is executed, a number between 1 and the number of times
    you want the script to be executed is assigned to the script execution. The specific number is saved in a
    variable (`SLURM_ARRAY_TASK_ID`). If you specify `--array=1-100` then your script is 100 times executed and
@@ -611,33 +640,35 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    jobs on your cluster.
 
    Please fetch the modified script
-   ```
+   ```bash
    wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/basic_array.sh
    ```
 
    Which is simply reading out the `SLURM_ARRAY_TASK_ID` variable and placing them in a file in an
    output directory:
 
-   ```bash
-   #!/bin/bash
-   
-   # Create output directory in case it was not created so far
-   mkdir -p output_array
-   
-   #Do not do anything for 10 seconds 
-   sleep 10
-   
-   #Create a file with the name of SLURM_ARRAY_TASK_ID content. 
-   touch output_array/${SLURM_ARRAY_TASK_ID}
-   ```
- 
+> ## Code In
+>    ```bash
+>    #!/bin/bash
+>    
+>    # Create output directory in case it was not created so far
+>    mkdir -p output_array
+>    
+>    #Do not do anything for 10 seconds 
+>    sleep 10
+>    
+>    #Create a file with the name of SLURM_ARRAY_TASK_ID content. 
+>    touch output_array/${SLURM_ARRAY_TASK_ID}
+>    ```
+{: .code-in}
+
    You can execute this script a 100 times with the following command 
-   ```
+   ```bash
    sbatch --array=1-100 basic_array.sh
    ```
    
    If you now check the `output_array` folder, you should see numbers from 0 to 100.
-   ```
+   ```bash
    ls output_array
    ```
 
@@ -649,7 +680,7 @@ searches a list of genomes in a list of metagenomic datasets.
 
 Please download the updated script by using wget:
 
-```
+```bash
 wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/search.sh
 ```
 
@@ -691,30 +722,30 @@ wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/search.sh
 a file containing a sketch of the genomes.
 
 Fastq datasets:
-```
+```bash
 wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/reads2.tsv
 ```
 
 Sketch:
-```
+```bash
 wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/genomes.msh
 ```
 
 3. We also need to download `mc` again since it was not saved as part of the snapshot.
 
-```
+```bash
 wget https://dl.min.io/client/mc/release/linux-amd64/mc
 ```
 
 Please set executable rights:
 
-```
+```bash
 chmod a+x mc
 ```
 
 4. You can execute the array job by using the following command:
 
-```
+```bash
 sbatch --array=1-386 search.sh
 ```
 
@@ -726,11 +757,13 @@ sbatch --array=1-386 search.sh
 
 7. Let's plot how many genomes we have found against the number of their matched k-mer hashes:
    Activate the denbi conda environment:
-   ```
+   ```bash
    conda activate denbi
    ```
    Run `csvtk` on the output
-   ```
+
+   
+   ```bash
    csvtk -t plot hist -H -f 3 output_final.tsv -o output_final.pdf
    ```
    You can open this file by a click on the Explorer View and selecting the pdf.
@@ -738,17 +771,17 @@ sbatch --array=1-386 search.sh
     
    Since there are many matches with a low number of k-mer hashes, you could filter the table first and plot
    the filtered results.
-   ```
+   ```bash
    sort -rnk 3,3 output_final.tsv | head -n 50 > output_final_top50.tsv
    ```   
 
-   ```
+   ```bash
    csvtk -t plot hist -H -f 3 output_final_top50.tsv -o output_final_top50.pdf
    ```
 
-8. Finally, you could view the top matches via `less` and check their description on the 
+9. Finally, you could view the top matches via `less` and check their description on the 
    [SRA website](https://www.ncbi.nlm.nih.gov/sra) by providing the SRA run accession
    (Example `ERR4181696`) for further investigation.
-   ```
+   ```bash
    less output_final_top50.tsv
    ```

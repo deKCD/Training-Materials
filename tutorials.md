@@ -16,7 +16,7 @@ permalink: /tutorials/
     </tr>
   </thead>
   <tbody>
-    {% assign tutorials = site.tutorials | where: "layout", "hands_on_tutorial" %}
+    {% assign tutorials = site.tutorials | where: "layout", "tutorial_hands_on" %}
     {% assign tutorials_grouped = tutorials | group_by: "title" %}
     {% for group in tutorials_grouped %}
       {% assign first = group.items[0] %}
@@ -30,15 +30,9 @@ permalink: /tutorials/
         </td>
         <td>{{ first.description }}</td>
         <td>
-            <ul>
-                {% for contributor in first.contributors %}
-                    {% if contributor.orcid %}
-                    <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor.name }}</a>
-                    {% else %}
-                    {{ contributor.name }}
-                    {% endif %}
-                {% endfor %}
-            </ul>
+            {% for contributor in first.contributions.authorship %}
+                <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor }}</a>{% unless forloop.last %}, {% endunless %}
+            {% endfor %}
         </td>
         <td>{{ first.time_estimation }}</td>
       </tr>

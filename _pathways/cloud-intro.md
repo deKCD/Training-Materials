@@ -16,7 +16,7 @@ pathway:
       - name: simplevmworkshop
         version: main
 editorial_board:
-  - name: Peter Belmann
-    orcid: 0000-0002-1294-2869
+  - name: FIXME
+    orcid: FIXME
 ---
 

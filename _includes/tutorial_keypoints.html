@@ -2,16 +2,16 @@
   Display key points for a tutorial
 {% endcomment %}
 
-{% if page.keypoints == nil %}
-{% assign tutorial_keypoints = include.tutorial_keypoints %}
+{% if page.key_points == nil %}
+{% assign tutorial_key_points = include.tutorial_key_points %}
 {% else %}
-{% assign tutorial_keypoints = page.keypoints %}
+{% assign tutorial_key_points = page.key_points %}
 {% endif %}
 
 <blockquote class="keypoints">
   <h2>Key Points</h2>
   <ul>
-    {% for keypoint in tutorial_keypoints %}
+    {% for keypoint in tutorial_key_points %}
     <li>{{ keypoint|markdownify }}</li>
     {% endfor %}
   </ul>
