@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
 slug: unix-course

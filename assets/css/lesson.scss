@@ -149,20 +149,21 @@ a { color: #204A6F; }
 //----------------------------------------
 
 // GTN compatible -> add titles
-
 $codeblock-padding: 0.325em !default;
 
 @mixin bkSetup($color, $glyph) {
+
   $gradientcolor1: $color;
   $gradientcolor2: scale-color($color, $lightness: 10%);
 
   padding: 0 0 $codeblock-padding $codeblock-padding;
-  border: 0.15em solid $color;
+  border: 0.065em solid;
+  border-color: $color;
   border-radius: 0.26em;
-  box-shadow: 0 3px 3px scale-color($color, $lightness: 40%); // <- bottom shadow only  
+
   margin: 0.975em 0.325em 0.65em 0;
 
-    h2 {
+  h2 {
     padding-top: $codeblock-padding;
     padding-bottom: $codeblock-padding;
     font-size: 1.3em;
@@ -171,8 +172,7 @@ $codeblock-padding: 0.325em !default;
     margin-top: 0em;
     margin-left: -$codeblock-padding; // to move back to the left margin of the enclosing blockquote
   }
-    
-    h2:before {
+  h2:before {
     font-family: 'Glyphicons Halflings';
     content: $glyph;
     float: left;
@@ -184,7 +184,7 @@ $codeblock-padding: 0.325em !default;
 }
 
 .overview h3,
-//.key_points h3,
+.key_points h3,
 .tip h3,
 .warning h3,
 .comment h3,
@@ -197,10 +197,8 @@ $codeblock-padding: 0.325em !default;
 .code-in h3,
 .code-out h3
 
-//.solution   { background-color: #ded4b94d; }
 
 // GTN compatible
-
 //.key_points{ @include bkSetup($color-key_points, "\e101", "key_points"); }
 .hands-on{ @include bkSetup($color-hands-on, "\270f"); }
 .hands_on{ @include bkSetup($color-hands-on, "\270f"); }
@@ -212,23 +210,24 @@ $codeblock-padding: 0.325em !default;
 .tip{ @include bkSetup($color-tip, "\2a"); }
 .code-in{ @include bkSetup($color-code-in, "\2328"); }
 .code-out{ @include bkSetup($color-code-out, "\1F4BB"); }
-.overview{ @include bkSetup($color-overview, ""); }
-.feedback{ @include bkSetup($color-feedback, ""); }
-
-// SC compatible
-
-.keypoints{ @include bkSetup($color-keypoints, "\e101"); }
-.objectives{ @include bkSetup($color-objectives, "\e085"); }
 .agenda { @include bkSetup($color-agenda, "\e101"); }
 
-.keypoints    { background-color: #7ae78e20; }
-.objectives   { background-color: #daee8420; }
 .agenda { background-color: #7ae78e20; }
 
 .agenda h3 {
     font-size: 1.2em;
 }
+.overview{ @include bkSetup($color-overview, ""); }
+.feedback{ @include bkSetup($color-feedback, ""); }
 
+
+// SC compatible
+
+.keypoints{ @include bkSetup($color-keypoints, "\e101"); }
+.objectives{ @include bkSetup($color-objectives, "\e085"); }
+
+.keypoints    { background-color: #7ae78e20; }
+.objectives   { background-color: #daee8420; }
 
 blockquote p {
     margin: 0.325em;
@@ -423,6 +422,12 @@ kbd {
 //------------------------------------------
 // Show solution while printing (Ctrl + P)
 // -----------------------------------------
+
+//@media print {
+//  blockquote.solution > * {
+//    display: unset !important;
+//  }
+//}
 
 @media print {
   blockquote.solution > * {

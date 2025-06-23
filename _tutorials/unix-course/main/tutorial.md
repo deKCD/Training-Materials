@@ -1,10 +1,9 @@
 ---
 layout: tutorial_hands_on
-
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
 slug: unix-course
-time_estimation: "FIXME"
+time_estimation: 2H
 questions:
   - "What is a command shell and why would I use one?"
   - "How can I move around on my computer?"
@@ -142,11 +141,12 @@ When accessing a Unix system running as a virtual machine in the cloud one would
 For the sake of this tutorial the access route to the terminal is via web browser.
 Every participant has access to a prepared virtual machine running a web-based development environment called Theia IDE.
 
-> ## Hands On: Generate a new ssh key
+> ## Generate a new ssh key
 > You can generate a new public/private SSH key pair on your local machine.
 > 
 > > ## Important
 > > You can distribute your public key to other servers, but your private key must be kept secure and never shared.
+> >
 > {: .keypoints}
 > 
 > After you generate the key, you can add the public key (e.g. `KEY.pub`) to your account on GitHub.com to enable authentication for Git operations over SSH.
@@ -191,8 +191,6 @@ This tutorial will primarily focus on the use of the terminal.
 > {: .code-in}
 > 
 {: .hands_on}
-
-
 
 #### **02 - Opening a terminal window**
 

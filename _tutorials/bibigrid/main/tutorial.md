@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: BiBiGrid Hands-on
 description: "FIXME"
 slug: bibigrid
@@ -52,6 +51,7 @@ The goal of this session is to set up a small HPC cluster consisting of 3 nodes 
 * [Moving Forward](#moving-forward)
     * [More BiBiGrid](#more-bibigrid)
     * [More Ansible](#more-ansible)
+
 
 ## **Prerequisites**
 
@@ -125,6 +125,7 @@ cp ~/Downloads/clouds.yaml ~/.config/openstack/clouds.yaml
 > {: .solution}
 > 
 {: .question}
+
 
 ### **Virtual Environment**
 

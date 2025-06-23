@@ -1,6 +1,6 @@
 ---
 layout: contributing
-title: "Contributing"
+title: "Contribution"
 ---
 
 ## **Add a new tutorial**
@@ -46,7 +46,6 @@ Leave the `layout: tutorial_hands_on` as default.
 
 If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
 
-
 #### **Format the content**
 
 ##### **Boxes**
@@ -88,6 +87,61 @@ There are several boxes that you can use to format the content of your training 
 > 
 {: .hands_on}
 
+### **Examples**
+
+> ## Tasks
+> 1. List of tasks
+> 2. ...
+> 
+{: .hands_on}
+
+
+> ## Details
+> Here put some text...
+> 
+{: .details}
+
+
+> ## Tip
+> Here put some useful information...
+> 
+{: .tip}
+
+
+> ## Comment
+> Here put some comments...
+> 
+{: .comment}
+
+> ## Code In
+> ```bash
+> ls -lh
+> ```
+>
+> ```python
+> import pandas as pd
+> ```
+> 
+{: .code-in}
+
+> ## Code Out
+> ```bash
+> # code output
+> ```
+> 
+{: .code-out}
+
+> ## Questions
+> 1. Question 1
+> 2. Question 2
+>  
+> > ## Answers
+> > 1. Answer 1
+> > 2. Answer 2
+> > 
+> {: .solution}
+>
+{: .question}
 
 ##### **Images**
 

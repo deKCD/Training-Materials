@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: SimpleVM Workshop
 description: "FIXME"
 slug: simplevmworkshop

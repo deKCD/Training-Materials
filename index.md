@@ -18,6 +18,6 @@ In the current phase of digital transformation, scientific and economic success 
 The de.KCD specifically addresses these challenges in order to bundle expertise in cloud computing and data management, as well as to provide and expand the necessary hardware capacities and cloud services. The project implements suitable measures for cloud-based data management and standardized data analysis. It offers cloud infrastructure, storage and analysis options as well as generic training for knowledge transfer across different specialist areas. Virtual learning and working environments lower the barriers to access. In addition, technologies are being developed to answer complex research questions and integrate data from different disciplines. Beyond these measures, de.KCD also aims to promote collaboration and knowledge exchange between research locations by creating a networked, collaborative data space for national and international research projects.
 </p>
 
-Please check our [de.KCD Website](https://datenkompetenz.cloud/) for upcoming events, news, and further information. 
+Please check our <a href="https://datenkompetenz.cloud/en/" target="_blank" rel="noopener noreferrer">de.KCD Website</a> for upcoming events, news, and further information. 
 
 </div>
