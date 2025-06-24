@@ -31,6 +31,8 @@ contributions:
   - Viktor Rudko
   editing: 
   funding:
+has_slides: true
+slides_url: /slides/unix-course/main/slides.html
 ---
 
 This tutorial will help you develop proficiency in the necessary Unix shell concepts.

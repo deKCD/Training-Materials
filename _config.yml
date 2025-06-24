@@ -19,6 +19,8 @@ collections:
     permalink: /tutorials/:path/
   pathways:
     output: true
+  slides:
+    output: true
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge

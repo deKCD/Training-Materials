@@ -10,6 +10,7 @@ permalink: /tutorials/
     <tr>
       <th>Tutorial</th>
       <th>Versions</th>
+      <th>Slides</th>
       <th>Description</th>
       <th>Contributors</th>
       <th>Estimated Time</th>
@@ -28,14 +29,34 @@ permalink: /tutorials/
             <a href="{{ version.url }}">{{ version.version }}</a>{% unless forloop.last %}, {% endunless %}
           {% endfor %}
         </td>
+        <td>
+          {% assign sorted_versions = group.items | sort: "version" %}
+          {% capture slide_links %}{% endcapture %}
+          {% assign first_slide = true %}
+          {% for v in sorted_versions %}
+            {% if v.has_slides %}
+              {% capture link %}
+                <a href="{{ v.slides_url }}">{{ v.version }}</a>
+              {% endcapture %}
+              {% if first_slide %}
+                {% capture slide_links %}{{ link | strip }}{% endcapture %}
+                {% assign first_slide = false %}
+              {% else %}
+                {% capture slide_links %}{{ slide_links }}, {{ link | strip }}{% endcapture %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {{ slide_links }}
+        </td>
         <td>{{ first.description }}</td>
         <td>
-            {% for contributor in first.contributions.authorship %}
-                <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor }}</a>{% unless forloop.last %}, {% endunless %}
-            {% endfor %}
+          {% for contributor in first.contributions.authorship %}
+            <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor }}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
         </td>
         <td>{{ first.time_estimation }}</td>
       </tr>
     {% endfor %}
   </tbody>
 </table>
+
