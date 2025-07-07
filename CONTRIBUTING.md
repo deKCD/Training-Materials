@@ -5,9 +5,13 @@ title: "Contribution"
 
 ## **Add a new tutorial**
 -------------------------
-To add a new tutorial, create a new folder in `_tutorials` folder and  place the tutorial content in a single `tutorial.md` in the tutorial directory (or subdirectory if you have several versions of the same tutorial). 
+To add a new tutorial, create a new folder in `_tutorials` folder and  place the tutorial content in a single `tutorial.md` within the tutorial directory (or a subdirectory if you have multiple versions of the same tutorial).
 
-Commit changes to the new branch and pull a request.
+When creating a new tutorial, add the folder name (slug) to the `_data/tutorial_groups.yml` file. This links your tutorial to an existing tutorial group.
+If your tutorial belongs to a new category that does not yet exist, create a new group entry in `_data/tutorial_groups.yml` with a clear description of the group.
+
+
+Then, commit the changes to the new branch and submit a pull request.
 
 ### **Edit the tutorial**
 -------------------------
