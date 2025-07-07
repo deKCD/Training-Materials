@@ -1,66 +1,54 @@
 <!DOCTYPE html>
-<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>{{ page.title }}</title>
+    {% seo %}
 
-    {% comment %} Basic Open Graph Meta Tags for social sharing {% endcomment %}
-    {% assign og_title = page.title | default: site.title %}
-    {% assign og_desc = page.description | default: "A presentation powered by Jekyll and Remark.js." %}
-    <meta name="description" content="{{ og_desc | strip_html }}">
-    <meta property="og:site_name" content="{{ site.title | default: 'Your Presentation Site' }}">
-    <meta property="og:title" content="Slide Deck: {{ og_title }}">
-    <meta property="og:description" content="{{ og_desc | strip_html }}">
-    {% if page.cover %}
-      <meta property="og:image" content="{% if page.cover contains '://' %}{{ page.cover }}{% else %}{{ site.url }}{{ site.baseurl }}/{{ page.cover }}{% endif %}">
-    {% endif %}
-
-    {% comment %} Standard CSS for Remark.js {% endcomment %}
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-      @import url(https://fonts.googleapis.com/css?family=Arial:400,700,400italic);
-
-      body { font-family: 'Droid Serif'; }
-      h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
-        font-weight: normal;
-      }
-      .remark-code, .remark-inline-code { font-family: 'Arial'; }
-
-      /* Basic styling for any custom icons/emojis */
-      .emoji-icon { font-size: 0.8em; vertical-align: middle; }
-
-      /* Basic footnote style for remark.js */
-      .footnote {
-          position: absolute;
-          bottom: 1em;
-          left: 1em;
-          font-size: 0.7em;
-          color: #888;
-      }
-    </style>
+   <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css" />
+   <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/black.css" />
+      
   </head>
-
   <body>
-    <textarea id="source">
-class: center, middle
+    <div class="reveal">
+      <div class="slides">
+        <!-- Title slide -->
+        <section>
+          <h1>{{ page.title }}</h1>
+          {% if page.author %}
+          <p>
+            {% for name in page.author %}
+              {{ name }}<br/>
+            {% endfor %}
+          </p>
+          {% endif %}
+        </section>
 
-      {{ content }}
+        <!-- Render the markdown content as slides -->
+        <section data-markdown>
+          <textarea data-template>
+{{ content | strip }}
+          </textarea>
+        </section>
+      </div>
+    </div>
 
-    </textarea>
+      <!-- Reveal.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
 
-    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
     <script>
-      var slideshow = remark.create({
-        navigation: {scroll: false}, // Disable scrolling between slides, rely on arrows
-        ratio: '16:9', // Set aspect ratio for the presentation
-        highlightLanguage: ['python', 'bash', 'R'],
-        highlightStyle: 'monokai',
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
       });
-      // Additional setup for highlighting or clipboard can go here if needed.
-      var hljs = remark.highlighter.engine; // Uncomment if you need code highlighting
     </script>
   </body>
 </html>

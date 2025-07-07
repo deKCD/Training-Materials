@@ -31,4 +31,3 @@ exclude:
 
 plugins:
   - jekyll-last-modified-at
-

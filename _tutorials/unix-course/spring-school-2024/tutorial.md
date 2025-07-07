@@ -30,8 +30,6 @@ contributions:
   - Sebastian Juenemann
   - Viktor Rudko
   editing:
-has_slides: true
-slides_url: /tutorials/unix-course/spring-school-2024/slides.pdf
 ---
 
 ## Table of Contents
