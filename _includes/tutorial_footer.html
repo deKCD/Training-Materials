@@ -1,0 +1,26 @@
+{% comment %}
+  Footer for the tutorial page.
+{% endcomment %}
+
+<footer class="custom-footer">
+  <div class="footer-container">
+    <div class="license" id="license-info">
+      {% if site.cc_by_human %}
+        Licensed under <a href="{{ site.cc_by_human | relative_url }}" target="_blank" rel="noopener">CC-BY 4.0</a> 2016–{{ 'now' | date: "%Y" }}
+      {% endif %}
+    </div>
+    <div class="help-links">
+      {% comment %} For main branch <a href="{{ site.repository_url }}/edit/main/{{ page.path }}" target="_blank" rel="noopener">Edit on GitHub</a>{% endcomment %}
+      <a href="{{ site.repository_url }}/edit/gh-pages/{{ page.path }}" target="_blank" rel="noopener">Edit on GitHub</a> /
+      <a href="mailto:{{ site.email }}">Contact</a> /
+      <a href="{{ '/CITATION/' | relative_url }}">Citation</a> /
+      <a href="{{ '/CONTRIBUTING/' | relative_url }}">Contribution</a> /
+      {% if site.denbicloud_site %}
+        <a href="{{ site.denbicloud_site | relative_url }}" target="_blank" rel="noopener">de.NBI Cloud</a> /
+      {% endif %}
+      {% if site.dekcd_site %}
+        <a href="{{ site.dekcd_site | relative_url }}" target="_blank" rel="noopener">de.KCD</a>
+      {% endif %}
+    </div>
+  </div>
+</footer>

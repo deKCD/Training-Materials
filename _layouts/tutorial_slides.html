@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>{{ page.title }}</title>
+    {% seo %}
+
+   <link rel="stylesheet" href="/node_modules/reveal.js/dist/reveal.css" />
+   <link rel="stylesheet" href="/node_modules/reveal.js/dist/theme/black.css" />
+      
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Title slide -->
+        <section>
+          <h1>{{ page.title }}</h1>
+          {% if page.author %}
+          <p>
+            {% for name in page.author %}
+              {{ name }}<br/>
+            {% endfor %}
+          </p>
+          {% endif %}
+        </section>
+
+        <!-- Render the markdown content as slides -->
+        <section data-markdown>
+          <textarea data-template>
+{{ content | strip }}
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+      <!-- Reveal.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/notes/notes.js"></script>
+
+    <script>
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+      });
+    </script>
+  </body>
+</html>

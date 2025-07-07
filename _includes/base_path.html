@@ -1,0 +1,15 @@
+{% if site.url %}
+  {% assign relative_root_path = site.baseurl %}
+{% else %}
+  {% assign last_char = page.url | slice: -1 %}
+  {% if last_char == "/" %}
+    {% assign offset = 0 %}
+  {% else %}
+    {% assign offset = 1 %}
+  {% endif %}
+  {% assign depth = page.url | split: '/' | size | minus: offset %}
+  {% if    depth <= 1 %}{% assign relative_root_path = '.' %}
+  {% elsif depth == 2 %}{% assign relative_root_path = '..' %}
+  {% else %}{% capture relative_root_path %}..{% for i in (3..depth) %}/..{% endfor %}{% endcapture %}
+  {% endif %}
+{% endif %}

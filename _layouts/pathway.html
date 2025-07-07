@@ -1,0 +1,89 @@
+---
+layout: null
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+    
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/bootstrap-theme.css" />
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/lesson.css" />
+  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/syntax.css" />
+  {% if page.math %}
+    <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/katex.min.css" />
+  {% endif %}
+  {% include favicons.html %}
+</head>
+
+<body>
+  <a id="skip-to-content" href="#content">Skip to the content.</a>
+  <header class="page-header" role="banner">
+    <h1 class="project-name">{{ page.title | default: site.title }}</h1>
+    <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
+    <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
+    <a href="{{ '/pathways/' | relative_url }}" class="btn btn-small">Collection of Learning pathways</a>
+  </header>
+    
+    <div class="pathway-content">    
+      {% for section in page.pathway %}
+        <h2>{{ section.section }}</h2>
+        <p>{{ section.description }}</p>
+    
+        <table>
+          <thead>
+            <tr>
+              <th>Tutorial</th>
+              <th>Description</th>
+              <th>Learning Objectives</th>  
+            </tr>
+          </thead>
+          <tbody>
+            {% for tutorial_ref in section.tutorials %}
+              {% assign matching_tutorials = site.tutorials | where: "slug", tutorial_ref.name %}
+              {% assign tutorial = matching_tutorials | where: "version", tutorial_ref.version | first %}
+
+              {% if tutorial %}
+              <!-- render tutorial row -->
+                <tr>
+                    <td><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></td>
+                    <td>{{ tutorial.description }}</td>
+                    <td>
+                        <ul>
+                            {% for obj in tutorial.objectives %}
+                            <li>{{ obj }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+              {% else %}
+              <tr>
+                  <td colspan="3">Tutorial "{{ tutorial_ref.name }}" (version: "{{ tutorial_ref.version }}") not found.</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+    {% endfor %}
+
+    <p>This material is reviewed by our Editorial Board:</p>
+        <ul>
+            {% for editor in page.editorial_board %}
+                {% if editor.orcid %}
+                <a href="https://orcid.org/{{ editor.orcid }}" target="_blank">{{ editor.name }}</a>
+                {% else %}
+                {{ editor.name }}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
