@@ -1,0 +1,10 @@
+- title: Unix
+  description: Our Core Curriculum consists of the lessons in the table below.
+  tutorials:
+    - unix-course
+
+- title: Cloud computing
+  description: Tutorials focused on ...
+  tutorials:
+    - simpleVMWorkshop
+    - bibigrid
