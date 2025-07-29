@@ -43,7 +43,7 @@ permalink: /tutorials/
     </thead>
     <tbody>
       {% for tutorial_id in group.tutorials %}
-        {% assign group_items = site.tutorials | where: "layout", "tutorial_hands_on" | where: "slug", tutorial_id %%}
+        {% assign group_items = site.tutorials | where: "layout", "tutorial_hands_on" | where: "slug", tutorial_id %}
         {% assign sorted_versions = group_items | sort: "version" %}
         {% assign first = sorted_versions[0] %}
         {% if first %}
@@ -51,7 +51,7 @@ permalink: /tutorials/
           <td><strong>{{ first.title }}</strong></td>
           <td>
             {% for version in sorted_versions %}
-              <a href="{{ version.url }}">{{ version.version }}</a>{% unless forloop.last %}, {% endunless %}
+              <a href="{{ version.url | relative_url }}">{{ version.version }}</a>{% unless forloop.last %}, {% endunless %}
             {% endfor %}
           </td>
           <td>
@@ -60,7 +60,7 @@ permalink: /tutorials/
             {% for v in sorted_versions %}
               {% if v.has_slides %}
                 {% capture link %}
-                  <a href="{{ v.slides_url }}">{{ v.version }}</a>
+                  <a href="{{ v.slides_url | relative_url  }}">{{ v.version }}</a>
                 {% endcapture %}
                 {% if first_slide %}
                   {% capture slide_links %}{{ link | strip }}{% endcapture %}

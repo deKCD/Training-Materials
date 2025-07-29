@@ -13,7 +13,7 @@ permalink: /pathways/
   {% assign pathways = site.pathways %}
   {% for pathway in pathways %}
     <div class="pathway-card">
-      <h3><a href="{{ pathway.url }}">{{ pathway.title }}</a></h3>
+      <h3><a href="{{ pathway.url | relative_url }}">{{ pathway.title }}</a></h3>
       <p>{{ pathway.description }}</p>
       {% if pathway.tags %}
         <div class="tags">
