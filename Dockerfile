@@ -6,9 +6,10 @@ RUN apt-get update \
      ruby-full \ 
     build-essential \
     zlib1g-dev \
+    openssl \
   && rm -rf /var/lib/apt/lists/*
 
-RUN gem install jekyll bundler
+RUN gem install jekyll bundler sinatra rack
 
 # Set the working directory (inside container) for your Jekyll site
 WORKDIR /srv/jekyll
