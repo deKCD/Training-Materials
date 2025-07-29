@@ -14,9 +14,6 @@ RUN gem install jekyll bundler
 WORKDIR /srv/jekyll
 
 
-# Expose the port Jekyll serves on
-EXPOSE 4000
-
 # Default command for serving the site
 # needs to be adjusted
-CMD ["bundle", "install", "&&", "bundle", "exec", "jekyll", "serve"]
+CMD bash run_docker.sh
