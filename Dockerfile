@@ -13,6 +13,13 @@ RUN gem install jekyll bundler
 # Set the working directory (inside container) for your Jekyll site
 WORKDIR /srv/jekyll
 
+COPY . .
+
+
+RUN bundle install
+
+
+
 
 # Default command for serving the site
 # needs to be adjusted

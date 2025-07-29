@@ -3,9 +3,3 @@ services:
     build: .
     ports:
       - "4000:4000"
-    volumes:
-      - .:/srv/jekyll
-      - jekyll-bundle:/srv/jekyll/vendor/bundle
-
-volumes:
-  jekyll-bundle:
