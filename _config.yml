@@ -4,8 +4,8 @@ description: |
 theme: jekyll-theme-cayman
 
 # Sites
-url: ""
-baseurl: ""
+url: "https://dekcd.github.io"
+baseurl: "/Training-Materials"
 repository_url: https://github.com/deKCD/Training-Materials
 dekcd_site: https://datenkompetenz.cloud/
 denbicloud_site: https://www.denbi.de/cloud
