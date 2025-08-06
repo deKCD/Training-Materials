@@ -28,14 +28,15 @@ layout: null
 <body>
   <a id="skip-to-content" href="#content">Skip to the content.</a>
   <header class="page-header" role="banner">
-    <h1 class="project-name">{{ page.title | default: site.title }}</h1>
-    <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
+    <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
+    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
     <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
-  </header>
-    
-  <div class="container">
+    <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+    </header>
+
+    <div class="container">
     {{ content }}
-  </div>
+    </div>
     {% include javascript.html %}
 
   <footer class="site-footer">
@@ -49,9 +50,8 @@ layout: null
     <span class="site-footer-credits">
       {% include default_footer.html %}
     </span>
-      
-  </footer>
-
-</body>
     
+  </footer>
+  <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+</body> 
 </html>

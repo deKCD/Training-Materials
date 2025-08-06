@@ -18,7 +18,7 @@
   font-weight: bold;
   border-radius: 0.3em;
   text-decoration: none;
-  color: #fff;
+  color: #333;
   background-color: transparent;
   transition: 0.2s ease;
 }
@@ -201,4 +201,17 @@ td {
   margin: 0 0 1rem 0;
   color: #444;
   font-size: 1rem;
+}
+
+.logo {
+  height: 80px;
+  vertical-align: top;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.page-header .btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2);
 }

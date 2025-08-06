@@ -3,6 +3,9 @@ layout: contributing
 title: "Contribution"
 ---
 
+We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR (Findable, Accessible, Interoperable, Reusable)** principles for training materials. 
+
+
 ## **Add a new tutorial**
 -------------------------
 To add a new tutorial, create a new folder in `_tutorials` folder and  place the tutorial content in a single `tutorial.md` within the tutorial directory (or a subdirectory if you have multiple versions of the same tutorial).
@@ -46,9 +49,25 @@ contributions:
 Enter your tutorial content here.
 ```
 
-Leave the `layout: tutorial_hands_on` as default. 
+The tutorial requires the metadata to be included at the top:
+* keep the layout as `tutorial_hands_on` by default.
+* `title`: the title of the tutorial will appear on the **Collection of Tutorials** page.
+* `time_estimation`: the estimated time needed to complete the hands-on tutorial. It must match the following regular expression pattern:
+      ```/^(?:([0-9]+)[Hh])?(?:([0-9]+)[Mm])?(?:([0-9.]+)[Ss])?$/```
+* `questions`: a list of questions that will be addressed in the tutorial.
+* `objectives`: a list of learning objectives for the tutorial.
+* `key_points`: a list of take-home messages that will appear at the end of the tutorial.
+* `contributions`: a list of tutorial contributors broken down into broad categories to help contributors identify how they contributed to a specific tutorial. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`.
+
+The following information can also be included in the tutorial metadata:
+* `zenodo_link`: link to the input data for the tutorial on Zenodo.
+* `follow_up_training`: a list of resources that the reader of the material could follow at the end of the tutorial.
+
+For additional information that could be included in the tutorial metadata, please refer to the [GTN tutorial.](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html){:target="_blank"}
+
 
 If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
+
 
 #### **Format the content**
 
@@ -153,9 +172,9 @@ To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-
 
 
 > ## Additional resources
-> If you need an additional materials to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes).
+> If you need an additional materials to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode.](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes){:target="_blank"}
 > 
-> Please also refer to the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
+> Please also refer to the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet){:target="_blank"} to learn more how to use Markdown.
 > 
 {: .details}
 
@@ -188,4 +207,4 @@ editorial_board:
 ---
 ```
 
-Leave the `layout: pathway` as default. Commit changes to the new branch and pull a request.
+Keep the `layout: pathway` as default. Commit changes to the new branch and pull a request.

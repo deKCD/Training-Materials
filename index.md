@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: home
 ---
 
 # German Competence Center Cloud Technologies for Data Management and Processing (de.KCD)

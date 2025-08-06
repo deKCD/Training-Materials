@@ -1,8 +1,12 @@
 title: de.KCD Training Materials
 description: |
-  Collection of GTN compatible de.KCD / de.NBI Cloud training materials and learning pathways.
+  Collection of GTN compatible de.KCD / de.NBI Cloud training materials and learning pathways
 theme: jekyll-theme-cayman
-
+color_mode:
+  enable: true
+  switch: true
+  default: light
+  
 # Sites
 url: ""
 baseurl: ""
@@ -22,6 +26,7 @@ collections:
   slides:
     output: true
 
+
 # Turn on built-in syntax highlighting.
 highlighter: rouge
 
@@ -31,3 +36,16 @@ exclude:
 
 plugins:
   - jekyll-last-modified-at
+
+categories:
+  tutorials: "/tutorials/"
+  pathways: "/pathways/"
+  contribution: CONTRIBUTING.md
+  citation: CITATION.md
+  about_dekcd: https://datenkompetenz.cloud/
+  about_denbi: https://www.denbi.de/cloud
+  contact_email: "info@datenkompetenz.cloud"
+header_links:
+  partners: "/partners/"
+  event_calendar: "/event-calendar/"
+  upcoming_courses: "/upcoming-courses/"
