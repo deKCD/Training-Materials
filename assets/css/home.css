@@ -26,8 +26,9 @@
 }
 .header-nav {
   display: flex;
-  align-items: center;
+  align-items: left;
   gap: 1.5em;
+  font-size: 1.2em;
 }
 .header-nav a {
   color: #fff;

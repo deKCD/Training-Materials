@@ -25,7 +25,8 @@ collections:
     output: true
   slides:
     output: true
-
+  upcoming:
+    output: true
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
@@ -46,6 +47,6 @@ categories:
   about_denbi: https://www.denbi.de/cloud
   contact_email: "info@datenkompetenz.cloud"
 header_links:
-  partners: "/partners/"
-  event_calendar: "/event-calendar/"
-  upcoming_courses: "/upcoming-courses/"
+  partners: https://datenkompetenz.cloud/partner/
+  event_calendar: https://datenkompetenz.cloud/event-kalender/?p=1
+  upcoming: "/upcoming/"
