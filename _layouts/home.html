@@ -26,8 +26,8 @@
         <a href="{{ '/upcoming/' | relative_url }}">Upcoming Tutorials</a>
       </nav>
       <div class="header-actions">
-        <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
-        <button id="search-toggle" aria-label="Search" style="background:none;border:none;font-size:1.3em;cursor:pointer;">&#128269;</button>
+        <button id="theme-toggle" aria-label="Toggle dark/light mode">☾</button>
+        <button id="search-toggle" aria-label="Search" style="background:none;border:none;font-size:1.3em;cursor:pointer;">🔍︎</button>
         <div id="search-container" style="display:none;position:relative;">
           <input type="search" id="site-search" placeholder="Search Tutorials" aria-label="Search" autocomplete="off" style="margin-left:8px; color:#373737;">
             <ul id="search-suggestions" style="position:absolute;top:100%;left:0;right:0;z-index:10;background:#fff;border:1px solid #ccc;list-style:none;margin:0;padding:0;display:none;max-height:200px;overflow-y:auto;color:#ccc;"></ul>
@@ -69,15 +69,18 @@
         document.getElementById('site-search').value = '';
           });
 
-          // Example data for suggestions (replace with real data or fetch via AJAX)
-          const searchData = [
-        {% for t in site.tutorials %}
-          { title: "{{ t.title | escape }}", url: "{{ t.url | relative_url }}", type: "Tutorial" },
-        {% endfor %}
-        {% for p in site.pathways %}
-          { title: "{{ p.title | escape }}", url: "{{ p.url | relative_url }}", type: "Pathway" },
-        {% endfor %}
-          ];
+            // Example data for suggestions (replace with real data or fetch via AJAX)
+            const searchData = [
+          {% for t in site.tutorials %}
+            { title: "{{ t.title | escape }}", url: "{{ t.url | relative_url }}", type: "Tutorial" },
+          {% endfor %}
+          {% for p in site.pathways %}
+            { title: "{{ p.title | escape }}", url: "{{ p.url | relative_url }}", type: "Pathway" },
+          {% endfor %}
+          {% for u in site.upcoming.docs %}
+            { title: "{{ u.title | escape }}", url: "{{ u.url | relative_url }}", type: "Upcoming Tutorial" },
+          {% endfor %}
+            ];
 
           // Show suggestions
           document.getElementById('site-search').addEventListener('input', function(e) {

@@ -21,17 +21,14 @@ layout: null
   {% if page.math %}
     <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/katex.min.css" />
   {% endif %}
-  {% include favicons.html %}
+  {% include favicons.html %}  
 </head>
 
     
 <body>
-  <a id="skip-to-content" href="#content">Skip to the content.</a>
-  <header class="page-header" role="banner">
-    <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
+    <header class="page-header" role="banner">
+    <h1 class="project-name" style="font-size:3.5em;font-weight:bold;">{{ page.title | default: site.title }}</h1>
     <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
-    <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
-    <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
     </header>
 
     <div class="container">
@@ -52,6 +49,5 @@ layout: null
     </span>
     
   </footer>
-  <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
 </body> 
 </html>

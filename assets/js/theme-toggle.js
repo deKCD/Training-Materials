@@ -3,10 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const body = document.body;
 
   function updateThemeIcon() {
+    toggleButton.style.fontSize = "1.5em"; // Make emoji bigger
     if (body.classList.contains("dark-mode")) {
-      toggleButton.textContent = "☀️"; // Sun for switching to light
+      toggleButton.textContent = "☀︎"; // Sun for switching to light
     } else {
-      toggleButton.textContent = "🌙"; // Moon for switching to dark
+      toggleButton.textContent = "☾"; // Moon for switching to dark
     }
   }
 
