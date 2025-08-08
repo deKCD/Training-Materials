@@ -22,7 +22,7 @@ To run the website locally, you need to have [Ruby](https://www.ruby-lang.org/en
 # Install the required gems
 bundle install 
 # Run the Jekyll server
-bundle exec jekyll serve --trace --reload
+bundle exec jekyll serve --trace --livereload
 ```
 
 Alternatively, you can use the provided `run.sh` script to start the Jekyll server:
@@ -33,6 +33,8 @@ chmod +x run.sh
 # Run the script
 ./run.sh
 ``` 
+
+Then, open your web browser and navigate to `http://localhost:4000/Training-Materials/` to view the website.
 
 ### Development with Devcontainer
 

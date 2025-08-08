@@ -19,11 +19,12 @@ layout: null
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
 
-  <!-- Stylesheets -->    
-  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/lesson.css" />
-  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/syntax.css" />
-  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/custom.css" />
-  <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/style.css" />
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/lesson.css' | relative_url }}" />
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/syntax.css' | relative_url }}" />
 
 </head>
 <body>

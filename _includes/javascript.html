@@ -1,9 +1,9 @@
 {% comment %}
   JavaScript used in lesson and workshop pages.
 {% endcomment %}
-<script src="{{ relative_root_path }}/assets/js/jquery.min.js"></script>
-<script src="{{ relative_root_path }}/assets/js/bootstrap.min.js"></script>
-<script src="{{ relative_root_path }}/assets/js/lesson.js"></script>
+<script src="{{ '/assets/js/jquery.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/bootstrap.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/lesson.js' | relative_url }}"></script>
 
 {% if site.kind == "lesson" %}
 <!-- Matomo -->
@@ -28,7 +28,7 @@
 {% endif %}
 
 {% if page.math %}
-<script src="{{ relative_root_path }}/assets/js/katex.min.js"></script>
+<script src="{{ '/assets/js/katex.min.js' | relative_url }}"></script>
 <script>
 options={
   delimiters: [
@@ -40,7 +40,7 @@ options={
   output: "mathml"
 }
 </script>
-<script src="{{ relative_root_path }}/assets/js/katex-auto-render.min.js" onload="renderMathInElement(document.body, options)"></script>
+<script src="{{ '/assets/js/katex-auto-render.min.js' | relative_url }}" onload="renderMathInElement(document.body, options)"></script>
 {% endif %}
 
 {%- comment -%}
@@ -49,7 +49,7 @@ https://github.com/bryanbraun/anchorjs
 https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js
 {%- endcomment -%}
 
-<script src="{{ relative_root_path }}/assets/js/anchor.min.js"></script>
+<script src="{{ '/assets/js/anchor.min.js' | relative_url }}"></script>
 <script>
     anchors.add();
 </script>
