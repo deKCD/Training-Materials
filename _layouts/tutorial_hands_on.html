@@ -2,9 +2,6 @@
 layout: null
 ---
 
-{% include base_path.html %}
-{% include gh_variables.html %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,35 +29,23 @@ layout: null
   <a id="skip-to-content" href="#content">Skip to the content.</a>
 
   <header class="page-header" role="banner">
-    <h1 class="project-name">{{ page.title | default: site.title }}</h1>
-    <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
-    <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
-    <a href="{{ '/tutorials/' | relative_url }}" class="btn btn-small">Collection of Tutorials</a>
+    <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo">
+    <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
+    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
+    <a href="{{ '/' | relative_url }}" class="btn">Home Page</a>
+    <a href="{{ '/tutorials/' | relative_url }}" class="btn">Collection of Tutorials</a>
   </header>
     
     <div class="container">
       {% include tutorial_overview.html %}
         {{ content }}
       {% include tutorial_keypoints.html %}
-      {% include tutorial_footer.html %}
     </div>
     {% include javascript.html %}
     
 
-  <footer class="site-footer">
-    {% if site.github.is_project_page %}
-      <span class="site-footer-owner">
-        <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by
-        <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.
-      </span>
-    {% endif %}
-      
-    <span class="site-footer-credits">
-      {% include tutorial_footer.html %}
-    </span>
-      
-  </footer>
+  {% include tutorial_footer.html %}
+  
 
-</body>
-    
+</body> 
 </html>

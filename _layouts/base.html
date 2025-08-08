@@ -31,11 +31,14 @@ layout: null
   <a id="skip-to-content" href="#content">Skip to the content.</a>
 
   <header class="page-header" role="banner">
-    <h1 class="project-name">{{ page.title | default: site.title }}</h1>
-    <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
-
-    <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
-
+    <!-- <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo"> -->
+    <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
+    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
+    <a href="{{ '/' | relative_url }}" class="btn">Home Page</a>
+    {% assign repo_url = site.github.repository_url | default: site.repository_url %}
+      {% if repo_url %}
+        <a href="{{ repo_url }}" class="btn" target="_blank" rel="noopener">View on GitHub</a>
+      {% endif %}  
   </header>
 
   <main id="content" class="main-content" role="main">

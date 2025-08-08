@@ -7,6 +7,13 @@
 
 .justify-text {
   text-align: justify;
+  color: black;
+  padding: auto;
+  font-size: 1.1em;
+  line-height: 1.6;
+  width: 100%;
+  max-width: none;
+  font-stretch: expanded;
 }
 
 /* Custom CSS for Home Page button */
@@ -18,7 +25,7 @@
   font-weight: bold;
   border-radius: 0.3em;
   text-decoration: none;
-  color: #fff;
+  color: #333;
   background-color: transparent;
   transition: 0.2s ease;
 }
@@ -108,7 +115,7 @@ td {
 
 .pathway-card:hover {
   background-color: #106060;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .pathway-card h3 {
@@ -124,7 +131,7 @@ td {
 }
 
 .pathway-card h3 a:hover {
-  text-decoration: underline;  /* Optional: underline on hover */
+  text-decoration: none;  /* Optional: underline on hover */
 }
 
 .pathway-card p {
@@ -191,14 +198,68 @@ td {
 .tutorial-group h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 0.2rem;
-  margin-top: 2rem;
-  color: #222;
+  margin: 2rem 0 0.2rem;
+  color: black;
 }
 
 /* Group description styling */
 .tutorial-group p {
-  margin: 0 0 1rem 0;
-  color: #444;
-  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: black;
+  font-size: 1.5rem;
 }
+
+/* Table cell styling */
+.tutorial-group td {
+  padding: 0.5rem;
+  vertical-align: top;
+  color: black;
+}
+
+/* Link and td shared styles */
+.tutorial-group td,
+.tutorial-group a {
+  color: black;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+/* Hover/focus state for links */
+.tutorial-group a:hover,
+.tutorial-group a:focus {
+  color: #b5b5b5; /* Adjust hover color as needed */
+  background-color: rgba(255, 255, 255, 0.08); /* Use background-color for clarity */
+  text-decoration: none; /* Optional: underline on hover */
+}
+.tutorial-group table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+.tutorial-group table:colgroup {
+  background-color: #157878; /* Header background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  height: 80px;
+  vertical-align: top;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.page-header {
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5); 
+  z-index: 1000;
+  top: 0;
+  width: 100%;
+}
+.page-header .btn:hover {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
