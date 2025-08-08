@@ -19,8 +19,8 @@ permalink: /tutorials/
 
 {% for group in groups %}
 <section class="tutorial-group">
-  <h2>{{ group.title }}</h2>
-  <p>{{ group.description }}</p>
+  <h2 style="color:#157878;"><strong>{{ group.title }}</strong></h2>
+  <p style="color:black;font-size:1em;">{{ group.description }}</p>
 
   <table>
       <colgroup>
@@ -48,7 +48,7 @@ permalink: /tutorials/
         {% assign first = sorted_versions[0] %}
         {% if first %}
         <tr>
-          <td><strong>{{ first.title }}</strong></td>
+          <td>{{ first.title }}</td>
           <td>
             {% for version in sorted_versions %}
               <a href="{{ version.url }}">{{ version.version }}</a>{% unless forloop.last %}, {% endunless %}

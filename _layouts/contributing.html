@@ -21,21 +21,19 @@ layout: null
   {% if page.math %}
     <link rel="stylesheet" type="text/css" href="{{ relative_root_path }}/assets/css/katex.min.css" />
   {% endif %}
-  {% include favicons.html %}
+  {% include favicons.html %}  
 </head>
 
     
 <body>
-  <a id="skip-to-content" href="#content">Skip to the content.</a>
-  <header class="page-header" role="banner">
-    <h1 class="project-name">{{ page.title | default: site.title }}</h1>
-    <h2 class="project-tagline">{{ page.description | default: site.description }}</h2>
-    <a href="{{ '/' | relative_url }}" class="btn btn-small">Home Page</a>
-  </header>
-    
-  <div class="container">
+    <header class="page-header" role="banner">
+    <h1 class="project-name" style="font-size:3.5em;font-weight:bold;">{{ page.title | default: site.title }}</h1>
+    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
+    </header>
+
+    <div class="container">
     {{ content }}
-  </div>
+    </div>
     {% include javascript.html %}
 
   <footer class="site-footer">
@@ -49,9 +47,7 @@ layout: null
     <span class="site-footer-credits">
       {% include default_footer.html %}
     </span>
-      
-  </footer>
-
-</body>
     
+  </footer>
+</body> 
 </html>

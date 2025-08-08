@@ -1,0 +1,151 @@
+{% comment %}
+  Default layout for the Home Page.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}{% if site.github.build_revision %}?v={{ site.github.build_revision }}{% endif %}">
+    <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+    {% include head-custom.html %}
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="header-left">
+        <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo">
+        <span class="site-title">{{ site.title }}</span>
+      </div>
+      <nav class="header-nav">
+        <a href="{{ site.header_links.partners | relative_url }}" target="_blank" rel="noopener">Partners</a>
+        <a href="{{ site.header_links.event_calendar | relative_url }}" target="_blank" rel="noopener">Event-Calendar</a>
+        <a href="{{ '/upcoming/' | relative_url }}">Upcoming Tutorials</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle dark/light mode">☾</button>
+        <button id="search-toggle" aria-label="Search" style="background:none;border:none;font-size:1.3em;cursor:pointer;">🔍︎</button>
+        <div id="search-container" style="display:none;position:relative;">
+          <input type="search" id="site-search" placeholder="Search Tutorials" aria-label="Search" autocomplete="off" style="margin-left:8px; color:#373737;">
+            <ul id="search-suggestions" style="position:absolute;top:100%;left:0;right:0;z-index:10;background:#fff;border:1px solid #ccc;list-style:none;margin:0;padding:0;display:none;max-height:200px;overflow-y:auto;color:#ccc;"></ul>
+            <style>
+            #search-suggestions li {
+              transition: background 0.10s, color 0.10s;
+            }
+            #search-suggestions li:hover {
+              background: #f0f0f0;
+              color: #656565;
+              text-decoration: underline;
+            }
+            </style>
+        </div>
+        <script>
+          // Toggle search input
+          document.getElementById('search-toggle').onclick = function(e) {
+        e.stopPropagation();
+        var sc = document.getElementById('search-container');
+        sc.style.display = sc.style.display === 'none' ? 'inline-block' : 'none';
+        if(sc.style.display !== 'none') document.getElementById('site-search').focus();
+          };
+
+          // Hide search when clicking outside
+          document.addEventListener('click', function(e) {
+        var sc = document.getElementById('search-container');
+        var st = document.getElementById('search-toggle');
+        if (!sc.contains(e.target) && e.target !== st) {
+          sc.style.display = 'none';
+          document.getElementById('search-suggestions').style.display = 'none';
+          document.getElementById('site-search').value = '';
+        }
+          });
+
+          // Hide search on page refresh (handled by default, but clear value just in case)
+          window.addEventListener('pageshow', function() {
+        document.getElementById('search-container').style.display = 'none';
+        document.getElementById('search-suggestions').style.display = 'none';
+        document.getElementById('site-search').value = '';
+          });
+
+            // Example data for suggestions (replace with real data or fetch via AJAX)
+            const searchData = [
+          {% for t in site.tutorials %}
+            { title: "{{ t.title | escape }}", url: "{{ t.url | relative_url }}", type: "Tutorial" },
+          {% endfor %}
+          {% for p in site.pathways %}
+            { title: "{{ p.title | escape }}", url: "{{ p.url | relative_url }}", type: "Pathway" },
+          {% endfor %}
+          {% for u in site.upcoming.docs %}
+            { title: "{{ u.title | escape }}", url: "{{ u.url | relative_url }}", type: "Upcoming Tutorial" },
+          {% endfor %}
+            ];
+
+          // Show suggestions
+          document.getElementById('site-search').addEventListener('input', function(e) {
+        const val = e.target.value.trim().toLowerCase();
+        const sugg = document.getElementById('search-suggestions');
+        if(val.length === 0) {
+          sugg.style.display = 'none';
+          sugg.innerHTML = '';
+          return;
+        }
+        const matches = searchData.filter(item => item.title.toLowerCase().includes(val));
+        if(matches.length === 0) {
+          sugg.innerHTML = '<li style="padding:6px 12px;color:#888;">No results</li>';
+        } else {
+          sugg.innerHTML = matches.map(item =>
+            `<li style="padding:6px 12px;cursor:pointer;" onclick="window.location='${item.url}'">
+          <strong>${item.title}</strong> <span style="color:#888;font-size:0.9em;">(${item.type})</span>
+            </li>`
+          ).join('');
+        }
+        sugg.style.display = 'block';
+          });
+
+          // Hide suggestions on blur
+          document.getElementById('site-search').addEventListener('blur', function() {
+        setTimeout(function() {
+          document.getElementById('search-suggestions').style.display = 'none';
+        }, 150);
+          });
+        </script>
+      </div>
+    </header>
+    <div class="container" style="display: flex; align-items: flex-start;">
+      <aside class="sidebar" style="flex: 0 0 260px; margin-right: 2em;">
+      <h2 class="project-tagline" style="text-align: center;">{{ page.description | default: site.description }}</h2>
+      <ul class="category-list">
+      <hr>
+      <h3><strong>Training Materials</strong></h3>
+      <li><a href="{{ '/tutorials/' | relative_url }}">Tutorials</a></li>
+      <li><a href="{{ '/pathways/' | relative_url }}">Learning Pathways</a></li>
+      </ul>
+      <hr>
+      <ul class="category-list">
+        <h3><strong>Contribution</strong></h3>
+        <li><a href="{{ '/CONTRIBUTING/' | relative_url }}">Add a new tutorial</a></li>
+        <li><a href="{{ site.repository_url }}/edit/gh-pages/{{ page.path }}" target="_blank" rel="noopener">Edit on GitHub</a></li>
+        <li><a href="{{ '/CITATION/' | relative_url }}">Citation</a></li>
+      </ul>
+      <hr>
+      <ul class="category-list">
+        <h3><strong>About us</strong></h3>
+        <li><a href="{{ site.dekcd_site | relative_url }}" target="_blank" rel="noopener">About de.KCD</a></li>
+        <li><a href="{{ site.denbicloud_site | relative_url }}" target="_blank" rel="noopener">About de.NBI</a></li>
+        <li><a href="mailto:{{ site.email }}">Contact us</a></li>
+      <hr>
+        <small style="font-size: 0.70em; color: #888;">
+        Licensed under <a href="{{ site.cc_by_human | relative_url }}" target="_blank" rel="noopener">CC-BY 4.0</a> 2016–{{ 'now' | date: "%Y" }}
+        </small>
+      </ul>
+      </aside>
+      <main class="main-content" id="content" role="main" style="flex: 1 1 0%;text-align:justify;">
+      {{ content }}
+      </main>
+    </div>
+    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
+  </body>
+</html>
