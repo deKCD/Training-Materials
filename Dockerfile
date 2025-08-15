@@ -8,7 +8,6 @@ RUN apt-get update \
     zlib1g-dev \
     openssl \
     git \
-    openssh-client \
   && rm -rf /var/lib/apt/lists/*
 
 RUN gem install jekyll bundler sinatra rack
