@@ -7,6 +7,8 @@ RUN apt-get update \
     build-essential \
     zlib1g-dev \
     openssl \
+    git \
+    openssh-client \
   && rm -rf /var/lib/apt/lists/*
 
 RUN gem install jekyll bundler sinatra rack
