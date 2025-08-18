@@ -33,10 +33,6 @@ The de.KCD specifically addresses these challenges in order to bundle expertise 
 
 Please check our <a href="https://datenkompetenz.cloud/en/" target="_blank" rel="noopener noreferrer">de.KCD Website</a> for upcoming events, news, and further information.
 
-<p>
-Do you want to contribute new material? Please check our <a href="CONTRIBUTING.html">contribution guide</a>!
-</p>
-
 ---
 
 <h1 style="color: #157878;">Acknowledgment and Funding</h1>
