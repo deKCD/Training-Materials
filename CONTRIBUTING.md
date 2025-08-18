@@ -1,9 +1,19 @@
 ---
 layout: contributing
-title: "Contribution"
+title: Contribution
+description: Guidelines for contributing, including adding new content or editing existing materials.
 ---
 
 We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR (Findable, Accessible, Interoperable, Reusable)** principles for training materials. 
+
+## Table of Contents
+* [Add a new tutorial](#add-a-new-tutorial)
+    * [Edit the tutorial](#edit-the-tutorial)
+    * [Format the content](#format-the-content)
+        * [Boxes](#boxes)
+        * [Images](#images)
+* [Create a new learning pathway](#create-a-new-learning-pathway)
+* [Preview the website](#preview-the-website)
 
 
 ## **Add a new tutorial**
@@ -69,9 +79,9 @@ For additional information that could be included in the tutorial metadata, plea
 If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
 
 
-#### **Format the content**
+### **Format the content**
 
-##### **Boxes**
+#### **Boxes**
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content. Below is an example of the "Task box with solutions":
 
@@ -166,7 +176,7 @@ There are several boxes that you can use to format the content of your training 
 >
 {: .question}
 
-##### **Images**
+#### **Images**
 
 To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-folder>/<image-folder>/<image>){: .responsive-img }`. Add `{: .responsive-img }` to place the image within the text width.
 
@@ -208,3 +218,11 @@ editorial_board:
 ```
 
 Keep the `layout: pathway` as default. Commit changes to the new branch and pull a request.
+
+## **Preview the website**
+--------------------------
+To preview your own training materials locally, use provided devcontainer. To use it, you need to have [Visual Studio Code](https://code.visualstudio.com/) installed. Open the repository in VS Code and it will prompt you to reopen the folder in the container. After that, you can run the Jekyll server as follows: 
+
+```bash
+bundle exec jekyll serve --config _config.yml,_config_dev.yml
+```

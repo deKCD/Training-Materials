@@ -1,34 +1,43 @@
 ---
-layout: null
+layout: contributing
 ---
 
+{% include base_path.html %}
+{% include gh_variables.html %}
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.lang | default: 'en-US' }}">
 <head>
-  <meta charset="utf-8"> 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title }}</title>
 
+  <meta name="theme-color" content="#157878">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+   <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
   <link rel="stylesheet" type="text/css" href="{{ '/assets/css/bootstrap.css' | relative_url }}" />
   <link rel="stylesheet" type="text/css" href="{{ '/assets/css/bootstrap-theme.css' | relative_url }}" />
   <link rel="stylesheet" type="text/css" href="{{ '/assets/css/lesson.css' | relative_url }}" />
   <link rel="stylesheet" type="text/css" href="{{ '/assets/css/syntax.css' | relative_url }}" />
-  {% if page.math %}
-    <link rel="stylesheet" type="text/css" href="{{ '/assets/css/katex.min.css' | relative_url }}" />
-  {% endif %}
+  
   {% include favicons.html %}  
 </head>
 
     
-<body>
-    <header class="page-header" role="banner">
-    <h1 class="project-name" style="font-size:3.5em;font-weight:bold;">{{ page.title | default: site.title }}</h1>
+<body style="margin: 0;">
+  <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+  <header class="page-header" role="banner" style="margin-top: 0">
+    <!-- <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo"> -->
+    <h1 class="project-name" style="font-size: 3.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
     <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
-    </header>
+  </header>
 
     <div class="container">
     {{ content }}
@@ -46,7 +55,6 @@ layout: null
     <span class="site-footer-credits">
       {% include default_footer.html %}
     </span>
-    
   </footer>
 </body> 
 </html>
