@@ -1,0 +1,8 @@
+services:
+  jekyll:
+    build: .
+    ports:
+      - "4000:4000"
+      - "5000:5000"
+    environment:
+      WEBHOOK_SECRET: ${TRAINING_MATERIAL_WEBHOOK_SECRET}
