@@ -46,6 +46,7 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 version: tutorial version
+life_cycle: tutorial lifecycle
 contributions:
   authorship:
   - author 1
@@ -68,6 +69,16 @@ The tutorial requires the metadata to be included at the top:
 * `objectives`: a list of learning objectives for the tutorial.
 * `key_points`: a list of take-home messages that will appear at the end of the tutorial.
 * `contributions`: a list of tutorial contributors broken down into broad categories to help contributors identify how they contributed to a specific tutorial. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`.
+
+> ## Development status of tutorials
+> The development status of tutorials follows a framework similar to that of the [Carpentries](https://docs.carpentries.org/> resources/curriculum/lesson-life-cycle.html). Training materials are classified into four categories: **alpha**, **beta**, **stable**, and **deprecated**.
+> 
+> - **Alpha:** the tutorial is in the early stages of development. Its content may be incomplete, untested, and subject to significant changes. This status typically applies until a complete first draft is available.
+> - **Beta:** the tutorial is in the testing phase, being reviewed and taught by other instructors. Feedback from pilot workshops is actively incorporated, and further revisions are likely.
+> - **Stable:** the tutorial is considered complete, reliable, and well-maintained. Only minor updates are expected, with no major changes anticipated. 
+> - **Deprecated:** the tutorial is no longer maintained and may be removed in the future.
+> 
+{: .details}
 
 The following information can also be included in the tutorial metadata:
 * `zenodo_link`: link to the input data for the tutorial on Zenodo.

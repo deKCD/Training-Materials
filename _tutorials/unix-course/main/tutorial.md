@@ -21,6 +21,7 @@ key_points:
   - "Tab completion can reduce errors from mistyping and make work more efficient in the shell."
 version:
   - main
+life_cycle: "beta"
 contributions:
   authorship:
   - Christian Henke

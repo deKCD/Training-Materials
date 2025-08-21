@@ -1,0 +1,33 @@
+{% comment %}
+    Display tutorial's lifecycle.
+    Possible values: "alpha", "beta", "stable", "deprecated".
+    If not set, the tutorial is considered "alpha".
+{% endcomment %}
+
+{% if page.life_cycle == nil %}
+{% assign life_cycle = include.life_cycle %}
+{% else %}
+{% assign life_cycle = page.life_cycle %}
+{% endif %}
+
+{% if life_cycle == "alpha" %}
+<div class="alert alert-warning">
+  <strong>Alpha</strong>: This tutorial is in an early stage of development and may change significantly.
+</div>
+{% elsif life_cycle == "beta" %}
+<div class="alert alert-info">
+  <strong>Beta</strong>: This tutorial is in a testing phase. Feedback is welcome.
+</div>
+{% elsif life_cycle == "stable" %}
+<div class="alert alert-success">
+  <strong>Stable</strong>: This tutorial is considered complete and reliable.
+</div>
+{% elsif life_cycle == "deprecated" %}
+<div class="alert alert-danger">
+  <strong>Deprecated</strong>: This tutorial is no longer being maintained and may be removed in the future.
+</div>
+{% else %}
+<div class="alert alert-danger">
+  <strong>Unknown</strong>: The lifecycle status of this tutorial is not defined. Please <a href="mailto:{{ site.email }}">contact us</a> for more information.
+</div>
+{% endif %} 
