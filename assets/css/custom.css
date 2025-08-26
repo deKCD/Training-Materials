@@ -6,14 +6,22 @@
 }
 
 .justify-text {
-  text-align: justify;
-  color: black;
-  padding: auto;
-  font-size: 1.1em;
-  line-height: 1.6;
-  width: 100%;
-  max-width: none;
-  font-stretch: expanded;
+    flex: 1 1 0%;
+    text-align: justify;
+    color: black;
+    line-height: 1.6;
+    margin: 2em auto 0;       /* no offset */
+    margin-top: 2em;  /* space from header */
+    padding: 0;      /* clean padding */
+    width: 150%;     /* full width */
+    font-size: 1.1em;
+    font-stretch: expanded;
+    transform: translateX(-15%); /* shift left by half of extra width */
+}
+.justify-text h1 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: black
 }
 
 /* Custom CSS for Home Page button */
@@ -99,22 +107,25 @@ td {
 
 .pathway-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5em;
-  margin-top: 1em;
+  margin-top: 1.5em;
+  width: 150%;     /* full width */
+  transform: translateX(-15%); /* shift left by half of extra width */
+  margin-left: auto;
+  margin-right: auto;
 }
-
 .pathway-card {
   border-radius: 12px;
   padding: 1.2em;
-  background-color: #2a8d8d; /* light Cayman blue */
+  background-color:rgba(0, 37, 66, 0.70);
   color: white;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
 
 .pathway-card:hover {
-  background-color: #106060;
+  background-color:rgba(0, 37, 66, 0.70);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -122,7 +133,7 @@ td {
   margin-top: 0;
   font-size: 1.3em;
   font-weight: bold;
-  color: #157878;
+  color: rgba(0, 37, 66, 0.70);
 }
 
 .pathway-card h3 a {
@@ -147,7 +158,7 @@ td {
 .pathway-card .tags span {
   display: inline-block;
   background-color: #ffffff;
-  color: #157878;
+  color: rgba(0, 37, 66, 0.70);
   font-size: 0.65em;
   font-weight: bold;
   padding: 0.3em 0.6em;
@@ -156,57 +167,101 @@ td {
   font-family: monospace;
 }
 
-
 /* Custom CSS for Pathway content */
-
-.pathway-content {
-  max-width: 960px;
-  margin: 0 auto; /* center horizontally */
-  padding: 20px;
+.pathway-content h2 {
+  font-size: 1.5em;
+  font-weight: semi-bold;
+  margin: 2em 0 0.5em;  /* space from header */
+  line-height: 1.6;
+  padding: 0;   
+  color: black;
+  text-align: left;
+  width: 100%;     /* full width */
+  font-stretch: expanded;
 }
-
 .pathway-content p {
-  font-size: 1.1em;  /* Or any size you prefer */
-  line-height: 1.6;  /* Optional: improves readability */
-  margin-bottom: 1em;
+  color: black;
+  width: 100%;     /* full width */
+  font-stretch: expanded;
+  font-size: 1.1em;
+  text-align: left;
 }
-
+.pathway-content th {
+  background-color:rgba(0, 37, 66, 0.852);
+  color: white;               /* text color */
+  padding: 0.5rem;
+  text-align: left;           /* optional */
+  font-weight: 600;           /* optional */
+  font-size: 1.1em;
+}
 .pathway-content table {
   width: 100%;
+  margin: 1em auto 1em; /* Center the table */
   border-collapse: collapse;
-  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+.pathway-content table:colgroup {
+  background-color: #0b466d; /* Header background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+.pathway-content td {
+  padding: 0.5rem;
+  vertical-align: top;
+  color: black;
+}
+.pathway-content td,
+.pathway-content a {
+  color: black;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+/* Hover/focus state for links */
+.pathway-content a:hover,
+.pathway-content a:focus {
+  color: #b5b5b5; /* Adjust hover color as needed */
+  background-color: rgba(255, 255, 255, 0.08); /* Use background-color for clarity */
+  text-decoration: none; /* Optional: underline on hover */
+  text-align: center;
 }
 
-.pathway-content table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  vertical-align: top;
-  font-size: 1em;
-}
-
-.pathway-content table th {
-  border: 1px solid #ddd;
-  vertical-align: top;
-  font-weight: bold;
-  font-size: 1.1em; /* increase this value for even larger text */
-  padding: 10px;
-}
 
 /* -------- Tutorial Group Layout -------- */
 
 /* Group title styling */
+
 .tutorial-group h2 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 2rem 0 0.2rem;
+  font-size: 1.5em;
+  font-weight: semi-bold;
+  margin: 2em 0 0.5em;  /* space from header */
+  line-height: 1.6;
+  padding: 0;   
   color: black;
+  text-align: left;
+  width: 150%;     /* full width */
+  font-stretch: expanded;
+  display: block;
+  transform: translateX(-15%); /* shift left by half of extra width */
 }
 
 /* Group description styling */
 .tutorial-group p {
-  margin-bottom: 1rem;
   color: black;
-  font-size: 1.5rem;
+  width: 150%;     /* full width */
+  font-stretch: expanded;
+  display: block;
+  transform: translateX(-15%); /* shift left by half of extra width */
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.tutorial-group th {
+  background-color:rgba(0, 37, 66, 0.852);
+  color: white;               /* text color */
+  padding: 0.5rem;
+  text-align: left;           /* optional */
+  font-weight: 600;           /* optional */
 }
 
 /* Table cell styling */
@@ -222,6 +277,7 @@ td {
   color: black;
   transition: color 0.3s ease;
   text-decoration: none;
+  font-size: 0.95em;
 }
 
 /* Hover/focus state for links */
@@ -230,16 +286,18 @@ td {
   color: #b5b5b5; /* Adjust hover color as needed */
   background-color: rgba(255, 255, 255, 0.08); /* Use background-color for clarity */
   text-decoration: none; /* Optional: underline on hover */
+  text-align: center;
 }
 .tutorial-group table {
-  width: 100%;
+  width: 150%;
+  margin: 1rem auto 1em; /* Center the table */
   border-collapse: collapse;
-  margin-top: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
+  transform: translateX(-15%);
 }
 .tutorial-group table:colgroup {
-  background-color: #157878; /* Header background color */
+  background-color: #0b466d; /* Header background color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
@@ -251,15 +309,66 @@ td {
 }
 
 .page-header {
-  transition: box-shadow 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5); 
-  z-index: 1000;
-  top: 0;
-  width: 100%;
+  background: url("/assets/img/background_dekcd.original.png") center/cover no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+  padding: 4em 2em;
+  position: relative;
 }
-.page-header .btn:hover {
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.2);
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+.page-header h1,
+.page-header h2,
+.page-header a {
+  position: relative;
+  z-index: 1; /* ensure content is above overlay */
 }
 
+.page-header h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.page-header h2 {
+  font-size: 1.5em;
+}
+
+/* Drop-down for FAQ*/
+details {
+  margin: 1em 0;
+  padding: 0.95em 1em;
+  border: 0.5px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  transition: background 0.3s;
+}
+
+details:hover {
+  background: #f1f1f1;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: semi-bold;
+  font-size: 1.1em;
+}
+
+details[open] {
+  background: #eef6ff;
+  border-color: #0b466d;
+}
+
+details.answer-block summary {
+  font-weight: semi-bold;
+}
+
+details.answer-block div {
+  padding-left: 15px;
+  margin-top: 5px;
+  font-size: 1em;
+}

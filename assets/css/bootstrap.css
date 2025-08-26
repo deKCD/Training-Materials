@@ -1588,6 +1588,7 @@ pre code {
   margin-right: auto;
   margin-left: auto;
   background-color: transparent;
+  font-size: larger;
 }
 @media (min-width: 768px) {
   .container {

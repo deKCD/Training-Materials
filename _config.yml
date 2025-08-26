@@ -25,8 +25,6 @@ collections:
     output: true
   slides:
     output: true
-  upcoming:
-    output: true
 
 # Turn on built-in syntax highlighting.
 highlighter: rouge
@@ -49,4 +47,4 @@ categories:
 header_links:
   partners: https://datenkompetenz.cloud/partner/
   event_calendar: https://datenkompetenz.cloud/event-kalender/?p=1
-  upcoming: "/upcoming/"
+  faq: FAQ.md

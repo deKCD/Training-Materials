@@ -21,25 +21,29 @@ layout: null
   {% if page.math %}
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/katex.min.css' | relative_url }}" />
   {% endif %}
+    
   {% include favicons.html %}
 </head>
 
 <body>
-  <a id="skip-to-content" href="#content">Skip to the content.</a>
-  <header class="page-header" role="banner">
-    <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo">
+  <header class="page-header" role="banner" style="margin-top: 0">
     <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
     <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
     <a href="{{ '/' | relative_url }}" class="btn">Home Page</a>
     <a href="{{ '/pathways/' | relative_url }}" class="btn">Collection of Learning pathways</a>
   </header>
-    
-    <div class="pathway-content">    
+ 
+    <div class="pathway-content tutorial-grop container">    
       {% for section in page.pathway %}
         <h2>{{ section.section }}</h2>
         <p>{{ section.description }}</p>
-    
+        
         <table>
+          <colgroup>
+            <col style="width: 20%;">
+            <col style="width: 30%;">
+            <col style="width: 40%;">
+          </colgroup>
           <thead>
             <tr>
               <th>Tutorial</th>
@@ -87,4 +91,5 @@ layout: null
         </ul>
     </div>
 </body>
+{% include tutorial_footer.html %}
 </html>

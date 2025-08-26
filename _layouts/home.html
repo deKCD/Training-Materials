@@ -12,7 +12,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}{% if site.github.build_revision %}?v={{ site.github.build_revision }}{% endif %}">
     <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
-    {% include head-custom.html %}
   </head>
   <body>
     <header class="main-header">
@@ -23,11 +22,10 @@
       <nav class="header-nav">
         <a href="{{ site.header_links.partners | relative_url }}" target="_blank" rel="noopener">Partners</a>
         <a href="{{ site.header_links.event_calendar | relative_url }}" target="_blank" rel="noopener">Event-Calendar</a>
-        <a href="{{ '/upcoming/' | relative_url }}">Upcoming Tutorials</a>
+        <a href="{{ '/FAQ/' | relative_url }}">FAQs</a>
       </nav>
       <div class="header-actions">
-        <button id="theme-toggle" aria-label="Toggle dark/light mode">☾</button>
-        <button id="search-toggle" aria-label="Search" style="background:none;border:none;font-size:1.3em;cursor:pointer;">🔍︎</button>
+        <button id="search-toggle" aria-label="Search" style="background:none;border:none;font-size:1.6em;cursor:pointer;color:#000;align-items:left;">🔍︎</button>
         <div id="search-container" style="display:none;position:relative;">
           <input type="search" id="site-search" placeholder="Search Tutorials" aria-label="Search" autocomplete="off" style="margin-left:8px; color:#373737;">
             <ul id="search-suggestions" style="position:absolute;top:100%;left:0;right:0;z-index:10;background:#fff;border:1px solid #ccc;list-style:none;margin:0;padding:0;display:none;max-height:200px;overflow-y:auto;color:#ccc;"></ul>
@@ -36,12 +34,13 @@
               transition: background 0.10s, color 0.10s;
             }
             #search-suggestions li:hover {
-              background: #f0f0f0;
-              color: #656565;
-              text-decoration: underline;
+              background: #c9c7c7;
+              color: #353434;
+              text-decoration: none;
             }
             </style>
         </div>
+
         <script>
           // Toggle search input
           document.getElementById('search-toggle').onclick = function(e) {
@@ -77,9 +76,6 @@
           {% for p in site.pathways %}
             { title: "{{ p.title | escape }}", url: "{{ p.url | relative_url }}", type: "Pathway" },
           {% endfor %}
-          {% for u in site.upcoming.docs %}
-            { title: "{{ u.title | escape }}", url: "{{ u.url | relative_url }}", type: "Upcoming Tutorial" },
-          {% endfor %}
             ];
 
           // Show suggestions
@@ -113,9 +109,10 @@
         </script>
       </div>
     </header>
-    <div class="container" style="display: flex; align-items: flex-start;">
-      <aside class="sidebar" style="flex: 0 0 260px; margin-right: 2em;">
-      <h2 class="project-tagline" style="text-align: center;">{{ page.description | default: site.description }}</h2>
+    <div class="header-banner"></div>
+    <div class="container" style="display:flex;align-items:flex-start;gap:5em;">
+      <aside class="sidebar">
+      <h2 class="project-tagline" style="text-align: left;">{{ page.description | default: site.description }}</h2>
       <ul class="category-list">
       <hr>
       <h3><strong>Training Materials</strong></h3>

@@ -2,11 +2,9 @@
 layout: home
 ---
 
-<h1 style="color: #157878;">How to Get Started?</h1>
+<h1 style="color:black;">How to Get Started?</h1>
 
 Welcome! This collection of training materials was developed as part of the <strong>de.KCD</strong> project for those interested in cloud computing and RDM as a means of self-learning.
-
-To begin, we recommend starting with the <a href="{{ '/pathways/basics/' | relative_url }}">Basics pathway</a>, which introduces key concepts and tools you will need along the way. Each module contains tutorials with clear objectives, hands-on exercises, and links to further resources.
 
 You do not need any advanced experience—just a willingness to learn. Some familiarity with Python and command-line tools will be helpful.
 
@@ -14,7 +12,7 @@ Feel free to learn at your own pace, and do not hesitate to reach out if you wou
 
 ---
 
-<h1 style="color: #157878;">How to contribute?</h1>
+<h1 style="color:black;">How to contribute?</h1>
 
 You can help us by reporting any mistakes or errors, or by creating additional content. To get started, visit our <a href="{{ '/CONTRIBUTING/' | relative_url }}">Contribution page</a>. 
 
@@ -23,7 +21,7 @@ Feel free to contact us to collaborate on integrating your contributions.
 
 ---
 
-<h1 style="color: #157878;">German Competence Center Cloud Technologies for Data Management and Processing (de.KCD)</h1>
+<h1 style="color:black;">German Competence Center Cloud Technologies for Data Management and Processing (de.KCD)</h1>
     
 de.KCD is a cross-location and cross-domain contact point for teaching skills in handling data using cloud-based technologies, resources and methods for institutions and networked centers as well as for researchers at all career levels.
 
@@ -35,5 +33,5 @@ Please check our <a href="https://datenkompetenz.cloud/en/" target="_blank" rel=
 
 ---
 
-<h1 style="color: #157878;">Acknowledgment and Funding</h1>
+<h1 style="color:black;">Acknowledgment and Funding</h1>
 

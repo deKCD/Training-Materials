@@ -19,17 +19,17 @@ permalink: /tutorials/
 
 {% for group in groups %}
 <section class="tutorial-group">
-  <h2 style="color:#157878;"><strong>{{ group.title }}</strong></h2>
-  <p style="color:black;font-size:1em;">{{ group.description }}</p>
+  <h2>{{ group.title }}</h2>
+  <p>{{ group.description }}</p>
 
   <table>
       <colgroup>
           <col style="width: 40%;">
-          <col style="width: 5%;">
+          <col style="width: 15%;">
           <col style="width: 5%;">
           <col style="width: 40%;">
+          <col style="width: 30%;">
           <col style="width: 10%;">
-          <col style="width: 5%;">
       </colgroup>
     <thead>
       <tr>
