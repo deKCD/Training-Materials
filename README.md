@@ -36,6 +36,33 @@ chmod +x run.sh
 
 Then, open your web browser and navigate to `http://localhost:4000/Training-Materials/` to view the website.
 
+### Running the containerized version
+
+Currently images are being pushed to [quay.io](quay.io/dekcd/) by hand. One can also run a local build by running `docker compose -f compose.dev.yml up -d`.
+
+#### Things to consider with the containerized version
+
+The image allows to retrieve webhooks from GitHub to update the state of the static jekyll site.
+One needs to set a webhook secret for this.
+A current test-installation is available here: [https://dekcd.bi.denbi.de/training/](https://dekcd.bi.denbi.de/training/), which is a work in progress (CSS not fully working at the moment).
+Webhooks can be sent to [https://dekcd.bi.denbi.de/training/webhook](https://dekcd.bi.denbi.de/training/webhook).
+When running the container in a compose setup one needs to set the expected webhook secret in the environment:
+`TRAINING_MATERIAL_WEBHOOK_SECRET=...`
+The current haproxy-config looks like this:
+```
+backend dekcd_training
+    http-request set-path %[path,regsub(^/training/?,/Training-Materials/)] 
+    server s1 training-test:4000 check resolvers docker resolve-prefer ipv4 init-addr none
+
+backend dekcd_training_webhook
+    http-request set-path %[path,regsub(^/training/webhook?,/webhook)] 
+    server s1 training-test:5000 check resolvers docker resolve-prefer ipv4 init-addr none
+```
+with `training-test` as the container running the jekyll-site.
+
+Currently the webhook triggers a pull command on the `main`-branch of this repository. Within the container the pull gets triggered when the webhook-payload retrieved indicates a `push` or `merge`-events on the `main`-branch of this repository. The test webhook was triggered by a push from another repository.  
+
+
 ### Development with Devcontainer
 
 We provide a devcontainer for easy development and testing of the website. You can find the devcontainer configuration in the `.devcontainer` directory. To use it, you need to have [Visual Studio Code](https://code.visualstudio.com/) installed. Open the repository in VS Code and it will prompt you to reopen the folder in the container. After that, you can run the Jekyll server as described above. 
