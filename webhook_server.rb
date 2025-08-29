@@ -6,14 +6,14 @@ set :bind, '0.0.0.0'
 set :port, 5000
 
 # Use ENV or hardcoded for your secret
-WEBHOOK_SECRET = ENV['WEBHOOK_SECRET'] || 'your_github_webhook_secret'
+WEBHOOK_SECRET = ENV['TRAINING_MATERIAL_WEBHOOK_SECRET'] || 'pheiP5aijahdeiy'
 
 helpers do
   def verify_signature(payload_body, signature)
-    return false unless signature
-    signature = signature.gsub('sha256=', '')
-    digest    = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), WEBHOOK_SECRET, payload_body)
-    Rack::Utils.secure_compare(digest, signature)
+    expected_signature = 'sha256=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), WEBHOOK_SECRET, payload_body)
+    compare_result = Rack::Utils.secure_compare(expected_signature, signature.to_s)
+
+    compare_result
   end
 end
 
@@ -24,23 +24,31 @@ post '/webhook' do
   event     = request.env['HTTP_X_GITHUB_EVENT']
 
   halt 401, "Signatures didn't match!" unless verify_signature(payload_body, signature)
-  halt 400, "Unsupported event" unless event == "push"
+  
+  payload = JSON.parse(payload_body)
+  case event
+  when "push"
+    branch_ref = payload['ref']
+    halt 400, "Not the main branch" unless branch_ref == "refs/heads/main"
+  when "pull_request"
+    action = payload['action']
+    merged = payload['pull_request'] && payload['pull_request']['merged']
+    base_branch = payload['pull_request'] && payload['pull_request']['base']['ref']
+    unless action == "closed" && merged && base_branch == "main"
+      halt 400, "Not a merged PR to main"
+    end
+  else
+    halt 400, "Unsupported event"
+  end
 
-  # Trigger your desired script or command here -- e.g. git pull
+  # Do your git pull, etc.
   output = `cd /srv/jekyll && git pull 2>&1`
   status_code = $?.exitstatus
 
   if status_code == 0
     content_type :json
-    {result: "Success!", output: output}.to_json
+    { result: "Success!", output: output }.to_json
   else
-    halt 500, {result: "Failure!", output: output}.to_json
+    halt 500, { result: "Failure!", output: output }.to_json
   end
 end
-
-get '/' do
-  "Webhook endpoint is running!"
-end
-
-
-# need to adjust this webhook endpoint, so it should work fine actually
