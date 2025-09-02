@@ -1,0 +1,41 @@
+{% comment %}
+    Display tutorial's contributors: authors, editors, and funding.
+{% endcomment %}
+
+{% if page.contributions.authorship == nil %}
+{% assign authors = include.contributions.authorship %}
+{% else %}
+{% assign authors = page.contributions.authorship %}
+{% endif %}
+
+{% if page.contributions.editing == nil %}
+{% assign editors = include.contributions.editing %}
+{% else %}
+{% assign editors = page.contributions.editing %}
+{% endif %}
+
+{% if page.contributions.funding == nil %}
+{% assign funders = include.contributions.funding %}
+{% else %}
+{% assign funders = page.contributions.funding %}
+{% endif %}
+
+<blockquote class="details">
+  <h2>Contributions</h2>
+  {% if authors %}
+      <p><strong>Author(s):</strong> {{ authors | join: ", " }}</p>
+  {% endif %}
+  {% if editors %}
+      <p><strong>Editor(s):</strong> {{ editors | join: ", " }}</p>
+  {% endif %}
+</blockquote>
+
+{% if funders %}
+    <p><strong>Supported by:</strong></p>
+    {% for funder in funders %}
+        {% assign contrib = site.data.contributions | where: "name", funder | first %}
+        {% if contrib %}
+            <img src="{{ contrib.logo }}" alt="{{ contrib.name }} logo" style="max-height:50px; margin-right:10px;"/>
+        {% endif %}
+    {% endfor %}
+{% endif %}

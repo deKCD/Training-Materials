@@ -1,0 +1,53 @@
+- name: deKCD
+  logo: /assets/img/deKCD.png
+
+- name: deNBI
+  logo: /assets/img/deNBI.png
+
+- name: BIH
+  logo: /assets/img/BIH.svg
+
+- name: DKFZ
+  logo: /assets/img/DKFZ.svg  
+
+- name: EMBL
+  logo: /assets/img/EMBL.svg
+
+- name: EOSC-Life
+  logo: /assets/img/EOSC-Life.svg
+
+- name: FAIRagro
+  logo: /assets/img/FAIRagro.png  
+
+- name: GHGA
+  logo: /assets/img/GHGA.svg
+
+- name: JLU
+  logo: /assets/img/JLU.svg 
+
+- name: NFDI4biodiversity
+  logo: /assets/img/NFDI4biodiversity.png
+
+- name: NFDI4health
+  logo: /assets/img/NFDI4health.jpg
+
+- name: NFDI4microbiota
+  logo: /assets/img/NFDI4microbiota.png
+
+- name: NFDI4neuroscience
+  logo: /assets/img/NFDI4neuroscience.png
+
+- name: NFDI4bioimage
+  logo: /assets/img/NFDI4bioimage.png
+
+- name: NFDIdataplant
+  logo: /assets/img/NFDIdataplant.png
+
+- name: uni-heidelberg
+  logo: /assets/img/uni-heidelberg.svg
+
+- name: uni-tuebingen
+  logo: /assets/img/uni-tuebingen.svg
+
+- name: uni-freiburg
+  logo: /assets/img/uni-freiburg.svg

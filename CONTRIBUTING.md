@@ -70,6 +70,8 @@ The tutorial requires the metadata to be included at the top:
 * `key_points`: a list of take-home messages that will appear at the end of the tutorial.
 * `contributions`: a list of tutorial contributors broken down into broad categories to help contributors identify how they contributed to a specific tutorial. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`.
 
+In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to the file and place the organization’s `logo` in `/assets/img/`.
+
 > ## Development status of tutorials
 > The development status of tutorials follows a framework similar to that of the [Carpentries](https://docs.carpentries.org/> resources/curriculum/lesson-life-cycle.html). Training materials are classified into four categories: **alpha**, **beta**, **stable**, and **deprecated**.
 > 
@@ -88,7 +90,6 @@ For additional information that could be included in the tutorial metadata, plea
 
 
 If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
-
 
 ### **Format the content**
 
