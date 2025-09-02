@@ -16,7 +16,7 @@ RUN gem install jekyll bundler sinatra rack
 WORKDIR /srv/jekyll
 
 COPY . .
-
+RUN ls -l /srv/jekyll
 
 RUN bundle install
 
