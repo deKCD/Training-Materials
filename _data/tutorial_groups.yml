@@ -8,3 +8,9 @@
   tutorials:
     - simpleVMWorkshop
     - bibigrid
+
+- title: Machine Learning on Cloud infrastructure
+  description: Tutorials focused on ...
+  tutorials:
+    - ml-fastapi
+    - ml-streamlit

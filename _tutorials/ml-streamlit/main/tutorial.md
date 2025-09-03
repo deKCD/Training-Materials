@@ -13,6 +13,7 @@ key_points:
   - "Streamlit allows rapid creation of user-friendly web apps for deploying models and sharing results."
 version:
   - main
+life_cycle: "alpha"
 contributions:
   authorship:
   - Dilfuza Djamalova
@@ -26,9 +27,9 @@ Machine learning projects often demand far more computational power and storage 
 In this hands-on tutorial, you will learn how to (1) create a VM instance on the de.NBI Cloud using SimpleVM; (2) preprocess and embed protein sequence dataset for training TabICL - a tabular foundation model for in-context learning on large datasets; (3) transform your trained model  into an online app/service with a user interface using Streamlit.
 
 > ## Note
-> This tutorial focuses on scaling machine learning workflows in the cloud, not on the theoretical aspects of how machine learning models learn. We assume you already have basic to intermediate knowledge of model training and libraries like scikit-learn. 
+> This tutorial focuses on scaling machine learning workflows in the cloud, not on the theoretical aspects of how machine learning models learn. We assume you already have basic to intermediate knowledge of model training and libraries like **scikit-learn**. 
 > 
-{: .key_points}
+{: .warning}
 
 ## **Prerequisites**
 Before you start, ensure you meet the following requirements:
@@ -47,7 +48,7 @@ Before you start, ensure you meet the following requirements:
     * [Load and inspect the dataset](#load-and-inspect-the-dataset)
     * [Extract protein embeddings using gLM2](#extract-protein-embeddings-using-glm2)
 * [Train TabICL model](#train-tabicl-model)
-* [Model deployment with UI on cloud](#model-deployment-with-ui-on-cloud)
+* [Model deployment on cloud with UI](#model-deployment-on-cloud-with-ui)
     * [Basic Streamlit commands](#basic-streamlit-commands)
     * [Deploy trained model on Streamlit](#deploy-trained-model-on-streamlit)
 * [What to learn next?](#what-to-learn-next)
@@ -56,7 +57,7 @@ Before you start, ensure you meet the following requirements:
 
 ### **Access SimpleVM instance**
 
-If you are already a member of a SimpleVM project, you can proceed to create a VM instance. If you are unfamiliar with this process, we recommend reviewing our [SimpleVM tutorial](/tutorials/simpleVMWorkshop/main/tutorial.md) and the [SimpleVM Wiki](https://simplevm.denbi.de/wiki/) for step-by-step guidance.
+If you are already a member of a SimpleVM project, you can proceed to create a VM instance. If you are unfamiliar with this process, we recommend reviewing our [SimpleVM tutorial](/tutorials/simpleVMWorkshop/main/tutorial/) and the [SimpleVM Wiki](https://simplevm.denbi.de/wiki/) for step-by-step guidance.
 
 > ## Instance Flavor
 > Ensure to select a flavor with the enough RAM and GPU, *e.g.* FIXME 
@@ -71,7 +72,9 @@ For this hands-on tutorial, we need to install the following packages:
 - [tabicl](https://github.com/soda-inria/tabicl/tree/main?tab=readme-ov-file#from-pypi)
 - [sklearn](https://scikit-learn.org/stable/install.html)
 - [pandas](https://pandas.pydata.org/) 
+- [biopython](https://pypi.org/project/biopython/)
 - [Streamlit](https://docs.streamlit.io/)
+- *(Optional)* [jupyterlab](https://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html)
 
 Once you have logged in your instance, install the `pip` following [this instructions](https://pip.pypa.io/en/stable/installation/)
 
@@ -81,20 +84,19 @@ Once you have logged in your instance, install the `pip` following [this instruc
 > sudo apt install python3-venv python3-pip -y
 > pip3 --version
 > ``` 
-> 
-{: code-in}
+{: .code-in}
 
-> ## Activate virtual environment and upgrade pip
+> ## Activate virtual environment and upgrade `pip`
 > ```bash
 > python3 -m venv ~/mlenv
 > source ~/mlenv/bin/activate
 > ```
 >
-{: code-in}
+{: .code-in}
 
 To install torch, please check the [PyTorch site](https://pytorch.org/get-started/locally/). Depending on your compute platform, select CPU or CUDA version and run the suggested command, *e.g.*: 
 
-![torch installation](/tutorials/mlcloud/img/torch_installation.png){: .responsive-img }
+![torch installation](/tutorials/ml-streamlit/img/torch_installation.png){: .responsive-img }
 
 
 > ## Install the remaining packages:
@@ -104,8 +106,8 @@ To install torch, please check the [PyTorch site](https://pytorch.org/get-starte
 > pip install tabicl # TabICL model
 > pip install datasets # Huggingface Datasets 
 > pip install streamlit # for model deployment
+> pip install biopython
 > ```
-> 
 {: .code-in}
 
 ## **Get the dataset**
@@ -122,7 +124,7 @@ In our case, we will use this dataset to train a protein sequence classifier tha
 
 ### **Load and inspect the dataset**
 Hugging Face Datasets provides several easy ways to load the data. Navigate to `Use this dataset` in the dataset page and select one of the libraries:
-![Load the dataset](/tutorials/mlcloud/img/get_data.png){: .responsive-img }
+![Load the dataset](/tutorials/ml-streamlit/img/get_data.png){: .responsive-img }
 
 For this tutorial, we will use the `datasets` library from Hugging Face:
 
@@ -133,12 +135,11 @@ For this tutorial, we will use the `datasets` library from Hugging Face:
 > ds = load_dataset("tattabio/mibig_classification_prot")
 > print(ds)
 > ```
->
 {: .code-in}
 
 This returns the following dataset structure:
 
-> ## Dataset
+> ## Dataset structure
 > ```
 DatasetDict({
     train: Dataset({
@@ -151,7 +152,6 @@ DatasetDict({
     })
 })
 > ```
-> 
 {: .code-out}
 
 The dataset comes with:
@@ -176,18 +176,18 @@ Now, let’s explore the dataset to better understand its structure before train
 > 1. Handle duplicates in the `Entry` column for both train and test splits. Keep the same number of samples as before, but assign unique indices by creating a new column `Entry_id`.
 > 2. Count how many unique classes exist in both `simple_class` and `class`. Identify which classes are most common in the dataset.
 > 
-> > ## Solution
-> > 1. One way to ensure unique `Entry_id` values is:
-> > ```python
-> > train.sort_values(by="Entry", inplace=True)
-> > train["Entry_id"] = train.groupby("Entry").cumcount().astype(str)
-> > train['Entry_id'] = train['Entry'] + '_' + train['Entry_id']
-> > ```
-> > 2. Use `.value_counts()` to inspect the distribution. This will reveal which classes dominate the dataset, which is critical for handling class imbalance during model training.
-> > 
+>> ## Solution
+>> 1. One way to ensure unique `Entry_id` values is:
+>> ```python
+>> train.sort_values(by="Entry", inplace=True)
+>> train["Entry_id"] = train.groupby("Entry").cumcount().astype(str)
+>> train['Entry_id'] = train['Entry'] + '_' + train['Entry_id']
+>> ```
+>> 2. Use `.value_counts()` to inspect the distribution. This will reveal which classes dominate the dataset, which is critical for handling class imbalance during model training.
+>> 
 > {: .solution}
 >
-{: .hands-on}
+{: .hands_on}
 
 > ## Pitfall #1: Class imbalance
 >
@@ -264,10 +264,10 @@ model = AutoModel.from_pretrained(model_name, torch_dtype=torch.bfloat16, trust_
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 ```
 Here,  
-    - **`torch_dtype=torch.bfloat16`** – specifies the data type for model weights. Using `bfloat16` reduces memory usage and speeds up computation on GPUs without significantly sacrificing precision.  
-    - **`trust_remote_code=True`** – allows execution of custom code provided by the model repository (required when models have custom architectures or tokenizers). Only use this flag with trusted sources.  
-    - **`.cuda()`** – moves the model to the GPU, enabling faster computation for embedding generation.  
-    - **`AutoTokenizer.from_pretrained(...)`** – loads the tokenizer associated with the model, ensuring proper tokenization of sequences for embedding generation.  
+    - `torch_dtype=torch.bfloat16` – specifies the data type for model weights. Using `bfloat16` reduces memory usage and speeds up computation on GPUs without significantly sacrificing precision.  
+    - `trust_remote_code=True` – allows execution of custom code provided by the model repository (required when models have custom architectures or tokenizers). Only use this flag with trusted sources.  
+    - `.cuda()` – moves the model to the GPU, enabling faster computation for embedding generation.  
+    - `AutoTokenizer.from_pretrained(...)` – loads the tokenizer associated with the model, ensuring proper tokenization of sequences for embedding generation.  
 
 
 **Step 3: Build a custom `Dataset`**
@@ -288,7 +288,7 @@ class ProteinDataset(Dataset):
 ```
 
 **Step 4: Collate function for tokenization**
-The collate function batches sequences together and tokenizes them dynamically. By **padding** (i.e., adding special tokens to shorter sequences so all sequences in a batch have the same length) and **truncating** (i.e., shortening sequences that exceed the maximum length) sequences to the same length within each batch, the model can process them efficiently. 
+The collate function batches sequences together and tokenizes them dynamically. By **padding** (*i.e.*, adding special tokens to shorter sequences so all sequences in a batch have the same length) and **truncating** (*i.e.*, shortening sequences that exceed the maximum length) sequences to the same length within each batch, the model can process them efficiently. 
 
 > ## Padding and Truncation
 > For a comprehensive explanation of **padding** and **truncation** strategies, refer to the [Hugging Face documentation](https://huggingface.co/docs/transformers/en/pad_truncation).
@@ -347,7 +347,7 @@ Here,
 > ## Task
 > Repeat the last step for the test split and save the embeddings.
 > 
-{: .hands-on}
+{: .hands_on}
 
 ## **Train TabICL model**
 
@@ -376,10 +376,10 @@ X_test = pd.DataFrame({k: v.numpy() for k, v in test_emb.items()}).T
 > 2. Extract the corresponding labels for each split to create `y_train` and `y_val` sets.  
 > 3. Verify that the number of samples in `X_train`, `X_val`, `y_train`, and `y_val` are consistent.
 >
-{: .hands-on}
+{: .hands_on}
 
 > ## Pitfall #2: Data Leakage
-> **Data leakage** occurs when information (samples) from the validation or test set present in the training process. In our case, leakage could happen if protein sequences from the same **BGC group** are present in both the training and validation splits. This leads to overly optimistic results, as the model indirectly "sees" validation data during training.  
+> **Data leakage** occurs when information (samples) from the validation or test set present in the training process. In our case, leakage could happen if protein sequences from the same **BGC class** are present in both the training and validation splits. This leads to overly optimistic results, as the model indirectly "sees" validation data during training.  
 > 
 > **How to avoid it:**  
 > - Use `GroupShuffleSplit` with the `bgc` column as the grouping variable to ensure that all sequences from the same BGC remain in a single split.  
@@ -393,6 +393,7 @@ The code below will automatically download the pre-trained checkpoint from the H
 
 ```python
 clf = TabICLClassifier(device="cuda:0")
+# clf = TabICLClassifier() # to train on CPU
 ```
 
 TabICL offers a set of hyperparameters to tune which can be checked using `.get_params` method.
@@ -446,14 +447,14 @@ However, TabICL can produce good predictions without hyperparameter tuning, unli
 > 3. Evaluate the tuned model and generate performance reports for both the validation and test sets.  
 > 4. *(Optional)* Visualize the results to compare model performance across different hyperparameter settings.  
 >
-{: .hands-on}
+{: .hands_on}
 
 > ## Train TabICL with additional classes
 > 1. Retrain the classifier using the more granular labels from the `class` column.  
 > 2. Compare the model’s average performance when trained on `simple_class` vs. `class` to evaluate the impact of increased class granularity.  
 > 3. *(Optional)* Tune hyperparameters to determine whether the overall performance improves.  
 >
-{: .hands-on}
+{: .hands_on}
 
 Save the trained model using `joblib` library. You may choose other techniques of storing model, *e.g.* `pickle`.
 
@@ -466,7 +467,7 @@ joblib.dump(clf, "model.joblib")
 Congratulations! You have learned how to set up the simple ML project. 
 
 ---
-## **Model deployment with UI on cloud**
+## **Model deployment on cloud with UI**
 
 You have trained the classifier to predict BGC — now it is time to share it with others using a simple and interactive web interface using [Streamlit](https://streamlit.io/). 
 
@@ -483,7 +484,7 @@ Installing Streamlit is pretty easy and you can follow the [official documentati
 
 To check whether streamlit was successfully installed, run the command `streamlit hello` in your terminal and click on local URLs. You will be redirected to the Welcome Page:
 
-![Streamlit Welcome Page](/tutorials/mlcloud/img/streamlit_welcome.png){: .responsive-image}
+![Streamlit Welcome Page](/tutorials/ml-streamlit/img/streamlit_welcome.png){: .responsive-image}
 
 After installation, you would be able to launch your app as follows:
 
@@ -499,7 +500,7 @@ While editing your script, Streamlit automatically detects changes and prompts y
 
 Here are some commands to help you get started.
 
-## Tasks
+> ## Tasks
 > Create `my_app.py` and edit it as follows to learn some basics:
 > 
 > **Titles and text**
@@ -542,7 +543,6 @@ Here are some commands to help you get started.
 > st.pyplot(fig)
 > ```
 > 
-> Check the following charts:
 > ```python
 > st.line_chart(df)
 > st.bar_chart(df)
@@ -556,7 +556,7 @@ Here are some commands to help you get started.
 > st.image(img, caption="Sample image", use_column_width=True)
 > ```
 > 
-{: .hands-on}
+{: .hands_on}
 
 For further information, please check the [Streamlit documentation](https://docs.streamlit.io/get-started/fundamentals/main-concepts). 
 
@@ -584,12 +584,12 @@ streamlit run app.py
 To access the app via localhost, open a new terminal and establish an SSH tunnel with:
 
 ```bash
-ssh -N -L localhost:XXXX:localhost:XXXX -i SSH_KEY.pub INSTANCE@FLOATING_IP
+ssh -N -L localhost:XXXX:localhost:XXXX -i PRIVATE_SSH_KEY INSTANCE@FLOATING_IP
 ```
 
 Here,
-* replace `XXXX` in with the localhost.
-* `-i SSH_KEY.pub` specifies the SSH key to authenticate with your instance.
+* replace `XXXX` in with the localhost, *e.g.* `localhost:8000:localhost:8000`.
+* `-i PRIVATE_SSH_KEY` specifies the SSH key to authenticate with your instance.
 * `INSTANCE` corresponds to your username on the remote VM (you can verify it by running `whoami` in your previous terminal session).
 
 
@@ -597,7 +597,7 @@ To set up the title and description for your app, you may use the functions `st.
 
 > ## Add title and description
 > ```python
-> st.title("BGC Inference App")
+> st.title("Biosynthetic Gene Cluster Inference")
 > st.subheader("Upload your protein sequences for prediction")
 > ```
 > 
@@ -617,8 +617,8 @@ Let’s create a sidebar which contains some descriptions of data, its format re
 >     st.divider()
 >     
 >     st.header("Model Information")
->     st.caption("This model predicts the target variable using features provided in FASTA file.")
->     st.markdown("The model is a TabICL classifier trained on protein embeddings generated by the gLM2_650M_embed model.")
+>     st.caption("This model predicts BGC class using protein embeddings")
+>     st.markdown("The model is a TabICL classifier trained on protein embeddings generated by `tattabio/gLM2_650M_embed`")
 >     st.markdown("- Input feature dimension: 512")
 > ```
 >
@@ -637,7 +637,7 @@ In this example, we use an HTML snippet to format the caption:
 - `unsafe_allow_html=True` enables Streamlit to render the HTML content as-is. By default, Streamlit sanitizes HTML to prevent security risks; setting this parameter explicitly acknowledges the potential risks and allows custom HTML rendering.
 
 > ## Upload a dataset
-> Create a button to upload a dataset. Use `st.button` and `st.file_uploader` functions. Also specify data type. 
+> Create a button to upload a dataset. Use `st.button` and `st.file_uploader` functions. Also specify the input data type. 
 >
 >> ## Solution
 >> ```python
@@ -651,63 +651,171 @@ In this example, we use an HTML snippet to format the caption:
 Click on button and upload your FASTA file. 
 
 > ## File Uploader
-> In Streamlit, the application script is executed from top to bottom whenever a user interacts with the interface (*e.g.*, pressing a button). This behavior can lead to unexpected issues, such as the file uploader disappearing or resetting after a button click.
-> 
-> Specifically:
-> 1. The entire script reruns on each interaction.
-> 2. `st.button("Upload FASTA")` returns `True` only during the run when the button is clicked.
-> 3. On subsequent runs, the condition becomes `False` unless the button is clicked again.
-> 
-> As a result, the file uploader may appear only briefly and then vanish. To maintain its visibility after a button click, use `st.session_state` to persist the button’s state:
+> In Streamlit, the script runs from top to bottom every time the user interacts with the app (*e.g.*, clicking a button). This behavior can cause the file uploader to reset or disappear after an interaction. To keep the file uploader visible after a button click, you need to store the button’s state in `st.session_state`, allowing the app to “remember” that the button was pressed.
 > 
 > ```python
-> # initialize click state
-> if 'clicked' not in st.session_state: 
->     st.session_state.clicked = {1: False}
->     
-> # callback function to update click state
-> def clicked(button):
->     st.session_state.clicked[button] = True
->     
-> # render button
-> st.button("Upload FASTA", on_click=clicked, args=[1])
+> # initialize
+> if "upload_clicked" not in st.session_state:
+>     st.session_state.upload_clicked = {1: False}
 > 
-> if st.session_state.clicked[1]:
->     uploaded_file = st.file_uploader("Choose FASTA file", type="fasta")
+> # callback function to update click state
+> def mark_upload_clicked(button):
+>     st.session_state.upload_clicked[button] = True
+> 
+> # render button
+> st.button("Upload FASTA", on_click=mark_upload_clicked, args=[1])
+> 
+> if st.session_state.upload_clicked[1]:
+>     st.file_uploader("Choose a FASTA file", type=["fasta", "fa"])
 > ```
 >
 {: .tip}
 
 Click on `Upload FASTA` button and upload your file. 
 
-#### Add feature generation and model inference buttons
+> ## *(Optional Task)* Enter a single protein sequence
+> Use `st.text_area` to past a single protein sequence directly 
+> 
+>> ## Solution
+>> ```python
+>> if st.session_state.upload_clicked[1]:
+>>     st.file_uploader("Choose a FASTA file", type=["fasta", "fa"])
+>>     
+>>     # paste a single protein sequence
+>>     st.markdown("---")
+>>     st.markdown("Or paste a single protein sequence")
+>>     protein_sequence = st.text_area(
+>>         "Enter a protein sequence",    )
+>> ```
+> {: .solution}
+>  
+{: .hands_on}
 
+> ## Add model inference button
+> 1. Create a new python file in the `src` folder (*e.g.*, `utils.py`) to store reusable functions for protein embeddings extraction and prediction. Move your trained model (`model.joblib`) into the same folder for easy access.
+> `utils.py` should include functions to:
+> * **parse a FASTA file** – read sequences and their identifiers.
+> * **generate embeddings** – compute embeddings for sequences in a FASTA file using your chosen model or embedding method.
+> * **make predictions** – load the trained model (`model.joblib`) and predict classes from the generated embeddings.
+> 
+>> ## Solution
+>> ```python
+>> import io
+>> import joblib
+>> from Bio import SeqIO
+>> import pandas as pd
+>> import torch
+>> from transformers import AutoModel, AutoTokenizer
+>> from tabicl import TabICLClassifier
+>> 
+>> # global variables to load models once
+>> _embedding_model = None
+>> _tokenizer = None
+>> _prediction_model = None
+>> 
+>> def parse_fasta(uploaded_file) -> dict:
+>>     """
+>>     Parse FASTA file.
+>>     """
+>>     sequences = {}
+>>     fasta_io = io.StringIO(uploaded_file.getvalue().decode("utf-8"))
+>>     for rec in SeqIO.parse(fasta_io, "fasta"):
+>>         sequences[rec.id] = str(rec.seq)
+>>     return sequences
+>> 
+>> def _load_embedding_model():
+>>     """
+>>     Load and cache the embedding model and tokenizer.
+>>     """
+>>     global _embedding_model, _tokenizer
+>>     if _embedding_model is None or _tokenizer is None:
+>>         _embedding_model = AutoModel.from_pretrained(
+>>             "tattabio/gLM2_650M_embed",
+>>             torch_dtype=torch.bfloat16,
+>>             trust_remote_code=True
+>>         ).cuda()
+>>         _tokenizer = AutoTokenizer.from_pretrained(
+>>             "tattabio/gLM2_650M_embed",
+>>             trust_remote_code=True
+>>         )
+>>     return _embedding_model, _tokenizer
+>> 
+>> def generate_embeddings(sequences: dict) -> dict:
+>>     """
+>>     Generate embeddings for one or more protein sequences.
+>>     """
+>>     model, tokenizer = _load_embedding_model()
+>>     query_embeddings = {}
+>> 
+>>     for seq_id, seq in sequences.items():
+>>         tokens = tokenizer([seq], return_tensors="pt")
+>>         with torch.no_grad():
+>>             embedding = model(tokens.input_ids.cuda()).pooler_output.cpu().squeeze(0)
+>>         query_embeddings[seq_id] = embedding.to(torch.float32)
+>> 
+>>     return query_embeddings
+>> 
+>> def _load_prediction_model():
+>>     """
+>>     Load and cache the TabICL pre-trained classifier.
+>>     """
+>>     global _prediction_model
+>>     if _prediction_model is None:
+>>         _prediction_model = joblib.load("model.joblib")
+>>     return _prediction_model
+>> 
+>> def make_prediction(query_embeddings: dict) -> pd.DataFrame:
+>>     """
+>>    Make predictions.
+>>     """
+>>     model = _load_prediction_model()
+>>     emb_df = pd.DataFrame({k: v.numpy() for k, v in query_embeddings.items()}).T
+>>     predictions = model.predict(emb_df)
+>>     return pd.DataFrame({"prediction": predictions}, index=emb.index)
+>> ```
+> {: .solution}
+> 
+{: .hands_on}
 
-> ## Plot results
-> 
-> 
-{: .hands-on}
+Then, import the functions from `src/utils.py` into `app.py`:
+```python
+from src.utils import parse_fasta, generate_embeddings, make_prediction
+```
 
-#### Download predictions
+Add logic to process the protein sequences and generate predictions, using `st.spinner` to display a loading spinner while the code executes.
 
+```python
+if uploaded_file and st.button("Predict"):
+    query_sequences = parse_fasta(uploaded_file)
+    with st.spinner("Generating embeddings..."):
+        embeddings = generate_embeddings(query_sequences)
+    with st.spinner("Making predictions..."):
+        results = make_prediction(embeddings)
+    st.dataframe(results)
+```
 
+You can also access the final [app.py](/tutorials/ml-streamlit/main/src/app.py) and [util.py](/tutorials/ml-streamlit/main/src/utils.py) scripts. Please review your script and test it by making predictions on the protein sequences of interest.
 
-Congratulations! You have deployed your trained model using Streamlit. 
+> ## *(Optional Task)* Download predictions
+> Add "**Download predictions**" button and obtain your results using `st.download_button`.
+>
+>> ## Solution
+>> ```python
+>> csv = results.to_csv().encode("utf-8")
+>> st.download_button(
+>>     label="Download predictions",
+>>     data=csv,
+>>     file_name="results.csv",
+>>     mime="text/csv"
+>> )
+>> ```
+> {: .solution}
+> 
+{: .hands_on}
 
-## **What to learn next?**
-> * [Deploy the model on cloud with FastAPI](/tutorials/ml-fastapi/main/tutorial.md)
-> 
-> ### Extra Content for Intermediate Learners
-> 
-> 1. ML experiment tracking
-> 
-> Integrate tools like MLflow or Weights & Biases for logging runs, metrics, and hyperparameters.
-> 
-> 2. Containerization
-> Run the same workflow in a containder for reproducibility.
-> Leverage Docker containers and bundle everything model-related into a single package that runs in the cloud. 
-> 
-> 3. Efficient optimization techniques to fine-tune or retrain the model
-> As a new data come over time, your model needs retraining. 
-> 
+Congratulations! You have successfully deployed your trained model using Streamlit.
+
+> ## **What to learn next?**
+> Explore alternative approaches to deploy your trained model on the cloud:
+> * [Deploy the model on cloud with FastAPI](/tutorials/ml-fastapi/main/tutorial/)
 {: .details}
