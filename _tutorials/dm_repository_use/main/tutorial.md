@@ -1,21 +1,29 @@
 ---
 layout: tutorial_hands_on
 
-title: Using the cross-domain Data-Management Platform registry
-description: A step by step overview on how to use the registry.
-slug: using-the-cross-domain-data-management-platform-registry
-time_estimation: HM
+title: Using the cross-domain Data-Management Platform repository
+description: A step by step overview on how to use the repository.
+slug: dm_repository_use
+level: Introductory
+time_estimation: "40 minutes"
 questions:
   - How to start looking for a Data-Management Solution?
-  - What benefits are there from having a cross-domain registry?
+  - What benefits are there from having a cross-domain repository?
   - How to extend a Data-Management solution using APIs and other platforms?
 objectives:
-  - Using the registry with confidence,
+  - "Understand the purpose and scope of the Data Management Platforms repository."
+  - "Learn how to navigate and interpret the listed platforms."
+  - "Contribute new or updated information to the repository."
   - Being able to contribute to it,
   - Knowing its limits and what to do around them,
+requirements:
+- "Basic understanding of research data management."
+- "Interest in FAIR principles and cloud affinity."
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- "The repository lists cross-domain Data Management platforms with a FAIR and cloud focus."
+- "It does not replace a full Data Management Plan."
+- "Platforms can be generalist or specialist, depending on needs."
+- "Contributions are welcome via GitHub issues and pull requests."
 version:
     - main
 life_cycle: tutorial lifecycle
@@ -35,33 +43,33 @@ contributions:
   * [Constraints](#Constraints)
 
 
-## **Scope**
+# **Scope**
 
 This tutorial is not a comprehensive guide of doing Data Management, but a "been there done that" introduction followed by how to use the [DeKCD registry of FAIR data management platforms for the Cloud](https://dekcd.github.io/FAIR-DMP-Registry/). It is mostly on the technical side of Data Management.
 
-## **Prerequisites**
+# **Prerequisites**
 
 To follow this tutorial:
 
 - Knowledge of what is a Data Management Platform,
 - Knowledge of the FAIR principles.
 
-For a good use of the registry:
+For a good use of the repository:
 
 - Knowledge of Linux and Containers (Docker),
 - Knowledge of API
 
-## **Setting-up a Data Management Solution, a short overview**
+# **Setting-up a Data Management Solution, a short overview**
 
-The registry is mostly a technical overview and as such this section is mostly scoped to the technical aspect.
+The repository is mostly a technical overview and as such this section is mostly scoped to the technical aspect.
 Several online resources help with a Data Management Plan, making it FAIR and various aspects, such as [RDM Kit (in Life Sciences)](https://rdmkit.elixir-europe.org/), [FairCookBook](https://faircookbook.elixir-europe.org/content/home.html), [Data Stewardship Wizard](https://ds-wizard.org/), [FairWizard](https://fair-wizard.com/)
 
-### **Goals and Purposes**
+## **Goals and Purposes**
 
 The choice of a Data Management Solution is deeply dependent on the given goals and purposes. A solution for supporting a 1 year work could use a simple web-application installed using Docker on a local server, while a solution meant for 10 years and several project might benefit from being on the cloud, uses several connected web-applications.
 Unfortunately there is no silver bullet, as the best solution will depend on your specific conditions, if you are part of a consortium proposing some infrastructure, if your institution offer some solutions, if you have the mean to get a technical person for the duration of the project.
 
-### **Means**
+## **Means**
 
 Some Data Management platform are easy to set-up, easy to update and easy to use. Some are not, but they might address your needs better. In that case, it is probably good to consider the highest point of friction: what will cost the most on the long run. But also critical points: what cannot be accepted.
 
@@ -73,7 +81,7 @@ Similarly, an assembly can be desirable, one application closer to the lab commu
 
 Versioning is always a good option for all your customisations, API, templating, parameter... When the customisation is not easily versionable, it is a good idea, when it is available as text, to work on a versioned copy. This work particularly well with a test set-up, which is also always good to have: apply the working changes only on test, and apply them on production only when commited in the Version Control System.
 
-### **Constraints**
+## **Constraints**
 
 Constraints might be funding constraint, data usage constraint due to data privacy policy but also non-commercial use only of a software or data...
 
@@ -85,3 +93,77 @@ They have strong connections with your means. You should have some leeway in ord
 
 Some decisions related to constraints must also be made before setting-up the platform. For instance if you work on patient-related data and need encrypted storage, you need to choose a platform supporting it.
 
+# Introduction to the Data Management Platform Repository
+
+The **Data Management Platforms (DMP) repository** is a curated collection of major platforms used in research data management.  
+It emphasizes the FAIR principles (Findable, Accessible, Interoperable, Reusable) and evaluates how platforms integrate with cloud infrastructures.  
+This tutorial will guide you through using the repository, understanding its scope, and contributing to it.
+
+# Hands-on: Using the Repository
+
+## Step 1: Access the Repository
+1. Open your browser and go to [https://dekcd.github.io/FAIR-DMP-Registry/](https://dekcd.github.io/FAIR-DMP-Registry/).
+2. Explore the list of platforms presented.
+
+## Step 2: Understand the Main Goals
+The repository highlights platforms with:
+- Reusability across domains,  
+- Interoperability,  
+- Affinity to cloud usage/set-ups,  
+- Good documentation.
+
+> Note: While some platforms align with FAIR principles, not all do completely.
+
+## Step 3: Using the repository
+
+### Using the menus
+
+### A typical entry
+
+### Using the search
+
+### Extras
+
+## Step 3: Generalists vs Specialists
+- **Generalist platforms**: e.g. NextCloud (supporting tasks), iRODS or RUCIO (registering/storing data).  
+- **Specialist platforms**: e.g. Electronic Laboratory Notebooks for domain-specific work.  
+- **Tip**: Combining both may be necessary. Interconnection often depends on available APIs and documentation.
+
+## Step 4: Consider Set-up Options
+- Containerized set-up → simpler deployment and updates.  
+- Kubernetes support → ensures 24/7 operation (if available).  
+- API access → enables interoperability and data extraction.  
+
+## Step 5: Be Aware of What’s NOT Included
+The repository does **not** provide:
+- A full Data Management Plan (e.g. retention policy, access rights).  
+- Guarantees on platform lifetime or funding.  
+- Alignment between scientists’ low-friction tools vs. institutes’ and funders’ FAIR requirements.  
+
+> Pitfall: Modifying open-source software may block future updates. Prefer configuring over modifying.
+
+## Step 6: Next Technical Steps
+A **Quickstart guide** (work in progress) is planned:
+- From bare-metal to full Kubernetes deployments,  
+- With details on costs, security, and support needs,  
+- Vocabulary clarification for better understanding of existing documentation.
+
+## Step 7: Contribute to the Repository
+You can contribute via GitHub:
+1. **Create an issue** to suggest a change.  
+2. **Fork the repository** and submit a pull request to add or modify entries.  
+
+A typical entry should include:
+- Platform name & quick description (with link),  
+- Links to Docker/Kubernetes manifests,  
+- Links to APIs & documentation,  
+- Interoperability level (None/Low/Medium/High),  
+- Cross-domain applicability (Not/Partly/Mostly/Fully).
+
+# Conclusion
+You now know how to use and navigate the **Data Management Platforms repository**.  
+It is a living resource focused on FAIR principles and cloud compatibility, and it depends on community contributions to grow and remain current.  
+
+For questions or contributions, contact:  
+**Alain Becam** – [Alain.Becam@bioquant.uni-heidelberg.de](mailto:Alain.Becam@bioquant.uni-heidelberg.de)  
+Project site: [https://datenkompetenz.cloud/](https://datenkompetenz.cloud/)
