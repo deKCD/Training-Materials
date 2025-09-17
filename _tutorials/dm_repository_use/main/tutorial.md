@@ -102,8 +102,11 @@ This tutorial will guide you through using the repository, understanding its sco
 # Hands-on: Using the Repository
 
 ## Step 1: Access the Repository
+
 1. Open your browser and go to [https://dekcd.github.io/FAIR-DMP-Registry/](https://dekcd.github.io/FAIR-DMP-Registry/).
-2. Explore the list of platforms presented.
+2. Spend some time exploring the different menus, we will cover them later
+  On the top header, the title and the Home link both return to the main page. About is a short description of the registry.
+  The left column shows the different pages while the right column shows the topic in the current page.
 
 ## Step 2: Understand the Main Goals
 The repository highlights platforms with:
