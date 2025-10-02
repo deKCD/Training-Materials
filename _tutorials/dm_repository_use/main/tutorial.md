@@ -115,7 +115,7 @@ The repository highlights platforms with:
 - Affinity to cloud usage/set-ups,  
 - Good documentation.
 
-> Note: While some platforms align with FAIR principles, not all do completely.
+> Note: While most platforms align with FAIR principles, not all do completely.
 
 ## Step 3: Using the repository
 
