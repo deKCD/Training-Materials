@@ -121,6 +121,25 @@ The repository highlights platforms with:
 
 ### Using the menus
 
+The menus are on the top, the left and the right:
+- **Top Menu**: The Home page and the about page.
+- **Left Menu**: All pages of the repository.
+- **Right Menu**: The topics in the current page.
+
+The top menu will typically be used once or twice, to check the About page. -- Image
+
+The Left menu will be used to select in which category to look for:
+
+The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopic that become visible in the menu when in the parent topic.
+
+Exercice:
+From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms. Note the 2nd entry.
+
+Answer: SMARTGeo.
+First click on the Major Data Management Platforms link in the left menu. -- Image
+
+Then on Geomatics on the right menu, and finally on Commercials in the sub-menu. -- Image
+
 ### A typical entry
 
 ### Using the search
