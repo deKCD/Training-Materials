@@ -132,7 +132,7 @@ The Left menu will be used to select in which category to look for:
 
 The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopic that become visible in the menu when in the parent topic.
 
-Exercice:
+Exercise:
 From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms. Note the 2nd entry.
 
 Answer: SMARTGeo.
@@ -142,7 +142,26 @@ Then on Geomatics on the right menu, and finally on Commercials in the sub-menu.
 
 ### A typical entry
 
+All entries are not identic, as there are some extra informations for some entries. But all entries should have a common base, and most entries will stick to it:
+
+* Link with the Name, quick description pointing generally to the URL of the main web page or the documentation.
+	+ Description and/or link to potential Docker image/Docker compose/Kubernetes manifest/…
+	+ Link to API(s), quick clarification on how well documented it is.
+	+ Interoperability **NONE/LOW/MEDIUM/HIGH** / No interoperability: explanation on why.
+	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
+
 ### Using the search
+
+The Repository propose a search function, powered by the used document system, Quarto, which is accessed by clicking on the manifying lens icon at the top right of the top menu.
+
+In the pop-up that appears, writing should automatically start a search.
+
+Clicking on one result should send to the paragraph containing the result.
+
+Exercise:
+Using the search, look for CIViC
+
+Answer: CIViC (Clinical Interpretation of Variants in Cancer), in Pharmaceutics.
 
 ### Extras
 
@@ -181,6 +200,14 @@ A typical entry should include:
 - Links to APIs & documentation,  
 - Interoperability level (None/Low/Medium/High),  
 - Cross-domain applicability (Not/Partly/Mostly/Fully).
+
+```Markdown
+* [Name, quick description](https:URL of main web page)
+	+ Description and/or link to potential Docker image/Docker compose/Kubernetes manifest/…
+	+ Link to API(s), quick clarification on how well documented it is.
+	+ Interoperability **NONE/LOW/MEDIUM/HIGH** / No interoperability: explanation on why.
+	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
+```
 
 # Conclusion
 You now know how to use and navigate the **Data Management Platforms repository**.  
