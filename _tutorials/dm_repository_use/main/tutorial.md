@@ -209,9 +209,12 @@ Clicking on one result should send to the paragraph containing the result. It is
 ### Extras
 
 The repository also lists, in a simplified format:
-- **the major ontologies and thesaurus**,
+- **the major ontologies and thesauruses**,
+![List of major ontologies and thesauruses](../../images/OntologiesThesauruses.png "List of major ontologies and thesauruses"){: .responsive-img }
 - **the major taxonomies and classifications**,
+![List of major taxonomies and classifications](../../images/Taxonomies.png "List of major taxonomies and classifications"){: .responsive-img }
 - Some **Useful tools and platforms for Data Managements**, these are applications and tools that can be used together with Data Managements platforms, such as central authority providers that can help setting-up a Single Sign On (SSO, login once for several applications) **or** used by Data Management platforms, such as a S3 implementation, to store data in a cloud environment.
+![List of useful tools and platforms](../../images/UsefulTools.png "List of useful tools and platforms"){: .responsive-img }
 
 As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
 
@@ -222,7 +225,7 @@ As for the Data Management Platforms, they do not pretend to be exhaustive and a
 
 ## Step 4: Consider Set-up Options
 - Containerized set-up → simpler deployment and updates.  
-- Kubernetes support → ensures 24/7 operation (if available).  
+- Kubernetes support → ensures 24/7 operation (if a Kubernetes cluster is already available).  
 - API access → enables interoperability and data extraction.  
 
 ## Step 5: Be Aware of What’s NOT Included
