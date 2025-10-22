@@ -5,25 +5,25 @@ title: Using the cross-domain Data-Management Platform repository
 description: A step by step overview on how to use the repository.
 slug: dm_repository_use
 level: Introductory
-time_estimation: "40 minutes"
+time_estimation: 40 minutes
 questions:
   - How to start looking for a Data-Management Solution?
   - What benefits are there from having a cross-domain repository?
   - How to extend a Data-Management solution using APIs and other platforms?
 objectives:
-  - "Understand the purpose and scope of the Data Management Platforms repository."
-  - "Learn how to navigate and interpret the listed platforms."
-  - "Contribute new or updated information to the repository."
+  - Understand the purpose and scope of the Data Management Platforms repository.
+  - Learn how to navigate and interpret the listed platforms.
+  - Contribute new or updated information to the repository.
   - Being able to contribute to it,
   - Knowing its limits and what to do around them,
 requirements:
-- "Basic understanding of research data management."
-- "Interest in FAIR principles and cloud affinity."
+- Basic understanding of research data management.
+- Interest in FAIR principles and cloud affinity.
 key_points:
-- "The repository lists cross-domain Data Management platforms with a FAIR and cloud focus."
-- "It does not replace a full Data Management Plan."
-- "Platforms can be generalist or specialist, depending on needs."
-- "Contributions are welcome via GitHub issues and pull requests."
+- The repository lists cross-domain Data Management platforms with a FAIR and cloud focus.
+- It does not replace a full Data Management Plan.
+- Platforms can be generalist or specialist, depending on needs.
+- Contributions are welcome via GitHub issues and pull requests.
 version:
     - main
 life_cycle: tutorial lifecycle
@@ -34,13 +34,14 @@ contributions:
   funding: DeKCD Project
 ---
 
-## Table of Contents
-* [Scope]
-* [Prerequisites](#prerequisites)
-* [Setting-up a Data Management Solution, a short overview](#Setting-up_a_Data_Management_Solution,_a_short_overview)
-  * [Goals and Purposes](#Goals and Purposes)
-  * [Means](#Means)
-  * [Constraints](#Constraints)
+> <agenda-title>Table of Contents</agenda-title>
+>
+> In this tutorial we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 
 # **Scope**
@@ -126,19 +127,30 @@ The menus are on the top, the left and the right:
 - **Left Menu**: All pages of the repository.
 - **Right Menu**: The topics in the current page.
 
-The top menu will typically be used once or twice, to check the About page. -- Image
+The top menu will typically be used once or twice, to check the About page.
+
+![Image showing the top menu](../../images/About.png "The top menu"){: .responsive-img }
 
 The Left menu will be used to select in which category to look for:
 
+![Image showing the left menu](../../images/MainDMPlatformMenu.png "The left menu"){: .responsive-img }
+
 The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopic that become visible in the menu when in the parent topic.
 
-Exercise:
-From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms. Note the 2nd entry.
+![Image showing the right menu](../../images/RightMenu.png "The right menu"){: .responsive-img }
 
-Answer: SMARTGeo.
-First click on the Major Data Management Platforms link in the left menu. -- Image
-
-Then on Geomatics on the right menu, and finally on Commercials in the sub-menu. -- Image
+> ## Hands On: Find a commercial DM platform for a domain
+> 
+> From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms.
+> 
+> > ## Answer
+> > First click on the Major Data Management Platforms link in the left menu.
+> > ![Selecting Major Data management in the left menu](../../images/MainDMPlatformMenu.png "Selecting Major Data management in the left menu"){: .responsive-img }
+> > Then on Geomatics on the right menu, and finally on Commercials in the sub-menu.
+> > ![Selecting in the right menu then in the submenu](../../images/CommercialsGeomatics.png "Selecting in the right menu then in the submenu"){: .responsive-img }
+> {: .solution}
+> 
+{: .question}
 
 ### A typical entry
 
@@ -150,20 +162,58 @@ All entries are not identic, as there are some extra informations for some entri
 	+ Interoperability **NONE/LOW/MEDIUM/HIGH** / No interoperability: explanation on why.
 	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
 
+> ## Hands On: Find details about a specific entry
+> 
+> In the Major Data Management Platforms page, find the details about pyiron, which is in Materials Science. Check if it is cross-domain.
+> 
+> > ## Answer
+> > Click on Materials Science on the right menu, then eventually scroll down to find the details about pyiron, including if it is cross-domain.
+> > ![Selecting in the right menu](../../images/MaterialsScience.png "Selecting in the right menu"){: .responsive-img }
+> {: .solution}
+> 
+{: .question}
+
 ### Using the search
 
 The Repository propose a search function, powered by the used document system, Quarto, which is accessed by clicking on the manifying lens icon at the top right of the top menu.
 
 In the pop-up that appears, writing should automatically start a search.
 
-Clicking on one result should send to the paragraph containing the result.
+![Doing a search](../../images/SearchIRODS.png "Doing a search"){: .responsive-img }
 
-Exercise:
-Using the search, look for CIViC
+Clicking on one result should send to the paragraph containing the result. It is possible to use the browser "Search in Page" to go to the actual entry.
 
-Answer: CIViC (Clinical Interpretation of Variants in Cancer), in Pharmaceutics.
+![Finding the entry using the browser search](../../images/SearchIRODSInPage.png "Finding the entry using the browser search"){: .responsive-img }
+
+> ## Info
+> Depending on the size of the page, there could be 2 manifying lenses. They have both the exact same function.
+{: .info}
+
+> ## Hands On: Find details about a specific entry
+> 
+> Using the search, look for CIViC.
+> 
+> > ## Answer
+> > Click on the manifying lens.
+> > ![Clicking on the manifying lense](../../images/SearchCIViC1.png "Clicking on the manifying lense"){: .responsive-img }
+> > Then type CIV in the search bar.
+> > ![Typing in the search bar](../../images/SearchCIViC2.png "Typing in the search bar"){: .responsive-img }
+> > Finally click on the search result.
+> > ![Selecting the search result](../../images/SearchCIViC3.png "Selecting the search result"){: .responsive-img }
+> > The result should roughly be in the middle of the page
+> > ![Getting the entry](../../images/SearchCIViC_result.png "Getting the entry"){: .responsive-img }
+> {: .solution}
+> 
+{: .question}
 
 ### Extras
+
+The repository also lists, in a simplified format:
+- **the major ontologies and thesaurus**,
+- **the major taxonomies and classifications**,
+- Some **Useful tools and platforms for Data Managements**, these are applications and tools that can be used together with Data Managements platforms, such as central authority providers that can help setting-up a Single Sign On (SSO, login once for several applications) **or** used by Data Management platforms, such as a S3 implementation, to store data in a cloud environment.
+
+As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
 
 ## Step 3: Generalists vs Specialists
 - **Generalist platforms**: e.g. NextCloud (supporting tasks), iRODS or RUCIO (registering/storing data).  
