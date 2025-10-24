@@ -185,9 +185,9 @@ Clicking on one result should send to the paragraph containing the result. It is
 
 ![Finding the entry using the browser search](../../images/SearchIRODSInPage.png "Finding the entry using the browser search"){: .responsive-img }
 
-> ## Info
+> ## details
 > Depending on the size of the page, there could be 2 manifying lenses. They have both the exact same function.
-{: .info}
+{: .details}
 
 > ## Hands On: Find details about a specific entry
 > 
@@ -234,7 +234,9 @@ The repository does **not** provide:
 - Guarantees on platform lifetime or funding.  
 - Alignment between scientists’ low-friction tools vs. institutes’ and funders’ FAIR requirements.  
 
+> ## warning
 > Pitfall: Modifying open-source software may block future updates. Prefer configuring over modifying.
+{: .warning}
 
 ## Step 6: Next Technical Steps
 A **Quickstart guide** (work in progress) is planned:
