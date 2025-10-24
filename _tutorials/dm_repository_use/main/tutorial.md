@@ -219,11 +219,20 @@ The repository also lists, in a simplified format:
 As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
 
 ## Step 3: Generalists vs Specialists
+
+TODO: Short explanation of the difference, cost and benefits
+
 - **Generalist platforms**: e.g. NextCloud (supporting tasks), iRODS or RUCIO (registering/storing data).  
 - **Specialist platforms**: e.g. Electronic Laboratory Notebooks for domain-specific work.  
 - **Tip**: Combining both may be necessary. Interconnection often depends on available APIs and documentation.
 
+TODO: question about using one generalist or a specialist platform,
+question about using one with another (for instance Omero + NextCloud)
+
 ## Step 4: Consider Set-up Options
+
+TODO: Short introduction, words about cost, benefits, difficulty and security
+
 - Containerized set-up → simpler deployment and updates.  
 - Kubernetes support → ensures 24/7 operation (if a Kubernetes cluster is already available).  
 - API access → enables interoperability and data extraction.  
