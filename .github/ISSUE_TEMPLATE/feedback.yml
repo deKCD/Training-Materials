@@ -1,0 +1,57 @@
+name: 💬 Training Material Feedback
+description: Share feedback on a tutorial, module, or section to help us improve.
+title: "[Feedback]: <short summary>"
+labels: ["feedback"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👋 **Thanks for helping us improve our training materials!**  
+        Please fill out the short form below — it only takes a minute.
+
+  - type: input
+    id: material
+    attributes:
+      label: 📘 Which material are you commenting on?
+      description: Mention the specific module, tutorial, or page.
+      placeholder: "e.g., Module 2 – Docker Basics or tutorials/deployment.md"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 🏷️ Feedback category
+      description: Choose the area that best fits your feedback.
+      options:
+        - Content accuracy
+        - Clarity or structure
+        - Code example issue
+        - Missing information
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: 💭 Your feedback
+      description: Explain what worked well and what could be improved.
+      placeholder: "Describe your experience here..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 💡 Suggested improvement (optional)
+      description: If you have a specific idea or example, share it here.
+      placeholder: "e.g., Add a diagram for Docker image layers."
+
+  - type: markdown
+    attributes:
+      value: |
+        ✅ **Thank you!**  
+        Your feedback will help us make the materials clearer and more effective.
+        We appreciate your time and input!
