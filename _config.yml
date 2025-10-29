@@ -8,7 +8,7 @@ color_mode:
   default: light
   
 # Sites
-url: "https://dekcd.github.io"
+url: "https://dekcd.bi.denbi.de"
 baseurl: "/training"
 repository_url: https://github.com/deKCD/Training-Materials
 dekcd_site: https://datenkompetenz.cloud/
