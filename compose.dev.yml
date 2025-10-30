@@ -1,8 +1,13 @@
+## Example usage
+
 services:
-  jekyll:
-    build: .
+  jekyll: # or any other name
+    build: . # if using the Dockerfile to build on the fly when starting compose setup
+    image: quay.io/dekcd/training-materials:0.1.0 # referencing training-materials image with the corresponding version one wants to use
+    
     ports:
-      - "4000:4000"
-      - "5000:5000"
+      - "4000:4000" # for the training-materials as such
+      - "5000:5000" # for the webhook endpoint
     environment:
-      - TRAINING_MATERIAL_WEBHOOK_SECRET
+      - TRAINING_MATERIAL_WEBHOOK_SECRET # the webhook secret one sets in the repository settings
+      - TARGET_BRANCH # the branch the webhook endpoint shall "watch for" - if any changes or pull requests get merged or pushed in the branch referenced, the retrigger mechanismn will be used (webhook_server.rb) - "main" is the default

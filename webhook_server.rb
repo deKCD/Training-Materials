@@ -6,7 +6,7 @@ set :bind, '0.0.0.0'
 set :port, 5000
 
 # Use ENV or hardcoded for your secret and for target branch
-WEBHOOK_SECRET = ENV['TRAINING_MATERIAL_WEBHOOK_SECRET'] || 'pheiP5aijahdeiy'
+WEBHOOK_SECRET = ENV['TRAINING_MATERIAL_WEBHOOK_SECRET']
 TARGET_BRANCH = ENV['TARGET_BRANCH'] || 'main'
 
 
@@ -44,7 +44,7 @@ post '/webhook' do
   end
 
   # Do your git pull, etc.
-  output = `cd /srv/jekyll && git pull 2>&1`
+  output = `cd /srv/jekyll && git checkout #{TARGET_BRANCH} && git pull 2>&1`
   status_code = $?.exitstatus
 
   if status_code == 0
