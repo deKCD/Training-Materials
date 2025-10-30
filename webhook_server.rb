@@ -44,7 +44,7 @@ post '/webhook' do
   end
 
   # Do your git pull, etc.
-  output = `cd /srv/jekyll && git pull 2>&1`
+  output = `cd /srv/jekyll && git checkout #{TARGET_BRANCH} && git pull 2>&1`
   status_code = $?.exitstatus
 
   if status_code == 0
