@@ -38,29 +38,34 @@ Then, open your web browser and navigate to `http://localhost:4000/Training-Mate
 
 ### Running the containerized version
 
-Currently images are being pushed to [quay.io](quay.io/dekcd/) by hand. One can also run a local build by running `docker compose -f compose.dev.yml up -d`.
+Currently images are being pushed to [quay.io](quay.io/dekcd/) by hand. 
+Building and pushing of a new version after changes can be carried out as follows:
+```
+docker build . -t quay.io/deckd/training-materials:VERSION_NUMBER --push
+```
+One can also run a local build by running `docker compose -f compose.dev.yml up -d` for testing.
+One would need to adjust the `compose.dev.yml` file accordingly.
 
 #### Things to consider with the containerized version
 
 The image allows to retrieve webhooks from GitHub to update the state of the static jekyll site.
-One needs to set a webhook secret for this.
-A current test-installation is available here: [https://dekcd.bi.denbi.de/training/](https://dekcd.bi.denbi.de/training/), which is a work in progress (CSS not fully working at the moment).
-Webhooks can be sent to [https://dekcd.bi.denbi.de/training/webhook](https://dekcd.bi.denbi.de/training/webhook).
-When running the container in a compose setup one needs to set the expected webhook secret in the environment:
-`TRAINING_MATERIAL_WEBHOOK_SECRET=...`
-The current haproxy-config looks like this:
+One needs to set a webhook secret for this - on default changes for the "main"-branch of the repository are considered. If one wants to adjust the branch that is watched for updates, the `TARGET_BRANCH` variable needs to be adjusted
+Have a look on the [compose.dev.yml](./compose.dev.yml)-file to see how the variables and the image is used in compose-setups.
+Webhooks will be sent to [https://dekcd.bi.denbi.de/training/webhook](https://dekcd.bi.denbi.de/training/webhook).
+
+
+To enable the use of the Jekyll-Site in combination with any other webpage, one needs to adjust the configuration, e.g. of HAProxy.
+The current haproxy-config looks similar to this:
 ```
 backend dekcd_training
-    http-request set-path %[path,regsub(^/training/?,/Training-Materials/)] 
-    server s1 training-test:4000 check resolvers docker resolve-prefer ipv4 init-addr none
+    http-request set-path %[path,regsub(^/training/?,/training/)] 
+    server s1 training-material-container-name:4000 check resolvers docker resolve-prefer ipv4 init-addr none
 
 backend dekcd_training_webhook
     http-request set-path %[path,regsub(^/training/webhook?,/webhook)] 
-    server s1 training-test:5000 check resolvers docker resolve-prefer ipv4 init-addr none
+    server s1 training-material-container-name:5000 check resolvers docker resolve-prefer ipv4 init-addr none
 ```
 with `training-test` as the container running the jekyll-site.
-
-Currently the webhook triggers a pull command on the `main`-branch of this repository. Within the container the pull gets triggered when the webhook-payload retrieved indicates a `push` or `merge`-events on the `main`-branch of this repository. The test webhook was triggered by a push from another repository.  
 
 
 ### Development with Devcontainer
