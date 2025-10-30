@@ -5,8 +5,10 @@ require 'openssl'
 set :bind, '0.0.0.0'
 set :port, 5000
 
-# Use ENV or hardcoded for your secret
+# Use ENV or hardcoded for your secret and for target branch
 WEBHOOK_SECRET = ENV['TRAINING_MATERIAL_WEBHOOK_SECRET'] || 'pheiP5aijahdeiy'
+TARGET_BRANCH = ENV['TARGET_BRANCH'] || 'main'
+
 
 helpers do
   def verify_signature(payload_body, signature)
@@ -29,20 +31,20 @@ post '/webhook' do
   case event
   when "push"
     branch_ref = payload['ref']
-    halt 400, "Not the main branch" unless branch_ref == "refs/heads/main"
+    halt 400, "Not the #{TARGET_BRANCH} branch" unless branch_ref == "refs/heads/#{TARGET_BRANCH}"
   when "pull_request"
     action = payload['action']
     merged = payload['pull_request'] && payload['pull_request']['merged']
     base_branch = payload['pull_request'] && payload['pull_request']['base']['ref']
-    unless action == "closed" && merged && base_branch == "main"
-      halt 400, "Not a merged PR to main"
+    unless action == "closed" && merged && base_branch == TARGET_BRANCH
+      halt 400, "Not a merged PR to #{TARGET_BRANCH}"
     end
   else
     halt 400, "Unsupported event"
   end
 
   # Do your git pull, etc.
-  output = `cd /srv/jekyll && git pull 2>&1`
+  output = `cd /srv/jekyll && git checkout #{TARGET_BRANCH} && git pull 2>&1`
   status_code = $?.exitstatus
 
   if status_code == 0
