@@ -2,7 +2,8 @@ name: 💬 Training Material Feedback
 description: Share feedback on a tutorial, module, or section to help us improve.
 title: "[Feedback]: <short summary>"
 labels: ["feedback"]
-
+assignees: []
+body:
   - type: input
     id: material
     attributes:
