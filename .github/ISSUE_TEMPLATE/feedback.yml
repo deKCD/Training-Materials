@@ -2,43 +2,36 @@ name: 💬 Training Material Feedback
 description: Share feedback on a tutorial, module, or section to help us improve.
 title: "[Feedback]: <short summary>"
 labels: ["feedback"]
-assignees: []
-body:
-  - type: markdown
-    attributes:
-      value: |
-        👋 **Thanks for helping us improve our training materials!**  
-        Please fill out the short form below — it only takes a minute.
 
   - type: input
     id: material
     attributes:
-      label: 📘 Which material are you commenting on?
-      description: Mention the specific module, tutorial, or page.
-      placeholder: "e.g., Module 2 – Docker Basics or tutorials/deployment.md"
+      label: Which material are you commenting on?
+      description: Mention the specific tutorial and its version or learning path.
+      placeholder: "e.g., Introduction to basic Unix commands or tutorials/unix-course/main/tutorial.md"
     validations:
       required: true
 
   - type: dropdown
     id: category
     attributes:
-      label: 🏷️ Feedback category
+      label: Feedback category
       description: Choose the area that best fits your feedback.
       options:
         - Content accuracy
         - Clarity or structure
         - Code example issue
         - Missing information
-        - Other
+        - Other (specific in feedback)
     validations:
       required: true
 
   - type: textarea
     id: feedback
     attributes:
-      label: 💭 Your feedback
+      label: 📝 Your feedback
       description: Explain what worked well and what could be improved.
-      placeholder: "Describe your experience here..."
+      placeholder: "Describe your feedback here..."
     validations:
       required: true
 
@@ -47,11 +40,10 @@ body:
     attributes:
       label: 💡 Suggested improvement (optional)
       description: If you have a specific idea or example, share it here.
-      placeholder: "e.g., Add a diagram for Docker image layers."
+      placeholder: "e.g., Add more examples on X topic..."
 
   - type: markdown
     attributes:
       value: |
-        ✅ **Thank you!**  
-        Your feedback will help us make the materials clearer and more effective.
+        ✅ **Thanks for helping us improve our training materials!** 
         We appreciate your time and input!
