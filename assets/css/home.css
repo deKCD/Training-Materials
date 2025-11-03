@@ -14,7 +14,7 @@
 .header-banner {
   width: 100%;
   height: 340px;
-  background: url("/assets/img/background_dekcd.original.png") center/cover no-repeat;
+  background: url("/training/assets/img/background_dekcd.original.png") center/cover no-repeat;
 }
 .header-left {  
   display: flex;
