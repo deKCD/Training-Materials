@@ -19,10 +19,20 @@ body:
       label: Feedback category
       description: Choose the area that best fits your feedback.
       options:
-        - Content accuracy
-        - Clarity or structure
+        - Outdated content or references
+        - Content clarity or structure issues
         - Code example issue
         - Missing information
+        - Typos or grammar mistakes
+        - Broken links or images
+        - Formatting or layout
+        - Accessibility issues
+        - Difficulty level mismatch
+        - Unclear prerequisites
+        - Lack of exercises or hands-on tasks
+        - Examples not reproducible
+        - Visuals or diagrams needed
+        - Translation or localization issues
         - Other (specific in feedback)
     validations:
       required: true
@@ -43,8 +53,21 @@ body:
       description: If you have a specific idea or example, share it here.
       placeholder: "e.g., Add more examples on X topic..."
 
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Overall rating (1-5)
+      description: Rate your experience with this material
+      options:
+      - "1 - Did not like at all"
+      - "2 - Poor"
+      - "3 - Average"
+      - "4 - Good"
+      - "5 - Very great"
+    validations:
+      required: true
+
   - type: markdown
     attributes:
       value: |
-        ✅ **Thanks for helping us improve our training materials!** 
-        We appreciate your time and input!
+      ✅ **Thanks for helping us improve our training materials!** We appreciate your time and effort in providing feedback.
