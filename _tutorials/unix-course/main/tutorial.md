@@ -53,9 +53,6 @@ This tutorial will help you develop proficiency in the necessary Unix shell conc
         * [10 - Cleaning up](#10---cleaning-up)
     * [Part 3: Advanced Concepts](#part-3-advanced-concepts)
         * [11 - Edit files](#11---edit-files)
-* [Questions and discussion](#questions-and-discussion)
-* [Remarks for the presenter](#remarks-for-the-presenter)
-
 
 ## What is a command shell?
 
