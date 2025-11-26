@@ -265,6 +265,8 @@ In both cases, it is important to know where the data will be store, as both are
 
 Some platforms will come with a Docker Compose or a Helm chart, and in that case the storage might be setup as part of the configuration. But generally not the backup. 
 
+> A lack of containerized set-up does not mean that the platform will be difficult to set-up. But with a standard set-up, it will always be necessary to consult the installation set-up documentation and follow the given procedure. 
+
 Finally, each entry tries to detail if there exists an API access, enabling interoperability and data extraction.
 
 Adding an API access is not a simple task so the need to have one should be clarified before choosing a platform. This access can be via an HTTP REST API, generally easy to use, a CLI, which will generally be non-standard, or a language API, Python, Java, ... Interfacing using the same language will be easy, probably easier than through a REST API (or very similar in the case of Python), but interfacing with a different language might be difficult.
