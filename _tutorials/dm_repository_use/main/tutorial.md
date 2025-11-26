@@ -220,27 +220,56 @@ As for the Data Management Platforms, they do not pretend to be exhaustive and a
 
 ## Step 3: Generalists vs Specialists
 
-TODO: Short explanation of the difference, cost and benefits
+One main consideration when choosing a Data Management platform is between a generalist platforms, i.e. not dedicated to a domain, and a specialist platform, dedicated and adapted to a domain. A specialist platform might still be used in another domain, eventually with some caveats. The last point of each entry explain how cross-domain an entry is.
+While choosing a generalist platform might allow to quickly start working and storing data, a specialised platform might offer some clear benefits: pre-existing meta-data and/or ontologies/taxonomies, a structured storage of data making reusing and sharing easier, ...
 
 - **Generalist platforms**: e.g. NextCloud (supporting tasks), iRODS or RUCIO (registering/storing data).  
 - **Specialist platforms**: e.g. Electronic Laboratory Notebooks for domain-specific work.  
 - **Tip**: Combining both may be necessary or useful. Interconnection often depends on available APIs and documentation.
 
-TODO: question about using one generalist or a specialist platform,
-question about using one with another (for instance Omero + NextCloud)
+
+> ## Hands On: Find one generalist platform and a specialist one
+> 
+> Using the right menu, look for Generalists. Find a Generalist platform of your choice.
+>
+> Then select a specific domain to find a Specialist platform.
+> 
+> > ## Answer
+> > Click on the Generalists in the right menu.
+> >
+> > The section lists the Generalists Data management platform. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or together one and lists, at the time of this writing, only NextCloud.
+> {: .solution}
+> 
+{: .question}
+> ## Hands On: How could you combine 2 platforms
+> 
+> Your institution is already using NextCloud as a generic distributed storage facility. Inside a shared folder, you store many large microscopy images. You would like to have an online tool to visualise and work on these images.
+> 
+> > ## Answer
+> > Omero is an online imaging platform for microscopy outputs, and can be connected to other platform using API. A central login is also possible using an central identity service (but this information is not part of the current registry).
+> >
+> > Using both NextCloud and Omero APIs, it is possible to bridge both, eventually with a small script fetching the images from NextCloud and pushing them to Omero. Omero also proposes specific imports scenarios.
+> {: .solution}
+> 
+{: .question}
 
 ## Step 4: Consider Set-up Options
 
 While not giving a detail explanation on how to set-up a platform, an entry will say if a containerized setup exist, as well as an integration in Kubernetes.
+
 Containerized platforms are generally easier to set-up and should be easier to maintain and update. But it is important to check thoroughly how well this support is: if the image is updated regularly, if an update processus exist.
+
 An integration with Kubernetes might allow an easier continous operation, where Kubernetes will take care of the lifeline of the platform. But the set-up will generally be more complex as well.
+
 In both cases, it is important to know where the data will be store, as both are based on images, so the data will be stored externally (most probably in volumes in both cases). The data should be securely stored and backed up regularly.
+
 Some platforms will come with a Docker Compose or a Helm chart, and in that case the storage might be setup as part of the configuration. But generally not the backup. 
 
 Finally, each entry tries to detail if there exists an API access, enabling interoperability and data extraction.
+
 Adding an API access is not a simple task so the need to have one should be clarified before choosing a platform. This access can be via an HTTP REST API, generally easy to use, a CLI, which will generally be non-standard, or a language API, Python, Java, ... Interfacing using the same language will be easy, probably easier than through a REST API (or very similar in the case of Python), but interfacing with a different language might be difficult.
 
-These technical aspects might give a security risk: if the platform is easy to update, if the API is too open, if the set-up is too complex and might let some openings. In some cases, simpler is better, so it is possible to set-up the platform with a reasonnable level of security. If a IT support is available, it is also advisable to involve them early.
+> These technical aspects might give a security risk: if the platform is easy to update, if the API is too open, if the set-up is too complex and might let some openings. In some cases, simpler is better, so it is possible to set-up the platform with a reasonnable level of security. If a IT support is available, it is also advisable to involve them early.
 
 ## Step 5: Be Aware of What’s NOT Included
 
