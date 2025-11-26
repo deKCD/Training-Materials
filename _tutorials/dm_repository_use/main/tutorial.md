@@ -224,20 +224,26 @@ TODO: Short explanation of the difference, cost and benefits
 
 - **Generalist platforms**: e.g. NextCloud (supporting tasks), iRODS or RUCIO (registering/storing data).  
 - **Specialist platforms**: e.g. Electronic Laboratory Notebooks for domain-specific work.  
-- **Tip**: Combining both may be necessary. Interconnection often depends on available APIs and documentation.
+- **Tip**: Combining both may be necessary or useful. Interconnection often depends on available APIs and documentation.
 
 TODO: question about using one generalist or a specialist platform,
 question about using one with another (for instance Omero + NextCloud)
 
 ## Step 4: Consider Set-up Options
 
-TODO: Short introduction, words about cost, benefits, difficulty and security
+While not giving a detail explanation on how to set-up a platform, an entry will say if a containerized setup exist, as well as an integration in Kubernetes.
+Containerized platforms are generally easier to set-up and should be easier to maintain and update. But it is important to check thoroughly how well this support is: if the image is updated regularly, if an update processus exist.
+An integration with Kubernetes might allow an easier continous operation, where Kubernetes will take care of the lifeline of the platform. But the set-up will generally be more complex as well.
+In both cases, it is important to know where the data will be store, as both are based on images, so the data will be stored externally (most probably in volumes in both cases). The data should be securely stored and backed up regularly.
+Some platforms will come with a Docker Compose or a Helm chart, and in that case the storage might be setup as part of the configuration. But generally not the backup. 
 
-- Containerized set-up → simpler deployment and updates.  
-- Kubernetes support → ensures 24/7 operation (if a Kubernetes cluster is already available).  
-- API access → enables interoperability and data extraction.  
+Finally, each entry tries to detail if there exists an API access, enabling interoperability and data extraction.
+Adding an API access is not a simple task so the need to have one should be clarified before choosing a platform. This access can be via an HTTP REST API, generally easy to use, a CLI, which will generally be non-standard, or a language API, Python, Java, ... Interfacing using the same language will be easy, probably easier than through a REST API (or very similar in the case of Python), but interfacing with a different language might be difficult.
+
+These technical aspects might give a security risk: if the platform is easy to update, if the API is too open, if the set-up is too complex and might let some openings. In some cases, simpler is better, so it is possible to set-up the platform with a reasonnable level of security. If a IT support is available, it is also advisable to involve them early.
 
 ## Step 5: Be Aware of What’s NOT Included
+
 The repository does **not** provide:
 - A full Data Management Plan (e.g. retention policy, access rights).  
 - Guarantees on platform lifetime or funding.  
@@ -248,12 +254,14 @@ The repository does **not** provide:
 {: .warning}
 
 ## Step 6: Next Technical Steps
+
 A **Quickstart guide** (work in progress) is planned:
 - From bare-metal to full Kubernetes deployments,  
 - With details on costs, security, and support needs,  
 - Vocabulary clarification for better understanding of existing documentation.
 
 ## Step 7: Contribute to the Repository
+
 You can contribute via GitHub:
 1. **Create an issue** to suggest a change.  
 2. **Fork the repository** and submit a pull request to add or modify entries.  
@@ -274,6 +282,7 @@ A typical entry should include:
 ```
 
 # Conclusion
+
 You now know how to use and navigate the **Data Management Platforms repository**.  
 It is a living resource focused on FAIR principles and cloud compatibility, and it depends on community contributions to grow and remain current.  
 
