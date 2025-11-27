@@ -26,7 +26,7 @@ key_points:
 - Contributions are welcome via GitHub issues and pull requests.
 version:
     - main
-life_cycle: tutorial lifecycle
+life_cycle: "beta"
 contributions:
   authorship:
   - Alain Becam
