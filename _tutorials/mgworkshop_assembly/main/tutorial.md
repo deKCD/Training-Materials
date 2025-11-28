@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Metagenomics Workshop
+title: Metagenomic Assembly
 description: "This tutorial will guide you through the typical steps of metagenome assembly. "
 slug: mgworkshop_assembly
 time_estimation: 6H
@@ -9,7 +9,7 @@ questions:
   - "How do I compare metagenome assemblies?"
 version:
   - main
-life_cycle: "beta"
+life_cycle: "alpha"
 contributions:
   authorship:
   - Nils Kleinbölting
@@ -28,6 +28,7 @@ TODO: Add data download!!!
 ## Table of Contents
 * [Quick introduction to (meta)-genome assembly](#metagenome-assembly)
 * [Tutorial](#tutorial)
+    * [Data download](#data-download)
     * [Velvet](#velvet)
     * [Megahit](#megahit)
     * [metaspades](#metaspades)
@@ -41,6 +42,32 @@ Describe Metagenome Assembly here, include images from the slides.
 ## **Tutorial**
 
 We are going to use different assemblers and compare the results.
+
+### **Data download**
+
+We have prepared a small toy data set for this tutorial. It's simulated data, so there is actually no need for quality control.
+
+
+> ## Download data
+> Please use the following commands to download the data to your VM:
+> ```bash
+> sudo chown ubuntu:ubuntu /mnt
+> cd /mnt
+> wget https://openstack.cebitec.uni-bielefeld.de:8080/swift/v1/denbi-mg-course/WGS-data.tar
+> tar xvf WGS-data.tar
+> ```
+> 
+{: .hands_on}
+
+The `/mnt/WGS-data` directory has the following content:
+
+| File          | Content                                    |
+|---------------|--------------------------------------------|
+| genomes/      | Directory containing the reference genomes |
+| gold_std/     | Gold Standard assemblies                   |
+| read1.fq      | Read 1 of paired reads (FASTQ)             |
+| read2.fq      | Read 2 of paired reads (FASTQ)             |
+| reads.fas     | Shuffled reads (FASTA)                     |
 
 
 ### **Velvet**
@@ -73,9 +100,10 @@ are going to run two jobs::
 > 
 {: .hands_on}
 
+Now we have to start the actual assembly using `velvetg`. 
+
 > ## Step 2: velvetg
-> Now we have to start the actual assembly using
-> `velvetg`. `velvetg` is the core of Velvet where the de Bruijn
+> `velvetg` is the core of Velvet where the de Bruijn
 > graph is built then manipulated. Let's run assemblies for both
 > kmer-lengths. See the `Velvet manual
 > <https://github.com/dzerbino/velvet/blob/master/Manual.pdf>`_ for more
@@ -83,8 +111,8 @@ are going to run two jobs::
 
 > ```bash
 > cd /mnt/WGS-data
-  velvetg velvet_31 -cov_cutoff auto -ins_length 270 -min_contig_lgth 500 -exp_cov auto &
-  velvetg velvet_51 -cov_cutoff auto -ins_length 270 -min_contig_lgth 500 -exp_cov auto &
+> velvetg velvet_31 -cov_cutoff auto -ins_length 270 -min_contig_lgth 500 -exp_cov auto &
+> velvetg velvet_51 -cov_cutoff auto -ins_length 270 -min_contig_lgth 500 -exp_cov auto &
 > ```
 > 
 {: .hands_on}
@@ -107,6 +135,8 @@ on the contigs.
 {: .hands_on}
 
 ### **Megahit**
+
+
 ### **metaspades**
 ### **idba_ud**
 ### **ray**
