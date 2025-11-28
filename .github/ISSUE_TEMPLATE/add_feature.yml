@@ -1,0 +1,11 @@
+name: Add a new feature
+title: "[feature]: "
+labels: ["feature"]
+assignees: []
+body:
+  - type: input
+    attributes:
+      label: New feature description
+      description: Please shortly describe your new feature
+    validations:
+      required: true
