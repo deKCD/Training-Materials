@@ -22,7 +22,7 @@ layout: null
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/katex.min.css' | relative_url }}" />
   {% endif %}
     
-  {% include favicons.html %}
+  {% include _includes/favicons.html %}
 </head>
 
 <body>
@@ -31,22 +31,22 @@ layout: null
   <header class="page-header" role="banner" style="margin-top: 0">
   <!--  <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo"> -->
     <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
-    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
+    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description | markdownify }}</h2>
     <a href="{{ '/' | relative_url }}" class="btn">Home Page</a>
     <a href="{{ '/tutorials/' | relative_url }}" class="btn">Collection of Tutorials</a>
   </header>
     
     <div class="container">
-      {% include tutorial_lifecycle.html %}
-      {% include tutorial_overview.html %}
+      {% include _includes/tutorial_lifecycle.html %}
+      {% include _includes/tutorial_overview.html %}
         {{ content }}
-      {% include tutorial_keypoints.html %}
-      {% include tutorial_feedback.html %}
-      {% include attributions.html %}
+      {% include _includes/tutorial_keypoints.html %}
+      {% include _includes/tutorial_feedback.html %}
+      {% include _includes/attributions.html %}
     </div>
-    {% include javascript.html %}
+    {% include _includes/javascript.html %}
     
-  {% include tutorial_footer.html %}
+  {% include _includes/tutorial_footer.html %}
   
 
 </body> 

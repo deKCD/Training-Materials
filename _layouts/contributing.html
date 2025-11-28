@@ -2,8 +2,8 @@
 layout: contributing
 ---
 
-{% include base_path.html %}
-{% include gh_variables.html %}
+{% include _includes/base_path.html %}
+{% include _includes/gh_variables.html %}
 
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en-US' }}">
@@ -26,7 +26,7 @@ layout: contributing
   <link rel="stylesheet" type="text/css" href="{{ '/assets/css/lesson.css' | relative_url }}" />
   <link rel="stylesheet" type="text/css" href="{{ '/assets/css/syntax.css' | relative_url }}" />
   
-  {% include favicons.html %}  
+  {% include _includes/favicons.html %}  
 </head>
 
     
@@ -42,7 +42,7 @@ layout: contributing
     <div class="container">
     {{ content }}
     </div>
-    {% include javascript.html %}
+    {% include _includes/javascript.html %}
 
   <footer class="site-footer">
     {% if site.github.is_project_page %}
@@ -53,7 +53,7 @@ layout: contributing
     {% endif %}
       
     <span class="site-footer-credits">
-      {% include default_footer.html %}
+      {% include _includes/default_footer.html %}
     </span>
   </footer>
 </body> 

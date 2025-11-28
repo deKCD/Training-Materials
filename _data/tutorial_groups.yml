@@ -20,3 +20,8 @@
   tutorials:
     - corer
     - panbench
+
+- title: Basic Data Management in the de.NBI Cloud
+  description: Tutorial focused on ...
+  tutorials:
+    - DM_in_the_deNBI_cloud
