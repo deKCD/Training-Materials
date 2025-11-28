@@ -11,4 +11,4 @@
 - DSW (https://ds-wizard.org)
 
 ## Chapters
-[1. The Basiscs ](https://github.com/deKCD/Training-Materials/edit/main/_tutorials/Microbial_RDM/main/Course1.md)
+[1. The Basics ](https://github.com/deKCD/Training-Materials/edit/main/_tutorials/Microbial_RDM/main/Course1.md)
