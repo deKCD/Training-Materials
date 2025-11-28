@@ -281,15 +281,15 @@ The repository does **not** provide:
 - Alignment between scientists’ low-friction tools vs. institutes’ and funders’ FAIR requirements.  
 
 > ## warning
-> Pitfall: Modifying open-source software may block future updates. Prefer configuring over modifying.
+> Pitfall: Modifying open-source software may block future updates. It is advised to prefer configuring over modifying.
 {: .warning}
 
 ## Step 6: Next Technical Steps
 
-A **Quickstart guide** (work in progress) is planned:
+A **Quickstart guide**  for setting-up a Data Management platform is planned:
 - From bare-metal to full Kubernetes deployments,  
 - With details on costs, security, and support needs,  
-- Vocabulary clarification for better understanding of existing documentation.
+- With vocabulary clarification for better understanding of existing documentation.
 
 ## Step 7: Contribute to the Repository
 
