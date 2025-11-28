@@ -1,4 +1,5 @@
 name: Add a new feature
+description: New feature description
 title: "[feature]: "
 labels: ["feature"]
 assignees: []
