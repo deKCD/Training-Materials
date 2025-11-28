@@ -26,6 +26,8 @@ If your tutorial belongs to a new category that does not yet exist, create a new
 
 Then, commit the changes to the new branch and submit a pull request.
 
+Optionally you can also go to issues and "create an issue" with the format [add new tutorial](https://github.com/deKCD/Training-Materials/issues) that describes what you are adding.
+
 ### **Edit the tutorial**
 -------------------------
 The `tutorial.md` should have the following structure:
