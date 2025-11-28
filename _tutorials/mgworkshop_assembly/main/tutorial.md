@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Metagenomics Workshop
 description: "This tutorial will guide you through the typical steps of metagenome assembly. "
-slug: mgworkshop
+slug: mgworkshop_assembly
 time_estimation: 6H
 questions:
   - "How do I run a metagenome assembly?"
@@ -22,6 +22,8 @@ contributions:
 ## Prerequisites
 
 Please do the linux introduction before this tutorial. We assume you have successfully connected to an instance in the de.NBI cloud with the software pre-installed. Otherwise you will need to install the required tools on your own and make sure you have sufficient resources available. 
+
+TODO: Add data download!!!
 
 ## Table of Contents
 * [Quick introduction to (meta)-genome assembly](#metagenome-assembly)
