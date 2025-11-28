@@ -1,0 +1,12 @@
+name: Add a new tutorial
+description: FIXME
+title: "[new_content]: <short summary>"
+labels: ["new_content"]
+assignees: []
+body:
+  - type: input
+    attributes:
+      label: New tutorial description
+      description: Please shortly describe your new tutorial
+    validations:
+      required: true
