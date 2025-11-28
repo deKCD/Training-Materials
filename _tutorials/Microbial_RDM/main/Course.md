@@ -49,23 +49,25 @@ Structured data containing information about characteristics of other data.
   - Biological and environmental metadata (e.g., broad-scale environmental context, local environmental context, environmental medium, geographic location (latitude) and geographic location (longitude), host metadata, sample collection metadata, etc.)
  
 # Overview of Minimal Technical Metadata for FASTA Files
----
-metadata: Bla bla
-example: "Support" bla
-source: Bla bla
----
+**Table**
 
 # Minimal Information Standards in the life sciences 
-Bio-Formats for microscopy image data (OME-XML)
-Crystallographic Information Framework (CIF)
-Minimal Information about a Flow Cytometry Experiment (MIFLowCyt)
-Minimum Information about a Marker Gene Sequence (MIMARKS)
-Minimum Information about a Microarray Experiment (MIAME)
-Minimum Information about a Next-generation Sequencing Experiment (MINSEQE)
-Minimal Information about a Proteomics Experiment (MIAPE)
-Minimum Information about a Single Amplified Genome (MISAG)
-Minimum Information about any (x) Sequence (MIxS)
-Minimum Information for Biological and Biomedical Investigations (MIBBI)
-NeXuS Data Format for neutron, x-ray and muon science
+- Bio-Formats for microscopy image data (OME-XML)
+- Crystallographic Information Framework (CIF)
+- Minimal Information about a Flow Cytometry Experiment (MIFLowCyt)
+- Minimum Information about a Marker Gene Sequence (MIMARKS)
+- Minimum Information about a Microarray Experiment (MIAME)
+- Minimum Information about a Next-generation Sequencing Experiment (MINSEQE)
+- Minimal Information about a Proteomics Experiment (MIAPE)
+- Minimum Information about a Single Amplified Genome (MISAG)
+- Minimum Information about any (x) Sequence (MIxS)
+- Minimum Information for Biological and Biomedical Investigations (MIBBI)
+- NeXuS Data Format for neutron, x-ray and muon science
 
-
+# Metadata standards directories, registries and repositories
+- Basel Register of Thesauri, Ontologies & Classifications (BARTOC)
+- DCC Disciplinary Metadata guide
+- RDA Metadata Standards Directory
+- BioPortal - Repository of biomedical ontologies
+- Cancer Data Standards Registry and Repository (caDSR)
+- FAIRsharing.org (search results for microbiology)
