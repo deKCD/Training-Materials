@@ -31,7 +31,7 @@ layout: null
   <header class="page-header" role="banner" style="margin-top: 0">
   <!--  <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo"> -->
     <h1 class="project-name" style="font-size: 2.5em; font-weight: bold;">{{ page.title | default: site.title }}</h1>
-    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description }}</h2>
+    <h2 class="project-tagline" style="font-size: 1.5em; color: #fff solid;">{{ page.description | default: site.description | markdownify }}</h2>
     <a href="{{ '/' | relative_url }}" class="btn">Home Page</a>
     <a href="{{ '/tutorials/' | relative_url }}" class="btn">Collection of Tutorials</a>
   </header>
