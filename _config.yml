@@ -26,6 +26,8 @@ collections:
   slides:
     output: true
 
+includes_dir: .
+
 # Turn on built-in syntax highlighting.
 highlighter: rouge
 
@@ -35,6 +37,7 @@ exclude:
 
 plugins:
   - jekyll-last-modified-at
+  - jekyll-sitemap
 
 categories:
   tutorials: "/tutorials/"
