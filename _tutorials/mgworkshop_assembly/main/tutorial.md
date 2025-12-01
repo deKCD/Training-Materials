@@ -35,7 +35,148 @@ Please do the linux introduction before this tutorial. We assume you have succes
 
 ## Metagenome Assembly
 
-Describe Metagenome Assembly here, include images from the slides.
+
+# Metagenome Assembly  
+*Based on lecture slides from FZ Jülich :contentReference[oaicite:0]{index=0}*
+
+## Introduction
+
+Metagenome assembly is the computational reconstruction of longer DNA sequences, so-called contigs, from millions to billions of short fragments generated during sequencing of complex microbial communities. It is a central component of metagenomic analysis pipelines because it transforms raw reads into interpretable genomic units. These units enable later steps such as binning, gene prediction, functional annotation, and the identification of community structure.
+
+Metagenomics is often summarized by two overarching questions: *Who is present in the sample?* and *What are they capable of doing?* Assembly occupies a key position among these steps, as illustrated in the workflow diagram from the lecture slides.
+
+**Figure 1.** *Metagenomic analysis strategies, adapted from Sharpton 2014*  
+`![Metagenomic analysis strategies]((/tutorials/mgworkshop_assembly/images/strategies.png))`
+
+## A Visual Analogy: Assembly as Puzzle Reconstruction
+
+Metagenome assembly resembles the process of solving a large jigsaw puzzle without the guiding image on the box. Each sequencing read corresponds to a small piece of the puzzle, and assembling them into contigs requires identifying how these pieces fit together based on overlapping sequence information. The analogy from the slides begins with scattered puzzle pieces representing disordered sequencing reads and ends with the completed picture symbolizing a reconstructed genomic sequence.
+
+**Figure 2.** *Puzzle pieces representing short reads*  
+`![Puzzle pieces representing short reads]((/tutorials/mgworkshop_assembly/images/puzzle1.png))`
+
+**Figure 3.** *Completed puzzle symbolizing the finished assembly*  
+`![Completed puzzle symbolizing the finished assembly]((/tutorials/mgworkshop_assembly/images/puzzle2.png))`
+
+## Classical Genome Sequencing Strategies
+
+Before short-read next-generation sequencing became dominant, genome assembly commonly relied on two main strategies: ordered shotgun sequencing and whole genome shotgun sequencing. In ordered shotgun sequencing, DNA fragments were cloned into vectors such as BACs and arranged into a physical map. This map provided positional information, making it possible to sequence clones individually and then piece them together with high confidence. The physical map served as a scaffold that guaranteed correct global arrangement, though generating it required significant laboratory effort.
+
+**Figure 4.** *Hierarchical (ordered) shotgun sequencing schematic adapted from Venter et al., Nature 2001 *  
+`![Hierarchical shotgun sequencing]((/tutorials/mgworkshop_assembly/images/hierarchical_shotgun.png))`
+
+Whole genome shotgun sequencing simplified the experimental workflow by fragmenting the entire genome simultaneously, sequencing all pieces in parallel, and then computationally assembling the resulting reads. While this approach quickly produced large amounts of sequence, it complicated the final assembly step because it lacked positional context. Complex repetitive regions frequently caused ambiguities because reads from different genomic copies appeared identical.
+
+**Figure 5.** *Whole genome shotgun sequencing schematic adapted from Venter et al., Nature 2001 *  
+`![Whole genome shotgun sequencing]((/tutorials/mgworkshop_assembly/images/wg_shotgun.png))`
+
+Short-read sequencing intensified this challenge. Technologies such as Illumina produce extremely high coverage but with short reads, typically around 100 base pairs. As a consequence, assembly algorithms require sophisticated data structures to handle both the enormous number of reads and the difficulties imposed by repetitions, sequencing errors, and the shortness of individual fragments.
+
+## Assembly Paradigms
+
+Assembly algorithms fall into three conceptual categories: greedy approaches, the overlap–layout–consensus (OLC) model, and de Bruijn graph assemblers.
+
+Greedy assemblers incrementally merge reads by repeatedly choosing the overlap that appears locally optimal. Because they commit early to decisions based on local criteria, they may fail to recover the globally correct genome structure.
+
+The OLC method attempts to identify all pairwise overlaps between reads, construct an overlap graph, and then determine a layout that visits each read once in an order consistent with these overlaps. The final consensus stage extracts the nucleotide sequence implied by the layout. While conceptually straightforward, the OLC approach suffers from its computational burden. For large datasets, computing all read overlaps scales quadratically with the number of reads. The slides highlight that assembling 27 million Sanger reads would yield approximately one trillion possible overlaps, which would require years of computation if each alignment took even a millisecond.
+
+The memory requirements are likewise severe. Storing such a graph may demand terabytes of memory. Because metagenomes contain far more reads than typical genome projects, OLC approaches have become largely infeasible for short-read metagenomics.
+
+**Figure 6.** *Illustration of overlaps and layouts used in OLC assembly*  
+`![Illustration of overlaps and layouts used in OLC assembly]((/tutorials/mgworkshop_assembly/images/olc.png))`
+
+By contrast, de Bruijn graph assemblers break each read into overlapping k-mers, thereby reducing the assembly problem to analysing the connectivity between k-mer prefixes and suffixes. This strategy dramatically increases computational efficiency because nodes of the graph represent k-mers, not entire reads. Instead of finding a Hamiltonian path (visiting each read exactly once), the assembler finds an Eulerian path that visits each edge, corresponding to each k-mer occurrence, exactly once. Eulerian path finding is computationally tractable, making de Bruijn graph methods the standard for short-read metagenome assembly.
+
+**Figure 7.** *Comparison of OLC and de Bruijn graph paradigms*  
+`![Comparison of OLC and de Bruijn graph paradigms]((/tutorials/mgworkshop_assembly/images/olc_dbg.png))`
+
+## Repeats and Structural Ambiguities
+
+Repetitive sequences pose difficulties for any assembly strategy. When two genomic regions share identical or nearly identical sequences, the assembler may mistakenly combine reads from distinct regions into a single contig (over-collapsing), or it may produce branching paths representing alternative assemblies that cannot be resolved unambiguously.
+
+The slides include several diagrams showing how repeats create complex graph structures, including branching nodes where multiple contigs are possible. Correct repeat resolution often requires additional information such as paired-end reads, long reads, or coverage differences.
+
+**Figure 8.** *Repeat-induced ambiguities and unitig structure*  
+`![Repeat-induced ambiguities and unitig structure]((/tutorials/mgworkshop_assembly/images/repeats1.png))`
+**Figure 9.** *Repeat-induced ambiguities and unitig structure*  
+`![Repeat-induced ambiguities and unitig structure]((/tutorials/mgworkshop_assembly/images/repeats2.png))`
+
+## Complexity of de Bruijn Graphs
+
+Although de Bruijn graphs avoid the prohibitive OLC overlap computations, they introduce their own challenges. Sequencing errors generate unique or low-frequency k-mers that do not align well within the graph, producing structures known as tips (short dead-end paths) or bubbles (parallel alternative paths). Polymorphisms between closely related organisms in a metagenome create similar structures. Repeats generate converging or diverging paths that require careful handling by the assembler.
+
+**Figure 10.** *Typical complexities within a de Bruijn graph: tips, bubbles, and repeat structures*  
+`![Typical complexities within a de Bruijn graph: tips, bubbles, and repeat structures]((/tutorials/mgworkshop_assembly/images/complexities.png))`
+
+## Influence of k-mer Size
+
+Choosing the appropriate k-mer size is a central challenge in constructing de Bruijn graphs. If k is too small, the graph becomes densely connected because short k-mers are insufficient to resolve unique genomic regions. This results in tangled, ambiguous graph structures. If k is too large, the graph becomes fragmented because fewer reads contain each specific k-mer, making it harder to maintain continuous paths.
+
+The lecture slides show a dramatic series of Bandage visualizations illustrating how graph structure changes as k increases from 51 to 91. At small k, the graph is extremely complex, resembling a knot of interwoven paths. As k increases, many ambiguous connections disappear, but the graph becomes more fragmented. Assemblers often work around this by constructing multiple graphs with different k values and combining their information, as done in metaSPAdes.
+
+**Figure 11.** *Examples of de Bruijn graphs at k=51 to k=91*  
+`![Examples of de Bruijn graphs at k=51 to k=91]((/tutorials/mgworkshop_assembly/images/bandage.png))`
+
+## K-mer Frequency Distributions
+
+K-mer abundance analysis provides valuable information for filtering erroneous k-mers and identifying genomic signals within mixed communities. True genomic k-mers typically appear at coverage levels reflecting the abundance of their originating organism. Low-frequency k-mers often result from sequencing errors. In metagenomes, the situation is complicated by varying species abundances, producing multiple k-mer coverage peaks rather than a single unicellular distribution. The slides illustrate how frequently particular k-mers occur and how this distribution can be used to distinguish noise from signal.
+
+**Figure 12.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
+`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq1.png))`
+**Figure 13.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
+`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq2.png))`
+**Figure 14.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
+`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq3.png))`
+
+## Special Challenges in Metagenomic Assembly
+
+Assembly of single genomes is already challenging, but metagenome assembly introduces additional complications. Coverage varies dramatically between species, making it difficult to decide which low-frequency k-mers correspond to rare organisms and which are artifacts. Closely related strains or species may share long genomic regions, producing highly similar k-mers that merge in the graph. Divergent abundance profiles of species introduce asymmetry into the graph that must be addressed by specialized heuristics. Contamination and horizontal gene transfer further blur boundaries between genomic segments.
+
+**Figure 11.** *MG Puzzle*  
+`![placeholder](path/to/image_p34.png)`
+
+Assemblers designed for isolated genomes typically assume uniform coverage and do not incorporate metagenome-specific statistical models, which is why specialized tools have been developed.
+
+## Metagenome Assemblers
+
+Several assemblers have been created specifically for metagenomic data.
+
+### MetaVelvet
+
+MetaVelvet extends the Velvet assembler by integrating coverage-based heuristics. It distinguishes high-coverage and low-coverage branches in the graph to separate signals from organisms with different abundances, increasing the likelihood of resolving strain mixtures.
+
+**Figure 11.** *MetaVelvet conceptual diagram (slide p.34).*  
+`![placeholder](path/to/image_p34.png)`
+
+### IDBA-UD
+
+IDBA-UD (Iterative de Bruijn graph assembler for uneven sequencing depth) adapts dynamically to the depth variability inherent in metagenomic datasets. It eliminates erroneous k-mers using depth-relative thresholds and performs local assemblies that incorporate paired-end information to resolve repeats in low-depth regions. High-depth regions undergo additional error correction to prevent oversaturation of the graph.
+
+### MEGAHIT
+
+MEGAHIT is designed for high efficiency and low memory consumption, making it particularly suitable for large metagenomic datasets. It constructs a compressed de Bruijn graph, iteratively increases k-mer sizes, and simplifies the graph through error removal. Despite its low resource usage, MEGAHIT produces high-quality assemblies.
+
+### metaSPAdes
+
+metaSPAdes uses a multilayer de Bruijn graph approach in which several k-mer sizes are considered simultaneously. This strategy combines the continuity benefits of small k-mers with the specificity of large k-mers. It includes extensive error correction procedures and explicitly models uneven coverage, making it one of the most accurate assemblers for complex communities.
+
+### Comparison of MEGAHIT and metaSPAdes
+
+The slides compare MEGAHIT and metaSPAdes, emphasizing that metaSPAdes generally yields higher accuracy but requires much more memory and computation time. MEGAHIT excels when speed or memory constraints are a priority.
+
+**Figure 12.** *Feature comparison of MEGAHIT and metaSPAdes (slide p.41).*  
+`![placeholder](path/to/image_p41.png)`
+
+## Assessment and Benchmarking
+
+As shown in the slides, the Critical Assessment of Metagenome Interpretation (CAMI) benchmarks evaluate assemblers and analysis pipelines on standardized simulated and real datasets. These benchmarks highlight strengths and weaknesses of individual tools and reveal that no single assembler outperforms all others across all categories. The choice of assembler often depends on dataset complexity, computational resources, and the goals of the analysis.
+
+**Figure 13.** *CAMI benchmarking overview (slide p.42).*  
+`![placeholder](path/to/image_p42.png)`
+
+## Summary
+
+Metagenome assembly reconstructs genomic sequences from mixtures of organisms, relying on computational methods that infer long stretches of DNA from short fragments. Classical OLC methods are computationally infeasible for modern metagenomics, leading to widespread adoption of de Bruijn graph–based assemblers. These assemblers must navigate complexities such as sequencing errors, repeats, uneven coverage, and strain-level diversity. Choices of k-mer size, graph simplification algorithms, and error correction strategies substantially influence assembly quality. Modern assemblers such as MEGAHIT and metaSPAdes incorporate innovative methods to handle these challenges and achieve increasingly accurate reconstructions of microbial communities. Through benchmarks like CAMI, the field continues to refine its methodologies and improve the robustness of metagenome assembly workflows.
 
 ## **Tutorial**
 
