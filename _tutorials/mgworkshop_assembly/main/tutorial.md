@@ -117,23 +117,31 @@ The lecture slides show a dramatic series of Bandage visualizations illustrating
 **Figure 11.** *Examples of de Bruijn graphs at k=51 to k=91*  
 `![Examples of de Bruijn graphs at k=51 to k=91]((/tutorials/mgworkshop_assembly/images/bandage.png))`
 
-## K-mer Frequency Distributions
-
-K-mer abundance analysis provides valuable information for filtering erroneous k-mers and identifying genomic signals within mixed communities. True genomic k-mers typically appear at coverage levels reflecting the abundance of their originating organism. Low-frequency k-mers often result from sequencing errors. In metagenomes, the situation is complicated by varying species abundances, producing multiple k-mer coverage peaks rather than a single unicellular distribution. The slides illustrate how frequently particular k-mers occur and how this distribution can be used to distinguish noise from signal.
-
-**Figure 12.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
-`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq1.png))`
-**Figure 13.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
-`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq2.png))`
-**Figure 14.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
-`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq3.png))`
 
 ## Special Challenges in Metagenomic Assembly
 
-Assembly of single genomes is already challenging, but metagenome assembly introduces additional complications. Coverage varies dramatically between species, making it difficult to decide which low-frequency k-mers correspond to rare organisms and which are artifacts. Closely related strains or species may share long genomic regions, producing highly similar k-mers that merge in the graph. Divergent abundance profiles of species introduce asymmetry into the graph that must be addressed by specialized heuristics. Contamination and horizontal gene transfer further blur boundaries between genomic segments.
+...
 
-**Figure 11.** *MG Puzzle*  
-`![placeholder](path/to/image_p34.png)`
+**Figure 12.** *A metagenome puzzle consisting of two quite distinct genomes*  
+`![A metagenome puzzle consisting of two quite distinct genomes]((/tutorials/mgworkshop_assembly/images/mgassembly1.png))`
+
+...
+
+**Figure 13.** *Solved metagenome puzzle consisting of two quite distinct genomes*  
+`![Solved metagenome puzzle consisting of two quite distinct genomes]((/tutorials/mgworkshop_assembly/images/mgassembly2.png))`
+
+...
+
+**Figure 14.** *Three very similar genomes*  
+`![Three very similar genomes]((/tutorials/mgworkshop_assembly/images/mgassembly3.png))`
+
+...
+
+**Figure 15.** *A real metagenome*  
+`![A real metagenome]((/tutorials/mgworkshop_assembly/images/mgassembly4.png))`
+
+
+Assembly of single genomes is already challenging, but metagenome assembly introduces additional complications. Coverage varies dramatically between species, making it difficult to decide which low-frequency k-mers correspond to rare organisms and which are artifacts. Closely related strains or species may share long genomic regions, producing highly similar k-mers that merge in the graph. Divergent abundance profiles of species introduce asymmetry into the graph that must be addressed by specialized heuristics. Contamination and horizontal gene transfer further blur boundaries between genomic segments.
 
 Assemblers designed for isolated genomes typically assume uniform coverage and do not incorporate metagenome-specific statistical models, which is why specialized tools have been developed.
 
@@ -143,36 +151,74 @@ Several assemblers have been created specifically for metagenomic data.
 
 ### MetaVelvet
 
+## K-mer Frequency Distributions
+
+K-mer abundance analysis provides valuable information for filtering erroneous k-mers and identifying genomic signals within mixed communities. True genomic k-mers typically appear at coverage levels reflecting the abundance of their originating organism. Low-frequency k-mers often result from sequencing errors. In metagenomes, the situation is complicated by varying species abundances, producing multiple k-mer coverage peaks rather than a single unicellular distribution. The slides illustrate how frequently particular k-mers occur and how this distribution can be used to distinguish noise from signal.
+
+**Figure 16.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
+`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq1.png))`
+**Figure 17.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
+`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq2.png))`
+**Figure 18.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
+`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq3.png))`
+
 MetaVelvet extends the Velvet assembler by integrating coverage-based heuristics. It distinguishes high-coverage and low-coverage branches in the graph to separate signals from organisms with different abundances, increasing the likelihood of resolving strain mixtures.
 
-**Figure 11.** *MetaVelvet conceptual diagram (slide p.34).*  
-`![placeholder](path/to/image_p34.png)`
+**Figure 19.** *MetaVelvet conceptual diagram (Namiki T et al. Nucl. Acids Res. 2012;40:e155
+)*  
+`![MetaVelvet conceptual diagram]((/tutorials/mgworkshop_assembly/images/metavelvet.png))`
 
 ### IDBA-UD
 
 IDBA-UD (Iterative de Bruijn graph assembler for uneven sequencing depth) adapts dynamically to the depth variability inherent in metagenomic datasets. It eliminates erroneous k-mers using depth-relative thresholds and performs local assemblies that incorporate paired-end information to resolve repeats in low-depth regions. High-depth regions undergo additional error correction to prevent oversaturation of the graph.
 
+
 ### MEGAHIT
 
 MEGAHIT is designed for high efficiency and low memory consumption, making it particularly suitable for large metagenomic datasets. It constructs a compressed de Bruijn graph, iteratively increases k-mer sizes, and simplifies the graph through error removal. Despite its low resource usage, MEGAHIT produces high-quality assemblies.
+
+
+**Figure 20.** MEGAhit workflow (Li et. al, Bioinformatics, 2015)*  
+`![MEGAhit workflow ]((/tutorials/mgworkshop_assembly/images/megahit.png))`
+
+MEGAHIT workflow:
+
+Streaming k-mer decomposition: Splits sequence reads into k-mers but stores them efficiently.
+Graph construction: Builds a compressed de Bruijn graph to save memory.
+Graph simplification: Removes unnecessary edges and sequencing errors.
+Iterative k-mer expansion: Starts with small k-mers and gradually increases their size.
+Contig generation: Assembles the best possible long contigs.
+
 
 ### metaSPAdes
 
 metaSPAdes uses a multilayer de Bruijn graph approach in which several k-mer sizes are considered simultaneously. This strategy combines the continuity benefits of small k-mers with the specificity of large k-mers. It includes extensive error correction procedures and explicitly models uneven coverage, making it one of the most accurate assemblers for complex communities.
 
+metaSPAdes workflow:
+
+K-mer analysis: Splits sequence reads into multiple k-mer sizes (e.g., 21, 33, 55, etc.).
+Graph construction: Builds a de Bruijn graph to identify sequence connections.
+Error correction: Removes sequencing errors from the k-mers for better assembly accuracy.
+Multilayer graph: Uses multiple k-mer sizes to resolve complex genome structures.
+Metagenome-specific improvements: Takes into account variable coverage depths (since some organisms are more abundant than others).
+Final assembly: Merges different graph layers to generate contigs (longer DNA sequences).
+
+
 ### Comparison of MEGAHIT and metaSPAdes
 
 The slides compare MEGAHIT and metaSPAdes, emphasizing that metaSPAdes generally yields higher accuracy but requires much more memory and computation time. MEGAHIT excels when speed or memory constraints are a priority.
 
-**Figure 12.** *Feature comparison of MEGAHIT and metaSPAdes (slide p.41).*  
-`![placeholder](path/to/image_p41.png)`
+
+**Figure 21.** Comparison of MEGAHIT and metaSPAdes*  
+`![Comparison of MEGAHIT and metaSPAdes]((/tutorials/mgworkshop_assembly/images/metaspades_megahit.png))`
+
 
 ## Assessment and Benchmarking
 
 As shown in the slides, the Critical Assessment of Metagenome Interpretation (CAMI) benchmarks evaluate assemblers and analysis pipelines on standardized simulated and real datasets. These benchmarks highlight strengths and weaknesses of individual tools and reveal that no single assembler outperforms all others across all categories. The choice of assembler often depends on dataset complexity, computational resources, and the goals of the analysis.
 
-**Figure 13.** *CAMI benchmarking overview (slide p.42).*  
-`![placeholder](path/to/image_p42.png)`
+**Figure 22.** CAMI benchmarking overview (Meyer, F., Fritz, A., Deng, ZL. et al. Critical Assessment of Metagenome Interpretation: the second round of challenges. Nat Methods 19, 429–440 (2022).)*  
+`![CAMI benchmarking overview]((/tutorials/mgworkshop_assembly/images/cami.png))`
 
 ## Summary
 
