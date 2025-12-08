@@ -253,7 +253,7 @@ While choosing a generalist platform might allow to quickly start working and st
 > 
 {: .question}
 
-## Step 4: Consider Set-up Options
+## Step 4: Considering Set-up Options
 
 While not giving a detail explanation on how to set-up a platform, an entry will say if a containerized setup exist, as well as an integration in Kubernetes.
 
