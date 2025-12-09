@@ -30,8 +30,8 @@ life_cycle: "beta"
 contributions:
   authorship:
   - Alain Becam
-  editing: 
-  funding: DeKCD Project
+  editing: AB
+  funding: deKCD/BMBF
 ---
 
 > <agenda-title>Table of Contents</agenda-title>
@@ -175,7 +175,7 @@ All entries are not identic, as there are some extra informations for some entri
 
 ### Using the search
 
-The Repository propose a search function, powered by the used document system, Quarto, which is accessed by clicking on the manifying lens icon at the top right of the top menu.
+The Repository propose a search function, powered by the used document system, Quarto, which is accessed by clicking on the magnifying lens icon at the top right of the top menu.
 
 In the pop-up that appears, writing should automatically start a search.
 
@@ -186,7 +186,7 @@ Clicking on one result should send to the paragraph containing the result. It is
 ![Finding the entry using the browser search](../../images/SearchIRODSInPage.png "Finding the entry using the browser search"){: .responsive-img }
 
 > ## details
-> Depending on the size of the page, there could be 2 manifying lenses. They have both the exact same function.
+> Depending on the size of the page, there could be 2 magnifying lenses. They have both the exact same function.
 {: .details}
 
 > ## Hands On: Find details about a specific entry
@@ -194,14 +194,14 @@ Clicking on one result should send to the paragraph containing the result. It is
 > Using the search, look for CIViC.
 > 
 > > ## Answer
-> > Click on the manifying lens.
-> > ![Clicking on the manifying lense](../../images/SearchCIViC1.png "Clicking on the manifying lense"){: .responsive-img }
+> > Click on the magnifying lens.
+> > ![Clicking on the magnifying lense](../../images/SearchCIViC1.png "Clicking on the magnifying lense"){: .responsive-img }
 > > Then type CIV in the search bar.
 > > ![Typing in the search bar](../../images/SearchCIViC2.png "Typing in the search bar"){: .responsive-img }
 > > Finally click on the search result.
 > > ![Selecting the search result](../../images/SearchCIViC3.png "Selecting the search result"){: .responsive-img }
 > > The result should roughly be in the middle of the page
-> > ![Getting the entry](../../images/SearchCIViC_result.png "Getting the entry"){: .responsive-img }
+> > ![Getting the entry](../../images/SearchCIViC_result.png "Getting the entry"){: .responsive-img}
 > {: .solution}
 > 
 {: .question}
@@ -237,7 +237,9 @@ While choosing a generalist platform might allow to quickly start working and st
 > > ## Answer
 > > Click on the Generalists in the right menu.
 > >
-> > The section lists the Generalists Data management platform. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or together one and lists, at the time of this writing, only NextCloud.
+> > The section lists the Generalists Data management Platform. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or used by another platform and lists, at the time of this writing, only NextCloud.
+> >
+> > NextCloud can be used as a flexible Data Management platform, with the limit that it is difficult to structure the stored data, or as a storage solution for another platform.
 > {: .solution}
 > 
 {: .question}
