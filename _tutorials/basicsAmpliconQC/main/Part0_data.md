@@ -20,13 +20,6 @@ contributions:
   editing: 
   funding: 
 
-
-## Section title
-
-Enter your tutorial content here.
-
-
-
 ## The Tutorial Data Set  
 
 The first thing you need to do is to connect to your virtual machine with the **X2Go Client**.  
@@ -112,5 +105,6 @@ conda activate mgcourse
 ```
 
 **Note:** You need to run the command above in **every** new terminal you open.
+
 
 
