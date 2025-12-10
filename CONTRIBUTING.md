@@ -26,6 +26,8 @@ If your tutorial belongs to a new category that does not yet exist, create a new
 
 Then, commit the changes to the new branch and submit a pull request.
 
+Optionally you can also go to issues and "create an issue" with the format [add new tutorial](https://github.com/deKCD/Training-Materials/issues) that describes what you are adding.
+
 ### **Edit the tutorial**
 -------------------------
 The `tutorial.md` should have the following structure:
@@ -73,7 +75,7 @@ The tutorial requires the metadata to be included at the top:
 In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to the file and place the organization’s `logo` in `/assets/img/`.
 
 > ## Development status of tutorials
-> The development status of tutorials follows a framework similar to that of the [Carpentries](https://docs.carpentries.org/> resources/curriculum/lesson-life-cycle.html). Training materials are classified into four categories: **alpha**, **beta**, **stable**, and **deprecated**.
+> The development status of tutorials follows a framework similar to that of the [Carpentries](https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html). Training materials are classified into four categories: **alpha**, **beta**, **stable**, and **deprecated**.
 > 
 > - **Alpha:** the tutorial is in the early stages of development. Its content may be incomplete, untested, and subject to significant changes. This status typically applies until a complete first draft is available.
 > - **Beta:** the tutorial is in the testing phase, being reviewed and taught by other instructors. Feedback from pilot workshops is actively incorporated, and further revisions are likely.

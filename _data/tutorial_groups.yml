@@ -9,6 +9,23 @@
     - simpleVMWorkshop
     - bibigrid
 
+- title: Machine Learning on Cloud infrastructure
+  description: Tutorials focused on ...
+  tutorials:
+    - ml-fastapi
+    - ml-streamlit
+
+- title: PATCH Tutorials
+  description: Tutorials in this group contain learning material about the tools contained inside the pangenomics toolbox PATCH
+  tutorials:
+    - corer
+    - panbench
+
+- title: Basic Data Management in the de.NBI Cloud
+  description: Tutorial focused on ...
+  tutorials:
+    - DM_in_the_deNBI_cloud
+
 - title: Data Management on the Cloud
   description: Tutorials focused on Data Management solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
   tutorials:

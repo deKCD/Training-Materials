@@ -8,8 +8,8 @@ color_mode:
   default: light
   
 # Sites
-url: "https://dekcd.github.io"
-baseurl: "/Training-Materials"
+url: "https://dekcd.bi.denbi.de"
+baseurl: "/training"
 repository_url: https://github.com/deKCD/Training-Materials
 dekcd_site: https://datenkompetenz.cloud/
 denbicloud_site: https://www.denbi.de/cloud
@@ -26,6 +26,8 @@ collections:
   slides:
     output: true
 
+includes_dir: .
+
 # Turn on built-in syntax highlighting.
 highlighter: rouge
 
@@ -35,7 +37,7 @@ exclude:
 
 plugins:
   - jekyll-last-modified-at
-
+  
 categories:
   tutorials: "/tutorials/"
   pathways: "/pathways/"
