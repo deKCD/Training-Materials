@@ -23,7 +23,7 @@ contributions:
 
 ## Section title
 
-Enter your tutorial content here.
+{ % include _tutorials/basicAmpliconQC/main/Part1_fastq.md }
 
 
 
@@ -112,5 +112,6 @@ conda activate mgcourse
 ```
 
 **Note:** You need to run the command above in **every** new terminal you open.
+
 
 
