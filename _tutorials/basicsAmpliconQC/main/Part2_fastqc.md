@@ -1,23 +1,3 @@
-Certainly! Here is your **GTN-style Markdown source** for the FastQC section, using hands-on boxes, tip block, and GTN Markdown syntax conventions:
-
-```markdown
----
-title: "FastQC"
-questions:
-  - What is FastQC and what does it do?
-  - How can I interpret FastQC reports?
-objectives:
-  - Understand the main functions of FastQC
-  - Run FastQC on raw sequencing data
-  - Explore FastQC's command-line interface
-time_estimation: "15m"
-level: Introductory
-key_points:
-  - FastQC gives a quick overview of sequencing quality
-  - It supports multiple input formats and batch operation
-  - Reports help identify problems before downstream analyses
----
-
 # FastQC
 
 [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) provides an easy way to perform quality control checks on raw high-throughput sequencing data. Its modular set of analyses allows you to quickly determine if your data have problematic features that could affect downstream analysis.
@@ -103,8 +83,4 @@ Let's evaluate a set of FASTQ files using FastQC from the command line.
 # References
 
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-```
 
----
-
-**Copy-paste** this as Markdown into your GTN tutorial source as a section. All blocks and code formatting follow GTN standards.
