@@ -74,5 +74,3 @@ Common questions about the de.KCD/de.NBI Cloud Training Materials, and about the
 ---
 
 Couldn’t find the answer you were looking for? Please feel free to <a href="mailto:{{ site.email }}">contact us</a>.
-
-

@@ -26,6 +26,11 @@
   tutorials:
     - DM_in_the_deNBI_cloud
 
+- title: Metagenomics
+  description: Tutorials focused on dealing with metagenomics seqeuncing data
+  tutorials:
+    - basicsAmpliconQC
+
 - title: Data Management on the Cloud
   description: Tutorials focused on Data Management solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
   tutorials:
