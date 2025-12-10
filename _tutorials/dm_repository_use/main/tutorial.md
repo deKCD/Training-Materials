@@ -2,20 +2,20 @@
 layout: tutorial_hands_on
 
 title: Using the cross-domain Data-Management Platform repository
-description: A step by step overview on how to use the repository.
+description: A step-by-step overview of how to use the repository.
 slug: dm_repository_use
 level: Introductory
 time_estimation: 40 minutes
 questions:
   - How to start looking for a Data-Management Solution?
-  - What benefits are there from having a cross-domain repository?
+  - What benefits are there to having a cross-domain repository?
   - How to extend a Data-Management solution using APIs and other platforms?
 objectives:
   - Understand the purpose and scope of the Data Management Platforms repository.
   - Learn how to navigate and interpret the listed platforms.
   - Contribute new or updated information to the repository.
-  - Being able to contribute to it,
-  - Knowing its limits and what to do around them,
+  - Be able to contribute to it,
+  - Know its limits and what to do about them,
 requirements:
 - Basic understanding of research data management.
 - Interest in FAIR principles and cloud affinity.
@@ -46,58 +46,58 @@ contributions:
 
 # **Scope**
 
-This tutorial is not a comprehensive guide of doing Data Management, but a "been there done that" introduction followed by how to use the [DeKCD registry of FAIR data management platforms for the Cloud](https://dekcd.github.io/FAIR-DMP-Registry/). It is mostly on the technical side of Data Management.
+This tutorial is not a comprehensive guide to doing Data Management, but a "been-there-done-that" introduction followed by how to use the [DeKCD registry of FAIR data management platforms for the Cloud](https://dekcd.github.io/FAIR-DMP-Registry/). It is mostly on the technical side of Data Management.
 
 # **Prerequisites**
 
 To follow this tutorial:
 
-- Knowledge of what is a Data Management Platform,
+- Knowledge of what a Data Management Platform is,
 - Knowledge of the FAIR principles.
 
 For a good use of the repository:
 
 - Knowledge of Linux and Containers (Docker),
-- Knowledge of API
+- Knowledge of APIs.
 
 # **Setting-up a Data Management Solution, a short overview**
 
-The repository is mostly a technical overview and as such this section is mostly scoped to the technical aspect.
-Several online resources help with a Data Management Plan, making it FAIR and various aspects, such as [RDM Kit (in Life Sciences)](https://rdmkit.elixir-europe.org/), [FairCookBook](https://faircookbook.elixir-europe.org/content/home.html), [Data Stewardship Wizard](https://ds-wizard.org/), [FairWizard](https://fair-wizard.com/)
+The repository is mostly a technical overview, and as such this section is mostly scoped to the technical aspects.  
+Several online resources help with a Data Management Plan, making it FAIR and various aspects, such as [RDM Kit (in Life Sciences)](https://rdmkit.elixir-europe.org/), [FairCookBook](https://faircookbook.elixir-europe.org/content/home.html), [Data Stewardship Wizard](https://ds-wizard.org/), [FairWizard](https://fair-wizard.com/).
 
 ## **Goals and Purposes**
 
-The choice of a Data Management Solution is deeply dependent on the given goals and purposes. A solution for supporting a 1 year work could use a simple web-application installed using Docker on a local server, while a solution meant for 10 years and several project might benefit from being on the cloud, uses several connected web-applications.
-Unfortunately there is no silver bullet, as the best solution will depend on your specific conditions, if you are part of a consortium proposing some infrastructure, if your institution offer some solutions, if you have the mean to get a technical person for the duration of the project.
+The choice of a Data Management Solution is deeply dependent on the given goals and purposes. A solution for supporting a one-year work period could use a simple web application installed using Docker on a local server, while a solution meant for 10 years and several projects might benefit from being on the cloud, using several connected web applications.  
+Unfortunately there is no silver bullet, as the best solution will depend on your specific conditions, if you are part of a consortium proposing some infrastructure, if your institution offers some solutions, and if you have the means to get a technical person for the duration of the project.
 
 ## **Means**
 
-Some Data Management platform are easy to set-up, easy to update and easy to use. Some are not, but they might address your needs better. In that case, it is probably good to consider the highest point of friction: what will cost the most on the long run. But also critical points: what cannot be accepted.
+Some Data Management platforms are easy to set up, easy to update, and easy to use. Some are not, but they might address your needs better. In that case, it is probably good to consider the highest point of friction: what will cost the most in the long run. But also critical points: what cannot be accepted.
 
-A critical point is the impossibility to do updates. If your datamanagement platform is online, it needs to be updated for security reasons. It might not be too critical if the application is behind a VPN, but that can change and might be a bigger problem then.
+A critical point is the impossibility of doing updates. If your Data Management platform is online, it needs to be updated for security reasons. It might not be too critical if the application is behind a VPN, but that can change and might be a bigger problem later.
 
-Point of frictions are the ease of use, the difficulty to update and the difficulty to set-it-up, from most important to less important, as a difficult to use application might simply be avoided. Users might also use some of their own solutions, making future data-management really difficult. But you have to be able to set-it-up and update it, and a difficult set-up might turn an emergency into a long downtime.
+Points of friction are the ease of use, the difficulty to update, and the difficulty to set it up, from most important to less important, as a difficult-to-use application might simply be avoided. Users might also use some of their own solutions, making future data management really difficult. But you have to be able to set it up and update it, and a difficult setup might turn an emergency into a long downtime.
 
-Similarly, an assembly can be desirable, one application closer to the lab communicating with a sharing platform, for instance. But the API communication needs to be secure, robust and well documented (also on your set-up). 
+Similarly, an assembly can be desirable: one application closer to the lab communicating with a sharing platform, for instance. But the API communication needs to be secure, robust, and well documented (also on your setup).
 
-Versioning is always a good option for all your customisations, API, templating, parameter... When the customisation is not easily versionable, it is a good idea, when it is available as text, to work on a versioned copy. This work particularly well with a test set-up, which is also always good to have: apply the working changes only on test, and apply them on production only when commited in the Version Control System.
+Versioning is always a good option for all your customisations, APIs, templating, parameters... When the customisation is not easily versionable, it is a good idea, when it is available as text, to work on a versioned copy. This works particularly well with a test setup, which is also always good to have: apply the working changes only on test, and apply them on production only when committed in the Version Control System.
 
 ## **Constraints**
 
-Constraints might be funding constraint, data usage constraint due to data privacy policy but also non-commercial use only of a software or data...
+Constraints might be funding constraints, data usage constraints due to data privacy policy, but also non-commercial-use-only of software or data...
 
 They might be considered as a chain: your Data Management platform needs to pass all elements of the chain.
 
-Some constraints might be extremely costly, like adapting a GPL licensed platform in a commercial environment: the licence forces to share all changes, which could be a no-go for a private entity. A non-respect of the data privacy could get some fee, and a leak of personal data could be devastating.
+Some constraints might be extremely costly, like adapting a GPL-licensed platform in a commercial environment: the licence forces you to share all changes, which could be a no-go for a private entity. Non-compliance with data privacy could result in a fine, and a leak of personal data could be devastating.
 
-They have strong connections with your means. You should have some leeway in order to manage constraint: i.e. the setup should not be so complex that the person(s) managing it can only focus on the needed technical aspect.
+They have strong connections with your means. You should have some leeway in order to manage constraints: i.e. the setup should not be so complex that the person(s) managing it can only focus on the needed technical aspect.
 
-Some decisions related to constraints must also be made before setting-up the platform. For instance if you work on patient-related data and need encrypted storage, you need to choose a platform supporting it.
+Some decisions related to constraints must also be made before setting up the platform. For instance, if you work on patient-related data and need encrypted storage, you need to choose a platform supporting it.
 
 # Introduction to the Data Management Platform Repository
 
 The **Data Management Platforms (DMP) repository** is a curated collection of major platforms used in research data management.  
-It emphasizes the FAIR principles (Findable, Accessible, Interoperable, Reusable) and evaluates how platforms integrate with cloud infrastructures.  
+It emphasizes the FAIR principles (Findable, Accessible, Interoperable, Reusable) and evaluates how platforms integrate with cloud infrastructure.  
 This tutorial will guide you through using the repository, understanding its scope, and contributing to it.
 
 # Hands-on: Using the Repository
@@ -105,11 +105,12 @@ This tutorial will guide you through using the repository, understanding its sco
 ## Step 1: Access the Repository
 
 1. Open your browser and go to [https://dekcd.github.io/FAIR-DMP-Registry/](https://dekcd.github.io/FAIR-DMP-Registry/).
-2. Spend some time exploring the different menus, we will cover them later
-  On the top header, the title and the Home link both return to the main page. About is a short description of the registry.
-  The left column shows the different pages while the right column shows the topic in the current page.
+2. Spend some time exploring the different menus; we will cover them later.  
+   On the top header, the title and the Home link both return to the main page. *About* is a short description of the registry.  
+   The left column shows the different pages, while the right column shows the topics in the current page.
 
 ## Step 2: Understand the Main Goals
+
 The repository highlights platforms with:
 - Reusability across domains,  
 - Interoperability,  
@@ -122,8 +123,8 @@ The repository highlights platforms with:
 
 ### Using the menus
 
-The menus are on the top, the left and the right:
-- **Top Menu**: The Home page and the about page.
+The menus are on the top, the left, and the right:
+- **Top Menu**: The Home page and the About page.
 - **Left Menu**: All pages of the repository.
 - **Right Menu**: The topics in the current page.
 
@@ -131,30 +132,30 @@ The top menu will typically be used once or twice, to check the About page.
 
 ![Image showing the top menu](../../images/About.png "The top menu"){: .responsive-img }
 
-The Left menu will be used to select in which category to look for:
+The left menu will be used to select in which category to look for:
 
 ![Image showing the left menu](../../images/MainDMPlatformMenu.png "The left menu"){: .responsive-img }
 
-The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopic that become visible in the menu when in the parent topic.
+The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopics that become visible in the menu when in the parent topic.
 
 ![Image showing the right menu](../../images/RightMenu.png "The right menu"){: .responsive-img }
 
 > ## Hands On: Find a commercial DM platform for a domain
-> 
+>
 > From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms.
-> 
+>
 > > ## Answer
-> > First click on the Major Data Management Platforms link in the left menu.
-> > ![Selecting Major Data management in the left menu](../../images/MainDMPlatformMenu.png "Selecting Major Data management in the left menu"){: .responsive-img }
-> > Then on Geomatics on the right menu, and finally on Commercials in the sub-menu.
+> > First click on the Major Data Management Platforms link in the left menu.  
+> > ![Selecting Major Data management in the left menu](../../images/MainDMPlatformMenu.png "Selecting Major Data management in the left menu"){: .responsive-img }  
+> > Then on Geomatics on the right menu, and finally on Commercials in the sub-menu.  
 > > ![Selecting in the right menu then in the submenu](../../images/CommercialsGeomatics.png "Selecting in the right menu then in the submenu"){: .responsive-img }
 > {: .solution}
-> 
+>
 {: .question}
 
 ### A typical entry
 
-All entries are not identic, as there are some extra informations for some entries. But all entries should have a common base, and most entries will stick to it:
+Not all entries are identical, as there is some extra information for some entries. But all entries should have a common base, and most entries will stick to it:
 
 * Link with the Name, quick description pointing generally to the URL of the main web page or the documentation.
 	+ Description and/or link to potential Docker image/Docker compose/Kubernetes manifest/…
@@ -163,25 +164,25 @@ All entries are not identic, as there are some extra informations for some entri
 	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
 
 > ## Hands On: Find details about a specific entry
-> 
+>
 > In the Major Data Management Platforms page, find the details about pyiron, which is in Materials Science. Check if it is cross-domain.
-> 
+>
 > > ## Answer
-> > Click on Materials Science on the right menu, then eventually scroll down to find the details about pyiron, including if it is cross-domain.
+> > Click on Materials Science on the right menu, then eventually scroll down to find the details about pyiron, including if it is cross-domain.  
 > > ![Selecting in the right menu](../../images/MaterialsScience.png "Selecting in the right menu"){: .responsive-img }
 > {: .solution}
-> 
+>
 {: .question}
 
 ### Using the search
 
-The Repository propose a search function, powered by the used document system, Quarto, which is accessed by clicking on the magnifying lens icon at the top right of the top menu.
+The repository provides a search function, powered by the document system Quarto, which is accessed by clicking on the magnifying lens icon at the top right of the top menu.
 
-In the pop-up that appears, writing should automatically start a search.
+In the pop-up that appears, typing should automatically start a search.
 
 ![Doing a search](../../images/SearchIRODS.png "Doing a search"){: .responsive-img }
 
-Clicking on one result should send to the paragraph containing the result. It is possible to use the browser "Search in Page" to go to the actual entry.
+Clicking on one result should lead to the paragraph containing the result. It is possible to use the browser "Search in Page" to go to the actual entry.
 
 ![Finding the entry using the browser search](../../images/SearchIRODSInPage.png "Finding the entry using the browser search"){: .responsive-img }
 
@@ -190,90 +191,90 @@ Clicking on one result should send to the paragraph containing the result. It is
 {: .details}
 
 > ## Hands On: Find details about a specific entry
-> 
+>
 > Using the search, look for CIViC.
-> 
+>
 > > ## Answer
-> > Click on the magnifying lens.
-> > ![Clicking on the magnifying lense](../../images/SearchCIViC1.png "Clicking on the magnifying lense"){: .responsive-img }
-> > Then type CIV in the search bar.
-> > ![Typing in the search bar](../../images/SearchCIViC2.png "Typing in the search bar"){: .responsive-img }
-> > Finally click on the search result.
-> > ![Selecting the search result](../../images/SearchCIViC3.png "Selecting the search result"){: .responsive-img }
-> > The result should roughly be in the middle of the page
+> > Click on the magnifying lens.  
+> > ![Clicking on the magnifying lense](../../images/SearchCIViC1.png "Clicking on the magnifying lense"){: .responsive-img }  
+> > Then type CIV in the search bar.  
+> > ![Typing in the search bar](../../images/SearchCIViC2.png "Typing in the search bar"){: .responsive-img }  
+> > Finally click on the search result.  
+> > ![Selecting the search result](../../images/SearchCIViC3.png "Selecting the search result"){: .responsive-img }  
+> > The result should roughly be in the middle of the page.  
 > > ![Getting the entry](../../images/SearchCIViC_result.png "Getting the entry"){: .responsive-img}
 > {: .solution}
-> 
+>
 {: .question}
 
 ### Extras
 
 The repository also lists, in a simplified format:
-- **the major ontologies and thesauruses**,
+- **the major ontologies and thesauruses**,  
 ![List of major ontologies and thesauruses](../../images/OntologiesThesauruses.png "List of major ontologies and thesauruses"){: .responsive-img }
-- **the major taxonomies and classifications**,
+- **the major taxonomies and classifications**,  
 ![List of major taxonomies and classifications](../../images/Taxonomies.png "List of major taxonomies and classifications"){: .responsive-img }
-- Some **Useful tools and platforms for Data Managements**, these are applications and tools that can be used together with Data Managements platforms, such as central authority providers that can help setting-up a Single Sign On (SSO, login once for several applications) **or** used by Data Management platforms, such as a S3 implementation, to store data in a cloud environment.
+- Some **useful tools and platforms for Data Management**, these are applications and tools that can be used together with Data Management platforms, such as central authority providers that can help set up a Single Sign On (SSO, login once for several applications) **or** used by Data Management platforms, such as an S3 implementation, to store data in a cloud environment.  
 ![List of useful tools and platforms](../../images/UsefulTools.png "List of useful tools and platforms"){: .responsive-img }
 
 As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
 
 ## Step 3: Generalists vs Specialists
 
-One main consideration when choosing a Data Management platform is between a generalist platforms, i.e. not dedicated to a domain, and a specialist platform, dedicated and adapted to a domain. A specialist platform might still be used in another domain, eventually with some caveats. The last point of each entry explain how cross-domain an entry is.
-While choosing a generalist platform might allow to quickly start working and storing data, a specialised platform might offer some clear benefits: pre-existing meta-data and/or ontologies/taxonomies, a structured storage of data making reusing and sharing easier, ...
+One main consideration when choosing a Data Management platform is the choice between generalist platforms (i.e. not dedicated to a domain) and specialist platforms, dedicated and adapted to a domain. A specialist platform might still be used in another domain, eventually with some caveats. The last point of each entry explains how cross-domain an entry is.  
+While choosing a generalist platform might allow you to quickly start working and storing data, a specialised platform might offer some clear benefits: pre-existing metadata and/or ontologies/taxonomies, a structured storage of data making reusing and sharing easier, ...
 
 - **Generalist platforms**: e.g. NextCloud (supporting tasks), iRODS or RUCIO (registering/storing data).  
 - **Specialist platforms**: e.g. Electronic Laboratory Notebooks for domain-specific work.  
 - **Tip**: Combining both may be necessary or useful. Interconnection often depends on available APIs and documentation.
-
 
 > ## Hands On: Find one generalist platform and a specialist one
 > 
 > Using the right menu, look for Generalists. Find a Generalist platform of your choice.
 >
 > Then select a specific domain to find a Specialist platform.
-> 
+>
 > > ## Answer
-> > Click on the Generalists in the right menu.
-> >
-> > The section lists the Generalists Data management Platform. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or used by another platform and lists, at the time of this writing, only NextCloud.
-> >
+> > Click on the Generalists in the right menu.  
+> >  
+> > The section lists the Generalist Data Management Platforms. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or used by another platform and lists, at the time of this writing, only NextCloud.  
+> >  
 > > NextCloud can be used as a flexible Data Management platform, with the limit that it is difficult to structure the stored data, or as a storage solution for another platform.
 > {: .solution}
-> 
+>
 {: .question}
+
 > ## Hands On: How could you combine 2 platforms
-> 
+>
 > Your institution is already using NextCloud as a generic distributed storage facility. Inside a shared folder, you store many large microscopy images. You would like to have an online tool to visualise and work on these images.
-> 
+>
 > > ## Answer
-> > Omero is an online imaging platform for microscopy outputs, and can be connected to other platform using API. A central login is also possible using an central identity service (but this information is not part of the current registry).
-> >
-> > Using both NextCloud and Omero APIs, it is possible to bridge both, eventually with a small script fetching the images from NextCloud and pushing them to Omero. Omero also proposes specific imports scenarios.
+> > Omero is an online imaging platform for microscopy outputs, and can be connected to other platforms using APIs. A central login is also possible using a central identity service (but this information is not part of the current registry).  
+> >  
+> > Using both NextCloud and Omero APIs, it is possible to bridge both, eventually with a small script fetching the images from NextCloud and pushing them to Omero. Omero also proposes specific import scenarios.
 > {: .solution}
-> 
+>
 {: .question}
 
 ## Step 4: Considering Set-up Options
 
-While not giving a detail explanation on how to set-up a platform, an entry will say if a containerized setup exist, as well as an integration in Kubernetes.
+While not giving a detailed explanation on how to set up a platform, an entry will say if a containerized setup exists, as well as an integration in Kubernetes.
 
-Containerized platforms are generally easier to set-up and should be easier to maintain and update. But it is important to check thoroughly how well this support is: if the image is updated regularly, if an update processus exist.
+Containerized platforms are generally easier to set up and should be easier to maintain and update. But it is important to check thoroughly how well this support is: if the image is updated regularly, if an update process exists.
 
-An integration with Kubernetes might allow an easier continous operation, where Kubernetes will take care of the lifeline of the platform. But the set-up will generally be more complex as well.
+An integration with Kubernetes might allow easier continuous operation, where Kubernetes will take care of the lifeline of the platform. But the setup will generally be more complex as well.
 
-In both cases, it is important to know where the data will be store, as both are based on images, so the data will be stored externally (most probably in volumes in both cases). The data should be securely stored and backed up regularly.
+In both cases, it is important to know where the data will be stored, as both are based on images, so the data will be stored externally (most probably in volumes in both cases). The data should be securely stored and backed up regularly.
 
-Some platforms will come with a Docker Compose or a Helm chart, and in that case the storage might be setup as part of the configuration. But generally not the backup. 
+Some platforms will come with a Docker Compose or a Helm chart, and in that case the storage might be set up as part of the configuration. But generally not the backup.
 
-> A lack of containerized set-up does not mean that the platform will be difficult to set-up. But with a standard set-up, it will always be necessary to consult the installation set-up documentation and follow the given procedure. 
+> A lack of containerized setup does not mean that the platform will be difficult to set up. But with a standard setup, it will always be necessary to consult the installation setup documentation and follow the given procedure.
 
 Finally, each entry tries to detail if there exists an API access, enabling interoperability and data extraction.
 
-Adding an API access is not a simple task so the need to have one should be clarified before choosing a platform. This access can be via an HTTP REST API, generally easy to use, a CLI, which will generally be non-standard, or a language API, Python, Java, ... Interfacing using the same language will be easy, probably easier than through a REST API (or very similar in the case of Python), but interfacing with a different language might be difficult.
+Adding an API access is not a simple task, so the need to have one should be clarified before choosing a platform. This access can be via an HTTP REST API, generally easy to use, a CLI, which will generally be non-standard, or a language API: Python, Java, ... Interfacing using the same language will be easy, probably easier than through a REST API (or very similar in the case of Python), but interfacing with a different language might be difficult.
 
-> These technical aspects might give a security risk: if the platform is easy to update, if the API is too open, if the set-up is too complex and might let some openings. In some cases, simpler is better, so it is possible to set-up the platform with a reasonnable level of security. If a IT support is available, it is also advisable to involve them early.
+> These technical aspects might give a security risk: if the platform is hard to update, if the API is too open, if the setup is too complex and might let some openings. In some cases, simpler is better, so it is possible to set up the platform with a reasonable level of security. If IT support is available, it is also advisable to involve them early.
 
 ## Step 5: Be Aware of What’s NOT Included
 
@@ -288,7 +289,7 @@ The repository does **not** provide:
 
 ## Step 6: Next Technical Steps
 
-A **Quickstart guide**  for setting-up a Data Management platform is planned:
+A **Quickstart guide** for setting up a Data Management platform is planned:
 - From bare-metal to full Kubernetes deployments,  
 - With details on costs, security, and support needs,  
 - With vocabulary clarification for better understanding of existing documentation.
