@@ -22,7 +22,7 @@ layout: null
     <link rel="stylesheet" type="text/css" href="{{ '/assets/css/katex.min.css' | relative_url }}" />
   {% endif %}
     
-  {% include favicons.html %}
+  {% include _includes/favicons.html %}
 </head>
 
 <body>
@@ -89,7 +89,8 @@ layout: null
                 {% endif %}
             {% endfor %}
         </ul>
+    {% include _includes/tutorial_feedback.html %}
     </div>
 </body>
-{% include tutorial_footer.html %}
+{% include _includes/tutorial_footer.html %}
 </html>

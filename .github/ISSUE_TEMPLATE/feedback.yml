@@ -1,0 +1,73 @@
+name: 💬 Training Material Feedback
+description: Share feedback on a tutorial, module, or section to help us improve.
+title: "[Feedback]: <short summary>"
+labels: ["feedback"]
+assignees: []
+body:
+  - type: input
+    id: material
+    attributes:
+      label: Which material are you commenting on?
+      description: Mention the specific tutorial and its version or learning path.
+      placeholder: "e.g., Introduction to basic Unix commands or tutorials/unix-course/main/tutorial.md"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feedback category
+      description: Choose the area that best fits your feedback.
+      options:
+        - Outdated content or references
+        - Content clarity or structure issues
+        - Code example issue
+        - Missing information
+        - Typos or grammar mistakes
+        - Broken links or images
+        - Formatting or layout
+        - Accessibility issues
+        - Difficulty level mismatch
+        - Unclear prerequisites
+        - Lack of exercises or hands-on tasks
+        - Examples not reproducible
+        - Visuals or diagrams needed
+        - Translation or localization issues
+        - Other (specific in feedback)
+    validations:
+      required: true
+
+  - type: textarea
+    id: feedback
+    attributes:
+      label: 📝 Your feedback
+      description: Explain what worked well and what could be improved.
+      placeholder: "Describe your feedback here..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 💡 Suggested improvement (optional)
+      description: If you have a specific idea or example, share it here.
+      placeholder: "e.g., Add more examples on X topic..."
+
+  - type: dropdown
+    id: rating
+    attributes:
+      label: Overall rating (1-5)
+      description: Rate your experience with this material
+      options:
+      - "1 - Did not like at all"
+      - "2 - Poor"
+      - "3 - Average"
+      - "4 - Good"
+      - "5 - Very great"
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ✅ **Thanks for helping us improve our training materials!** We appreciate your time and effort in providing feedback.
