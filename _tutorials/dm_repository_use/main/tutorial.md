@@ -296,7 +296,7 @@ A **Quickstart guide** for setting up a Data Management platform is planned:
 
 ## Step 7: Contribute to the Repository
 
-You can contribute via GitHub:
+You can contribute via [GitHub](https://github.com/deKCD/FAIR-DMP-Registry) - the link is also provided on the top header with the GitHub logo:
 1. **Create an issue** to suggest a change.  
 2. **Fork the repository** and submit a pull request to add or modify entries.  
 
