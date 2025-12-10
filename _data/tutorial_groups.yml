@@ -29,5 +29,5 @@
 - title: Metagenomics
   description: Tutorials focused on dealing with metagenomics seqeuncing data
   tutorials:
-    - basicAmpliconQC
+    - basicsAmpliconQC
 
