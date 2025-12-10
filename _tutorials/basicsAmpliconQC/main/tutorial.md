@@ -1,6 +1,6 @@
 title: Basics of Amplicon Quality Processing
 description: Baic steps to do manually quality processing of 16S data step by step with individual tools instead of using integrated solutions like qiime2 / dada2 / deblur.
-slug: BasicAmpliconQC
+slug: basicsAmpliconQC
 time_estimation: HM
 questions:
   - What is quality processing and why it is important?
@@ -27,4 +27,5 @@ contributions:
 { % include _tutorials/basicAmpliconQC/main/Part1_fastq.md }
 { % include _tutorials/basicAmpliconQC/main/Part2_fastqc.md }
 { % include _tutorials/basicAmpliconQC/main/Part3_process.md }
+
 
