@@ -72,6 +72,8 @@ invitation](https://simplevm.denbi.de/portal/webapp/#/workshops/invitation/faecb
 
 The above invitation link will not work after October 2025. 
 
+If you have been invited to join a simpleVM project on de.NBI cloud via a link, you may now click on the link and follow the instructions to join the project. 
+
 ## 1.4 About the Tools and Prerequisites
 
 In this workshop, we will use several tools that will be pre-installed
