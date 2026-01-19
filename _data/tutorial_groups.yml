@@ -25,3 +25,9 @@
   description: Tutorial focused on ...
   tutorials:
     - DM_in_the_deNBI_cloud
+
+- title: Metagenomics
+  description: Tutorials focused on dealing with metagenomics seqeuncing data
+  tutorials:
+    - basicsAmpliconQC
+
