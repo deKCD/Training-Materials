@@ -1,27 +1,27 @@
 ---
 layout: tutorial_hands_on
 
-title: Basic Data Management in the de.NBI Cloud 
-description: Basic Data Management in the de.NBI Cloud. Intended for a cloud-naive audience.  
-slug: DM_in_the_deNBI_cloud 
-time_estimation: 8Hrs
+title: Basic Data Management in the de.NBI Cloud
+description: Basic Data Management in the de.NBI Cloud. Intended for a cloud-naive audience.
+slug: DM_in_the_deNBI_cloud
+time_estimation: 8H
 questions:
-  - How do you conduct basic data Management in the de.NBI Cloud?
+  - How do you conduct basic data management in the de.NBI Cloud?
 objectives:
   - Be able to ingress/egress data (as single files or in bulk) into SimpleVM machines.
-  - Be able to ingress/egress data from containers and virtual machines. 
-  - Be able to start new virtual machines on de.NBI cloud, and attach volumes and containers.
-  - Be able to use object storage on the de.NBI Cloud
-  - Be able to use some advanced Object data operations and ssh-based transfers (parallel transfers, mirroring, resume interrupted transfers)
+  - Be able to ingress/egress data from containers and virtual machines.
+  - Be able to start new virtual machines on the de.NBI Cloud, and attach volumes and containers.
+  - Be able to use object storage on the de.NBI Cloud.
+  - Be able to use advanced object storage operations and SSH-based transfers (parallel transfers, mirroring, resume interrupted transfers).
 key_points:
-- The take-home message: Use de.NBI cloud for superior performance for all your research projects.
-- They will appear at the end of the tutorial
+  - Use the de.NBI Cloud for superior performance for all your research projects.
+  - Key points will appear at the end of the tutorial.
 version: main
 life_cycle: alpha
 contributions:
   authorship:
-  - Abhijeet Shah
-  - Sebastian Juenemann
+    - Abhijeet Shah
+    - Sebastian Juenemann
   editing: AS & SJ
   funding: deKCD/BMBF
 ---
@@ -59,8 +59,8 @@ able to log in to the de.NBI Cloud Portal:
 
 ![Key](tutorial/figures/key.png)
 
-2. (optional) If you have already a personal ssh key-pair, you can also
-upload your *public* key here instead of generating one.
+3. (optional) If you already have a personal SSH key-pair, you can also
+   upload your *public* key here instead of generating one.
 
 ## 1.3 Join the *ib2025workshop1* Project
 
@@ -72,7 +72,7 @@ invitation](https://simplevm.denbi.de/portal/webapp/#/workshops/invitation/faecb
 
 The above invitation link will not work after October 2025.
 
-If you have been invited to join a simpleVM project on de.NBI cloud via a link, you may now click on the link and follow the instructions to join the project. 
+If you have been invited to join a SimpleVM project on the de.NBI Cloud via a link, you may now click on the link and follow the instructions to join the project.
 
 ## 1.4 About the Tools and Prerequisites
 
@@ -329,7 +329,7 @@ Add 30000 to this number (in this example this would be the number
 30051). This will be the port that you will be using for the ssh
 connection.
 
-2.  In the guacamole environment open a terminal (or use any running
+2.  In the Guacamole environment, open a terminal (or use any running
     terminal session) and type the following command:
 
 ``` bash
@@ -352,7 +352,7 @@ mkdir ~/data_remote
 
 # Section 4: Using the Object Storage
 
-In this section, we will use the openstack horizon interface directly.
+In this section, we will use the OpenStack Horizon interface directly.
 Please navigate to the following site:
 
 <https://openstack.cebitec.uni-bielefeld.de/project/>
@@ -374,7 +374,7 @@ blank. You should pick a sensible expiration date.
 
 We will now save the downloaded `clouds.yaml` under
 `~/.config/openstack/`. That will allow the `OpenstackClient` to access
-it. You will also need the `app-cred-openrc.sh` script finish the setup.
+it. You will also need the `app-cred-openrc.sh` script to finish the setup.
 
 ![Download](tutorial/images/ac_screen3.png)
 
@@ -415,7 +415,7 @@ using
 openstack --os-identity-api-version 3 ec2 credentials list
 ```
 
-We will now configure the S3 minio client:
+We will now configure the S3 MinIO client:
 
 ``` bash
 mc alias set ibworkshop https://openstack.cebitec.uni-bielefeld.de:8080/ <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY>
@@ -423,7 +423,7 @@ mc alias set ibworkshop https://openstack.cebitec.uni-bielefeld.de:8080/ <YOUR-A
 
 ## 4.3 Uploading data to the Object Storage
 
-We will now use the minio client to upload some data. In the guacamole
+We will now use the MinIO client to upload some data. In the Guacamole
 SimpleVM instance, type:
 
 ``` bash
@@ -437,14 +437,14 @@ mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.
 mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_2.fastq.gz .
 ```
 
-Next, we are going to create a new object storage container, a so called
-bucket. For this, we will use for the first time the horizon interface.
+Next, we are going to create a new object storage container, a so-called
+bucket. For this, we will use the Horizon interface for the first time.
 Navigate to the **Container** entry under the **Object Store** menu
 entry. Note: All containers here are visible to all project members, as
 those containers in openstack are bound to the project.
 
 This container is empty, but we can show it nevertheless on the command
-line using the minio client:
+line using the MinIO client:
 
 ``` bash
 mc ls ibworkshop
@@ -458,8 +458,8 @@ mc cp *.fastq.gz ibworkshop/YOUR_CONTAINER_NAME
 mc ls ibworkshop/YOUR_CONTAINER_NAME
 ```
 
-Tip: You can enable auto completion for the minio client. After
-activation, the shell needs to be restarted, though.
+**Tip**: You can enable autocompletion for the MinIO client. After
+activation, the shell needs to be restarted.
 
 ``` bash
 mc --autocompletion
@@ -491,7 +491,7 @@ Here are some additional useful object storage operations:
 
 3.  **Set public access for sharing data:**
 
-    **Caution**: This will expose your data in the folder to the open internet, and cannot be undone.
+    **Caution**: This will expose your data in the folder to the public internet. You can reverse this by changing the anonymous access policy.
 
     ``` bash
     mc anonymous --recursive set download ibworkshop/YOUR_CONTAINER_NAME/public/
@@ -503,21 +503,21 @@ This section covers examples of advanced data transfer techniques for
 moving data efficiently between cloud instances, object storage
 containers, and hybrid environments. These methods are particularly
 useful for large-scale data processing workflows and collaborative
-research projects. **However** these examples do not work out of the
-box. You will need to modify sufficiently.
+research projects. **However**, these examples do not work out of the
+box. You will need to modify them for your specific use case.
 
 ## 5.1 Advanced Object Storage Operations
 
 ### 5.1.1 Cross-region data replication
 
 **Use Case**: You're collaborating with researchers at different de.NBI
-sites (Bielefeld, Heidelberg, Geissen, Berlin, etc.) and need to share
+sites (Bielefeld, Heidelberg, Gießen, Berlin, etc.) and need to share
 large metagenomic datasets. Cross-region replication ensures data
 availability and reduces transfer times.
 
 **How it works**: Data is automatically synchronized between different
 de.NBI cloud regions, providing redundancy and faster access for
-collaborators. This requires access to projects located at multiple sites. 
+collaborators. This requires access to projects located at multiple sites.
 
 Advantages:
 
@@ -536,13 +536,13 @@ mc alias set UniHe https://denbi-cloud.bioquant.uni-heidelberg.de:8080/ <ACCESS-
 mc mirror ibworkshop/YOUR_CONTAINER_NAME UniHe/BACKUP_CONTAINER/
 ```
 
-### 5.1.2 Batch operations with minio client
+### 5.1.2 Batch operations with MinIO client
 
 **Use Case**: You have hundreds of sequencing files from different
 experiments that need to be organized and uploaded to object storage.
 Manual upload would take hours and be error-prone.
 
-**How it works**: Minio client can process multiple files simultaneously
+**How it works**: The MinIO client can process multiple files simultaneously
 using wildcards and patterns, with built-in progress monitoring and
 error handling.
 
