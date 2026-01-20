@@ -83,14 +83,14 @@ in your VM through conda environments:
 -   **parallel**: GNU parallel for running jobs in parallel
 -   **fasterq-dump**: Part of the SRA Toolkit for converting SRA data
 
-These tools will be available after activating the conda environment
+**Note**: These tools will be available after activating the conda environment
 with `conda activate denbi` (covered later in this workshop).
 
 **Note**: This workshop uses SimpleVM, which is a simplified interface
 for the de.NBI Cloud. The full OpenStack Horizon interface has more advanced
 features but is not required for this workshop.
 
-## 1.5 Select the *ib2025workshop1* project
+## 1.5 Select your project
 
 You start this tutorial from your profile page
 (<https://simplevm.denbi.de>).
@@ -99,7 +99,7 @@ You start this tutorial from your profile page
 
 2.  If you are already a member of a SimpleVM project then you are offered
     a drop down menu to select a project. In this case please select the
-    **ib2025workshop1** project. If this is your first SimpleVM project,
+    **ib2025workshop1** project or your project. If this is your first SimpleVM project,
     you are now able to select/generate a key (next point) or directly
     start a VM.
 
@@ -130,7 +130,7 @@ You start this tutorial from your profile page
 
     You will learn in the next sections how to apply these tools.
 
-5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**). This
+5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**), or your collaborators. This
     way these members get ssh access to your VM and can help you in case
     something does not work as expected.
     ![](./figures/additional_users.png)
@@ -493,7 +493,7 @@ Here are some additional useful object storage operations:
 
 3.  **Set public access for sharing data:**
 
-    **Caution**: This will expose your data in the folder to the open internet.
+    **Caution**: This will expose your data in the folder to the open internet, and cannot be undone.
 
     ``` bash
     mc anonymous --recursive set download ibworkshop/YOUR_CONTAINER_NAME/public/
@@ -629,7 +629,7 @@ availability and reduces transfer times.
 
 **How it works**: Data is automatically synchronized between different
 de.NBI cloud regions, providing redundancy and faster access for
-collaborators.
+collaborators. This requires access to projects located at multiple sites. 
 
 Advantages:
 
