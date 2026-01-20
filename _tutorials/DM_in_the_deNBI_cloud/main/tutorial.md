@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Basic Data Management in the de.NBI Cloud 
-description: Basic Data Management in the de.NBI Cloud. Intended for a cloud naive audiance.  
+description: Basic Data Management in the de.NBI Cloud. Intended for a cloud-naive audience.  
 slug: DM_in_the_deNBI_cloud 
 time_estimation: 8Hrs
 questions:
@@ -57,7 +57,7 @@ able to log in to the de.NBI Cloud Portal:
     de.NBI Cloud wiki regarding SSH keys:
     <https://cloud.denbi.de/wiki/portal/user_information/#ssh-key>
 
-![Key](figures/key.png)
+![Key](tutorial/figures/key.png)
 
 2. (optional) If you have already a personal ssh key-pair, you can also
 upload your *public* key here instead of generating one.
@@ -118,7 +118,7 @@ You start this tutorial from your profile page
 
 3.  In the image section, please click on the *Research Environments*
     tab and select the **Guacamole** image based on **Ubuntu 24.04**.
-    ![](./figures/resenv.png)
+    ![Research Environment Selection](tutorial/figures/resenv.png)
 
 4.  Select the Conda tab and choose the following tools with their
     version numbers given below for installation via Conda:
@@ -126,17 +126,17 @@ You start this tutorial from your profile page
     -   parallel (20220922)
     -   sra-tools (3.1.1)
     -   mash (2.2)
-        ![](./figures/conda.png)
+        ![Conda Tool Selection](tutorial/figures/conda.png)
 
     You will learn in the next sections how to apply these tools.
 
 5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**), or your collaborators. This
     way these members get ssh access to your VM and can help you in case
     something does not work as expected.
-    ![](./figures/additional_users.png)
+    ![Additional Users](tutorial/figures/additional_users.png)
 
 6.  Optional: Modify the URL path for Guacamole. You will access this VM
-    via this URL. ![](./figures/resenv_url.png)
+    via this URL. ![Research Environment URL](tutorial/figures/resenv_url.png)
 
 7.  Confirm the checkboxes and click on Start.
 
@@ -162,15 +162,15 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     have been automatically redirected to the **Instance Overview**
     page. Now click on the dropdown of your machine. Click on the
     Guacamole URL which opens a new browser tab.
-    ![](figures/vm_state.png)
+    ![VM State](tutorial/figures/vm_state.png)
 
 2.  Log into the virtual desktop environment using the credentials:
-    `denbi` `denbi` ![](figures/vm_login.png)
+    `denbi` `denbi` ![VM Login](tutorial/figures/vm_login.png)
 
     And choose the correct keyboard layout for you.
 
 3.  Right click on background and select `Open Terminal Here`.
-    ![](figures/open_terminal.png)
+    ![Open Terminal](tutorial/figures/open_terminal.png)
 
 4.  Inspect the VM before starting to work with it. Let's check whether
     the VM has the properties that SimpleVM promised you by typing the
@@ -255,21 +255,21 @@ your site (that is actually the SimpleVM) to your project in the de.NBI
 Cloud. For that, we also initialize a second instance in the cloud using
 the openstack interface.
 
-### 3.1 Opening Horizon
+## 3.1 Opening Horizon
 
 1.  Go to [de.NBI Horizon (at
     Bielefeld)](https://openstack.cebitec.uni-bielefeld.de/project/)
 
-### 3.2 Create a new Key Pair
+## 3.2 Create a new Key Pair
 
 2.  Click on the `Key Pairs` entry under the `Compute` menu and select
     `Create Key Pair`
 
-![](figures/keypair1.png)
+![Key Pair Creation Step 1](tutorial/figures/keypair1.png)
 
 3.  Enter any name and select `SSH Key` as the Key Type.
 
-![](figures/keypair2.png)
+![Key Pair Creation Step 2](tutorial/figures/keypair2.png)
 
 4.  The private key will be downloaded automatically to your SimpleVM
     instance. This instance can be accessed only by you, however,
@@ -281,7 +281,7 @@ mv ~/Downloads/*.pem ~/.ssh
 chmod 600 ~/.ssh/*.pem
 ```
 
-### 3.3 Start a new instance
+## 3.3 Start a new instance
 
 We will now go together through the process of creating a new instance
 using the more powerful yet also more complex interface as provided by
@@ -290,40 +290,40 @@ openstack horizon.
 1.  Under the `Compute` menu, select the `Instances` entry and click on
     `Launch Instance`.
 
-![](figures/newinstance1.png)
+![New Instance Step 1](tutorial/figures/newinstance1.png)
 
 2.  In the first section, you just need to provide an instance name.
     Please choose your name so that we can identify your VM.
 
-![](figures/newinstance2.png)
+![New Instance Step 2](tutorial/figures/newinstance2.png)
 
 3.  Then, we need to select a bootable image. In the drop down menu
     `Select Boot Source` select the entry `Instance Snapshot` upon which
     the image `RDM Meets Cloud Workshop` will appear in the list below.
     Click the right up-arrow on that image so that it will be selected.
 
-![](figures/newinstance3.png)
+![New Instance Step 3](tutorial/figures/newinstance3.png)
 
 4.  Next the flavor, i.e. physical virtualization, needs to be chosen.
     Here, select the `de.NBI default` flavor.
 
-![](figures/newinstance4.png)
+![New Instance Step 4](tutorial/figures/newinstance4.png)
 
 5.  The last option that needs to be selected is the key pair that will
     be used for the ssh connection. Select the `Key Pair` menu entry and
     choose the key pair that you just created in the previous section
     3.2.
 
-![](figures/newinstance5.png)
+![New Instance Step 5](tutorial/figures/newinstance5.png)
 
 6.  You can now `Launch the Instance`.
 
-### 3.4 Login to your instance using SSH
+## 3.4 Login to your instance using SSH
 
 1.  Locate your running instance in the List of instances and note
     (write down) the last part of the IP address.
 
-![](figures/ipaddress.png)
+![IP Address](tutorial/figures/ipaddress.png)
 
 Add 30000 to this number (in this example this would be the number
 30051). This will be the port that you will be using for the ssh
@@ -342,7 +342,7 @@ got in the step above!
 If everything went without any issue, you should see the following
 prompt:
 
-![](figures/instance_login.png)
+![Instance Login](tutorial/figures/instance_login.png)
 
 Here, we will create a new folder called `data_remote`:
 
@@ -364,19 +364,19 @@ credential](https://access.redhat.com/documentation/zh-cn/red_hat_openstack_plat
 and download the autogenerated `clouds.yaml`. `clouds.yaml` contains all
 required authentication information. Follow the images:
 
-![Navigation](images/ac_screen1.png)
+![Navigation](tutorial/images/ac_screen1.png)
 
 Don't use the input field secret. As you can see its input is not
 hidden. OpenStack will generate a strong secret for you, if you leave it
 blank. You should pick a sensible expiration date.
 
-![Creation](images/ac_screen2.png)
+![Creation](tutorial/images/ac_screen2.png)
 
 We will now save the downloaded `clouds.yaml` under
 `~/.config/openstack/`. That will allow the `OpenstackClient` to access
 it. You will also need the `app-cred-openrc.sh` script finish the setup.
 
-![Download](images/ac_screen3.png)
+![Download](tutorial/images/ac_screen3.png)
 
 If the file was auto downloaded, you need to move it instead:
 
@@ -459,20 +459,18 @@ mc ls ibworkshop/YOUR_CONTAINER_NAME
 ```
 
 Tip: You can enable auto completion for the minio client. After
-activiation, the shell needs to be restartet, though.
+activation, the shell needs to be restarted, though.
 
 ``` bash
 mc --autocompletion
 ```
 
-![](figures/minio_verify.png)
+![MinIO Verification](tutorial/figures/minio_verify.png)
 
 ## 4.4 Additional Object Storage Operations
 
 For more advanced work with the SRA mirror and metagenomic datasets
-analysis, please refer to [Section
-3.4](Part3.md#34-make-the-analysis-where-the-data-is-located) where we
-covered working with the de.NBI Cloud SRA mirror in detail.
+analysis, please refer to the [de.NBI Cloud SRA mirror documentation](https://cloud.denbi.de/wiki/).
 
 Here are some additional useful object storage operations:
 
@@ -498,116 +496,6 @@ Here are some additional useful object storage operations:
     ``` bash
     mc anonymous --recursive set download ibworkshop/YOUR_CONTAINER_NAME/public/
     ```
-
-## 4.5 Creating application credentials
-
-In this section you will create an [application
-credential](https://access.redhat.com/documentation/zh-cn/red_hat_openstack_platform/14/html/users_and_identity_management_guide/application_credentials)
-and download the autogenerated `clouds.yaml`. `clouds.yaml` contains all
-required authentication information. Follow the images:
-
-![Navigation](images/ac_screen1.png)
-
-Don't use the input field secret. As you can see its input is not
-hidden. OpenStack will generate a strong secret for you, if you leave it
-blank. You should pick a sensible expiration date.
-
-![Creation](images/ac_screen2.png)
-
-Save the downloaded `clouds.yaml` under `~/.config/openstack/`. That
-will allow the `OpenstackClient` to access it. You will also need the `app-cred-openrc.sh` script finish the setup.
-
-![Download](images/ac_screen3.png)
-
-If the file was auto downloaded, you need to move it instead:
-
-``` bash
-mkdir -p ~/.config/openstack
-mv ~/Downloads/clouds.yaml ~/.config/openstack/
-source ~/Downloads/app-cred-openrc.sh
-```
-
-If you have `OpenstackClient` installed and `openstack subnet list` runs
-without error, you are ready to proceed.
-
-``` bash
-openstack subnet list
-```
-
-## 4.6 Creating S3 credentials
-
-The creation of credentials for the project related object storage can't
-be done in the web interface. Therefore, we will use the openstack CLI
-for that.
-
-``` bash
-openstack --os-identity-api-version 3 ec2 credentials create
-```
-
-This command will return you the newly generated key and secret. You
-can, at any time, look up what S3 credentials are still valid for you
-using
-
-``` bash
-openstack --os-identity-api-version 3 ec2 credentials list
-```
-
-We will now configure the S3 minio client:
-
-``` bash
-mc alias set ibworkshop https://openstack.cebitec.uni-bielefeld.de:8080/ <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY>
-```
-
-## 4.7 Uploading data to the Object Storage
-
-We will now use the minio client to upload some data. In the guacamole
-SimpleVM instance, type:
-
-``` bash
-mkdir ~/data/fastq
-
-mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz ~/data/fastq/reads_1.fastq.gz
-mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_2.fastq.gz ~/data/fastq/reads_2.fastq.gz
-
-cd ~/data/fastq
-mc ls ibworkshop
-```
-
-This should show you your previously created bucket (container) name.
-You can now upload data into it.
-
-``` bash
-mc cp *.fastq ibworkshop/YOUR_CONTAINER_NAME
-mc ls ibworkshop/YOUR_CONTAINER_NAME
-```
-
-![](figures/minio_verify.png)
-
-## 4.8 Additional Object Storage Operations
-
-For more advanced work with the SRA mirror and metagenomic datasets analysis, please refer to [Section 3.4](Part3.md#34-make-the-analysis-where-the-data-is-located) where we covered working with the de.NBI Cloud SRA mirror in detail.
-
-Here are some additional useful object storage operations:
-
-1. **Copy data between buckets:**
-   ``` bash
-   mc cp ibworkshop/YOUR_CONTAINER_NAME/file.txt ibworkshop/ANOTHER_CONTAINER/
-   ```
-
-2. **Mirror entire directories:**
-   ``` bash
-   mc mirror ~/local_data ibworkshop/YOUR_CONTAINER_NAME/backup/
-   ```
-
-3. **Set public access for sharing data:**
-   ``` bash
-   mc policy set download ibworkshop/YOUR_CONTAINER_NAME/public/
-   ```
-
-4. **Monitor transfer progress:**
-   ``` bash
-   mc cp --json large_file.gz ibworkshop/YOUR_CONTAINER_NAME/ | jq .
-   ```
 
 # Section 5: Advanced Data Transfer Methods
 
@@ -734,7 +622,7 @@ parallel -j 4 -a files_to_transfer.txt scp -i ~/.ssh/*.pem -P YOUR_PORT {} ubunt
 
 **However**: It must be noted that doing this puts considerable load on the network interface and network.
 
-### 5.3 Transfer speed optimization
+## 5.3 Transfer speed optimization
 
 **Use Case**: You're transferring terabytes of sequencing data and need
 to maximize transfer speeds to meet project deadlines or minimize cloud
