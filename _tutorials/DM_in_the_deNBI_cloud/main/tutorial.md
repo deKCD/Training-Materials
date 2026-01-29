@@ -1,27 +1,27 @@
 ---
 layout: tutorial_hands_on
 
-title: Basic Data Management in the de.NBI Cloud 
-description: Basic Data Management in the de.NBI Cloud. Intended for a cloud naive audiance.  
-slug: DM_in_the_deNBI_cloud 
-time_estimation: 8Hrs
+title: Basic Data Management in the de.NBI Cloud
+description: Basic Data Management in the de.NBI Cloud. Intended for a cloud-naive audience.
+slug: DM_in_the_deNBI_cloud
+time_estimation: 8H
 questions:
-  - How do you conduct basic data Management inb the de.NBI Cloud?
+  - How do you conduct basic data management in the de.NBI Cloud?
 objectives:
   - Be able to ingress/egress data (as single files or in bulk) into SimpleVM machines.
-  - Be able to ingress/egress data from containers and virtual machines. 
-  - Be able to start new virtual machines on de.NBI cloud, and attach volumes and containers.
-  - Be able to use object storage on the de.NBI Cloud
-  - Be able to use some advanced Object data operations and ssh-based transfers (parallel transfers, mirroring, resume interrupted transfers)
+  - Be able to ingress/egress data from containers and virtual machines.
+  - Be able to start new virtual machines on the de.NBI Cloud, and attach volumes and containers.
+  - Be able to use object storage on the de.NBI Cloud.
+  - Be able to use advanced object storage operations and SSH-based transfers (parallel transfers, mirroring, resume interrupted transfers).
 key_points:
-- The take-home message: Use de.NBI cloud for superior performance for all your research projects.
-- They will appear at the end of the tutorial
+  - Use the de.NBI Cloud for superior performance for all your research projects.
+  - Key points will appear at the end of the tutorial.
 version: main
 life_cycle: alpha
 contributions:
   authorship:
-  - Abhijeet Shah
-  - Sebastian Juenemann
+    - Abhijeet Shah
+    - Sebastian Juenemann
   editing: AS & SJ
   funding: deKCD/BMBF
 ---
@@ -48,7 +48,7 @@ able to log in to the de.NBI Cloud Portal:
 
 ## 1.2 Set an SSH key in your account
 
-1.  Click on the `Profile` tab on the left and scroll down .
+1.  Click on the `Profile` tab on the left and scroll down.
 
 2.  If you have no SSH key set so far, just click on generate key and
     save the private key. During this workshop you will not need this
@@ -57,10 +57,10 @@ able to log in to the de.NBI Cloud Portal:
     de.NBI Cloud wiki regarding SSH keys:
     <https://cloud.denbi.de/wiki/portal/user_information/#ssh-key>
 
-![Key](figures/key.png)
+![Key](tutorial/figures/key.png)
 
-2.(optional) If you have already a personal ssh key-pair, you can also
-upload your *public* key here instead of generating one.
+3. (optional) If you already have a personal SSH key-pair, you can also
+   upload your *public* key here instead of generating one.
 
 ## 1.3 Join the *ib2025workshop1* Project
 
@@ -70,7 +70,9 @@ access to the project:
 [ib2025workshop
 invitation](https://simplevm.denbi.de/portal/webapp/#/workshops/invitation/faecbc35ec5648e890f6510f583e2b38)
 
-The above invitation link will not work after October 2025. 
+The above invitation link will not work after October 2025.
+
+If you have been invited to join a SimpleVM project on the de.NBI Cloud via a link, you may now click on the link and follow the instructions to join the project.
 
 ## 1.4 About the Tools and Prerequisites
 
@@ -81,23 +83,23 @@ in your VM through conda environments:
 -   **parallel**: GNU parallel for running jobs in parallel
 -   **fasterq-dump**: Part of the SRA Toolkit for converting SRA data
 
-These tools will be available after activating the conda environment
+**Note**: These tools will be available after activating the conda environment
 with `conda activate denbi` (covered later in this workshop).
 
 **Note**: This workshop uses SimpleVM, which is a simplified interface
-for the de.NBI Cloud. The full OpenStack Horizon interface more advanced
+for the de.NBI Cloud. The full OpenStack Horizon interface has more advanced
 features but is not required for this workshop.
 
-## 1.5 Select the *ib2025workshop1* project
+## 1.5 Select your project
 
 You start this tutorial from your profile page
 (<https://simplevm.denbi.de>).
 
 1.  Click on the `New Instance` tab.
 
-2.  If you are already member of a SimpleVM project then you are offered
+2.  If you are already a member of a SimpleVM project then you are offered
     a drop down menu to select a project. In this case please select the
-    **ib2025workshop1** project. If this is your first SimpleVM project,
+    **ib2025workshop1** project or your project. If this is your first SimpleVM project,
     you are now able to select/generate a key (next point) or directly
     start a VM.
 
@@ -116,7 +118,7 @@ You start this tutorial from your profile page
 
 3.  In the image section, please click on the *Research Environments*
     tab and select the **Guacamole** image based on **Ubuntu 24.04**.
-    ![](./figures/resenv.png)
+    ![Research Environment Selection](tutorial/figures/resenv.png)
 
 4.  Select the Conda tab and choose the following tools with their
     version numbers given below for installation via Conda:
@@ -124,22 +126,22 @@ You start this tutorial from your profile page
     -   parallel (20220922)
     -   sra-tools (3.1.1)
     -   mash (2.2)
-        ![](./figures/conda.png)
+        ![Conda Tool Selection](tutorial/figures/conda.png)
 
     You will learn in the next sections how to apply these tools.
 
-5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**). This
+5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**), or your collaborators. This
     way these members get ssh access to your VM and can help you in case
     something does not work as expected.
-    ![](./figures/additional_users.png)
+    ![Additional Users](tutorial/figures/additional_users.png)
 
 6.  Optional: Modify the URL path for Guacamole. You will access this VM
-    via this URL. ![](./figures/resenv_url.png)
+    via this URL. ![Research Environment URL](tutorial/figures/resenv_url.png)
 
 7.  Confirm the checkboxes and click on Start.
 
-**Please note**: It may take upto 10 minutes or more to spawn an
-instance and finish running the initial playbook to install and step all
+**Please note**: It may take up to 10 minutes or more to spawn an
+instance and finish running the initial playbook to install and set up all
 the software we will require.
 
 # Section 2: Verify your VM properties and tools
@@ -160,15 +162,15 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     have been automatically redirected to the **Instance Overview**
     page. Now click on the dropdown of your machine. Click on the
     Guacamole URL which opens a new browser tab.
-    ![](figures/vm_state.png)
+    ![VM State](tutorial/figures/vm_state.png)
 
 2.  Log into the virtual desktop environment using the credentials:
-    `denbi` `denbi` ![](figures/vm_login.png)
+    `denbi` `denbi` ![VM Login](tutorial/figures/vm_login.png)
 
     And choose the correct keyboard layout for you.
 
 3.  Right click on background and select `Open Terminal Here`.
-    ![](figures/open_terminal.png)
+    ![Open Terminal](tutorial/figures/open_terminal.png)
 
 4.  Inspect the VM before starting to work with it. Let's check whether
     the VM has the properties that SimpleVM promised you by typing the
@@ -198,8 +200,8 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
     Exit `htop` by typing `q` or `F10`.
 
-5.  We have installed some tools previously using the conda environment management. In order to use them, we need to activate this environment. The default 
-    environemnt for using SimpleVM is **denbi**. To activate this, type
+5.  We have installed some tools previously using the conda environment management. In order to use them, we need to activate this environment. The default
+    environment for using SimpleVM is **denbi**. To activate this, type
 
     `conda activate denbi`.
 
@@ -243,7 +245,8 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     ``` bash
     sudo apt install python3-openstackclient
     ```
-## Section 3: Using Horizon OpenStack Interface
+
+# Section 3: Using Horizon OpenStack Interface
 
 We will now use your newly created SimpleVM as a replacement of any
 given local compute infrastructure you might be working on in your
@@ -252,21 +255,21 @@ your site (that is actually the SimpleVM) to your project in the de.NBI
 Cloud. For that, we also initialize a second instance in the cloud using
 the openstack interface.
 
-### 3.1 Opening Horizon
+## 3.1 Opening Horizon
 
 1.  Go to [de.NBI Horizon (at
     Bielefeld)](https://openstack.cebitec.uni-bielefeld.de/project/)
 
-### 3.2 Create a new Key Pair
+## 3.2 Create a new Key Pair
 
 2.  Click on the `Key Pairs` entry under the `Compute` menu and select
     `Create Key Pair`
 
-![](figures/keypair1.png)
+![Key Pair Creation Step 1](tutorial/figures/keypair1.png)
 
 3.  Enter any name and select `SSH Key` as the Key Type.
 
-![](figures/keypair2.png)
+![Key Pair Creation Step 2](tutorial/figures/keypair2.png)
 
 4.  The private key will be downloaded automatically to your SimpleVM
     instance. This instance can be accessed only by you, however,
@@ -274,11 +277,11 @@ the openstack interface.
     currently not the case. We will change this now:
 
 ``` bash
-    mv \~/Downloads/\*.pem \~/.ssh
-    chmod 600 \~/.ssh/\*.pem
+mv ~/Downloads/*.pem ~/.ssh
+chmod 600 ~/.ssh/*.pem
 ```
 
-### 3.3 Start a new instance
+## 3.3 Start a new instance
 
 We will now go together through the process of creating a new instance
 using the more powerful yet also more complex interface as provided by
@@ -287,52 +290,50 @@ openstack horizon.
 1.  Under the `Compute` menu, select the `Instances` entry and click on
     `Launch Instance`.
 
-![](figures/newinstance1.png)
+![New Instance Step 1](tutorial/figures/newinstance1.png)
 
 2.  In the first section, you just need to provide an instance name.
     Please choose your name so that we can identify your VM.
 
-![](figures/newinstance2.png)
+![New Instance Step 2](tutorial/figures/newinstance2.png)
 
 3.  Then, we need to select a bootable image. In the drop down menu
     `Select Boot Source` select the entry `Instance Snapshot` upon which
     the image `RDM Meets Cloud Workshop` will appear in the list below.
     Click the right up-arrow on that image so that it will be selected.
 
-![](figures/newinstance3.png)
+![New Instance Step 3](tutorial/figures/newinstance3.png)
 
 4.  Next the flavor, i.e. physical virtualization, needs to be chosen.
     Here, select the `de.NBI default` flavor.
 
-![](figures/newinstance4.png)
+![New Instance Step 4](tutorial/figures/newinstance4.png)
 
 5.  The last option that needs to be selected is the key pair that will
     be used for the ssh connection. Select the `Key Pair` menu entry and
     choose the key pair that you just created in the previous section
     3.2.
 
-![](figures/newinstance5.png)
+![New Instance Step 5](tutorial/figures/newinstance5.png)
 
 6.  You can now `Launch the Instance`.
 
-### 3.4 Login to your instance using SSH
+## 3.4 Login to your instance using SSH
 
 1.  Locate your running instance in the List of instances and note
     (write down) the last part of the IP address.
 
-![](figures/ipaddress.png)
+![IP Address](tutorial/figures/ipaddress.png)
 
 Add 30000 to this number (in this example this would be the number
 30051). This will be the port that you will be using for the ssh
 connection.
 
-2.  In the guacamole environment open a terminal (or use any running
+2.  In the Guacamole environment, open a terminal (or use any running
     terminal session) and type the following command:
 
 ``` bash
-    ssh -i \~/.ssh/\*.pem
-    [ubuntu\@129.70.51.199](mailto:ubuntu@129.70.51.199){.email} -p
-    YOUR_PORT
+ssh -i ~/.ssh/*.pem ubuntu@129.70.51.199 -p YOUR_PORT
 ```
 
 **Note:** You need to replace YOUR_PORT with the actual port number you
@@ -341,7 +342,7 @@ got in the step above!
 If everything went without any issue, you should see the following
 prompt:
 
-![](figures/instance_login.png)
+![Instance Login](tutorial/figures/instance_login.png)
 
 Here, we will create a new folder called `data_remote`:
 
@@ -351,7 +352,7 @@ mkdir ~/data_remote
 
 # Section 4: Using the Object Storage
 
-In this section, we will the openstack horizon interface directly.
+In this section, we will use the OpenStack Horizon interface directly.
 Please navigate to the following site:
 
 <https://openstack.cebitec.uni-bielefeld.de/project/>
@@ -363,19 +364,19 @@ credential](https://access.redhat.com/documentation/zh-cn/red_hat_openstack_plat
 and download the autogenerated `clouds.yaml`. `clouds.yaml` contains all
 required authentication information. Follow the images:
 
-![Navigation](images/ac_screen1.png)
+![Navigation](tutorial/images/ac_screen1.png)
 
 Don't use the input field secret. As you can see its input is not
 hidden. OpenStack will generate a strong secret for you, if you leave it
 blank. You should pick a sensible expiration date.
 
-![Creation](images/ac_screen2.png)
+![Creation](tutorial/images/ac_screen2.png)
 
 We will now save the downloaded `clouds.yaml` under
 `~/.config/openstack/`. That will allow the `OpenstackClient` to access
-it. You will also need the `app-cred-openrc.sh` script finish the setup.
+it. You will also need the `app-cred-openrc.sh` script to finish the setup.
 
-![Download](images/ac_screen3.png)
+![Download](tutorial/images/ac_screen3.png)
 
 If the file was auto downloaded, you need to move it instead:
 
@@ -414,7 +415,7 @@ using
 openstack --os-identity-api-version 3 ec2 credentials list
 ```
 
-We will now configure the S3 minio client:
+We will now configure the S3 MinIO client:
 
 ``` bash
 mc alias set ibworkshop https://openstack.cebitec.uni-bielefeld.de:8080/ <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY>
@@ -422,7 +423,7 @@ mc alias set ibworkshop https://openstack.cebitec.uni-bielefeld.de:8080/ <YOUR-A
 
 ## 4.3 Uploading data to the Object Storage
 
-We will now use the minio client to upload some data. In the guacamole
+We will now use the MinIO client to upload some data. In the Guacamole
 SimpleVM instance, type:
 
 ``` bash
@@ -436,16 +437,14 @@ mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.
 mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_2.fastq.gz .
 ```
 
-Next, we are going to create a new object storage container, a so called
-bucket. For this, we will use for the first time the horizon interface.
+Next, we are going to create a new object storage container, a so-called
+bucket. For this, we will use the Horizon interface for the first time.
 Navigate to the **Container** entry under the **Object Store** menu
 entry. Note: All containers here are visible to all project members, as
-those containers in openstack are bound to the project
-
-![](figures/TODO)
+those containers in openstack are bound to the project.
 
 This container is empty, but we can show it nevertheless on the command
-line using the minio client:
+line using the MinIO client:
 
 ``` bash
 mc ls ibworkshop
@@ -459,21 +458,19 @@ mc cp *.fastq.gz ibworkshop/YOUR_CONTAINER_NAME
 mc ls ibworkshop/YOUR_CONTAINER_NAME
 ```
 
-Tip: You can enable auto completion for the minio client. After
-activiation, the shell needs to be restartet, though.
+**Tip**: You can enable autocompletion for the MinIO client. After
+activation, the shell needs to be restarted.
 
 ``` bash
 mc --autocompletion
 ```
 
-![](figures/minio_verify.png)
+![MinIO Verification](tutorial/figures/minio_verify.png)
 
 ## 4.4 Additional Object Storage Operations
 
 For more advanced work with the SRA mirror and metagenomic datasets
-analysis, please refer to [Section
-3.4](Part3.md#34-make-the-analysis-where-the-data-is-located) where we
-covered working with the de.NBI Cloud SRA mirror in detail.
+analysis, please refer to the [de.NBI Cloud SRA mirror documentation](https://cloud.denbi.de/wiki/).
 
 Here are some additional useful object storage operations:
 
@@ -494,34 +491,33 @@ Here are some additional useful object storage operations:
 
 3.  **Set public access for sharing data:**
 
-    **Caution**: This will expose your data in the folder to the open internet.
+    **Caution**: This will expose your data in the folder to the public internet. You can reverse this by changing the anonymous access policy.
 
-    
     ``` bash
     mc anonymous --recursive set download ibworkshop/YOUR_CONTAINER_NAME/public/
     ```
 
-## 4. Advanced Data Transfer Methods
+# Section 5: Advanced Data Transfer Methods
 
 This section covers examples of advanced data transfer techniques for
 moving data efficiently between cloud instances, object storage
 containers, and hybrid environments. These methods are particularly
 useful for large-scale data processing workflows and collaborative
-research projects. **However** these examples do not work out of the
-box. You will need to modify sufficiently.
+research projects. **However**, these examples do not work out of the
+box. You will need to modify them for your specific use case.
 
-## 4.5 Advanced Object Storage Operations
+## 5.1 Advanced Object Storage Operations
 
-### 4.5.1 Cross-region data replication
+### 5.1.1 Cross-region data replication
 
 **Use Case**: You're collaborating with researchers at different de.NBI
-sites (Bielefeld, Heidelberg, Geissen, Berlin, etc.) and need to share
+sites (Bielefeld, Heidelberg, Gießen, Berlin, etc.) and need to share
 large metagenomic datasets. Cross-region replication ensures data
 availability and reduces transfer times.
 
 **How it works**: Data is automatically synchronized between different
 de.NBI cloud regions, providing redundancy and faster access for
-collaborators.
+collaborators. This requires access to projects located at multiple sites.
 
 Advantages:
 
@@ -540,13 +536,13 @@ mc alias set UniHe https://denbi-cloud.bioquant.uni-heidelberg.de:8080/ <ACCESS-
 mc mirror ibworkshop/YOUR_CONTAINER_NAME UniHe/BACKUP_CONTAINER/
 ```
 
-### 4.5.2 Batch operations with minio client
+### 5.1.2 Batch operations with MinIO client
 
 **Use Case**: You have hundreds of sequencing files from different
 experiments that need to be organized and uploaded to object storage.
 Manual upload would take hours and be error-prone.
 
-**How it works**: Minio client can process multiple files simultaneously
+**How it works**: The MinIO client can process multiple files simultaneously
 using wildcards and patterns, with built-in progress monitoring and
 error handling.
 
@@ -568,9 +564,9 @@ mc cp /mount/volume/*.{fastq,fna,fa} ibworkshop/YOUR_CONTAINER_NAME/raw_data/
 mc find ibworkshop/YOUR_CONTAINER_NAME --name "*.fastq.gz" --exec "mc cp {} ~/downloads/"
 ```
 
-## 4.6 Advanced SSH-based Transfers
+## 5.2 Advanced SSH-based Transfers
 
-### 4.6.1 Using rsync for efficient transfers
+### 5.2.1 Using rsync for efficient transfers
 
 **Use Case**: You're regularly updating large datasets (like reference
 genomes or annotation files) or need to make regular daily or weekly
@@ -601,7 +597,7 @@ rsync -avzP -e "ssh -p YOUR_PORT" ~/large_dataset/ ubuntu@YOUR_VM_IP:/mnt/volume
 rsync -avz --exclude="*.tmp" --exclude="*.log" -e "ssh -p YOUR_PORT" ~/data/ ubuntu@YOUR_VM_IP:/mnt/volume/
 ```
 
-### 4.6.2 Parallel transfers with GNU parallel
+### 5.2.2 Parallel transfers with GNU parallel
 
 **Use Case**: You have thousands of sequencing files that need to be
 transferred to the cloud, and sequential transfer would take days.
@@ -624,7 +620,9 @@ find ~/data -name "*.fastq" > files_to_transfer.txt
 parallel -j 4 -a files_to_transfer.txt scp -i ~/.ssh/*.pem -P YOUR_PORT {} ubuntu@YOUR_VM_IP:/mnt/volume/
 ```
 
-### 4.7 Transfer speed optimization
+**However**: It must be noted that doing this puts considerable load on the network interface and network.
+
+## 5.3 Transfer speed optimization
 
 **Use Case**: You're transferring terabytes of sequencing data and need
 to maximize transfer speeds to meet project deadlines or minimize cloud
@@ -654,320 +652,3 @@ mc cp --max-workers 8 aws/sra-pub-run-odp/sra/SRR34093683/SRR34093683  ibworksho
 # Compress data during transfer
 rsync -avz --compress-level=9 -e "ssh -p YOUR_PORT" ~/data/ ubuntu@YOUR_VM_IP:/mnt/volume/
 ```
-
-### 4.8 Resume interrupted transfers
-
-**Use Case**: You're transferring large genomic datasets and the
-connection is interrupted (network issues, VM restarts, etc.). Without
-resume capability, you'd have to start over from the beginning.
-
-**How it works**: Transfer tools can resume from where they left off,
-using partial files and transfer logs to avoid re-transferring already
-completed portions.
-
-**Advantages**:
-
--   **Time savings**: Resume from interruption point instead of starting
-    over
-
--   **Bandwidth efficiency**: Don't waste bandwidth on already
-    transferred data
-
--   **Reliability**: Handle network interruptions gracefully
-
--   **Cost savings**: Avoid repeated transfer costs for large datasets
-
-``` bash
-# Resume interrupted rsync transfers
-rsync -avz --partial --progress -e "ssh -p YOUR_PORT" ~/large_dataset/ ubuntu@YOUR_VM_IP:/mnt/volume/
-
-# Resume interrupted minio transfers
-mc cp --continue ibworkshop/YOUR_CONTAINER_NAME/large_file.gz ~/
-```
-
-# Section 5: Using the Object Storage
-
-## 5.1 Creating application credentials
-
-In this section you will create an [application
-credential](https://access.redhat.com/documentation/zh-cn/red_hat_openstack_platform/14/html/users_and_identity_management_guide/application_credentials)
-and download the autogenerated `clouds.yaml`. `clouds.yaml` contains all
-required authentication information. Follow the images:
-
-![Navigation](images/ac_screen1.png)
-
-Don't use the input field secret. As you can see its input is not
-hidden. OpenStack will generate a strong secret for you, if you leave it
-blank. You should pick a sensible expiration date.
-
-![Creation](images/ac_screen2.png)
-
-Save the downloaded `clouds.yaml` under `~/.config/openstack/`. That
-will allow the `OpenstackClient` to access it. You will also need the `app-cred-openrc.sh` script finish the setup.
-
-![Download](images/ac_screen3.png)
-
-If the file was auto downloaded, you need to move it instead:
-
-``` bash
-mkdir -p ~/.config/openstack
-mv ~/Downloads/clouds.yaml ~/.config/openstack/
-source ~/Downloads/app-cred-openrc.sh
-```
-
-If you have `OpenstackClient` installed and `openstack subnet list` runs
-without error, you are ready to proceed.
-
-``` bash
-openstack subnet list
-```
-
-### 5.2 Creating S3 credentials
-
-The creation of credentials for the project related object storage can't
-be done in the web interface. Therefore, we will use the openstack CLI
-for that.
-
-``` bash
-openstack --os-identity-api-version 3 ec2 credentials create
-```
-
-This command will return you the newly generated key and secret. You
-can, at any time, look up what S3 credentials are still valid for you
-using
-
-``` bash
-openstack --os-identity-api-version 3 ec2 credentials list
-```
-
-We will now configure the S3 minio client:
-
-``` bash
-mc alias set ibworkshop https://openstack.cebitec.uni-bielefeld.de:8080/ <YOUR-ACCESS-KEY> <YOUR-SECRET-KEY>
-```
-
-### 5.3 Uploading data to the Object Storage
-
-We will now use the minio client to upload some data. In the guacamole
-SimpleVM instance, type:
-
-``` bash
-mkdir ~/data/fastq
-
-mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz ~/data/fastq/reads_1.fastq.gz
-mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_2.fastq.gz ~/data/fastq/reads_2.fastq.gz
-
-cd ~/data/fastq
-mc ls ibworkshop
-```
-
-This should show you your previously created bucket (container) name.
-You can now upload data into it.
-
-``` bash
-mc cp *.fastq ibworkshop/YOUR_CONTAINER_NAME
-mc ls ibworkshop/YOUR_CONTAINER_NAME
-```
-
-![](figures/minio_verify.png)
-
-## 5.4 Additional Object Storage Operations
-
-For more advanced work with the SRA mirror and metagenomic datasets analysis, please refer to [Section 3.4](Part3.md#34-make-the-analysis-where-the-data-is-located) where we covered working with the de.NBI Cloud SRA mirror in detail.
-
-Here are some additional useful object storage operations:
-
-1. **Copy data between buckets:**
-   ``` bash
-   mc cp ibworkshop/YOUR_CONTAINER_NAME/file.txt ibworkshop/ANOTHER_CONTAINER/
-   ```
-
-2. **Mirror entire directories:**
-   ``` bash
-   mc mirror ~/local_data ibworkshop/YOUR_CONTAINER_NAME/backup/
-   ```
-
-3. **Set public access for sharing data:**
-   ``` bash
-   mc policy set download ibworkshop/YOUR_CONTAINER_NAME/public/
-   ```
-
-4. **Monitor transfer progress:**
-   ``` bash
-   mc cp --json large_file.gz ibworkshop/YOUR_CONTAINER_NAME/ | jq .
-   ```
-
-## Advanced Data Transfer Methods 
-
-This section covers advanced data transfer techniques for moving data
-efficiently between cloud instances, object storage containers, and
-hybrid environments. These methods are particularly useful for
-large-scale data processing workflows and collaborative research
-projects.
-
-## 5.5 Advanced Object Storage Operations
-
-### 5.5.1 Cross-region data replication
-
-**Use Case**: You're collaborating with researchers at different de.NBI
-sites (Bielefeld, Heidelberg, Geissen, Berlin, etc.) and need to share
-large metagenomic datasets. Cross-region replication ensures data
-availability and reduces transfer times.
-
-**How it works**: Data is automatically synchronized between different
-de.NBI cloud regions, providing redundancy and faster access for
-collaborators.
-
-Advantages:
-
-\- **Disaster recovery**: If one region is unavailable, data remains
-accessible
-
-\- **Collaboration**: Multiple teams can work on the same datasets
-simultaneously
-
-``` bash
-# Configure multiple regions (for example)
-mc alias set UniBi https://openstack.cebitec.uni-bielefeld.de:8080/ <ACCESS-KEY> <SECRET-KEY>
-mc alias set UniHe https://denbi-cloud.bioquant.uni-heidelberg.de:8080/ <ACCESS-KEY> <SECRET-KEY>
-
-# Replicate data between regions
-mc mirror ibworkshop/YOUR_CONTAINER_NAME UniHe/BACKUP_CONTAINER/
-```
-
-### 5.5.2 Batch operations with minio client
-
-**Use Case**: You have hundreds of sequencing files from different
-experiments that need to be organized and uploaded to object storage.
-Manual upload would take hours and be error-prone.
-
-**How it works**: Minio client can process multiple files simultaneously
-using wildcards and patterns, with built-in progress monitoring and
-error handling.
-
-**Advantages:**
-
-\- **Time savings**: Upload hundreds of files in one command instead of
-individual uploads
-
-\- **Error reduction**: Automated pattern matching reduces human errors
-
-\- **Progress tracking**: Monitor large transfers with real-time
-progress bars
-
-``` bash
-# Upload multiple file types with wildcards
-mc cp ~/data/*.{fastq,fna,fa} ibworkshop/YOUR_CONTAINER_NAME/raw_data/
-
-# Download files matching specific patterns
-mc find ibworkshop/YOUR_CONTAINER_NAME --name "*.fastq.gz" --exec "mc cp {} ~/downloads/"
-
-# Sync directories with progress monitoring
-mc mirror --progress ~/local_data ibworkshop/YOUR_CONTAINER_NAME/synced_data/
-```
-## 5.6 Advanced SSH-based Transfers
-
-### 5.6.1 Using rsync for efficient transfers
-
-**Use Case**: You're regularly updating large datasets (like reference
-genomes or annotation files) or need to make regular daily or weekly
-backups.
-
-**How it works**: Rsync compares file timestamps and sizes, transferring
-only the differences between source and destination. This is especially
-efficient for incremental backups and dataset updates.
-
-**Advantages**:
-
-\- **Time efficiency**: Updates take minutes instead of hours for large
-datasets
-
-\- **Resume capability**: Interrupted transfers can be resumed from
-where they left off
-
-\- **Compression**: Built-in compression reduces transfer size and time
-
-``` bash
-# Sync directories between instances
-rsync -avz -e "ssh -p YOUR_PORT" ubuntu@YOUR_VM_IP:/mnt/volume/data/ ~/local_backup/
-
-# Transfer with compression and progress
-rsync -avzP -e "ssh -p YOUR_PORT" ~/large_dataset/ ubuntu@YOUR_VM_IP:/mnt/volume/
-
-# Exclude certain file types.
-rsync -avz --exclude="*.tmp" --exclude="*.log" -e "ssh -p YOUR_PORT" ~/data/ ubuntu@YOUR_VM_IP:/mnt/volume/
-```
-
-### 5.6.2 Parallel transfers with GNU parallel
-
-**Use Case**: You have thousands of sequencing files that need to be
-transferred to the cloud, and sequential transfer would take days.
-
-**How it works**: GNU parallel manages multiple transfer processes
-simultaneously, utilizing available bandwidth and CPU cores efficiently.
-
-**Advantages**:
-
-\- **Speed**: Transfer multiple files simultaneously, utilizing more
-resources, and improving transfer throughput.
-
-\- **Monitoring**: Track progress of all transfers simultaneously
-
-``` bash
-# Create a list of files to transfer
-find ~/data -name "*.fastq" > files_to_transfer.txt
-
-# Transfer files in parallel (4 at a time)
-parallel -j 4 -a files_to_transfer.txt scp -i ~/.ssh/*.pem -P YOUR_PORT {} ubuntu@YOUR_VM_IP:/mnt/volume/
-```
-
-### 5.7 Transfer speed optimization
-
-**Use Case**: You're transferring terabytes of sequencing data and need
-to maximize transfer speeds to meet project deadlines or minimize cloud
-costs.
-
-**How it works**: Various techniques can be combined to optimize
-transfer performance, including parallel connections, compression, and
-optimized encryption.
-
-**Advantages**:
-\- **Time savings**: Reduce transfer times by 50-80% through optimization
-\- **Cost reduction**: Faster transfers mean less VM time and lower costs 
-\- **Bandwidth utilization**: Make full use of available network capacity 
-\-  **Scalability**: Techniques work for datasets of any size
-
-``` bash
-# Use multiple connections for faster transfers
-mc cp --concurrent 4 large_file.gz ibworkshop/YOUR_CONTAINER_NAME/
-
-# Compress data during transfer
-rsync -avz --compress-level=9 -e "ssh -p YOUR_PORT" ~/data/ ubuntu@YOUR_VM_IP:/mnt/volume/
-```
-### 5.8 Resume interrupted transfers
-
-**Use Case**: You're transferring large genomic datasets and the
-connection is interrupted (network issues, VM restarts, etc.). Without
-resume capability, you'd have to start over from the beginning.
-
-**How it works**: Transfer tools can resume from where they left off,
-using partial files and transfer logs to avoid re-transferring already
-completed portions.
-
-**Advantages**:
-\- **Time savings**: Resume from interruption point
-instead of starting over
-\-  **Bandwidth efficiency**: Don't waste bandwidth on already transferred data
-\-  **Reliability**: Handle network interruptions gracefully 
-\-  **Cost savings**: Avoid repeated transfer costs for large datasets
-
-``` bash
-# Resume interrupted rsync transfers
-rsync -avz --partial --progress -e "ssh -p YOUR_PORT" ~/large_dataset/ ubuntu@YOUR_VM_IP:/mnt/volume/
-
-# Resume interrupted minio transfers
-mc cp --continue ibworkshop/YOUR_CONTAINER_NAME/large_file.gz ~/
-```
-
-
-
