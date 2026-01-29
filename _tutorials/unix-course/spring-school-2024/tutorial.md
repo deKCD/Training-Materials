@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
 slug: unix-course
-time_estimation: "FIXME"
+time_estimation: 2H
 questions:
   - "What is a command shell and why would I use one?"
   - "How can I move around on my computer?"
@@ -21,6 +21,7 @@ key_points:
   - "Tab completion can reduce errors from mistyping and make work more efficient in the shell."
 version:
   - spring-school-2024
+life_cycle: "beta"
 contributions:
   authorship:
   - Christian Henke
