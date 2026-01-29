@@ -31,3 +31,7 @@
   tutorials:
     - basicsAmpliconQC
 
+- title: Data Management on the Cloud
+  description: Tutorials focused on Data Management solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
+  tutorials:
+    - dm_repository_use
