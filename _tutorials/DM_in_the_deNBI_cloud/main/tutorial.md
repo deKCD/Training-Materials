@@ -57,7 +57,7 @@ able to log in to the de.NBI Cloud Portal:
     de.NBI Cloud wiki regarding SSH keys:
     <https://cloud.denbi.de/wiki/portal/user_information/#ssh-key>
 
-![Key](tutorial/figures/key.png){: .responsive-img }
+![Key](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/key.png){: .responsive-img }
 
 3. (optional) If you already have a personal SSH key-pair, you can also
    upload your *public* key here instead of generating one.
@@ -118,7 +118,7 @@ You start this tutorial from your profile page
 
 3.  In the image section, please click on the *Research Environments*
     tab and select the **Guacamole** image based on **Ubuntu 24.04**.
-    ![Research Environment Selection](tutorial/figures/resenv.png){: .responsive-img }
+    ![Research Environment Selection](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/resenv.png){: .responsive-img }
 
 4.  Select the Conda tab and choose the following tools with their
     version numbers given below for installation via Conda:
@@ -126,17 +126,17 @@ You start this tutorial from your profile page
     -   parallel (20220922)
     -   sra-tools (3.1.1)
     -   mash (2.2)
-        ![Conda Tool Selection](tutorial/figures/conda.png){: .responsive-img }
+        ![Conda Tool Selection](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/conda.png){: .responsive-img }
 
     You will learn in the next sections how to apply these tools.
 
 5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**), or your collaborators. This
     way these members get ssh access to your VM and can help you in case
     something does not work as expected.
-    ![Additional Users](tutorial/figures/additional_users.png){: .responsive-img }
+    ![Additional Users](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/additional_users.png){: .responsive-img }
 
 6.  Optional: Modify the URL path for Guacamole. You will access this VM
-    via this URL. ![Research Environment URL](tutorial/figures/resenv_url.png){: .responsive-img }
+    via this URL. ![Research Environment URL](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/resenv_url.png){: .responsive-img }
 
 7.  Confirm the checkboxes and click on Start.
 
@@ -162,15 +162,15 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     have been automatically redirected to the **Instance Overview**
     page. Now click on the dropdown of your machine. Click on the
     Guacamole URL which opens a new browser tab.
-    ![VM State](tutorial/figures/vm_state.png){: .responsive-img }
+    ![VM State](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/vm_state.png){: .responsive-img }
 
 2.  Log into the virtual desktop environment using the credentials:
-    `denbi` `denbi` ![VM Login](tutorial/figures/vm_login.png){: .responsive-img }
+    `denbi` `denbi` ![VM Login](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/vm_login.png){: .responsive-img }
 
     And choose the correct keyboard layout for you.
 
 3.  Right click on background and select `Open Terminal Here`.
-    ![Open Terminal](tutorial/figures/open_terminal.png){: .responsive-img }
+    ![Open Terminal](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/open_terminal.png){: .responsive-img }
 
 4.  Inspect the VM before starting to work with it. Let's check whether
     the VM has the properties that SimpleVM promised you by typing the
@@ -265,11 +265,11 @@ the openstack interface.
 2.  Click on the `Key Pairs` entry under the `Compute` menu and select
     `Create Key Pair`
 
-![Key Pair Creation Step 1](tutorial/figures/keypair1.png){: .responsive-img }
+![Key Pair Creation Step 1](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/keypair1.png){: .responsive-img }
 
 3.  Enter any name and select `SSH Key` as the Key Type.
 
-![Key Pair Creation Step 2](tutorial/figures/keypair2.png){: .responsive-img }
+![Key Pair Creation Step 2](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/keypair2.png){: .responsive-img }
 
 4.  The private key will be downloaded automatically to your SimpleVM
     instance. This instance can be accessed only by you, however,
@@ -290,31 +290,31 @@ openstack horizon.
 1.  Under the `Compute` menu, select the `Instances` entry and click on
     `Launch Instance`.
 
-![New Instance Step 1](tutorial/figures/newinstance1.png){: .responsive-img }
+![New Instance Step 1](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/newinstance1.png){: .responsive-img }
 
 2.  In the first section, you just need to provide an instance name.
     Please choose your name so that we can identify your VM.
 
-![New Instance Step 2](tutorial/figures/newinstance2.png){: .responsive-img }
+![New Instance Step 2](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/newinstance2.png){: .responsive-img }
 
 3.  Then, we need to select a bootable image. In the drop down menu
     `Select Boot Source` select the entry `Instance Snapshot` upon which
     the image `RDM Meets Cloud Workshop` will appear in the list below.
     Click the right up-arrow on that image so that it will be selected.
 
-![New Instance Step 3](tutorial/figures/newinstance3.png){: .responsive-img }
+![New Instance Step 3](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/newinstance3.png){: .responsive-img }
 
 4.  Next the flavor, i.e. physical virtualization, needs to be chosen.
     Here, select the `de.NBI default` flavor.
 
-![New Instance Step 4](tutorial/figures/newinstance4.png){: .responsive-img }
+![New Instance Step 4](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/newinstance4.png){: .responsive-img }
 
 5.  The last option that needs to be selected is the key pair that will
     be used for the ssh connection. Select the `Key Pair` menu entry and
     choose the key pair that you just created in the previous section
     3.2.
 
-![New Instance Step 5](tutorial/figures/newinstance5.png){: .responsive-img }
+![New Instance Step 5](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/newinstance5.png){: .responsive-img }
 
 6.  You can now `Launch the Instance`.
 
@@ -323,7 +323,7 @@ openstack horizon.
 1.  Locate your running instance in the List of instances and note
     (write down) the last part of the IP address.
 
-![IP Address](tutorial/figures/ipaddress.png){: .responsive-img }
+![IP Address](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/ipaddress.png){: .responsive-img }
 
 Add 30000 to this number (in this example this would be the number
 30051). This will be the port that you will be using for the ssh
@@ -342,7 +342,7 @@ got in the step above!
 If everything went without any issue, you should see the following
 prompt:
 
-![Instance Login](tutorial/figures/instance_login.png){: .responsive-img }
+![Instance Login](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/instance_login.png){: .responsive-img }
 
 Here, we will create a new folder called `data_remote`:
 
@@ -364,19 +364,19 @@ credential](https://access.redhat.com/documentation/zh-cn/red_hat_openstack_plat
 and download the autogenerated `clouds.yaml`. `clouds.yaml` contains all
 required authentication information. Follow the images:
 
-![Navigation](tutorial/images/ac_screen1.png){: .responsive-img }
+![Navigation](/tutorials/DM_in_the_deNBI_cloud/tutorial/images/ac_screen1.png){: .responsive-img }
 
 Don't use the input field secret. As you can see its input is not
 hidden. OpenStack will generate a strong secret for you, if you leave it
 blank. You should pick a sensible expiration date.
 
-![Creation](tutorial/images/ac_screen2.png){: .responsive-img }
+![Creation](/tutorials/DM_in_the_deNBI_cloud/tutorial/images/ac_screen2.png){: .responsive-img }
 
 We will now save the downloaded `clouds.yaml` under
 `~/.config/openstack/`. That will allow the `OpenstackClient` to access
 it. You will also need the `app-cred-openrc.sh` script to finish the setup.
 
-![Download](tutorial/images/ac_screen3.png){: .responsive-img }
+![Download](/tutorials/DM_in_the_deNBI_cloud/tutorial/images/ac_screen3.png){: .responsive-img }
 
 If the file was auto downloaded, you need to move it instead:
 
@@ -465,7 +465,7 @@ activation, the shell needs to be restarted.
 mc --autocompletion
 ```
 
-![MinIO Verification](tutorial/figures/minio_verify.png){: .responsive-img }
+![MinIO Verification](/tutorials/DM_in_the_deNBI_cloud/tutorial/figures/minio_verify.png){: .responsive-img }
 
 ## 4.4 Additional Object Storage Operations
 
