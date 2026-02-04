@@ -4,11 +4,10 @@
     - unix-course
 
 - title: Cloud computing
-  description: Introduction to cloud computing concepts and hands-on tutorials
+  description: Tutorials focused on using the de.NBI Cloud infrastructure and project types.
   tutorials:
     - simpleVMWorkshop
     - bibigrid
-    - ansible_webservices_denbi_cloud
 
 - title: Machine Learning on Cloud infrastructure
   description: Tutorials focused on setting up machine learning toolkits and applications on cloud infrastructure.
@@ -28,7 +27,7 @@
     - DM_in_the_deNBI_cloud
 
 - title: Metagenomics
-  description: Tutorials focused on handling of metagenomics sequencing data
+  description: Tutorials focused on handling of metagenomics sequencing data.
   tutorials:
     - basicsAmpliconQC
 

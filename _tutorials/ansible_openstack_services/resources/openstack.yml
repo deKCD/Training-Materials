@@ -1,0 +1,190 @@
+my:
+  ansible_host: "129.70.51.190"
+  openstack_cloud: "myproject-prod"
+  openstack_project: "myproject"
+  openstack_site: "Bielefeld"
+  ssh:
+    key:
+      #the keyname in openstack under Compute/Key Pairs
+      name: "myproject-key" 
+      public: "/Users/username/.ssh/id_rsa.pub"
+  network:
+    name: "myproject-network"
+  subnet:
+    name: "ingress-network"
+    cidr: "192.168.1.0/24"
+    gateway_ip: "192.168.1.1"
+  security_group:
+    name: "myproject-security-group"
+    rules:
+      - protocol: tcp
+        port_range_min: 80
+        port_range_max: 80
+        remote_ip_prefix: 0.0.0.0/0
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 443 
+        port_range_max: 443
+        remote_ip_prefix: 0.0.0.0/0
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 22 
+        port_range_max: 22
+        remote_ip_prefix: 0.0.0.0/0
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 50 
+        port_range_max: 50
+        remote_ip_prefix: 0.0.0.0/0
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp 
+        port_range_min: 53 
+        port_range_max: 53
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 111 
+        port_range_max: 111
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp 
+        port_range_min: 111 
+        port_range_max: 111
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 2049 
+        port_range_max: 2049
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp 
+        port_range_min: 2049
+        port_range_max: 2049
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 2377
+        port_range_max: 2377
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp
+        port_range_min: 5353
+        port_range_max: 5353
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 7946 
+        port_range_max: 7946
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp 
+        port_range_min: 7946 
+        port_range_max: 7946
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp 
+        port_range_min: 4789 
+        port_range_max: 4789
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 9001
+        port_range_max: 9001
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: tcp
+        port_range_min: 33333
+        port_range_max: 33333
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+      - protocol: udp
+        port_range_min: 33333
+        port_range_max: 33333
+        remote_ip_prefix: 192.168.1.0/24
+        direction: ingress
+        ethertype: IPv4
+  router:
+    name: "myproject-router"
+    network: "external"
+  vms:
+    gateway:
+      image: "Ubuntu 22.04 LTS (2024-07-03)"
+      flavor: "de.NBI small"
+      description: "Gateway Server" 
+      host_groups: 
+        - "gateway"
+        - "k8s_cluster"  
+        - "masters"
+        - "swarmmanager"
+        - "swarmseed"
+        - "swarm"
+        - "nfsclient"
+        - "all"  
+      rke2_type: "server"
+  # external ip to access project gateway
+      floating_ip: "129.70.51.247"
+      count: 1
+    swarm:
+      image: "Ubuntu 22.04 LTS (2024-07-03)"
+      flavor: "de.NBI medium + ephemeral"
+      description: "Ephemeral fast local storage" 
+      host_groups:
+        - "k8s_cluster"  
+        - "masters"
+        - "swarmmanager"
+        - "swarm"
+        - "nfsclient"
+        - "swarmephemeral"
+        - "all"
+      rke2_type: "server"
+      count: 4 
+    swarmhighmem:
+      image: "Ubuntu 22.04 LTS (2024-07-03)"
+      flavor: "de.NBI highmem medium"
+      description: "High Mem Instances" 
+      host_groups:
+        - "k8s_cluster"
+        - "workers"
+        - "swarm"
+        - "swarmworker"
+        - "swarmhighmem"  
+        - "nfsclient"
+        - "all"
+      rke2_type: "agent"
+      count: 2
+    nfsserver:
+      image: "Ubuntu 22.04 LTS (2024-07-03)"
+      flavor: "de.NBI small"
+      description: "NFS Server" 
+      host_groups: 
+        - "nfsserver"
+        - "all"
+      count: 1
+    gpuserver:
+      image: "Ubuntu 22.04 LTS (2024-11-22)"
+      flavor: "de.NBI 2 GPU L4 medium + ephemeral"
+      description: "GPU Server"
+      host_groups:
+        - "workers"
+        - "swarm"
+        - "swarmworker"
+        - "nfsclient"
+        - "gpu"
+        - "all"
+      count: 1
