@@ -113,11 +113,11 @@ This tutorial is based on the [tutorial](https://gitlab.ub.uni-bielefeld.de/denb
 The first two sections (01 and 02) describe how to access the workshop environment for this tutorial.
 Participants need a web browser and an active ELIXIR account. 
 
-{ % include _tutorials/unix-course/main/part1.md %}
+{% include _tutorials/unix-course/main/part1.md %}
 
-{ % include _tutorials/unix-course/main/part2.md %}
+{% include _tutorials/unix-course/main/part2.md %}
 
-{ % include _tutorials/unix-course/main/part3.md %}
+{% include _tutorials/unix-course/main/part3.md %}
 
 
 

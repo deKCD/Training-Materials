@@ -61,7 +61,7 @@ This tutorial will primarily focus on the use of the terminal.
 
 If not yet open go to -> _Terminal_ -> _new Terminal_ to open a new terminal.
 
-![Opening a terminal window](/tutorials/unix-course/images/Terminal.png){: .responsive-img }
+![Opening a terminal window]({{ "/tutorials/unix-course/images/Terminal.png" | relative_url }}){: .responsive-img }
 
 It is possible to have more than one terminal open at the same time.
 
