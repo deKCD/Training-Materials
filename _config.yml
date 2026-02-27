@@ -10,9 +10,12 @@ color_mode:
 # Sites
 url: "https://dekcd.bi.denbi.de"
 baseurl: "/training"
-repository_url: https://github.com/deKCD/Training-Materials
-dekcd_site: https://datenkompetenz.cloud/
-denbicloud_site: https://www.denbi.de/cloud
+repository_url: "https://github.com/deKCD/Training-Materials"
+dekcd: "https://datenkompetenz.cloud/"
+denbi_cloud: "https://www.denbi.de/cloud"
+partner: "https://datenkompetenz.cloud/partner/"
+event_kalender: "https://datenkompetenz.cloud/event-kalender/?p=1"
+frag_unsere_experten: "https://datenkompetenz.cloud/frag-unsere-experten/"
 cc_by_human: "https://creativecommons.org/licenses/by/4.0/"
 email: "info@datenkompetenz.cloud"
 
@@ -43,10 +46,5 @@ categories:
   pathways: "/pathways/"
   contribution: CONTRIBUTING.md
   citation: CITATION.md
-  about_dekcd: https://datenkompetenz.cloud/
-  about_denbi: https://www.denbi.de/cloud
-  contact_email: "info@datenkompetenz.cloud"
-header_links:
-  partners: https://datenkompetenz.cloud/partner/
-  event_calendar: https://datenkompetenz.cloud/event-kalender/?p=1
   faq: FAQ.md
+  contact_email: "info@datenkompetenz.cloud"  
