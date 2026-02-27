@@ -1,5 +1,5 @@
 {% comment %}
-  Layout for Pathways Page.
+  Layout for the Collection of Tutorials Page.
 {% endcomment %}
 
 <!DOCTYPE html>
@@ -141,74 +141,13 @@
     <section id="dekcd_title_section" class="title-section white-back">
       <div class="container">
         <div class="my-1">
-          <h2 class="text-center" style="margin: 2rem 0;">{{ page.title }}</h2>
-          <p class="text-center" style="font-size: large; margin-bottom: 2rem;"> {{ page.description }}</p>
+          <h2 class="text-center">Learning Paths</h2>
           <div class="mx-auto p-2 width-padder my-1">
-            <div class="pathway-content tutorial-grop container">    
-
-              {% for section in page.pathway %}
-              <h2>{{ section.section }}</h2>
-              <p>{{ section.description }}</p>
-              
-              <table>
-                <colgroup>
-                  <col style="width: 20%;">
-                  <col style="width: 30%;">
-                  <col style="width: 40%;">
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th>Tutorial</th>
-                    <th>Description</th>
-                    <th>Learning Objectives</th>  
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for tutorial_ref in section.tutorials %}
-                    {% assign matching_tutorials = site.tutorials | where: "slug", tutorial_ref.name %}
-                    {% assign tutorial = matching_tutorials | where: "version", tutorial_ref.version | first %}
-
-                    {% if tutorial %}
-                    <!-- render tutorial row -->
-                      <tr>
-                          <td><a href="{{ tutorial.url | relative_url }}">{{ tutorial.title }}</a></td>
-                          <td>{{ tutorial.description }}</td>
-                          <td>
-                              <ul>
-                                  {% for obj in tutorial.objectives %}
-                                  <li>{{ obj }}</li>
-                                  {% endfor %}
-                              </ul>
-                          </td>
-                      </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="3">Tutorial "{{ tutorial_ref.name }}" (version: "{{ tutorial_ref.version }}") not found.</td>
-                    </tr>
-                    {% endif %}
-                  {% endfor %}
-                </tbody>
-              </table>
-              {% endfor %}
-
-              <p>This material is reviewed by our Editorial Board:</p>
-                  <ul>
-                      {% for editor in page.editorial_board %}
-                          {% if editor.orcid %}
-                          <a href="https://orcid.org/{{ editor.orcid }}" target="_blank">{{ editor.name }}</a>
-                          {% else %}
-                          {{ editor.name }}
-                          {% endif %}
-                      {% endfor %}
-                  </ul>
-
-                  {% include _includes/tutorial_feedback.html %}
-
-              </div>
-            </div>
+            <p class="card-text">{{ content }}</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
 <footer class="footer">
   <div class="footer-navigation-container">
