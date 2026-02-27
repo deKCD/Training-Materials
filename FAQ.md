@@ -1,5 +1,5 @@
 ---
-layout: contributing
+layout: base_contributing
 title: FAQs
 ---
 
@@ -10,21 +10,27 @@ Common questions about the de.KCD/de.NBI Cloud Training Materials, and about the
 <details class="answer-block">
 <summary>What are the de.KCD/de.NBI Cloud Training Materials?</summary>
   <div>
+    <p>
     The de.KCD/de.NBI Cloud Training Materials are curated learning resources and tutorials designed to help researchers, students, and developers effectively use the de.NBI Cloud for bioinformatics, data analysis, and machine learning workflows.
+    </p>
   </div>
 </details>
 
 <details class="answer-block">
 <summary>Who can benefit from these materials?</summary>
   <div>
+  <p>
     These materials are intended for anyone interested in learning how to use the de.NBI Cloud—particularly researchers, educators, students, and developers in life sciences and related fields.
+  </p>
   </div>
 </details>
 
 <details class="answer-block">
 <summary>Do I need prior cloud or bioinformatics experience?</summary>
   <div>
+  <p>
     No prior experience is required. The materials are beginner-friendly but also include advanced content for experienced users. While basic command-line and python knowledge can be helpful, they are not mandatory.
+  </p>
   </div>
 </details>
 
@@ -46,28 +52,36 @@ Common questions about the de.KCD/de.NBI Cloud Training Materials, and about the
 <details class="answer-block">
 <summary>How can I access the de.NBI Cloud?</summary>
   <div>
+    <p>
     You will need a LifeScience account to apply for access via the <a href="https://cloud.denbi.de/" target="_blank" rel="noopener">de.NBI Cloud Portal</a>. Detailed registration guidance is available in the <a href="https://cloud.denbi.de/wiki/registration/" target="_blank" rel="noopener">de.NBI Cloud Wiki</a>.
+    </p>
   </div>
 </details>
 
 <details class="answer-block">
 <summary>Where can I find support if I encounter issues?</summary>
   <div>
+   <p>
     Support is available through multiple channels: review the documentation, open an issue in this repository, or contact the support team directly at <a href="mailto:support@denbi.de">support@denbi.de</a>.
+   </p>
   </div>
 </details>
 
 <details class="answer-block">
 <summary>Can I contribute to the training materials?</summary>
   <div>
+  <p>
     Absolutely! Contributions are welcome—whether it’s fixing a typo, suggesting improvements, or adding new materials or learning pathways. Please review the <a href="{{ '/CONTRIBUTING/' | relative_url }}">contributing guidelines</a> for details on how to get started.
+  </p>
   </div>
 </details>
 
 <details class="answer-block">
 <summary>Are the training materials open source?</summary>
   <div>
+  <p>
     Yes. All materials are licensed under <a href="{{ site.cc_by_human | relative_url }}" target="_blank" rel="noopener">CC-BY 4.0</a>, allowing you to use, adapt, and share the content with proper attribution.
+  </p>
   </div>
 </details>
 

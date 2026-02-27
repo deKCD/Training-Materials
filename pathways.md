@@ -1,7 +1,5 @@
 ---
-layout: base
-title: "Learning Pathways"
-description: List of structured learning pathways 
+layout: base_paths
 permalink: /pathways/
 ---
 
@@ -18,13 +16,12 @@ permalink: /pathways/
   {% for pathway in pathways %}
     <div class="pathway-card">
       <h3><a href="{{ pathway.url | relative_url }}">{{ pathway.title }}</a></h3>
-      <p>{{ pathway.description }}</p>
-      <p>Lifecycle: <strong>{{ pathway.life_cycle }}</strong></p>
+      <p style="margin: 2rem 0">{{ pathway.description }}</p>
       {% if pathway.tags %}
         <div class="tags">
-            {% for tag in pathway.tags %}
+          {% for tag in pathway.tags %}
             <span>{{ tag }}</span>
-            {% endfor %}
+          {% endfor %}
         </div>
       {% endif %}
     </div>

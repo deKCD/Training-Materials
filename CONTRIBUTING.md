@@ -1,5 +1,5 @@
 ---
-layout: contributing
+layout: base_contributing
 title: Contribution
 description: Guidelines for contributing, including adding new content or editing existing materials.
 ---
@@ -7,16 +7,50 @@ description: Guidelines for contributing, including adding new content or editin
 We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR (Findable, Accessible, Interoperable, Reusable)** principles for training materials. 
 
 ## Table of Contents
+
+* [Preview the website](#preview-the-website)
 * [Add a new tutorial](#add-a-new-tutorial)
     * [Edit the tutorial](#edit-the-tutorial)
     * [Format the content](#format-the-content)
         * [Boxes](#boxes)
         * [Images](#images)
 * [Create a new learning pathway](#create-a-new-learning-pathway)
-* [Preview the website](#preview-the-website)
 
 
-## **Add a new tutorial**
+## Preview the website
+---------------------------
+There are two options to run the website locally and preview your training materials before pushing them.
+
+**Option 1: Using Ruby and Bundler**
+
+You need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){:target="_blank"} and [Bundler](https://bundler.io/){:target="_blank"} installed. Then run:
+
+```bash
+# Install required gems
+bundle install
+
+# Start the Jekyll server
+bundle exec jekyll serve --trace --livereload
+```
+
+Open `http://127.0.0.1:4000/training/` (`Server address`) in your browser to view the website.
+
+**Option 2: Using Docker**
+
+Build and run the containerized version:
+
+```bash
+# Build the Docker image
+docker build . -t dekcd
+
+# Run the container
+docker run -it -p 4000:4000 dekcd
+```
+
+Then open `http://127.0.0.1:4000/training/` in your browser.
+
+
+## Add a new tutorial
 -------------------------
 To add a new tutorial, create a new folder in `_tutorials` folder and  place the tutorial content in a single `tutorial.md` within the tutorial directory (or a subdirectory if you have multiple versions of the same tutorial).
 
@@ -28,7 +62,7 @@ Then, commit the changes to the new branch and submit a pull request.
 
 Optionally you can also go to issues and "create an issue" with the format [add new tutorial](https://github.com/deKCD/Training-Materials/issues) that describes what you are adding.
 
-### **Edit the tutorial**
+### Edit the tutorial
 -------------------------
 The `tutorial.md` should have the following structure:
 
@@ -93,9 +127,9 @@ For additional information that could be included in the tutorial metadata, plea
 
 If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
 
-### **Format the content**
+### Format the content
 
-#### **Boxes**
+#### Boxes
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content. Below is an example of the "Task box with solutions":
 
@@ -134,7 +168,7 @@ There are several boxes that you can use to format the content of your training 
 > 
 {: .hands_on}
 
-### **Examples**
+### Examples
 
 > ## Tasks
 > 1. List of tasks
@@ -190,9 +224,15 @@ There are several boxes that you can use to format the content of your training 
 >
 {: .question}
 
-#### **Images**
+#### Images
 
-To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-folder>/<image-folder>/<image>){: .responsive-img }`. Add `{: .responsive-img }` to place the image within the text width.
+To insert an inline image in a way that works both locally and when deployed, use:
+```
+![figure-title]({{ "/tutorials/<tutorial-folder>/<image-folder>/<image>" | relative_url }}){: .responsive-img }
+```
+* `![figure-title]()` this is standard Markdown image syntax. The text inside the brackets (`figure-title`) becomes the **alt text**, which improves accessibility and is displayed if the image fails to load.
+* `{{ "/path/to/image" | relative_url }}` the `relative_url` ensures that the correct `baseurl` defined in `_config.yml` is automatically prepended. This prevents broken links when the site is hosted in a subdirectory.
+* `{: .responsive-img }` CSS class constrains the image to the content width, prevents overflow, and scales the image proportionally on smaller screens.
 
 
 > ## Additional resources
@@ -203,7 +243,7 @@ To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-
 {: .details}
 
 
-## **Create a new learning pathway**
+## Create a new learning pathway
 ------------------------------------
 To add a new learning pathway, create `<pathway_title>.md` file in `_pathways` folder. The `<pathway_title>.md` should have the following structure:
 
@@ -233,10 +273,3 @@ editorial_board:
 
 Keep the `layout: pathway` as default. Commit changes to the new branch and pull a request.
 
-## **Preview the website**
---------------------------
-To preview your own training materials locally, use provided devcontainer. To use it, you need to have [Visual Studio Code](https://code.visualstudio.com/) installed. Open the repository in VS Code and it will prompt you to reopen the folder in the container. After that, you can run the Jekyll server as follows: 
-
-```bash
-bundle exec jekyll serve --config _config.yml,_config_dev.yml
-```
