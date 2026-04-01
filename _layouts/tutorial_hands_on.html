@@ -12,6 +12,7 @@
     <script async="" src="https://piwik.cebitec.uni-bielefeld.de/matomo.js"></script>
     <script src="{{ '/assets/js/jquery/jquery-3.7.1.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/bootstrap5/bootstrap.bundle.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/lesson.js' | relative_url }}"></script>
     <!-- Bootstrap core CSS -->
     <link href="{{ '/assets/css/bootstrap5/bootstrap.min.css' | relative_url }}" rel="stylesheet">
     <link href="{{ '/assets/css/dekcd_styles.css' | relative_url }}" rel="stylesheet">
@@ -60,7 +61,7 @@
           <div class="collapse navbar-collapse show" id="mainNavigation">
             <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav ">
               <li class="nav-item p-2">
-                <a class="nav-link" href="{{ site.partner }}" target="_blank" rel="noopener">Partners </a>
+                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
               </li>
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Calendar </a>
@@ -102,7 +103,7 @@
           <div class="navbar-collapse collapse sticky-top bg-white pt-3" id="navbarToggled" style="">
             <ul class="navbar-nav">
               <li class="nav-item p-2">
-                <a class="nav-link" href="{{ site.partner }}" target="_blank" rel="noopener">Partners </a>
+                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
               </li>
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Kalender </a>
@@ -139,14 +140,22 @@
                 <h2 class="text-center">{{ page.title }}</h2>
                 <p class="text-center" style="font-size: large; margin-bottom: 2rem;"> {{ page.description }}</p>
                 <div class="mx-auto p-2 width-padder my-1">
-                    <div class="container">
-                        {% include _includes/tutorial_lifecycle.html %}
-                        {% include _includes/tutorial_overview.html %}
-                        <p class="card-text">{{ content }}</p>
-                        {% include _includes/tutorial_keypoints.html %}
-                        {% include _includes/tutorial_feedback.html %}
-                        {% include _includes/attributions.html %}
-                    </div>  
+                    <div class="toc-layout">
+                        <aside class="toc-layout__sidebar">
+                            <h5>Table of contents</h5>
+                            {% include _includes/toc.html html=content sanitize=true class="toc-list" id="tutorial_toc" h_min=2 h_max=4 %}
+                        </aside>
+                        <div class="toc-layout__content">
+                            <div class="container-fluid p-0">
+                                {% include _includes/tutorial_lifecycle.html %}
+                                {% include _includes/tutorial_overview.html %}
+                                <p class="card-text">{{ content }}</p>
+                                {% include _includes/tutorial_keypoints.html %}
+                                {% include _includes/tutorial_feedback.html %}
+                                {% include _includes/attributions.html %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

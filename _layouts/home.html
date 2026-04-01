@@ -33,8 +33,9 @@
           </a>
           <div class="collapse navbar-collapse show" id="mainNavigation">
             <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav ">
+
               <li class="nav-item p-2">
-                <a class="nav-link" href="{{ site.partner }}" target="_blank" rel="noopener">Partners </a>
+                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
               </li>
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Calendar </a>
@@ -75,7 +76,7 @@
         <div class="navbar-collapse collapse sticky-top bg-white pt-3" id="navbarToggled" style="">
           <ul class="navbar-nav">
             <li class="nav-item p-2">
-              <a class="nav-link" href="{{ site.partner }}" target="_blank" rel="noopener">Partners </a>
+              <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
             </li>
             <li class="nav-item p-2">
               <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Kalender </a>
@@ -123,67 +124,42 @@
 
 <section id="feature_section" class="gradient-section feature-section">
   <div class="text-center">
-    <h4>Core competencies and services</h4>
+    <h5 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Core competencies and services</h5>
     <div>
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 equal-height-row">
 
-        <a href="{{ '/tutorials/' | relative_url }}" class="text-decoration-none">
-          <div class="block-features">
-            <div class="col col-auto">
-              <div class="card m-4 feature-card">
-
-                <div class="row p-5 mx-auto">
-                  <img src="{{ '/assets/img/example.svg' | relative_url }}" class="img-fluid feature-img rounded-start" alt="competence-image">
-                </div>
-
-                <div class="row">
-                  <div class="card-body p-4">
-                    <h5 class="card-title">Tutorials</h5>
-                    <p class="card-text">Curated collection of training materials covering a wide range of topics in cloud computing, bioinformatics, and data science. These tutorials are designed for hands-on learning and support both beginners and advanced users.</p>
-                  </div>
-                </div>
+        <div class="col">
+          <a href="{{ '/tutorials/' | relative_url }}" class="text-decoration-none h-100">
+            <div class="card m-2 feature-card h-100">
+              <div class="card-body p-2">
+                <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 1rem;">Tutorials</h5>
+                <p class="card-text">Curated collection of training materials covering a wide range of topics in cloud computing, bioinformatics, and data science. These tutorials are designed for hands-on learning and support both beginners and advanced users.</p>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
 
-        <a href="{{ '/pathways/' | relative_url }}" class="text-decoration-none">
-          <div class="block-features">
-            <div class="col col-auto">
-              <div class="card m-4 feature-card">
-
-                <div class="row p-5 mx-auto">
-                  <img src="{{ '/assets/img/example.svg' | relative_url }}" class="img-fluid feature-img rounded-start" alt="competence-image">
-                </div>
-
-                <div class="row">
-                  <div class="card-body p-4">
-                    <h5 class="card-title">Learning Paths</h5>
-                    <p class="card-text">Sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go.</p>
-                  </div>
-                </div>
+        <div class="col">
+          <a href="{{ '/pathways/' | relative_url }}" class="text-decoration-none h-100">
+            <div class="card m-2 feature-card h-100">
+              <div class="card-body p-2">
+                <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 1rem;">Learning Paths</h5>
+                <p class="card-text">Sets of tutorials curated for you by community experts to form a coherent set of lessons around a topic, building up knowledge as you go.</p>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
 
-        <a href="{{ '/CONTRIBUTING/' | relative_url }}" class="text-decoration-none">
-          <div class="block-features">
-            <div class="col col-auto">
-              <div class="card m-4 feature-card">
-                <div class="row p-5 mx-auto">
-                  <img src="{{ '/assets/img/example.svg' | relative_url }}" class="img-fluid feature-img rounded-start" alt="competence-image">
-                </div>
-                <div class="row">
-                  <div class="card-body p-4">
-                    <h5 class="card-title">Contribution</h5>
-                    <p class="card-text">Help us by reporting any mistakes or errors, or by creating additional content.</p>
-                  </div>
-                </div>
+        <div class="col">
+          <a href="{{ '/CONTRIBUTING/' | relative_url }}" class="text-decoration-none h-100">
+            <div class="card m-2 feature-card h-100">
+              <div class="card-body p-2">
+                <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 1rem;">Contribution</h5>
+                <p class="card-text">Guidelines for contributing, including adding new content or editing existing materials.</p>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
         
       </div>
     </div>

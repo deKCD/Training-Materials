@@ -2,20 +2,37 @@
 $("table").addClass("table table-striped");
 
 
-// Handle foldable challenges and solutions (on click and at start).
-$(".solution").click(function(event) {
-    var trigger = $(event.target).has(".fold-unfold").length > 0
-               || $(event.target).filter(".fold-unfold").length > 0;
-    if (trigger) {
-        $(">*:not(h2)", this).toggle(400);
-        $(">h2>span.fold-unfold", this).toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
-        event.stopPropagation();
-    }
-});
-$(".solution").each(function() {
-    $(">*:not(h2)", this).toggle();
-    var h2 = $("h2:first", this);
-    h2.append("<span class='fold-unfold glyphicon glyphicon-collapse-down'></span>");
+// Handle foldable solutions (on click and at start)
+$(document).ready(function() {
+
+  // Initialize each solution
+  $(".solution").each(function() {
+    var container = $(this);
+
+    // Hide all children except <solution-title>
+    $(">*:not(solution-title)", container).hide();
+
+    // Add fold/unfold icon to the title
+    $("solution-title:first", container).append(
+      "<span class='fold-unfold glyphicon glyphicon-collapse-down'></span>"
+    );
+
+    // Optional: make cursor pointer
+    $("solution-title:first", container).css("cursor", "pointer");
+  });
+
+  // Toggle on click
+  $(".solution solution-title").on("click", function(event) {
+    var container = $(this).parent();
+
+    // Toggle all content except the title
+    $(">*:not(solution-title)", container).toggle(400);
+
+    // Toggle the icon class
+    $(">solution-title > span.fold-unfold", container)
+      .toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
+  });
+
 });
 
 
