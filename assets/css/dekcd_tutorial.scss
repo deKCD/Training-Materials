@@ -165,7 +165,7 @@ $codeblock-padding: 0.35em !default;
 
 // Softwarecarpentries compatible
 
-.keypoints{ @include bkSetup($color-keypoints, "\e101", "keypoints-title"); }
+.keypoints{ @include bkSetup($color-keypoints, "\e101"); }
 .objectives{ @include bkSetup($color-objectives, "\e085"); }
 
 .keypoints{ background-color: #7ae78e20; }
