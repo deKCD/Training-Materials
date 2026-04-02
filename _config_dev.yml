@@ -35,6 +35,7 @@ exclude:
 
 plugins:
   - jekyll-last-modified-at
+  - jekyll-sitemap
 
 categories:
   tutorials: "/tutorials/"

@@ -20,6 +20,42 @@
     <link href="{{ '/assets/fontawesomefree/css/fontawesome.css' | relative_url }}" rel="stylesheet" type="text/css">
     <link href="{{ '/assets/fontawesomefree/css/brands.css' | relative_url }}" rel="stylesheet" type="text/css">
     <link href="{{ '/assets/fontawesomefree/css/solid.css' | relative_url }}" rel="stylesheet" type="text/css">
+
+    <!-- include bioschema markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LearningResource", 
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+          "@type": "CreativeWork"
+        },
+        "@id": "{{ page.url | absolute_url }}",
+        "url": "{{ page.url | absolute_url }}",
+        "name": "{{ page.title | escape }}",
+        "description": "{{ page.description | escape }}",
+        "keywords": "{{ page.keywords | join: ', ' }}",
+        "teaches": [
+          {% for learning_objective in page.objectives %}
+            "{{ learning_objective | escape }}"{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+        "learningResourceType": "tutorial",
+        "educationalUse": "training",
+        "author": [
+          {% for author in page.contributions.authorship %}
+            {
+              "@type": "Person",
+              "name": "{{ author | escape }}"
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+          ],
+        "license": ["https://creativecommons.org/licenses/by/4.0/"],
+        "timeRequired": "{{ page.time_estimation }}",
+        "version": "{{ page.life_cycle }}"
+      }
+    </script>
+
   </head>
   <body>
     <!-- include nav menu -->
