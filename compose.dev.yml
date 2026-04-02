@@ -3,7 +3,7 @@
 services:
   jekyll: # or any other name
     build: . # if using the Dockerfile to build on the fly when starting compose setup
-    image: quay.io/dekcd/training-materials:0.1.0 # referencing training-materials image with the corresponding version one wants to use
+    image: oci.bi.denbi.de/dekcd/training-materials:0.1.0 # referencing training-materials image with the corresponding version one wants to use
     
     ports:
       - "4000:4000" # for the training-materials as such
