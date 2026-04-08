@@ -74,6 +74,8 @@ title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
 slug: unix-course
 time_estimation: 2H30M
+level: "Educational level"
+keywords: [list of keywords]
 questions:
   - Which questions are addressed by the tutorial?
 objectives:
@@ -83,7 +85,7 @@ key_points:
  - They will appear at the end of the tutorial
 version:
  - main
-life_cycle: "Beta"
+life_cycle: "Creative work status"
 contributions:
   authorship:
   - author 1
@@ -100,14 +102,21 @@ The following fields are mandatory unless stated otherwise:
 * `layout`: use `tutorial_hands_on` as the default layout.
 * `title`: tutorial title as displayed on the tutorial collection page.
 * `description`: a concise summary of the tutorial content. 
+* `slug`: 
 * `time_estimation`: estimated duration of the tutorial. This must conform to the following pattern:
       ```/^(?:([0-9]+)[Hh])?(?:([0-9]+)[Mm])?(?:([0-9.]+)[Ss])?$/```
+* `level`: the learners level of ability in the topic being taught according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Examples of skill levels include ***beginner***, ***intermediate*** or ***advanced***.
+* `keywords`: keywords or tags used to describe the content. Multiple entries in a keywords list are delimited by commas.
+  Example:
+  ```keywords: ["bioinformatics", "python"]```
 * `questions`: a list of key questions addressed by the tutorial.
 * `objectives`: a list of learning objectives.
 * `key_points`: summary points presented at the end of the tutorial.
 * `version`: specifies the tutorial version (e.g., `main`).
-* `life_cycle`: indicates the development status.
-* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/`.
+* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Options are ***Active***, ***Under development***, and ***Archived***.
+
+  Example:
+  ```life_cycle: "under development"```
 
 > <details-title>Development status of tutorials</details-title>
 > Tutorials follow a structured development model aligned with best practices from [Carpentries](https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html).
@@ -117,6 +126,9 @@ The following fields are mandatory unless stated otherwise:
 > - **Deprecated:** the tutorial is no longer maintained and may be removed in the future.
 > 
 {: .details}
+
+* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/`.
+
 
 The following fields are optional but recommended where applicable:
 * `zenodo_link`: link to the input data for the tutorial on Zenodo.
@@ -205,6 +217,8 @@ The following boxes are available and should be used consistently:
 * `{: .code-in}` input code blocks
 * `{: .code-out}` output or results
 
+Foldable box types (`solution`, `tip`, `comment`, `details`) allow you to show or hide the content on the same page. The title line of these boxes is always visible, making it easier to scan long explanatory boxes and reducing visual overload in tutorials.
+
 > <hands-on-title>Tasks</hands-on-title>
 > 1. Create each box and see how it looks.
 > 2. Create one with a nested box.
@@ -269,7 +283,6 @@ Usage examples:
 Images must be referenced using the `relative_url` filter:
 ```
 ![figure-title]({{ "/tutorials/<tutorial-folder>/<image-folder>/<image>" | relative_url }}){: .responsive-img }
-
 ```
 * `![figure-title]()` this is standard Markdown image syntax. The text inside the brackets (`figure-title`) becomes the **alt text**, which improves accessibility and is displayed if the image fails to load.
 * `{{ "/path/to/image" | relative_url }}` the `relative_url` ensures that the correct `baseurl` defined in `_config.yml` is automatically prepended. This prevents broken links when the site is hosted in a subdirectory.
@@ -308,6 +321,9 @@ If no suitable group exists:
 Once your tutorial is ready to publish, create a new branch, commit your changes, submit a pull request for review. 
 You may optionally [open an issue](https://github.com/deKCD/Training-Materials/issues){:target="_blank"} to describe your contribution before or alongside your pull request.
 
+### Registering material in TeSS
+
+If all the required metadata fields are completed correctly, tutorials can be registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"} with minimal additional effort. Using the [Bioschemas TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"} ensures the metadata is machine-readable and interoperable, enabling automated harvesting, improving discoverability, and supporting seamless integration into the ELIXIR training ecosystem without manual curation.
 
 ## Create a new learning pathway
 ------------------------------------

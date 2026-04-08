@@ -21,6 +21,17 @@
     <link href="{{ '/assets/fontawesomefree/css/brands.css' | relative_url }}" rel="stylesheet" type="text/css">
     <link href="{{ '/assets/fontawesomefree/css/solid.css' | relative_url }}" rel="stylesheet" type="text/css">
 
+    <!-- Parse tutorial group title -->
+    {% assign group_title = "" %}
+    {% assign group_description = "" %}
+
+    {% for group in site.data.tutorial_groups %}
+      {% if group.tutorials contains page.slug %}
+        {% assign group_title = group.title %}
+        {% assign group_description = group.description %}
+      {% endif %}
+    {% endfor %}
+
     <!-- include bioschema markup -->
     <script type="application/ld+json">
       {
@@ -30,11 +41,19 @@
           "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
           "@type": "CreativeWork"
         },
-        "@id": "{{ page.url | absolute_url }}",
-        "url": "{{ page.url | absolute_url }}",
+        "audience": {
+          "@type": "EducationalAudience",
+          "educationalRole": "Learners"
+        },
+        "@id": "{{ site.dekcd_training | append: page.url | absolute_url }}",
+        "url": "{{ site.dekcd_training | append: page.url | absolute_url }}",
         "name": "{{ page.title | escape }}",
         "description": "{{ page.description | escape }}",
-        "keywords": "{{ page.keywords | join: ', ' }}",
+        "keywords": [
+          {% for kw in page.keywords %}
+            "{{ kw | escape }}"{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
         "teaches": [
           {% for learning_objective in page.objectives %}
             "{{ learning_objective | escape }}"{% unless forloop.last %},{% endunless %}
@@ -42,6 +61,8 @@
         ],
         "learningResourceType": "tutorial",
         "educationalUse": "training",
+        "educationalLevel": "{{ page.level | escape }}",
+        {% if page.contributions.authorship %}
         "author": [
           {% for author in page.contributions.authorship %}
             {
@@ -50,9 +71,18 @@
             }{% unless forloop.last %},{% endunless %}
           {% endfor %}
           ],
+        {% endif %}
         "license": ["https://creativecommons.org/licenses/by/4.0/"],
         "timeRequired": "{{ page.time_estimation }}",
-        "version": "{{ page.life_cycle }}"
+        "version": "{{ page.version }}",
+        "creativeWorkStatus": "{{ page.life_cycle | escape }}",
+        "dateModified": "{{ page.last_modified_at | escape }}",
+        "isPartOf": {
+          "@type": "CreativeWork",
+          "name": "{{ group_title | default: 'Training Collection' | escape }}",
+          "description": "{{ group_description | default: '' | escape }}",
+          "url": "https://datenkompetenz.cloud/training/tutorials/"
+        }
       }
     </script>
 

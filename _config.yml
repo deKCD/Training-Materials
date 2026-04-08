@@ -8,11 +8,11 @@ color_mode:
   default: light
   
 # Sites
-url: "https://dekcd.bi.denbi.de"
+url: "https://datenkompetenz.cloud"
 baseurl: "/training"
 repository_url: "https://github.com/deKCD/Training-Materials"
 dekcd: "https://datenkompetenz.cloud/"
-dekcd_training: "https://datenkompetenz.cloud/training/"
+dekcd_training: "https://datenkompetenz.cloud/training"
 denbi_cloud: "https://www.denbi.de/cloud"
 partner: "https://datenkompetenz.cloud/partner/"
 event_kalender: "https://datenkompetenz.cloud/event-kalender/?p=1"
