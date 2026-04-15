@@ -8,6 +8,7 @@
   tutorials:
     - simpleVMWorkshop
     - bibigrid
+    - ansible_webservices_denbi_cloud
 
 - title: Machine Learning on Cloud infrastructure
   description: Tutorials focused on setting up machine learning toolkits and applications on cloud infrastructure.
