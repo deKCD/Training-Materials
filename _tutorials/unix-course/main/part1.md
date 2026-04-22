@@ -6,13 +6,13 @@ When accessing a Unix system running as a virtual machine in the cloud one would
 For the sake of this tutorial the access route to the terminal is via web browser.
 Every participant has access to a prepared virtual machine running a web-based development environment called Theia IDE.
 
-> ## Generate a new ssh key
+> <hands-on-title>Generate a new ssh key</hands-on-title>
 > You can generate a new public/private SSH key pair on your local machine.
 > 
-> > ## Important
-> > You can distribute your public key to other servers, but your private key must be kept secure and never shared.
-> >
-> {: .keypoints}
+>> <warning-title>Important</warning-title>
+>> You can distribute your public key to other servers, but your private key must be kept secure and never shared.
+>>
+>{: .warning}
 > 
 > After you generate the key, you can add the public key (e.g. `KEY.pub`) to your account on GitHub.com to enable authentication for Git operations over SSH.
 > ```bash
@@ -46,10 +46,10 @@ After successful login the Theia IDE screen appears. The screen is usually divid
 Editor pane in the center, file browser on the left, terminal at the bottom.
 This tutorial will primarily focus on the use of the terminal.
 
-> ## Hands On: Access your private VM
+> <hands-on-title>Access your private VM</hands-on-title>
 > Access to your own private virtual machine works different from what is used here. You would usually run an SSH client to connect to the machine using a key file and would then be presented with a single terminal command prompt, e.g.:
 > 
-> > ## Code In
+> > <code-in-title>Bash</code-in-title>
 > > ```bash
 > > ssh -i ~/.ssh/mykeyfile ubuntu@myprivatevm.example.com
 > > ```
@@ -77,14 +77,14 @@ git clone https://github.com/deNBI/unix-course.git
 This will create the directory `unix-course` within your user's home directory.
 We can now move on with the exercise.
 
-> ## Taks
+> <hands-on-title>Taks</hands-on-title>
 > 1. Open the manual page of the command `pwd` by entering `man pwd`.
 > 2. Find out your current (working) directory. *(1 command)*
 > 3. If your current directory is not your home directory, please move to it. *(1 command)*
 > 4. Now create a directory called `pi_calculation` and enter the new directory. *(2 commands)*
 > 5. Confirm that your current directory has changed. *(1 command)*
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > pwd
 > > cd ~
@@ -100,14 +100,14 @@ We can now move on with the exercise.
 
 A simple program that (slowly) approximates the number pi is available as a file at `~/unix-course/calculate_pi`.
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Please copy this program into your current directory. *(1 command)*
 > 2. Inspect the file you just copied to get information about its file type. *(1 command)*
 > 3. Please make the file executable (for you as the owner only). *(1 command)*
 > 4. Now run the executable and watch how the pi approximation gets better over time. *(1 command)*
 > 5. Stop the running program by pressing the key combination `Ctrl+c`.
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cp ~/unix-course/calculate_pi .
 > > file calculate_pi
@@ -122,12 +122,12 @@ A simple program that (slowly) approximates the number pi is available as a file
 
 We would like to save the results of the pi calculation program to a file instead of just displaying them on the screen.
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Please run the pi executable again but this time send its output to a file called `pi_results.txt` in the same directory. *(1 command)*
 > 2. Open a second terminal and enter a command that allows you to watch the output lines being written to the results file. **Note:** Bear in mind that a new terminal always starts in your home directory. *(2 commands)*
 > 3. Stop following the results file. *(1 key combination)*
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > ./calculate_pi > pi_results.txt 
 > > cd pi_calculation
@@ -142,7 +142,7 @@ We would like to save the results of the pi calculation program to a file instea
 
 The pi approximation will probably run for about an hour but we would like to terminate it earlier.
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. List your own running programs. *(1 command)*
 > 2. Use the process ID (PID) of the still running pi calculation to terminate it. The PID is in the first column of the program list. *(1 command)*
 > 3. Verify that the pi calculation has stopped. *(1 command or action)*
@@ -151,7 +151,7 @@ The pi approximation will probably run for about an hour but we would like to te
 > 6. Check the free disk space available on your file system. *(1 command)*
 >
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > ps -x
 > > kill <id of the process>

@@ -2,6 +2,7 @@
   description: Tutorials focused on basic Unix / Linux commands and shell usage.
   tutorials:
     - unix-course
+    - simplevmworkshop
 
 - title: Cloud computing
   description: Tutorials focused on using the de.NBI Cloud infrastructure and project types.
@@ -21,22 +22,19 @@
     - corer
     - panbench
 
-- title: Basic Data Management in the de.NBI Cloud
-  description: Tutorial focused on data management best practices and tools in the de.NBI Cloud.
-  tutorials:
-    - DM_in_the_deNBI_cloud
-
 - title: Metagenomics
   description: Tutorials focused on handling of metagenomics sequencing data
   tutorials:
+    - mgworkshop_assembly
     - basicsAmpliconQC
 
 - title: Data Management on the Cloud
-  description: Tutorials focused on Data Management solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
+  description: Tutorials focused on data management best practices, solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
   tutorials:
+    - DM_in_the_deNBI_cloud
     - dm_repository_use
 
 - title: Incubator
-  description: location for new tutorials, for review
+  description: Location for new tutorials, for review
   tutorials:
     - data-dashboard-webapp

@@ -5,6 +5,8 @@ title: Build a Simple Dataset Web App on EMBL Cloud Infrastructure
 description: Learn to create and deploy a web application using Python, Streamlit, Docker/Podman, and Kubernetes on EMBL cloud computing infrastructure
 slug: data-dashboard-webapp
 time_estimation: 2H
+level: beginner
+keywords: [FIXME]
 questions:
   - How do I create a simple web application for data visualization?
   - How do I containerize an application using Docker or Podman?
@@ -21,19 +23,19 @@ key_points:
   - Kubernetes enables cloud deployment and makes your app publicly accessible
   - Git is essential for version control and sharing your container images
   - Testing locally before deploying to the cloud saves time and catches errors early
-version: 1.0
-life_cycle: stable
+version:
+  - main
+life_cycle: active
 contributions:
   authorship:
-    - author 1
-    - author 2
+    - Jacobo Miranda
   editing: 
   funding: 
 ---
 
-![People hiking in a row on the ice of Perito Moreno glacier, Los Glaciares national park, Santa Cruz province, Patagonia Argentina](images/perito-moreno-glacier.jpg){: .responsive-img }
+![People hiking in a row on the ice of Perito Moreno glacier, Los Glaciares national park, Santa Cruz province, Patagonia Argentina]({{ "/tutorials/incubator/images/perito-moreno-glacier.jpg" | relative_url }}){: .responsive-img }
 
-# Introduction
+## Introduction
 
 In this tutorial we will create a simple web app for a toy dataset in Python, using a CSV file as the dataset, then we will run this web app on EMBL infrastructure so it will be available online.
 
@@ -50,7 +52,7 @@ It only uses 6 files and will do the bare minimum, but these steps can be the ba
 >
 {: .agenda}
 
-# Prerequisites
+## Prerequisites
 
 Before starting this tutorial, you will need:
 
@@ -65,7 +67,7 @@ Before starting this tutorial, you will need:
 >
 {: .tip}
 
-# Create Your Git Project
+## Create Your Git Project
 
 Version control is essential for tracking changes and sharing your code. We'll start by setting up a Git repository.
 
@@ -88,7 +90,7 @@ Version control is essential for tracking changes and sharing your code. We'll s
 >
 {: .hands_on}
 
-# Set Up Your Local Environment
+## Set Up Your Local Environment
 
 Now we'll clone the repository to your computer and set up the project structure.
 
@@ -118,7 +120,7 @@ Now we'll clone the repository to your computer and set up the project structure
 >
 {: .hands_on}
 
-# Create the Application Files
+## Create the Application Files
 
 We'll create three core files for our web application: the Python app, a data file, and a requirements file.
 
@@ -160,7 +162,7 @@ We'll create three core files for our web application: the Python app, a data fi
 >
 {: .hands_on}
 
-# Test the App Locally
+## Test the App Locally
 
 Before deploying to the cloud, it's important to test your application locally.
 
@@ -227,7 +229,7 @@ Before deploying to the cloud, it's important to test your application locally.
 >
 {: .tip}
 
-# Containerize Your Application
+## Containerize Your Application
 
 Now we'll create a container image of your application. A container is like a snapshot of your code and its environment, ensuring it runs consistently anywhere.
 
@@ -255,7 +257,7 @@ Now we'll create a container image of your application. A container is like a sn
 >
 {: .hands_on}
 
-## Create the Containerfile
+### Create the Containerfile
 
 The containerfile tells Podman how to build your image.
 
@@ -300,7 +302,7 @@ The containerfile tells Podman how to build your image.
 >
 {: .details}
 
-## Build and Test the Container
+### Build and Test the Container
 
 > <hands-on-title>Build and run the container locally</hands-on-title>
 >
@@ -348,7 +350,7 @@ The containerfile tells Podman how to build your image.
 >
 {: .question}
 
-## Upload the Image to Git Registry
+### Upload the Image to Git Registry
 
 Once your image works locally, upload it to the Git container registry so Kubernetes can access it.
 
@@ -374,7 +376,7 @@ Once your image works locally, upload it to the Git container registry so Kubern
 >
 {: .hands_on}
 
-# Deploy to Kubernetes
+## Deploy to Kubernetes
 
 The final step is deploying your application to the cloud using Kubernetes.
 
@@ -386,7 +388,7 @@ The final step is deploying your application to the cloud using Kubernetes.
 >
 {: .details}
 
-## Set Up Kubernetes Access
+### Set Up Kubernetes Access
 
 > <hands-on-title>Configure kubectl</hands-on-title>
 >
@@ -445,7 +447,7 @@ The final step is deploying your application to the cloud using Kubernetes.
 >
 {: .hands_on}
 
-## Create the Deployment Configuration
+### Create the Deployment Configuration
 
 Now we'll create a YAML file that tells Kubernetes how to deploy your application.
 
@@ -569,7 +571,7 @@ Now we'll create a YAML file that tells Kubernetes how to deploy your applicatio
 >
 {: .hands_on}
 
-## Deploy and Test
+### Deploy and Test
 
 > <hands-on-title>Run your app in the cloud</hands-on-title>
 >
@@ -635,7 +637,7 @@ Now we'll create a YAML file that tells Kubernetes how to deploy your applicatio
 >
 {: .question}
 
-# Conclusion
+## Conclusion
 
 Congratulations on completing this tutorial! You've successfully:
 

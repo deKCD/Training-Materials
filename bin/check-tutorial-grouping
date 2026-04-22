@@ -1,0 +1,61 @@
+#!/bin/bash
+# Check Tutorial Grouping
+# Validates that all tutorials are properly grouped and registered
+
+set -e
+
+# Script configuration
+QUIET_MODE="${1:-no}"
+VERBOSE_MODE="${2:-no}"
+FOLDER_PATH="${3:-_tutorials/}"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Initialize counters
+ISSUES=0
+UNGROUPED_TUTORIALS=0
+
+if [[ "$QUIET_MODE" != "yes" ]]; then
+    echo "Starting tutorial grouping check..."
+    echo "Folder: $FOLDER_PATH"
+fi
+
+# Check _data/tutorial_groups.yml exists
+if [[ ! -f "_data/tutorial_groups.yml" ]]; then
+    echo -e "${YELLOW}Warning: _data/tutorial_groups.yml not found${NC}"
+    ((ISSUES++))
+fi
+
+# Find all tutorial directories
+while IFS= read -r dir; do
+    tutorial_name=$(basename "$dir")
+    
+    if [[ -f "$dir/index.md" ]]; then
+        # Check if tutorial is listed in tutorial_groups.yml
+        if [[ -f "_data/tutorial_groups.yml" ]]; then
+            if ! grep -q "$tutorial_name" "_data/tutorial_groups.yml" 2>/dev/null; then
+                if [[ "$VERBOSE_MODE" == "yes" ]]; then
+                    echo -e "${YELLOW}Tutorial '$tutorial_name' not found in tutorial_groups.yml${NC}"
+                fi
+                ((UNGROUPED_TUTORIALS++))
+                ((ISSUES++))
+            fi
+        fi
+    fi
+done < <(find "$FOLDER_PATH" -maxdepth 1 -type d ! -name "_*" ! -name "." 2>/dev/null || true)
+
+if [[ "$QUIET_MODE" != "yes" ]]; then
+    echo "Checked tutorials for proper grouping"
+    if [[ $ISSUES -gt 0 ]]; then
+        echo -e "${RED}Found $ISSUES grouping issues ($UNGROUPED_TUTORIALS ungrouped)${NC}"
+        exit 1
+    else
+        echo -e "${GREEN}All tutorials are properly grouped${NC}"
+    fi
+fi
+
+exit 0

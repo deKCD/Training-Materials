@@ -113,10 +113,10 @@ The following fields are mandatory unless stated otherwise:
 * `objectives`: a list of learning objectives.
 * `key_points`: summary points presented at the end of the tutorial.
 * `version`: specifies the tutorial version (e.g., `main`).
-* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Options are ***Active***, ***Under development***, and ***Archived***.
+* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Options are ***active***, ***under development***, and ***archived***.
 
   Example:
-  ```life_cycle: "under development"```
+  ```life_cycle: under development```
 
 > <details-title>Development status of tutorials</details-title>
 > Tutorials follow a structured development model aligned with best practices from [Carpentries](https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html).
@@ -167,7 +167,22 @@ If you have any data or images that you would like to add to the tutorial, pleas
 
 #### **Formatting tutorial content**
 
-This section outlines the standardized components used to structure tutorial content, including instructional boxes and image handling.
+This section outlines the standardized components used to structure tutorial content, including Table of Contents (TOC), instructional boxes and image handling.
+
+##### **TOC**
+
+To automatically generate a Table of Contents from your section headings, add the following snippet directly below the metadata section in your content:
+
+{% raw %}
+```markdown
+> <agenda-title>Table of Contents</agenda-title>
+> Your text (optional).
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+```
+{% endraw %}
 
 ##### **Boxes**
 
@@ -361,3 +376,40 @@ editorial_board:
 The `layout` field must be set to `pathway` to ensure correct rendering of the pathway page. Each tutorial entry must include `name` (which must exactly match the corresponding tutorial folder name) and `version` (selected from the available versions of that tutorial).
 
 After defining the pathway, create a new branch, commit the pathway file, and submit a pull request for review.
+
+## Share Materials with the Galaxy Training Network (GTN)
+
+If you would like to contribute your training materials to the Galaxy Training Network (GTN), please follow the official guidelines for [creating a new tutorial](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/github-contribution/tutorial.html) and [formatting content](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html).
+
+This platform is fully compatible with GTN in terms of metadata structure and formatting conventions. This compatibility enables seamless transfer of materials between GTN and this platform. In practice, this means:
+
+* training materials developed here can be contributed to GTN with minimal adjustments.
+* GTN tutorials can be integrated into this platform without requiring reformatting, preserving both content and presentation.
+
+To incorporate specific GTN tutorials into this platform, you can use [git sparse-checkout](https://git-scm.com/docs/git-sparse-checkout) to efficiently retrieve only the required content:
+
+1. Clone the GTN repository with sparse checkout and blob filtering (lightweight clone into a temporary directory):
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/galaxyproject/training-material.git temp-training
+```
+
+2. Navigate to the cloned repository:
+```bash
+cd temp-training
+```
+
+3. Select the specific tutorial directory. For example, to retrieve the [Classification in Machine Learning](https://galaxyproject.github.io/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html) tutorial:
+```bash
+git sparse-checkout set topics/statistics/tutorials/classification_machinelearning
+```
+
+4. Copy the tutorial into your local `_tutorials/` directory:
+```bash
+cp -r topics/statistics/tutorials/classification_machinelearning ../_tutorials/<tutorial_name>
+```
+
+5. Clean up the temporary files:
+```bash
+cd ..
+rm -rf temp-training
+```

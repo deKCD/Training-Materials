@@ -4,8 +4,9 @@ layout: tutorial_hands_on
 title: Using the cross-domain Data-Management Platform repository
 description: A step-by-step overview of how to use the repository.
 slug: dm_repository_use
-level: Introductory
 time_estimation: 40 minutes
+level: beginner
+keywords: [FIXME]
 questions:
   - How to start looking for a Data-Management Solution?
   - What benefits are there to having a cross-domain repository?
@@ -26,7 +27,7 @@ key_points:
 - Contributions are welcome via GitHub issues and pull requests.
 version:
     - main
-life_cycle: "beta"
+life_cycle: under development
 contributions:
   authorship:
   - Alain Becam
@@ -44,11 +45,11 @@ contributions:
 {: .agenda}
 
 
-# **Scope**
+## **Scope**
 
 This tutorial is not a comprehensive guide to doing Data Management, but a "been-there-done-that" introduction followed by how to use the [DeKCD registry of FAIR data management platforms for the Cloud](https://dekcd.github.io/FAIR-DMP-Registry/). It is mostly on the technical side of Data Management.
 
-# **Prerequisites**
+## **Prerequisites**
 
 To follow this tutorial:
 
@@ -60,17 +61,17 @@ For a good use of the repository:
 - Knowledge of Linux and Containers (Docker),
 - Knowledge of APIs.
 
-# **Setting-up a Data Management Solution, a short overview**
+## **Setting-up a Data Management Solution, a short overview**
 
 The repository is mostly a technical overview, and as such this section is mostly scoped to the technical aspects.  
 Several online resources help with a Data Management Plan, making it FAIR and various aspects, such as [RDM Kit (in Life Sciences)](https://rdmkit.elixir-europe.org/), [FairCookBook](https://faircookbook.elixir-europe.org/content/home.html), [Data Stewardship Wizard](https://ds-wizard.org/), [FairWizard](https://fair-wizard.com/).
 
-## **Goals and Purposes**
+### **Goals and Purposes**
 
 The choice of a Data Management Solution is deeply dependent on the given goals and purposes. A solution for supporting a one-year work period could use a simple web application installed using Docker on a local server, while a solution meant for 10 years and several projects might benefit from being on the cloud, using several connected web applications.  
 Unfortunately there is no silver bullet, as the best solution will depend on your specific conditions, if you are part of a consortium proposing some infrastructure, if your institution offers some solutions, and if you have the means to get a technical person for the duration of the project.
 
-## **Means**
+### **Means**
 
 Some Data Management platforms are easy to set up, easy to update, and easy to use. Some are not, but they might address your needs better. In that case, it is probably good to consider the highest point of friction: what will cost the most in the long run. But also critical points: what cannot be accepted.
 
@@ -82,7 +83,7 @@ Similarly, an assembly can be desirable: one application closer to the lab commu
 
 Versioning is always a good option for all your customisations, APIs, templating, parameters... When the customisation is not easily versionable, it is a good idea, when it is available as text, to work on a versioned copy. This works particularly well with a test setup, which is also always good to have: apply the working changes only on test, and apply them on production only when committed in the Version Control System.
 
-## **Constraints**
+### **Constraints**
 
 Constraints might be funding constraints, data usage constraints due to data privacy policy, but also non-commercial-use-only of software or data...
 
@@ -94,34 +95,34 @@ They have strong connections with your means. You should have some leeway in ord
 
 Some decisions related to constraints must also be made before setting up the platform. For instance, if you work on patient-related data and need encrypted storage, you need to choose a platform supporting it.
 
-# Introduction to the Data Management Platform Repository
+## Introduction to the Data Management Platform Repository
 
 The **Data Management Platforms (DMP) repository** is a curated collection of major platforms used in research data management.  
 It emphasizes the FAIR principles (Findable, Accessible, Interoperable, Reusable) and evaluates how platforms integrate with cloud infrastructure.  
 This tutorial will guide you through using the repository, understanding its scope, and contributing to it.
 
-# Hands-on: Using the Repository
+## Hands-on: Using the Repository
 
-## Step 1: Access the Repository
+### Step 1: Access the Repository</hands-on-title>
 
 1. Open your browser and go to [https://dekcd.github.io/FAIR-DMP-Registry/](https://dekcd.github.io/FAIR-DMP-Registry/).
 2. Spend some time exploring the different menus; we will cover them later.  
-   On the top header, the title and the Home link both return to the main page. *About* is a short description of the registry.  
-   The left column shows the different pages, while the right column shows the topics in the current page.
+    On the top header, the title and the Home link both return to the main page. *About* is a short description of the registry.  
+    The left column shows the different pages, while the right column shows the topics in the current page.
 
-## Step 2: Understand the Main Goals
-
+### Step 2: Understand the Main Goals</hands-on-title>
+ 
 The repository highlights platforms with:
 - Reusability across domains,  
 - Interoperability,  
 - Affinity to cloud usage/set-ups,  
 - Good documentation.
 
-> Note: While most platforms align with FAIR principles, not all do completely.
+**Note:** While most platforms align with FAIR principles, not all do completely.
 
-## Step 3: Using the repository
+### Step 3: Using the repository
 
-### Using the menus
+#### Using the menus
 
 The menus are on the top, the left, and the right:
 - **Top Menu**: The Home page and the About page.
@@ -140,20 +141,20 @@ The right menu will be used to go to a specific topic and most of the time to a 
 
 ![Image showing the right menu](../../images/RightMenu.png "The right menu"){: .responsive-img }
 
-> ## Hands On: Find a commercial DM platform for a domain
+><hands-on-title>Find a commercial DM platform for a domain</hands-on-title>
 >
 > From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms.
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > First click on the Major Data Management Platforms link in the left menu.  
 > > ![Selecting Major Data management in the left menu](../../images/MainDMPlatformMenu.png "Selecting Major Data management in the left menu"){: .responsive-img }  
 > > Then on Geomatics on the right menu, and finally on Commercials in the sub-menu.  
 > > ![Selecting in the right menu then in the submenu](../../images/CommercialsGeomatics.png "Selecting in the right menu then in the submenu"){: .responsive-img }
 > {: .solution}
 >
-{: .question}
+{: .hands_on}
 
-### A typical entry
+#### A typical entry
 
 Not all entries are identical, as there is some extra information for some entries. But all entries should have a common base, and most entries will stick to it:
 
@@ -163,18 +164,18 @@ Not all entries are identical, as there is some extra information for some entri
 	+ Interoperability **NONE/LOW/MEDIUM/HIGH** / No interoperability: explanation on why.
 	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
 
-> ## Hands On: Find details about a specific entry
+><hands-on-title>Find details about a specific entry</hands-on-title>
 >
 > In the Major Data Management Platforms page, find the details about pyiron, which is in Materials Science. Check if it is cross-domain.
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > Click on Materials Science on the right menu, then eventually scroll down to find the details about pyiron, including if it is cross-domain.  
 > > ![Selecting in the right menu](../../images/MaterialsScience.png "Selecting in the right menu"){: .responsive-img }
 > {: .solution}
 >
-{: .question}
+{: .hands_on}
 
-### Using the search
+#### Using the search
 
 The repository provides a search function, powered by the document system Quarto, which is accessed by clicking on the magnifying lens icon at the top right of the top menu.
 
@@ -186,15 +187,15 @@ Clicking on one result should lead to the paragraph containing the result. It is
 
 ![Finding the entry using the browser search](../../images/SearchIRODSInPage.png "Finding the entry using the browser search"){: .responsive-img }
 
-> ## details
+> <details-title></details-title>
 > Depending on the size of the page, there could be 2 magnifying lenses. They have both the exact same function.
 {: .details}
 
-> ## Hands On: Find details about a specific entry
+> <hands-on-title>Find details about a specific entry</hands-on-title>
 >
 > Using the search, look for CIViC.
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > Click on the magnifying lens.  
 > > ![Clicking on the magnifying lense](../../images/SearchCIViC1.png "Clicking on the magnifying lense"){: .responsive-img }  
 > > Then type CIV in the search bar.  
@@ -205,9 +206,9 @@ Clicking on one result should lead to the paragraph containing the result. It is
 > > ![Getting the entry](../../images/SearchCIViC_result.png "Getting the entry"){: .responsive-img}
 > {: .solution}
 >
-{: .question}
+{: .hands_on}
 
-### Extras
+##### Extras
 
 The repository also lists, in a simplified format:
 - **the major ontologies and thesauruses**,  
@@ -219,7 +220,7 @@ The repository also lists, in a simplified format:
 
 As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
 
-## Step 3: Generalists vs Specialists
+### Step 3: Generalists vs Specialists
 
 One main consideration when choosing a Data Management platform is the choice between generalist platforms (i.e. not dedicated to a domain) and specialist platforms, dedicated and adapted to a domain. A specialist platform might still be used in another domain, eventually with some caveats. The last point of each entry explains how cross-domain an entry is.  
 While choosing a generalist platform might allow you to quickly start working and storing data, a specialised platform might offer some clear benefits: pre-existing metadata and/or ontologies/taxonomies, a structured storage of data making reusing and sharing easier, ...
@@ -228,13 +229,13 @@ While choosing a generalist platform might allow you to quickly start working an
 - **Specialist platforms**: e.g. Electronic Laboratory Notebooks for domain-specific work.  
 - **Tip**: Combining both may be necessary or useful. Interconnection often depends on available APIs and documentation.
 
-> ## Hands On: Find one generalist platform and a specialist one
+> <hands-on-title>Find one generalist platform and a specialist one</hands-on-title>
 > 
 > Using the right menu, look for Generalists. Find a Generalist platform of your choice.
 >
 > Then select a specific domain to find a Specialist platform.
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > Click on the Generalists in the right menu.  
 > >  
 > > The section lists the Generalist Data Management Platforms. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or used by another platform and lists, at the time of this writing, only NextCloud.  
@@ -242,21 +243,21 @@ While choosing a generalist platform might allow you to quickly start working an
 > > NextCloud can be used as a flexible Data Management platform, with the limit that it is difficult to structure the stored data, or as a storage solution for another platform.
 > {: .solution}
 >
-{: .question}
+{: .hands_on}
 
-> ## Hands On: How could you combine 2 platforms
+> <hands-on-title>How could you combine 2 platforms</hands-on-title>
 >
 > Your institution is already using NextCloud as a generic distributed storage facility. Inside a shared folder, you store many large microscopy images. You would like to have an online tool to visualise and work on these images.
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > Omero is an online imaging platform for microscopy outputs, and can be connected to other platforms using APIs. A central login is also possible using a central identity service (but this information is not part of the current registry).  
 > >  
 > > Using both NextCloud and Omero APIs, it is possible to bridge both, eventually with a small script fetching the images from NextCloud and pushing them to Omero. Omero also proposes specific import scenarios.
 > {: .solution}
 >
-{: .question}
+{: .hands_on}
 
-## Step 4: Considering Set-up Options
+### Step 4: Considering Set-up Options
 
 While not giving a detailed explanation on how to set up a platform, an entry will say if a containerized setup exists, as well as an integration in Kubernetes.
 
@@ -276,25 +277,25 @@ Adding an API access is not a simple task, so the need to have one should be cla
 
 > These technical aspects might give a security risk: if the platform is hard to update, if the API is too open, if the setup is too complex and might let some openings. In some cases, simpler is better, so it is possible to set up the platform with a reasonable level of security. If IT support is available, it is also advisable to involve them early.
 
-## Step 5: Be Aware of What’s NOT Included
+### Step 5: Be Aware of What’s NOT Included
 
 The repository does **not** provide:
 - A full Data Management Plan (e.g. retention policy, access rights).  
 - Guarantees on platform lifetime or funding.  
 - Alignment between scientists’ low-friction tools vs. institutes’ and funders’ FAIR requirements.  
 
-> ## warning
+> <warning-title>Warning</warning-title>
 > Pitfall: Modifying open-source software may block future updates. It is advised to prefer configuring over modifying.
 {: .warning}
 
-## Step 6: Next Technical Steps
+### Step 6: Next Technical Steps
 
 A **Quickstart guide** for setting up a Data Management platform is planned:
 - From bare-metal to full Kubernetes deployments,  
 - With details on costs, security, and support needs,  
 - With vocabulary clarification for better understanding of existing documentation.
 
-## Step 7: Contribute to the Repository
+### Step 7: Contribute to the Repository
 
 You can contribute via [GitHub](https://github.com/deKCD/FAIR-DMP-Registry) - the link is also provided on the top header with the GitHub logo:
 1. **Create an issue** to suggest a change.  
@@ -315,7 +316,7 @@ A typical entry should include:
 	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
 ```
 
-# Conclusion
+## Conclusion
 
 You now know how to use and navigate the **Data Management Platforms repository**.  
 It is a living resource focused on FAIR principles and cloud compatibility, and it depends on community contributions to grow and remain current.  

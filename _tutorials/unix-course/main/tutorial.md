@@ -4,6 +4,8 @@ title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
 slug: unix-course
 time_estimation: 2H
+level: beginner
+keywords: ["shell", "simplevm"]
 questions:
   - "What is a command shell and why would I use one?"
   - "How can I move around on my computer?"
@@ -21,7 +23,7 @@ key_points:
   - "Tab completion can reduce errors from mistyping and make work more efficient in the shell."
 version:
   - main
-life_cycle: "beta"
+life_cycle: under development
 contributions:
   authorship:
   - Christian Henke
@@ -45,7 +47,7 @@ Commands often have _parameters_, e. g. a file to work on. These are typed in af
  
 In addition, Unix extends the power of commands by using special flags or *switches*. Switches are usually preceded with a dash (`-`), e. g. `ls -lh`.
 
-> ## List of commands
+><details-title>List of commands</details-title>
 > 
 > | Command             | Description                                                  |
 > | ------------------- | ------------------------------------------------------------ |
@@ -98,7 +100,7 @@ In addition, Unix extends the power of commands by using special flags or *switc
 > | `>>`                | append (add) output to a file                                |
 > | `\|`                 | pipe output from one command as input to another             |
 >
-> Download as [PDF](/tutorials/unix-course/main/data/cheatsheet.pdf) or separate [MarkDown](/tutorials/unix-course/main/data/cheatsheet.md).
+> Download as [PDF](./data/cheatsheet.md) or separate [MarkDown](./data/cheatsheet.md).
 > 
 {: .details}
 
@@ -118,6 +120,8 @@ Participants need a web browser and an active ELIXIR account.
 {% include _tutorials/unix-course/main/part2.md %}
 
 {% include _tutorials/unix-course/main/part3.md %}
+
+{% include _tutorials/unix-course/main/part4.md %}
 
 
 

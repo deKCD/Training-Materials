@@ -1,0 +1,13 @@
+name: Check tutorial formatting
+
+on: 
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tutorial-format-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      run: echo "hello world"

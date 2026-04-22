@@ -1,9 +1,11 @@
 ---
 layout: tutorial_hands_on
 title: BiBiGrid Hands-on
-description: "FIXME"
+description: FIXME
 slug: bibigrid
-time_estimation: "FIXME"
+time_estimation: FIXME
+level: FIXME
+keywords: [FIXME]
 questions:
   - "FIXME"
 objectives:
@@ -12,6 +14,7 @@ key_points:
   - "FIXME"
 version:
   - main
+life_cycle: under development
 contributions:
   authorship:
   - Xaver Stiensmeier
@@ -24,33 +27,12 @@ contributions:
 
 The goal of this session is to set up a small HPC cluster consisting of 3 nodes (1 master, 2 [on demand](https://github.com/BiBiServ/bibigrid/blob/master/documentation/markdown/features/configuration.md#workerinstances) workers) using BiBiGrid with [Slurm](https://slurm.schedmd.com/quickstart.html) (workload manager), [Network File System](https://linux.die.net/man/5/nfs) (allows file sharing between servers) and [Theia](https://theia-ide.org/docs/user_getting_started/) (Web IDE). This tutorial targets users running BiBiGrid on de.NBI cloud.
 
-## Table of Contents
-* [Prerequisites](#prerequisites)
-* [Clone bibigrid and bibigrid_clum](#clone-bibigrid-and-bibigrid_clum)
-* [Preparation](#preparation)
-  * [Premade Template](#premade-template)
-  * [Authentication](#authentication)
-  * [Virtual Environment](#virtual-environment)
-* [Configuration](#configuration)
-  * [SSH access information](#ssh-access-information)
-  * [Network](#network)
-  * [Instances](#instances)
-    * [Image](#image)
-    * [Flavor](#flavor)
-  * [Waiting for post-launch Services](#waiting-for-post-launch-services)
-  * [Check Your Configuration](#check-your-configuration)
-* [The Cluster](#the-cluster)
-  * [Starting the cluster](#starting-the-cluster)
-  * [List Running Cluster](#list-running-cluster)
-  * [Cluster SSH Connection](#cluster-ssh-connection)
-  * [Using Theia Web IDE](#using-theia-web-ide)
-* [Hello BiBiGrid, Hello Antibiotic Resistance!](#hello-bibigrid-hello-antibiotic-resistance)
-  * [Setting up nextflow](#setting-up-nextflow)
-* [Ansible - Let's Automate](#ansible---lets-automate)
-* [Terminate a cluster](#terminate-a-cluster)
-* [Moving Forward](#moving-forward)
-    * [More BiBiGrid](#more-bibigrid)
-    * [More Ansible](#more-ansible)
+> <agenda-title>Table of Contents</agenda-title>
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 
 ## **Prerequisites**
@@ -112,15 +94,16 @@ Pick a sensible expiration date.
 ![Download]({{ "/tutorials/bibigrid/images/ac_screen3.png" | relative_url }}){: .responsive-img }
 
 Save the downloaded `clouds.yaml` under `~/.config/openstack/` **and** `~/.config/bibigrid/`. That will allow both OpenstackClient and BiBiGrid to access it:
-```sh
+
+```bash
 cp ~/Downloads/clouds.yaml ~/.config/bibigrid/clouds.yaml
 mkdir ~/.config/openstack
 cp ~/Downloads/clouds.yaml ~/.config/openstack/clouds.yaml
 ```
 
-> ## Why not store BiBiGrids `clouds.yaml` in openstack and avoid the extra copy?
+> <question-title>Why not store BiBiGrids `clouds.yaml` in openstack and avoid the extra copy?</question-title>
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > In the future BiBiGrid will support more than just one cloud infrastructure. Therefore, using the `~/.config/openstack` folder would be a disadvantage later.
 > {: .solution}
 > 
@@ -133,7 +116,9 @@ A virtual environment is something that gives you everything you need to run spe
 
 #### **Creating a [Virtual Python Environment](https://docs.python.org/3/library/venv.html)**
 
-`python3 -m venv ~/.venv/bibigrid`
+```bash
+python3 -m venv ~/.venv/bibigrid
+```
 
 If this command fails, you probably need to install python3-venv manually. 
 For that first update `sudo apt update && sudo apt upgrade` and then `sudo apt install python3.??-venv` (use the correct version for your system).
@@ -142,7 +127,9 @@ For that first update `sudo apt update && sudo apt upgrade` and then `sudo apt i
 
 In order to actually use the virtual environment we need to [source](https://www.theunixschool.com/2012/04/what-is-sourcing-file.html) that environment:
 
-`source ~/.venv/bibigrid/bin/activate`
+```bash
+source ~/.venv/bibigrid/bin/activate
+```
 
 Following [pip](https://manpages.ubuntu.com/manpages/bionic/en/man1/pip.1.html) installations will only affect the virtual environment.
 The virtual environment is only `sourced` in the terminal where you executed the source command. Other terminals are not affected.
@@ -153,7 +140,9 @@ Now let's move into the bibigrid folder `cd bibigrid` we will stay in it unless 
 
 You will now install packages required by BiBiGrid within your newly created virtual environment. If you haven't `sourced` your environment yet, please go [back](#sourcing-environments). To install all BiBiGrid requirements, we simply install from the given requirements file:
 
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
 Try executing `openstack subnet list --os-cloud=openstack` within this environment. If it runs without errors, you are ready to proceed. Otherwise you need to check your `clouds.yaml` and your virtual environment.
 
@@ -161,9 +150,9 @@ Try executing `openstack subnet list --os-cloud=openstack` within this environme
 
 Following the next steps you will update the [premade template](#premade-template).
 
-> ## Why are some keys in the template already set?
+><question-title>Why are some keys in the template already set?</question-title>
 > 
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > In this hands-on, we want to make things as easy as possible for you.
 > > Just check whether the key you've found is the correct one and matches with the one we've written down in the configuration file already.
 > {: .solution}
@@ -186,9 +175,9 @@ openstack subnet list --os-cloud=openstack
 
 Set the template's `subnet` key to the result's `Name` key.
 
-> ## How do I create a subnet for my own project?
+> <question-title>How do I create a subnet for my own project?</question-title>
 > 
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > If you have your own project outside of this workshop and would like to create a subnet, take a look at the [OpenStack Quickstart from de.NBI Cloud Wiki](https://cloud.denbi.de/wiki/quickstart/#network-and-subnet). Depending on your cloud location, steps might slightly differ.
 > {: .solution}
 > 
@@ -219,9 +208,9 @@ openstack image list --os-cloud=openstack | grep active | grep "Ubuntu 22.04"
 Set the template's `image` key of all instances to the result's `ID`  **or** `NAME` entry of the Ubuntu 22.04 row. 
 All servers will share the same image.
 
-> ## Do I have to update my configuration file whenever there is a new image version?
+> <question-title>Do I have to update my configuration file whenever there is a new image version?</question-title>
 >
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > If you use the method described above, yes. However, you can also use a regex instead of a specific name to select an image during runtime. This has also avoids issues that may arise whenever an image is deactivated while your cluster is still running. For our Ubuntu 22.04 images you could use `^Ubuntu 22\.04 LTS \(.*\)$`, but usually you need to check what image names are available at your location and choose the regex accordingly. For more information on this functionality take a look at BiBiGrids [full documentation](https://github.com/BiBiServ/bibigrid/blob/master/documentation/markdown/features/configuration.md#using-regex).
 > {: .solution}
 > 
@@ -239,7 +228,7 @@ openstack flavor list --os-cloud=openstack
 
 Set the template's `flavor` keys (provide an `ID` or `NAME` - we will use `NAME` in the following examples) to flavors of your choice - in this tutorial we will use `de.NBI medium` for our master and `de.NBI small` for our two workers. You can use a different flavor for the master and each worker-group.
 
-> ## Example: Multiple worker groups
+> <details-title>Example: Multiple worker groups</details-title>
 > 
 > The key `workerInstances` expects a list. Each list element is a `worker group` with an `image` + `type` combination and a `count`. In our tutorial we use a single worker group containing two workers. Since they are in the same worker group, they are identical in flavor and image. We could, however, define two worker groups with one worker each in order to use different flavors for them.
 > 
@@ -322,9 +311,9 @@ All*         up   infinite      2  idle~ bibigrid-worker-6jh83w0n3vsip90-[0-1]
 All*         up   infinite      1   idle bibigrid-master-6jh83w0n3vsip90
 ```
 
-> ## Why are there two partitions (openstack and all) with the same nodes?
+> <question-title>Why are there two partitions (openstack and all) with the same nodes?</question-title>
 > 
-> > ## Answer
+> > <solution-title>Answer</solution-title>
 > > BiBiGrid creates one partition for every cloud (here `openstack`) and one partition called `all` containing all nodes from all partitions. Since we are only using one cloud for this tutorial, we only have `openstack` and `all`.
 > {: .solution}
 > 
@@ -353,7 +342,7 @@ to connect to Theia. A Theia IDE tab will be automatically opened in your browse
 In this section, you will execute the `resFinder` workflow to create a heatmap of antibiotic resistances using your cluster. We will only focus on the workflow language [Nextflow](https://www.nextflow.io/) within this tutorial. However, you could use any software that comes with a SLURM executor instead or even run the jobs directly through SLURM's CLI.
 
 
-> ## Digression: Job Scheduling (SLURM)
+> <details-title>Digression: Job Scheduling (SLURM)</details-title>
 > 
 > [Slurm](https://slurm.schedmd.com/) is used for job scheduling/workload management. To see all nodes in your cluster execute `sinfo`. You will notice that workers are `idle~`. That means they are `idle` and `~` (powered down). Slurm uses many symbols and words to indicate node states. See [here](https://slurm.schedmd.com/sinfo.html#SECTION_NODE-STATE-CODES) for more about that. To see all running jobs, execute `squeue`. You will notice that no job is currently running.
 >
@@ -361,7 +350,7 @@ In this section, you will execute the `resFinder` workflow to create a heatmap o
 
 After successfully connecting to Theia IDE, we will now run our first job on our cluster. Let's start with a "hello world".
 
-> ## Hands On: Run job on cluster
+> <hands-on-title>Hands On: Run job on cluster</hands-on-title>
 > 1. Open a terminal
 > 2. Create a new shell script `nano /vol/spool/helloworld.sh`:
 > ```
@@ -490,7 +479,7 @@ Congratulations! You have finished BiBiGrid's Hands-on.
 
 You may want to take a look at the "real" `bibigrid.yaml` inside BiBiGrid's repository. It has a lot more options. However, everything you learned here stays true.
 
-> ## Additional resources
+> <details-title>Additional resources</details-title>
 > 
 > **More BiBiGrid**
 > 

@@ -4,12 +4,18 @@ title: Metagenomic Assembly
 description: "This tutorial will guide you through the typical steps of metagenome assembly. "
 slug: mgworkshop_assembly
 time_estimation: 6H
+level: FIXME
+keywords: [FIXME]
 questions:
   - "How do I run a metagenome assembly?"
   - "How do I compare metagenome assemblies?"
+objectives:
+  - FIXME
+key_points:
+  - FIXME
 version:
   - main
-life_cycle: "alpha"
+life_cycle: under development
 contributions:
   authorship:
   - Nils Kleinbölting
@@ -33,11 +39,9 @@ Please do the linux introduction before this tutorial. We assume you have succes
     * [idba_ud](#idba_ud)
     * [ray](#ray)
 
-## Metagenome Assembly
 
-
-# Metagenome Assembly  
-*Based on lecture slides from FZ Jülich :contentReference[oaicite:0]{index=0}*
+## Metagenome Assembly  
+*Based on lecture slides from FZ Jülich :contentReference*
 
 ## Introduction
 
@@ -46,29 +50,29 @@ Metagenome assembly is the computational reconstruction of longer DNA sequences,
 Metagenomics is often summarized by two overarching questions: *Who is present in the sample?* and *What are they capable of doing?* Assembly occupies a key position among these steps, as illustrated in the workflow diagram from the lecture slides.
 
 **Figure 1.** *Metagenomic analysis strategies, adapted from Sharpton 2014*  
-`![Metagenomic analysis strategies]((/tutorials/mgworkshop_assembly/images/strategies.png))`
+![Metagenomic analysis strategies]({{ "/tutorials/mgworkshop_assembly/images/strategies.png" | relative_url }}){: .responsive-img }
 
 ## A Visual Analogy: Assembly as Puzzle Reconstruction
 
 Metagenome assembly resembles the process of solving a large jigsaw puzzle without the guiding image on the box. Each sequencing read corresponds to a small piece of the puzzle, and assembling them into contigs requires identifying how these pieces fit together based on overlapping sequence information. The analogy from the slides begins with scattered puzzle pieces representing disordered sequencing reads and ends with the completed picture symbolizing a reconstructed genomic sequence.
 
 **Figure 2.** *Puzzle pieces representing short reads*  
-`![Puzzle pieces representing short reads]((/tutorials/mgworkshop_assembly/images/puzzle1.png))`
+![Puzzle pieces representing short reads]({{ "/tutorials/mgworkshop_assembly/images/puzzle1.png" | relative_url }}){: .responsive-img }
 
 **Figure 3.** *Completed puzzle symbolizing the finished assembly*  
-`![Completed puzzle symbolizing the finished assembly]((/tutorials/mgworkshop_assembly/images/puzzle2.png))`
+![Completed puzzle symbolizing the finished assembly]({{ "/tutorials/mgworkshop_assembly/images/puzzle2.png" | relative_url }}){: .responsive-img }
 
 ## Classical Genome Sequencing Strategies
 
 Before short-read next-generation sequencing became dominant, genome assembly commonly relied on two main strategies: ordered shotgun sequencing and whole genome shotgun sequencing. In ordered shotgun sequencing, DNA fragments were cloned into vectors such as BACs and arranged into a physical map. This map provided positional information, making it possible to sequence clones individually and then piece them together with high confidence. The physical map served as a scaffold that guaranteed correct global arrangement, though generating it required significant laboratory effort.
 
 **Figure 4.** *Hierarchical (ordered) shotgun sequencing schematic adapted from Venter et al., Nature 2001 *  
-`![Hierarchical shotgun sequencing]((/tutorials/mgworkshop_assembly/images/hierarchical_shotgun.png))`
+![Hierarchical shotgun sequencing]({{ "/tutorials/mgworkshop_assembly/images/hierarchical_shotgun.png" | relative_url }}){: .responsive-img }
 
 Whole genome shotgun sequencing simplified the experimental workflow by fragmenting the entire genome simultaneously, sequencing all pieces in parallel, and then computationally assembling the resulting reads. While this approach quickly produced large amounts of sequence, it complicated the final assembly step because it lacked positional context. Complex repetitive regions frequently caused ambiguities because reads from different genomic copies appeared identical.
 
-**Figure 5.** *Whole genome shotgun sequencing schematic adapted from Venter et al., Nature 2001 *  
-`![Whole genome shotgun sequencing]((/tutorials/mgworkshop_assembly/images/wg_shotgun.png))`
+**Figure 5.** *Whole genome shotgun sequencing schematic adapted from Venter et al., Nature 2001*  
+![Whole genome shotgun sequencing]({{ "/tutorials/mgworkshop_assembly/images/wg_shotgun.png" | relative_url }}){: .responsive-img }
 
 Short-read sequencing intensified this challenge. Technologies such as Illumina produce extremely high coverage but with short reads, typically around 100 base pairs. As a consequence, assembly algorithms require sophisticated data structures to handle both the enormous number of reads and the difficulties imposed by repetitions, sequencing errors, and the shortness of individual fragments.
 
@@ -83,12 +87,12 @@ The OLC method attempts to identify all pairwise overlaps between reads, constru
 The memory requirements are likewise severe. Storing such a graph may demand terabytes of memory. Because metagenomes contain far more reads than typical genome projects, OLC approaches have become largely infeasible for short-read metagenomics.
 
 **Figure 6.** *Illustration of overlaps and layouts used in OLC assembly*  
-`![Illustration of overlaps and layouts used in OLC assembly]((/tutorials/mgworkshop_assembly/images/olc.png))`
+![Illustration of overlaps and layouts used in OLC assembly]({{ "/tutorials/mgworkshop_assembly/images/olc.png" | relative_url }}){: .responsive-img }
 
 By contrast, de Bruijn graph assemblers break each read into overlapping k-mers, thereby reducing the assembly problem to analysing the connectivity between k-mer prefixes and suffixes. This strategy dramatically increases computational efficiency because nodes of the graph represent k-mers, not entire reads. Instead of finding a Hamiltonian path (visiting each read exactly once), the assembler finds an Eulerian path that visits each edge, corresponding to each k-mer occurrence, exactly once. Eulerian path finding is computationally tractable, making de Bruijn graph methods the standard for short-read metagenome assembly.
 
 **Figure 7.** *Comparison of OLC and de Bruijn graph paradigms*  
-`![Comparison of OLC and de Bruijn graph paradigms]((/tutorials/mgworkshop_assembly/images/olc_dbg.png))`
+![Comparison of OLC and de Bruijn graph paradigms]({{ "/tutorials/mgworkshop_assembly/images/olc_dbg.png" | relative_url }}){: .responsive-img }
 
 ## Repeats and Structural Ambiguities
 
@@ -97,16 +101,16 @@ Repetitive sequences pose difficulties for any assembly strategy. When two genom
 The slides include several diagrams showing how repeats create complex graph structures, including branching nodes where multiple contigs are possible. Correct repeat resolution often requires additional information such as paired-end reads, long reads, or coverage differences.
 
 **Figure 8.** *Repeat-induced ambiguities and unitig structure*  
-`![Repeat-induced ambiguities and unitig structure]((/tutorials/mgworkshop_assembly/images/repeats1.png))`
+![Repeat-induced ambiguities and unitig structure]({{ "/tutorials/mgworkshop_assembly/images/repeats1.png" | relative_url }}){: .responsive-img }
 **Figure 9.** *Repeat-induced ambiguities and unitig structure*  
-`![Repeat-induced ambiguities and unitig structure]((/tutorials/mgworkshop_assembly/images/repeats2.png))`
+![Repeat-induced ambiguities and unitig structure]({{ "/tutorials/mgworkshop_assembly/images/repeats2.png" | relative_url }}){: .responsive-img }
 
 ## Complexity of de Bruijn Graphs
 
 Although de Bruijn graphs avoid the prohibitive OLC overlap computations, they introduce their own challenges. Sequencing errors generate unique or low-frequency k-mers that do not align well within the graph, producing structures known as tips (short dead-end paths) or bubbles (parallel alternative paths). Polymorphisms between closely related organisms in a metagenome create similar structures. Repeats generate converging or diverging paths that require careful handling by the assembler.
 
 **Figure 10.** *Typical complexities within a de Bruijn graph: tips, bubbles, and repeat structures*  
-`![Typical complexities within a de Bruijn graph: tips, bubbles, and repeat structures]((/tutorials/mgworkshop_assembly/images/complexities.png))`
+![Typical complexities within a de Bruijn graph: tips, bubbles, and repeat structures]({{ "/tutorials/mgworkshop_assembly/images/complexities.png" | relative_url }}){: .responsive-img }
 
 ## Influence of k-mer Size
 
@@ -115,7 +119,7 @@ Choosing the appropriate k-mer size is a central challenge in constructing de Br
 The lecture slides show a dramatic series of Bandage visualizations illustrating how graph structure changes as k increases from 51 to 91. At small k, the graph is extremely complex, resembling a knot of interwoven paths. As k increases, many ambiguous connections disappear, but the graph becomes more fragmented. Assemblers often work around this by constructing multiple graphs with different k values and combining their information, as done in metaSPAdes.
 
 **Figure 11.** *Examples of de Bruijn graphs at k=51 to k=91*  
-`![Examples of de Bruijn graphs at k=51 to k=91]((/tutorials/mgworkshop_assembly/images/bandage.png))`
+![Examples of de Bruijn graphs at k=51 to k=91]({{ "/tutorials/mgworkshop_assembly/images/bandage.png" | relative_url }}){: .responsive-img }
 
 
 ## Special Challenges in Metagenomic Assembly
@@ -123,22 +127,22 @@ The lecture slides show a dramatic series of Bandage visualizations illustrating
 ...
 
 **Figure 12.** *A metagenome puzzle consisting of two quite distinct genomes*  
-`![A metagenome puzzle consisting of two quite distinct genomes]((/tutorials/mgworkshop_assembly/images/mgassembly1.png))`
+![A metagenome puzzle consisting of two quite distinct genomes]({{ "/tutorials/mgworkshop_assembly/images/mgassembly1.png" | relative_url }}){: .responsive-img }
 
 ...
 
 **Figure 13.** *Solved metagenome puzzle consisting of two quite distinct genomes*  
-`![Solved metagenome puzzle consisting of two quite distinct genomes]((/tutorials/mgworkshop_assembly/images/mgassembly2.png))`
+![Solved metagenome puzzle consisting of two quite distinct genomes]({{ "/tutorials/mgworkshop_assembly/images/mgassembly2.png" | relative_url }}){: .responsive-img }
 
 ...
 
 **Figure 14.** *Three very similar genomes*  
-`![Three very similar genomes]((/tutorials/mgworkshop_assembly/images/mgassembly3.png))`
+![Three very similar genomes]({{ "/tutorials/mgworkshop_assembly/images/mgassembly3.png" | relative_url }}){: .responsive-img }
 
 ...
 
 **Figure 15.** *A real metagenome*  
-`![A real metagenome]((/tutorials/mgworkshop_assembly/images/mgassembly4.png))`
+![A real metagenome]({{ "/tutorials/mgworkshop_assembly/images/mgassembly4.png" | relative_url }}){: .responsive-img }
 
 
 Assembly of single genomes is already challenging, but metagenome assembly introduces additional complications. Coverage varies dramatically between species, making it difficult to decide which low-frequency k-mers correspond to rare organisms and which are artifacts. Closely related strains or species may share long genomic regions, producing highly similar k-mers that merge in the graph. Divergent abundance profiles of species introduce asymmetry into the graph that must be addressed by specialized heuristics. Contamination and horizontal gene transfer further blur boundaries between genomic segments.
@@ -156,17 +160,16 @@ Several assemblers have been created specifically for metagenomic data.
 K-mer abundance analysis provides valuable information for filtering erroneous k-mers and identifying genomic signals within mixed communities. True genomic k-mers typically appear at coverage levels reflecting the abundance of their originating organism. Low-frequency k-mers often result from sequencing errors. In metagenomes, the situation is complicated by varying species abundances, producing multiple k-mer coverage peaks rather than a single unicellular distribution. The slides illustrate how frequently particular k-mers occur and how this distribution can be used to distinguish noise from signal.
 
 **Figure 16.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
-`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq1.png))`
+![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]({{ "/tutorials/mgworkshop_assembly/images/freq1.png" | relative_url }}){: .responsive-img }
 **Figure 17.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
-`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq2.png))`
+![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]({{ "/tutorials/mgworkshop_assembly/images/freq2.png" | relative_url }}){: .responsive-img }
 **Figure 18.** *K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers*  
-`![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]((/tutorials/mgworkshop_assembly/images/freq3.png))`
+![K-mer frequency distributions demonstrating separation of error-derived and genomic k-mers]({{ "/tutorials/mgworkshop_assembly/images/freq3.png" | relative_url }}){: .responsive-img }
 
 MetaVelvet extends the Velvet assembler by integrating coverage-based heuristics. It distinguishes high-coverage and low-coverage branches in the graph to separate signals from organisms with different abundances, increasing the likelihood of resolving strain mixtures.
 
-**Figure 19.** *MetaVelvet conceptual diagram (Namiki T et al. Nucl. Acids Res. 2012;40:e155
-)*  
-`![MetaVelvet conceptual diagram]((/tutorials/mgworkshop_assembly/images/metavelvet.png))`
+**Figure 19.** *MetaVelvet conceptual diagram (Namiki T et al. Nucl. Acids Res. 2012;40:e155)*  
+![MetaVelvet conceptual diagram]({{ "/tutorials/mgworkshop_assembly/images/metavelvet.png" | relative_url }}){: .responsive-img }
 
 ### IDBA-UD
 
@@ -178,8 +181,8 @@ IDBA-UD (Iterative de Bruijn graph assembler for uneven sequencing depth) adapts
 MEGAHIT is designed for high efficiency and low memory consumption, making it particularly suitable for large metagenomic datasets. It constructs a compressed de Bruijn graph, iteratively increases k-mer sizes, and simplifies the graph through error removal. Despite its low resource usage, MEGAHIT produces high-quality assemblies.
 
 
-**Figure 20.** MEGAhit workflow (Li et. al, Bioinformatics, 2015)*  
-`![MEGAhit workflow ]((/tutorials/mgworkshop_assembly/images/megahit.png))`
+**Figure 20.** *MEGAhit workflow (Li et. al, Bioinformatics, 2015)*  
+![MEGAhit workflow ]({{ "/tutorials/mgworkshop_assembly/images/megahit.png" | relative_url }}){: .responsive-img }
 
 MEGAHIT workflow:
 
@@ -209,16 +212,16 @@ Final assembly: Merges different graph layers to generate contigs (longer DNA se
 The slides compare MEGAHIT and metaSPAdes, emphasizing that metaSPAdes generally yields higher accuracy but requires much more memory and computation time. MEGAHIT excels when speed or memory constraints are a priority.
 
 
-**Figure 21.** Comparison of MEGAHIT and metaSPAdes*  
-`![Comparison of MEGAHIT and metaSPAdes]((/tutorials/mgworkshop_assembly/images/metaspades_megahit.png))`
+**Figure 21.** *Comparison of MEGAHIT and metaSPAdes*  
+![Comparison of MEGAHIT and metaSPAdes]({{ "/tutorials/mgworkshop_assembly/images/metaspades_megahit.png" | relative_url }}){: .responsive-img }
 
 
 ## Assessment and Benchmarking
 
 As shown in the slides, the Critical Assessment of Metagenome Interpretation (CAMI) benchmarks evaluate assemblers and analysis pipelines on standardized simulated and real datasets. These benchmarks highlight strengths and weaknesses of individual tools and reveal that no single assembler outperforms all others across all categories. The choice of assembler often depends on dataset complexity, computational resources, and the goals of the analysis.
 
-**Figure 22.** CAMI benchmarking overview (Meyer, F., Fritz, A., Deng, ZL. et al. Critical Assessment of Metagenome Interpretation: the second round of challenges. Nat Methods 19, 429–440 (2022).)*  
-`![CAMI benchmarking overview]((/tutorials/mgworkshop_assembly/images/cami.png))`
+**Figure 22.** *CAMI benchmarking overview (Meyer, F., Fritz, A., Deng, ZL. et al. Critical Assessment of Metagenome Interpretation: the second round of challenges. Nat Methods 19, 429–440 (2022).)*  
+![CAMI benchmarking overview]({{ "/tutorials/mgworkshop_assembly/images/cami.png" | relative_url }}){: .responsive-img }
 
 ## Summary
 
@@ -232,7 +235,7 @@ We are going to use different assemblers and compare the results.
 
 We have prepared a small toy data set for this tutorial. It's simulated data, so there is actually no need for quality control.
 
-> ## Download data
+><hands-on-title>Download data</hands-on-title>
 > Please use the following commands to download the data to your VM:
 > ```bash
 > sudo chown ubuntu:ubuntu /mnt
@@ -265,7 +268,7 @@ paired-end read and long read information, when available, to retrieve
 the repeated areas between contigs. See the `Velvet GitHub page
 <https://github.com/dzerbino/velvet>`_ for more info.
 
-> ## Step 1: velveth
+><hands-on-title>Step 1: velveth</hands-on-title>
 > `velveth` takes in a number of sequence files, produces a hashtable, then
 > outputs two files in an output directory (creating it if necessary), Sequences
 > and Roadmaps, which are necessary for running `velvetg` in the next step.
@@ -286,7 +289,7 @@ are going to run two jobs:
 
 Now we have to start the actual assembly using `velvetg`. 
 
-> ## Step 2: velvetg
+><hands-on-title>Step 2: velvetg</hands-on-title>
 > `velvetg` is the core of Velvet where the de Bruijn
 > graph is built then manipulated. Let's run assemblies for both
 > kmer-lengths. See the [Velvet manual](https://github.com/dzerbino/velvet/blob/master/Manual.pdf)
@@ -303,7 +306,7 @@ The contig sequences are located in the `velvet_31` and `velvet_51`
 directories in file `contigs.fa`. Let's get some very basic statistics
 on the contigs.
 
-> ## Step 3: getN50
+><hands-on-title>Step 3: getN50</hands-on-title>
 > The script ``getN50.pl`` reads the contig file and
 > computes the total length of the assembly, number of contigs, N50 and
 > largest contig size. In our example we will exclude contigs shorter
@@ -325,7 +328,7 @@ a CUDA-enabled GPU to accelerate its SdBG contstruction. See the
 [MEGAHIT home page](https://github.com/voutcn/megahit/) for more
 info.
 
-> ## Step 1: Run MEGAHIT
+><hands-on-title>Step 1: Run MEGAHIT</hands-on-title>
 > MEGAHIT can be run by the following command. As our compute instance
 > has multiple cores, we use the option `-t 14` to tell MEGAHIT it
 > should use 14 parallel threads. The output will be redirected to file
@@ -339,7 +342,7 @@ info.
 The contig sequences are located in the `megahit_out` directory in
 file `final.contigs.fa`. 
 
-> ## Step 2: getN50
+><hands-on-title>Step 2: getN50</hands-on-title>
 > Again, let's get some basic statistics on the contigs:
 > ```bash
 > commandgetN50.pl -s 500 -f megahit_out/final.contigs.fa
@@ -353,7 +356,7 @@ SPAdes – St. Petersburg genome assembler – is an assembly toolkit
 containing various assembly pipelines. See the 
 [SPAdes home page](http://cab.spbu.ru/software/spades/) for more info.
 
-> ## Step 1: Run metaSPAdes
+><hands-on-title>Step 1: Run metaSPAdes</hands-on-title>
 > metaSPAdes can be run by the following command:
 > ```bash
 > cd /mnt/WGS-data
@@ -364,7 +367,7 @@ containing various assembly pipelines. See the
 
 The contig sequences are located in the `metaspades_out` directory in file `contigs.fasta`.
 
-> ## Step 2: getN50
+><hands-on-title>Step 2: getN50</hands-on-title>
 > Again, let's get some basic statistics on the contigs:
 > ```bash
 > getN50.pl -s 500 -f metaspades_out/contigs.fasta
@@ -386,7 +389,7 @@ pair of reads is in consecutive two lines. You can use `fq2fa` (part
 of the IDBA repository) to merge two FastQ read files to a single
 file. 
 
-> ## Step 1: Create fasta file
+><hands-on-title>Step 1: Create fasta file</hands-on-title>
 > The following command will generate a FASTA formatted file
 > called `reads12.fas` by "shuffling" the reads from FASTQ files
 > `read1.fq` and `read2.fq`::
@@ -397,7 +400,7 @@ file.
 > 
 {: .hands_on}
 
-> ## Step 2: Run IDBA_UD
+><hands-on-title>Step 2: Run IDBA_UD</hands-on-title>
 > IDBA-UD can be run by the following command. As our compute instances
 > have multiple cores, we use the option `--num_threads 28` to tell
 > IDBA-UD it should use 28 parallel threads.
@@ -410,7 +413,7 @@ file.
 
 The contig sequences are located in the `idba_ud_out` directory in file `contig.fa`. 
 
-> ## Step 3: getN50
+><hands-on-title>Step 3: getN50</hands-on-title>
 > Again, let's get some basic statistics on the contigs:
 > ```bash
 > getN50.pl -s 500 -f idba_ud_out/contig.fa
@@ -426,7 +429,7 @@ with next-generation sequencing data.  Ray is written in C++ and can
 run in parallel on numerous interconnected computers using the
 message-passing interface (MPI) standard. See the [Ray home page](http://denovoassembler.sourceforge.net/) for more info.
 
-> ## Step 1: Run Ray
+><hands-on-title>Step 1: Run Ray</hands-on-title>
 > Ray can be run by the following command using a kmer-length of 51 and
 > 31, repectively. As our compute instance have multiple cores, we
 > specify this in the `mpiexec -n 28 ` command to let Ray know it should
@@ -438,7 +441,7 @@ message-passing interface (MPI) standard. See the [Ray home page](http://denovoa
 > 
 {: .hands_on}
 
-> ## Step 2: Run another assembly
+><hands-on-title>Step 2: Run another assembly</hands-on-title>
 >If there is enough time, you can run another Ray assembly using a smaller kmer size.
 > ```bash
 > mpiexec -n 28 /usr/local/bin/Ray -k 31 -p read1.fq read2.fq -o ray_31
@@ -450,7 +453,7 @@ This will create the output directory `ray_51` (and `ray_31`), the final
 contigs are located in `ray_51/Contigs.fasta` (and
 `ray_31/Contigs.fasta`).  
 
-> ## Step 3: getN50
+><hands-on-title>Step 3: getN50</hands-on-title>
 > Again, let's get some basic statistics on the contigs:
 > ```bash
 > getN50.pl -s 500 -f ray_51/Contigs.fasta
@@ -459,7 +462,7 @@ contigs are located in `ray_51/Contigs.fasta` (and
 > 
 {: .hands_on}
 
-> ## Step 4: getN50
+><hands-on-title>Step 4: getN50</hands-on-title>
 > Now that you have run assemblies using Velvet, MEGAHIT, metaSPAdes, IDBA-UD and Ray, let's have a > quick look at the assembly statistics of all of them::
 > ```bash
 > cd /mnt/WGS-data
