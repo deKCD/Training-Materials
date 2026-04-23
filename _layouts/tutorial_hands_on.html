@@ -45,8 +45,8 @@
           "@type": "EducationalAudience",
           "educationalRole": "Learners"
         },
-        "@id": "{{ site.dekcd_training | append: page.url | absolute_url }}",
-        "url": "{{ site.dekcd_training | append: page.url | absolute_url }}",
+        "@id": "{{ site.url | append: page.url | absolute_url }}",
+        "url": "{{ site.url | append: page.url | absolute_url }}",
         "name": "{{ page.title | escape }}",
         "description": "{{ page.description | escape }}",
         "keywords": [

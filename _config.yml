@@ -19,6 +19,7 @@ event_kalender: "https://datenkompetenz.cloud/event-kalender/?p=1"
 frag_unsere_experten: "https://datenkompetenz.cloud/frag-unsere-experten/"
 cc_by_human: "https://creativecommons.org/licenses/by/4.0/"
 email: "info@datenkompetenz.cloud"
+port: 4000
 
 # Directory setup
 collections:
