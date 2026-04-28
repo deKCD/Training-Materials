@@ -153,8 +153,17 @@
                 </thead>
                 <tbody>
                   {% for tutorial_ref in section.tutorials %}
-                    {% assign matching_tutorials = site.tutorials | where: "slug", tutorial_ref.name %}
-                    {% assign tutorial = matching_tutorials | where: "version", tutorial_ref.version | first %}
+                    {% assign tutorial = nil %}
+                    {% for t in site.tutorials %}
+                      {% assign path_parts = t.url | split: "/" | where_exp: "item", "item != ''" %}
+                      {% if path_parts.size >= 2 %}
+                        {% assign short_name = path_parts[1] %}
+                        {% assign version = path_parts[2] %}
+                        {% if short_name == tutorial_ref.name and version == tutorial_ref.version %}
+                          {% assign tutorial = t %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
 
                     {% if tutorial %}
                     <!-- render tutorial row -->
