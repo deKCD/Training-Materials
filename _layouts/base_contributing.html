@@ -1,0 +1,197 @@
+{% comment %}
+  Layout for the Contribution Page.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="authors" content="de.KCD, Dilfuza Djamalova; de.NBI Cloud Portal Dev, Viktor Rudko;">
+    <script async="" src="https://piwik.cebitec.uni-bielefeld.de/matomo.js"></script>
+    <script src="{{ '/assets/js/jquery/jquery-3.7.1.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/bootstrap5/bootstrap.bundle.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/lesson.js' | relative_url }}"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ '/assets/css/bootstrap5/bootstrap.min.css' | relative_url }}" rel="stylesheet">
+    <link href="{{ '/assets/css/dekcd_styles.css' | relative_url }}" rel="stylesheet">
+    <link href="{{ '/assets/css/dekcd_tutorial.css' | relative_url }}" rel="stylesheet">
+    <link href="{{ '/assets/fontawesomefree/css/fontawesome.css' | relative_url }}" rel="stylesheet" type="text/css">
+    <link href="{{ '/assets/fontawesomefree/css/brands.css' | relative_url }}" rel="stylesheet" type="text/css">
+    <link href="{{ '/assets/fontawesomefree/css/solid.css' | relative_url }}" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <!-- include nav menu -->
+    <!-- Matomo -->
+    <script>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.datenkompetenz.cloud"]);
+      _paq.push(["setDomains", ["*.datenkompetenz.cloud"]]);
+      _paq.push(['setVisitorCookieTimeout', '2592000']);
+      _paq.push(['setSessionCookieTimeout', '0']);
+      _paq.push(['enableHeartBeatTimer', 30]);
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="https://piwik.cebitec.uni-bielefeld.de/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '18']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true;
+        g.src=u+'matomo.js';
+        s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript>
+      <p>
+        <img referrerpolicy="no-referrer-when-downgrade" src="https://piwik.cebitec.uni-bielefeld.de/matomo.php?idsite=18&amp;rec=1" style="border:0;" alt="" />
+      </p>
+    </noscript>
+    <!-- End Matomo Code -->
+
+    <header class="nav-semi-trans sticky-top bg-white pt-3 full-navigation">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid d-flex justify-content-between align-items-center mx-3">
+          <a class="navbar-brand mx-3" href="/">
+            <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="de.KCD" class="d-inline-block align-text-top">
+          </a>
+          <div class="collapse navbar-collapse show" id="mainNavigation">
+            <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav ">
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Calendar </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.frag_unsere_experten }}" target="_blank" rel="noopener">Ask our experts </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.dekcd }}" target="_blank" rel="noopener">de.KCD </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.denbi_cloud }}" target="_blank" rel="noopener">de.NBI Cloud </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ '/FAQ/' | relative_url }}">FAQs </a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <header class="mobile-navigation sticky-top">
+      <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-3" href="/">
+            <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="de.KCD" class="d-inline-block align-text-top">
+          </a>
+          <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggled" aria-controls="navbarScroll" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse sticky-top bg-white pt-3" id="navbarToggled" style="">
+            <ul class="navbar-nav">
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Kalender </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.frag_unsere_experten }}" target="_blank" rel="noopener">Frag unsere Experten </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.dekcd }}" target="_blank" rel="noopener">de.KCD </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.denbi_cloud }}">de.NBI Cloud </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ '/FAQ/' | relative_url }}">FAQs </a>
+              </li>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid no-side-pad">
+      <section>
+        <div class="bg-image header-title-area" style="background-image: url('{{ "/assets/img/background_dekcd.32abde77.fill-2400x600-c100.png" | relative_url }}');" id="dekcd_start_page_header_area">
+        </div>
+      </section>
+    </div>
+
+    <section id="dekcd_title_section" class="title-section white-back">
+      <div class="container">
+        <div class="my-1">
+          <h1 class="text-center" >{{ page.title }}</h1>
+          <p class="text-center" style="margin-bottom: 1.5rem"> {{ page.description }}</p>
+          <div class="mx-auto p-2 width-padder my-1">
+            <div class="toc-layout">
+              <aside class="toc-layout__sidebar">
+                <h5>Table of contents</h5>
+                {% include _includes/toc.html html=content sanitize=true class="toc-list" id="tutorial_toc" h_min=2 h_max=5 flat_toc=false %}
+              </aside>
+              <div class="toc-layout__content">
+                <div class="container-fluid p-0">
+                  <p class="card-text">{{ content }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<footer class="footer">
+  <div class="footer-navigation-container">
+    <div class="container">
+      <div class="row footer-row">
+        <div class="col-auto">
+          <span>© 2026 de.KCD - All Rights Reserved.</span>
+        </div>
+        <div class="col-auto">
+          <h5>Navigation</h5>
+          <ul>   
+            <li><a href="/impressum/">Impressum</a></li>
+            <li><a href="/kontakt/">Kontakt</a></li>
+          </ul>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sponsor-container">
+    <div class="container">
+      <div class="row">
+        <div class="col" style="text-align: center;">
+          <a href="https://next-generation-eu.europa.eu/index_de" target="_blank" rel="noreferrer">
+            <img src="{{ '/assets/img/Forderhinweis_EU_vertikal.width-400.jpg' | relative_url }}" class="sponsor-img">
+          </a>
+        </div>
+        <div class="col" style="text-align: center;">
+          <a href="https://www.bmbf.de/bmbf/de/forschung/zukunftsstrategie/foerderung-in-der-forschung/foerderung-in-der-forschung_node.html" target="_blank" rel="noreferrer">
+            <img src="{{ '/assets/img/BMFTR_en_DTP_CMYK_gef_durch.width-400.jpg' | relative_url }}" class="sponsor-img">
+          </a>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+  <deepl-input-controller translate="no"></deepl-input-controller>
+  <div id="highlighter--hover-tools" style="display: none;">
+    <div id="highlighter--hover-tools--container">
+      <div class="highlighter--icon highlighter--icon-copy" title="Copy"></div>
+      <div class="highlighter--icon highlighter--icon-change-color" title="Change Color"></div>
+      <div class="highlighter--icon highlighter--icon-delete" title="Delete"></div>
+    </div>
+  </div>
+</body>
+</html>    

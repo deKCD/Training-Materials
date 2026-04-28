@@ -1,7 +1,10 @@
 _site
 .sass-cache
+.env
 Gemfile.lock
 *.gem
+.bundle
 .jekyll-cache
 .jekyll-cache
+.jekyll-metadata
 .ipynb_checkpoints

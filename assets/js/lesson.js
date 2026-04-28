@@ -2,20 +2,48 @@
 $("table").addClass("table table-striped");
 
 
-// Handle foldable challenges and solutions (on click and at start).
-$(".solution").click(function(event) {
-    var trigger = $(event.target).has(".fold-unfold").length > 0
-               || $(event.target).filter(".fold-unfold").length > 0;
-    if (trigger) {
-        $(">*:not(h2)", this).toggle(400);
-        $(">h2>span.fold-unfold", this).toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
-        event.stopPropagation();
+// Handle foldable boxes (on click and at start)
+$(document).ready(function() {
+
+  // Container selectors for foldable blocks
+  var foldableSelector = ".solution, .tip, .comment, .details, solution, tip, comment, details";
+  var titleSelector = "solution-title, tip-title, comment-title, details-title";
+
+  // Initialize each foldable block
+  $(foldableSelector).each(function() {
+    var container = $(this);
+
+    // Hide all children except the title element
+    $(">*:not(" + titleSelector + ")", container).hide();
+
+    // Add fold/unfold icon to the title
+    $(titleSelector + ":first", container).append(
+      "<span class='fold-unfold glyphicon glyphicon-collapse-down'></span>"
+    );
+
+    // Optional: make cursor pointer
+    $(titleSelector + ":first", container).css("cursor", "pointer");
+  });
+
+  // Toggle on click (whole box fold/unfold)
+  $(foldableSelector).on("click", function(event) {
+    // Do not toggle when clicking inside a nested box or external links/buttons
+    if (!$(event.target).closest(foldableSelector).is(this)) {
+      return;
     }
-});
-$(".solution").each(function() {
-    $(">*:not(h2)", this).toggle();
-    var h2 = $("h2:first", this);
-    h2.append("<span class='fold-unfold glyphicon glyphicon-collapse-down'></span>");
+
+    var container = $(this);
+    var title = container.children(titleSelector).first();
+    var body = container.children(":not(" + titleSelector + ")");
+    var icon = title.children("span.fold-unfold");
+
+    // Toggle all content except title
+    body.toggle(400);
+
+    // Toggle the icon class
+    icon.toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
+  });
+
 });
 
 

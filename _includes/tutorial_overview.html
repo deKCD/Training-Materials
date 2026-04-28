@@ -39,14 +39,14 @@
     </div>
       
     <div class="col-md-9">
-        <strong>Questions</strong>
+        Questions:
         <ul>
             {% for question in tutorial_questions %}
             <li>{{ question | markdownify }}</li>
             {% endfor %}
         </ul>
         
-        <strong>Objectives</strong>
+        Objectives:
         <ul>
             {% for objective in tutorial_objectives %}
             <li>{{ objective | markdownify }}</li>

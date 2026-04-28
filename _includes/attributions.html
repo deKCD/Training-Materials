@@ -21,13 +21,14 @@
 {% endif %}
 
 <blockquote class="details">
-  <h2>Contributions</h2>
-  {% if authors %}
-      <p><strong>Author(s):</strong> {{ authors | join: ", " }}</p>
-  {% endif %}
-  {% if editors %}
-      <p><strong>Editor(s):</strong> {{ editors | join: ", " }}</p>
-  {% endif %}
+    <p class="details-title">Contributions</p>
+    {% if authors %}
+        <p><strong>Author(s):</strong> {{ authors | join: ", " }}</p>
+    {% endif %}
+
+    {% if editors %}
+        <p><strong>Editor(s):</strong> {{ editors | join: ", " }}</p>
+    {% endif %}
 </blockquote>
 
 {% if funders %}

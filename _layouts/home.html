@@ -6,144 +6,222 @@
 <html lang="{{ site.lang | default: 'en-US' }}">
   <head>
     <meta charset="UTF-8">
-    <title>{{ page.title | default: site.title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}{% if site.github.build_revision %}?v={{ site.github.build_revision }}{% endif %}">
-    <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="authors" content="de.KCD, Dilfuza Djamalova; de.NBI Cloud Portal Dev, Viktor Rudko;">
+    <script async="" src="https://piwik.cebitec.uni-bielefeld.de/matomo.js"></script>
+    <script src="{{ '/assets/js/jquery/jquery-3.7.1.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/bootstrap5/bootstrap.bundle.min.js' | relative_url }}"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ '/assets/css/bootstrap5/bootstrap.min.css' | relative_url }}" rel="stylesheet">
+    <link href="{{ '/assets/css/dekcd_styles.css' | relative_url }}" rel="stylesheet">
+    <link href="{{ '/assets/fontawesomefree/css/fontawesome.css' | relative_url }}" rel="stylesheet" type="text/css">
+    <link href="{{ '/assets/fontawesomefree/css/brands.css' | relative_url }}" rel="stylesheet" type="text/css">
+    <link href="{{ '/assets/fontawesomefree/css/solid.css' | relative_url }}" rel="stylesheet" type="text/css">
   </head>
   <body>
-    <header class="main-header">
-      <div class="header-left">
-        <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="Logo" class="logo">
-        <span class="site-title">{{ site.title }}</span>
+    <!-- include nav menu -->
+    <!-- Matomo -->
+    <script> var _paq = window._paq = window._paq || []; /* tracker methods like "setCustomDimension" should be called before "trackPageView" */ _paq.push(["setDocumentTitle", document.domain + "/" + document.title]); _paq.push(["setCookieDomain", "*.datenkompetenz.cloud"]); _paq.push(["setDomains", ["*.datenkompetenz.cloud"]]); _paq.push(['setVisitorCookieTimeout', '2592000']); _paq.push(['setSessionCookieTimeout', '0']); _paq.push(['enableHeartBeatTimer', 30]); _paq.push(['trackPageView']); _paq.push(['enableLinkTracking']); (function() { var u="https://piwik.cebitec.uni-bielefeld.de/"; _paq.push(['setTrackerUrl', u+'matomo.php']); _paq.push(['setSiteId', '18']); var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s); })(); </script>
+    <noscript><p><img referrerpolicy="no-referrer-when-downgrade" src="https://piwik.cebitec.uni-bielefeld.de/matomo.php?idsite=18&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Matomo Code -->
+    <header class="nav-semi-trans sticky-top bg-white pt-3 full-navigation">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid d-flex justify-content-between align-items-center mx-3">
+          <a class="navbar-brand mx-3" href="/">
+            <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="de.KCD" class="d-inline-block align-text-top">
+          </a>
+          <div class="collapse navbar-collapse show" id="mainNavigation">
+            <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav ">
+
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
+              </li>
+              <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Calendar </a>
+            </li>
+            <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.frag_unsere_experten }}" target="_blank" rel="noopener">Ask our experts </a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ site.dekcd }}" target="_blank" rel="noopener">de.KCD </a>
+            </li>
+            <li class="nav-item p-2">
+                <a class="nav-link" href="{{ site.denbi_cloud }}" target="_blank" rel="noopener">de.NBI Cloud </a>
+            </li>
+            <li class="nav-item p-2">
+                <a class="nav-link" href="{{ '/FAQ/' | relative_url }}">FAQs </a>
+            </li>
+
+          </ul>
+        </div>
       </div>
-      <nav class="header-nav">
-        <a href="{{ site.header_links.partners | relative_url }}" target="_blank" rel="noopener">Partners</a>
-        <a href="{{ site.header_links.event_calendar | relative_url }}" target="_blank" rel="noopener">Event-Calendar</a>
-        <a href="{{ '/FAQ/' | relative_url }}">FAQs</a>
-      </nav>
-      <div class="header-actions">
-        <button id="search-toggle" aria-label="Search" style="background:none;border:none;font-size:1.6em;cursor:pointer;color:#000;align-items:left;">🔍︎</button>
-        <div id="search-container" style="display:none;position:relative;">
-          <input type="search" id="site-search" placeholder="Search Tutorials" aria-label="Search" autocomplete="off" style="margin-left:8px; color:#373737;">
-            <ul id="search-suggestions" style="position:absolute;top:100%;left:0;right:0;z-index:10;background:#fff;border:1px solid #ccc;list-style:none;margin:0;padding:0;display:none;max-height:200px;overflow-y:auto;color:#ccc;"></ul>
-            <style>
-            #search-suggestions li {
-              transition: background 0.10s, color 0.10s;
-            }
-            #search-suggestions li:hover {
-              background: #c9c7c7;
-              color: #353434;
-              text-decoration: none;
-            }
-            </style>
+    </nav>
+  </header>
+  <header class="mobile-navigation sticky-top">
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container-fluid">
+        <a class="navbar-brand mx-3" href="/">
+          <img src="{{ '/assets/img/dekcd_vector.svg' | relative_url }}" alt="de.KCD" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler m-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggled" aria-controls="navbarScroll" aria-expanded="true" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse sticky-top bg-white pt-3" id="navbarToggled" style="">
+          <ul class="navbar-nav">
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Kalender </a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ site.frag_unsere_experten }}" target="_blank" rel="noopener">Frag unsere Experten </a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ site.dekcd }}" target="_blank" rel="noopener">de.KCD </a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ site.denbi_cloud }}">de.NBI Cloud </a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{{ '/FAQ/' | relative_url }}">FAQs </a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container-fluid no-side-pad">
+    <section>
+      <div class="bg-image header-title-area" style="background-image: url('{{ "/assets/img/background_dekcd.32abde77.fill-2400x600-c100.png" | relative_url }}');" id="dekcd_start_page_header_area">
+      </div>
+            </li> 
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="container-fluid no-side-pad">
+    <section>
+      <div class="bg-image header-title-area" style="background-image: url('{{ "/assets/img/background_dekcd.32abde77.fill-2400x600-c100.png" | relative_url }}');" id="dekcd_start_page_header_area">
+      </div>
+    </section>
+  </div>
+  <section id="dekcd_title_section" class="title-section white-back">
+  <div class="container">
+    <div class="my-1">
+      <h2 class="text-center">{{ site.description }}</h2>
+      <div class="mx-auto p-2 width-padder my-1">
+        <p class="card-text">{{ content }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="feature_section" class="gradient-section feature-section">
+  <div class="text-center">
+    <div>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 equal-height-row">
+        <div class="col">
+          <a href="{{ '/tutorials/' | relative_url }}" class="text-decoration-none h-100">
+            <div class="card m-2 feature-card h-100">
+              <div class="card-body p-2">
+                <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 1rem;">Tutorials</h5>
+                <p class="card-text">A curated collection of hands-on tutorials designed to develop practical skills through guided exercises. Suitable for both beginners and advanced learners, these tutorials support progressive, self-paced learning.</p>
+              </div>
+            </div>
+          </a>
         </div>
 
-        <script>
-          // Toggle search input
-          document.getElementById('search-toggle').onclick = function(e) {
-        e.stopPropagation();
-        var sc = document.getElementById('search-container');
-        sc.style.display = sc.style.display === 'none' ? 'inline-block' : 'none';
-        if(sc.style.display !== 'none') document.getElementById('site-search').focus();
-          };
+        <div class="col">
+          <a href="{{ '/pathways/' | relative_url }}" class="text-decoration-none h-100">
+            <div class="card m-2 feature-card h-100">
+              <div class="card-body p-2">
+                <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 1rem;">Learning Paths</h5>
+                <p class="card-text">A curated collection of structured learning paths designed by community experts. Each path brings together a sequence of tutorials that progressively build knowledge around a specific topic, guiding you from foundational concepts to more advanced skills.</p>
+              </div>
+            </div>
+          </a>
+        </div>
 
-          // Hide search when clicking outside
-          document.addEventListener('click', function(e) {
-        var sc = document.getElementById('search-container');
-        var st = document.getElementById('search-toggle');
-        if (!sc.contains(e.target) && e.target !== st) {
-          sc.style.display = 'none';
-          document.getElementById('search-suggestions').style.display = 'none';
-          document.getElementById('site-search').value = '';
-        }
-          });
-
-          // Hide search on page refresh (handled by default, but clear value just in case)
-          window.addEventListener('pageshow', function() {
-        document.getElementById('search-container').style.display = 'none';
-        document.getElementById('search-suggestions').style.display = 'none';
-        document.getElementById('site-search').value = '';
-          });
-
-            // Example data for suggestions (replace with real data or fetch via AJAX)
-            const searchData = [
-          {% for t in site.tutorials %}
-            { title: "{{ t.title | escape }}", url: "{{ t.url | relative_url }}", type: "Tutorial" },
-          {% endfor %}
-          {% for p in site.pathways %}
-            { title: "{{ p.title | escape }}", url: "{{ p.url | relative_url }}", type: "Pathway" },
-          {% endfor %}
-            ];
-
-          // Show suggestions
-          document.getElementById('site-search').addEventListener('input', function(e) {
-        const val = e.target.value.trim().toLowerCase();
-        const sugg = document.getElementById('search-suggestions');
-        if(val.length === 0) {
-          sugg.style.display = 'none';
-          sugg.innerHTML = '';
-          return;
-        }
-        const matches = searchData.filter(item => item.title.toLowerCase().includes(val));
-        if(matches.length === 0) {
-          sugg.innerHTML = '<li style="padding:6px 12px;color:#888;">No results</li>';
-        } else {
-          sugg.innerHTML = matches.map(item =>
-            `<li style="padding:6px 12px;cursor:pointer;" onclick="window.location='${item.url}'">
-          <strong>${item.title}</strong> <span style="color:#888;font-size:0.9em;">(${item.type})</span>
-            </li>`
-          ).join('');
-        }
-        sugg.style.display = 'block';
-          });
-
-          // Hide suggestions on blur
-          document.getElementById('site-search').addEventListener('blur', function() {
-        setTimeout(function() {
-          document.getElementById('search-suggestions').style.display = 'none';
-        }, 150);
-          });
-        </script>
+        <div class="col">
+          <a href="{{ '/CONTRIBUTING/' | relative_url }}" class="text-decoration-none h-100">
+            <div class="card m-2 feature-card h-100">
+              <div class="card-body p-2">
+                <h5 class="card-title" style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 1rem;">Contribution</h5>
+                <p class="card-text">Guidelines for contributing to the platform, including how to create new content, improve existing materials, and collaborate effectively with the community.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        
       </div>
-    </header>
-    <div class="header-banner"></div>
-    <div class="container" style="display:flex;align-items:flex-start;gap:5em;">
-      <aside class="sidebar">
-      <h2 class="project-tagline" style="text-align: left;">{{ page.description | default: site.description }}</h2>
-      <ul class="category-list">
-        <hr>
-        <h3><strong>Training Materials</strong></h3>
-        <li><a href="{{ '/tutorials/' | relative_url }}">Tutorials</a></li>
-        <li><a href="{{ '/pathways/' | relative_url }}">Learning Pathways</a></li>
-        <li><a>Dummy</a></li>
-      </ul>
-      <hr>
-      <ul class="category-list">
-        <h3><strong>Contribution</strong></h3>
-        <li><a href="{{ '/CONTRIBUTING/' | relative_url }}">Add a new tutorial</a></li>
-        <li><a href="{{ site.repository_url }}/edit/gh-pages/{{ page.path }}" target="_blank" rel="noopener">Edit on GitHub</a></li>
-        <li><a href="{{ '/CITATION/' | relative_url }}">Citation</a></li>
-      </ul>
-      <hr>
-      <ul class="category-list">
-        <h3><strong>About us</strong></h3>
-        <li><a href="{{ site.dekcd_site | relative_url }}" target="_blank" rel="noopener">About de.KCD</a></li>
-        <li><a href="{{ site.denbicloud_site | relative_url }}" target="_blank" rel="noopener">About de.NBI</a></li>
-        <li><a href="mailto:{{ site.email }}">Contact us</a></li>
-      <hr>
-        <small style="font-size: 0.70em; color: #888;">
-        Licensed under <a href="{{ site.cc_by_human | relative_url }}" target="_blank" rel="noopener">CC-BY 4.0</a> 2016–{{ 'now' | date: "%Y" }}
-        </small>
-      </ul>
-      </aside>
-      <main class="main-content" id="content" role="main" style="flex: 1 1 0%;text-align:justify;">
-      {{ content }}
-      </main>
     </div>
-    <script src="{{ '/assets/js/theme-toggle.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/search.js' | relative_url }}"></script>
-  </body>
+  </div>
+</section>
+
+<section id="partner_section" class="partner-section white-back">
+  <div>
+    <h4 class="my-2 text-center">Project partners</h4>
+    <p class="my-2 text-center"></p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 mx-auto width-padder">
+      <div class="col col-auto m-auto">
+        <div class="block-svg_linked">
+          <div class="mx-auto svg-max-100">
+            <object class="svg-max-100" data="{{ '/assets/img/map_with_links_fzj.original.svg' | relative_url }}"></object>
+          </div>
+        </div>
+      </div>
+      <div class="col col-auto m-auto">
+        <div class="block-text"><p data-block-key="67xb9">Die Verbundpartner des de.KCD Konsortiums arbeiten bereits äußerst erfolgreich und vertrauensvoll im Rahmen des de.NBI-Netzwerkes zusammen und betreiben die kooperative und verteilte de.NBI Cloud-Infrastruktur, um Forschenden einen kostenfreien Zugang zu hoch skalierbaren Speicher- und Rechenkapazitäten auf einer einheitlichen technischen Basis zur Verfügung zu stellen. Die Partner von de.KCD - gleichzeitig auch die Betreiberstandorte der de.NBI Cloud - sind:</p><ul><li data-block-key="101u3"><a href="https://uni-freiburg.de/">Albert-Ludwigs-Universität Freiburg</a></li><li data-block-key="aapni"><a href="https://www.charite.de/berlin_institute_of_health/">Charité - Universitätsmedizin Berlin</a></li><li data-block-key="4d6ss"><a href="https://www.dkfz.de/de/index.html">Deutsches Krebsforschungszentrum (DKFZ)</a></li><li data-block-key="7i1ln"><a href="https://uni-tuebingen.de/">Eberhard Karls Universität Tübingen</a></li><li data-block-key="f9ifk"><a href="https://www.embl.org/">Europäisches Laboratorium für Molekularbiologie (EMBL)</a></li><li data-block-key="9ls2f"><a href="https://www.uni-giessen.de/de/index">Justus-Liebig-Universität Gießen</a></li><li data-block-key="2091u"><a href="https://www.uni-heidelberg.de/de">Ruprecht-Karls Universität Heidelberg</a></li><li data-block-key="bi5si"><a href="https://www.fz-juelich.de/de/ibg/ibg-5">Forschungszentrum Jülich (Verbundkoordination)</a></li></ul></div>
+      </div>
+    </div>  
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-navigation-container">
+    <div class="container">
+      <div class="row footer-row">
+        <div class="col-auto">
+          <span>© 2026 de.KCD - All Rights Reserved.</span>
+        </div>
+        <div class="col-auto">
+          <h5>Navigation</h5>
+          <ul>   
+            <li><a href="/impressum/">Impressum</a></li>
+            <li><a href="/kontakt/">Kontakt</a></li>
+          </ul>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sponsor-container">
+    <div class="container">
+      <div class="row">
+        <div class="col" style="text-align: center;">
+          <a href="https://next-generation-eu.europa.eu/index_de" target="_blank" rel="noreferrer">
+            <img src="{{ '/assets/img/Forderhinweis_EU_vertikal.width-400.jpg' | relative_url }}" class="sponsor-img">
+          </a>
+        </div>
+        <div class="col" style="text-align: center;">
+          <a href="https://www.bmbf.de/bmbf/de/forschung/zukunftsstrategie/foerderung-in-der-forschung/foerderung-in-der-forschung_node.html" target="_blank" rel="noreferrer">
+            <img src="{{ '/assets/img/BMFTR_en_DTP_CMYK_gef_durch.width-400.jpg' | relative_url }}" class="sponsor-img">
+          </a>
+        </div> 
+      </div>
+    </div>
+  </div>
+
+  <deepl-input-controller translate="no"></deepl-input-controller>
+  <div id="highlighter--hover-tools" style="display: none;">
+    <div id="highlighter--hover-tools--container">
+      <div class="highlighter--icon highlighter--icon-copy" title="Copy"></div>
+      <div class="highlighter--icon highlighter--icon-change-color" title="Change Color"></div>
+      <div class="highlighter--icon highlighter--icon-delete" title="Delete"></div>
+    </div>
+  </div>
+</body>
 </html>

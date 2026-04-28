@@ -1,0 +1,189 @@
+---
+---
+
+//----------------------------------------
+// Colors.
+//----------------------------------------
+
+// branding
+$color-brand:       #2b3990 !default;
+
+// code boxes
+$color-error:       #bd2c00 !default;
+$color-output:      #303030 !default;
+$color-source:      #360084 !default;
+
+// GTN compatible blockquotes
+$color-overview: #8A9AD0 !default;
+$color-agenda: #86D486 !default;
+$color-key_points: #FFA1A1 !default;
+$color-tip: #FFE19E !default;
+$color-warning: #de8875 !default;
+$color-comment: #ffecc1 !default;
+$color-hands_on: #dfe5f9 !default;
+$color-hands-on: #dfe5f9 !default;
+$color-question: #8A9AD0 !default;
+$color-solution: #B8C3EA !default;
+$color-details: #ddd !default;
+$color-feedback: #86D486 !default;
+$color-code-in: #86D486 !default;
+$color-code-out: #fb99d0 !default;
+
+$color-objectives:  #daee84 !default;
+$color-discussion:  #eec275 !default;
+$color-keypoints:   #7ae78e !default;
+
+// Specialized code blocks.
+
+@mixin cdSetup($color) {
+    color: $color;
+    border: solid 0.065em $color;
+    border-left: solid 0.325em $color;
+    margin: 0.975em 0.325em 0.65em 0;
+    border-radius: 0.26em 0 0 0.26em;
+}
+
+// Generic setup. Has to come before .error, .warning, and .output
+div[class^='language-'] { @include cdSetup($color-source); }
+
+div.source  { @include cdSetup($color-source); }
+div.error   { @include cdSetup($color-error); }
+div.warning { @include cdSetup($color-warning); }
+div.output  { @include cdSetup($color-output); }
+
+div.error::before,
+div.warning:before,
+div.output::before,
+div.source::before,
+div[class^='language-']::before {
+    background-color: #f2eff6;
+    display: block;
+    font-weight: bold;
+    padding: 0.325em 0.65em;
+}
+
+div[class^='language-']::before,
+div.source::before { content: "Code"; }
+
+div.error::before  { background-color: #ffebe6; content: "Error"; }
+div.warning:before { background-color: #f8f4e8; content:" Warning"; }
+div.output::before { background-color: #efefef; content: "Output"; }
+
+div.language-bash::before     { content: "Bash"; }
+div.language-perl::before     { content: "Perl"; }
+div.language-python::before   { content: "Python"; }
+div.language-r::before        { content: "R"; }
+div.language-rust::before     { content: "Rust"; }
+div.language-sql::before      { content: "SQL"; }
+
+//----------------------------------------
+// Specialized blockquote environments for learning objectives, callouts, etc.
+//----------------------------------------
+
+// Glyphicons Halflings font for blockquote icons
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/training/assets/fonts/glyphicons-halflings-regular.eot');
+  src: url('/training/assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+       url('/training/assets/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+       url('/training/assets/fonts/glyphicons-halflings-regular.woff') format('woff'),
+       url('/training/assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+       url('/training/assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// GTN compatible -> add titles
+$codeblock-padding: 0.35em !default;
+
+@mixin bkSetup($color, $glyph, $title-element: h2) {
+
+    $gradientcolor1: $color;
+    $gradientcolor2: scale-color($color, $lightness: 10%);
+
+    padding: 0 0 $codeblock-padding $codeblock-padding;
+    border: 0.065em solid;
+    border-color: $color;
+    border-radius: 0.26em;
+    margin: 0.975em 0.325em 0.65em 0;
+
+    #{$title-element} {
+        display: block; // custom elements must be block
+        padding-top: $codeblock-padding;
+        padding-bottom: $codeblock-padding;
+        padding-left: 0;
+        font-size: 1em;
+        background: linear-gradient(to bottom, $gradientcolor1, $gradientcolor2);
+        border-color: $color;
+        margin-top: 0em;
+        margin-left: -$codeblock-padding;
+    }
+
+    #{$title-element}::before {
+        font-family: 'Glyphicons Halflings';
+        content: $glyph;
+        display: inline-block;
+        padding-left: $codeblock-padding;
+        padding-right: $codeblock-padding;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.overview h3,
+.key_points h3,
+.tip h3,
+.warning h3,
+.comment h3,
+.hands-on h3,
+.hands_on h3,
+.question h3,
+.solution h3,
+.details h3,
+.feedback h3,
+.code-in h3,
+.code-out h3
+
+// GTN compatible
+//.key_points{ @include bkSetup($color-key_points, "\e101", "key_points-title"); }
+.hands-on,
+.hands_on { @include bkSetup($color-hands-on, "\270f", "hands-on-title"); }
+.question{ @include bkSetup($color-question, "\e085", "question-title"); }
+.solution{ @include bkSetup($color-solution, "\e105", "solution-title"); }
+.warning{ @include bkSetup($color-warning, "\e107", "warning-title"); }
+.comment{ @include bkSetup($color-comment, "\e111", "comment-title"); }
+.details{ @include bkSetup($color-details, "\e086", "details-title"); }
+.tip{ @include bkSetup($color-tip, "\2a", "tip-title"); }
+.code-in{ @include bkSetup($color-code-in, "\2328", "code-in-title");}
+.code-out{ @include bkSetup($color-code-out, "\1F4BB", "code-out-title"); }
+.agenda { @include bkSetup($color-agenda, "\e101", "agenda-title"); }
+
+.agenda{ background-color: #7ae78e20; }
+
+.overview{ @include bkSetup($color-overview, "",); }
+.feedback{ @include bkSetup($color-feedback, ""); }
+
+// Softwarecarpentries compatible
+
+.keypoints{ @include bkSetup($color-keypoints, "\e101"); }
+.objectives{ @include bkSetup($color-objectives, "\e085"); }
+
+.keypoints{ background-color: #7ae78e20; }
+.objectives{ background-color: #daee8420; }
+
+blockquote p {
+    margin: 0.325em;
+}
+blockquote :not(h2) + p {
+    padding-top: 0.7em;
+}
+
+//------------------------------------------
+// Show solution while printing (Ctrl + P)
+// -----------------------------------------
+
+@media print {
+  blockquote.solution > * {
+    display: unset !important;
+  }
+}

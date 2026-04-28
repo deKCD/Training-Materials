@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: FIXME
 description: "FIXME"
-slug: ansible
 time_estimation: FIXME
 questions:
   - "FIXME"

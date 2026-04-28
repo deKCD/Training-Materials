@@ -2,8 +2,9 @@ FROM ruby:3.3.9-slim-bookworm
 
 # Install needed OS packages for Jekyll and common gems (may tweak as needed)
 RUN apt-get update \
+  && apt-get upgrade -y \
   && apt-get install -y --no-install-recommends \
-     ruby-full \ 
+    ruby-full \ 
     build-essential \
     zlib1g-dev \
     openssl \
@@ -19,8 +20,6 @@ COPY . .
 RUN ls -l /srv/jekyll
 
 RUN bundle install
-
-
 
 
 # Default command for serving the site

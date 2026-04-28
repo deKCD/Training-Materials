@@ -2,8 +2,7 @@
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
-slug: unix-course
-time_estimation: "FIXME"
+time_estimation: 2H
 questions:
   - "What is a command shell and why would I use one?"
   - "How can I move around on my computer?"
@@ -21,6 +20,7 @@ key_points:
   - "Tab completion can reduce errors from mistyping and make work more efficient in the shell."
 version:
   - spring-school-2024
+life_cycle: "beta"
 contributions:
   authorship:
   - Christian Henke
@@ -114,7 +114,7 @@ In addition, Unix extends the power of commands by using special flags or *switc
 > | `>>`                | append (add) output to a file                                |
 > | `\|`                 | pipe output from one command as input to another             |
 > 
-> Download as [PDF](/tutorials/unix-course/spring-school-2024/data/cheatsheet.pdf) or separate [MarkDown](data/cheatsheet.md).
+> Download as [PDF]({{ "/tutorials/unix-course/spring-school-2024/data/cheatsheet.pdf" | relative_url }}) or separate [MarkDown]({{ "/tutorials/unix-course/spring-school-2024/data/cheatsheet.md" | relative_url }}).
 > 
 {: .details}
 
@@ -145,30 +145,30 @@ If you did not receive a mail containing a link to a VM, please contact your tut
 After successful login the Guacamole remote desktop appears. 
 Passwort and username is "denbi".
 
-![Guacamole Login](/tutorials/unix-course/images/guaca_login.png){: .responsive-img }
+![Guacamole Login]({{ "/tutorials/unix-course/images/guaca_login.png" | relative_url }}){: .responsive-img }
 
 Once logged in you can will see a screen that allows you to select the keyboard layout. 
 Please select the German keyboard layout.
 
-![Guacamole Connection](/tutorials/unix-course/images/guaca_con.png){: .responsive-img }
+![Guacamole Connection]({{ "/tutorials/unix-course/images/guaca_con.png" | relative_url }}){: .responsive-img }
 
 This tutorial will primarily focus on the use of the terminal.
 
 If guacamole is inactive for a certain period of time, you might see the following additional login screen.
 In this case, the password is `ogvkyf`.
 
-![Guacamole Ubuntu login](/tutorials/unix-course/images/guaca_inactive.png){: .responsive-img }
+![Guacamole Ubuntu login]({{ "/tutorials/unix-course/images/guaca_inactive.png" | relative_url }}){: .responsive-img }
 
 If you see the following window. Just click on "x" to close it.
 
-![Guacamole Window](/tutorials/unix-course/images/guaca_auth.png){: .responsive-img }
+![Guacamole Window]({{ "/tutorials/unix-course/images/guaca_auth.png" | relative_url }}){: .responsive-img }
 
 #### **02 - Opening a terminal window**
 
 On the bottom of the following screen you should see a terminal icon.
 Once you have clicked on the icon, a terminal window should pop up.
 
-![Guacmole Termina](/tutorials/unix-course/images/guaca_screen.png){: .responsive-img }
+![Guacmole Termina]({{ "/tutorials/unix-course/images/guaca_screen.png" | relative_url }}){: .responsive-img }
 
 It is possible to have more than one terminal open at the same time.
 

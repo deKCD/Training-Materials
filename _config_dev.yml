@@ -8,7 +8,7 @@ color_mode:
   default: light
   
 # Sites
-url: "https://dekcd.bi.denbi.de"
+url: "https://datenkompetenz.cloud"
 baseurl: "/training"
 repository_url: https://github.com/deKCD/Training-Materials
 dekcd_site: https://datenkompetenz.cloud/
@@ -35,6 +35,7 @@ exclude:
 
 plugins:
   - jekyll-last-modified-at
+  - jekyll-sitemap
 
 categories:
   tutorials: "/tutorials/"

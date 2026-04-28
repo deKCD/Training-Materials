@@ -1,7 +1,5 @@
 ---
-layout: base
-title: Collection of Tutorials
-description: List of de.KCD/de.NBI Cloud training materials
+layout: base_tutorial
 permalink: /tutorials/
 ---
 
@@ -19,7 +17,7 @@ permalink: /tutorials/
 
 {% for group in groups %}
 <section class="tutorial-group">
-  <h2>{{ group.title }}</h2>
+  <p style="font-weight:600;">{{ group.title }}</p>
   <p>{{ group.description }}</p>
 
   <table>
@@ -43,7 +41,7 @@ permalink: /tutorials/
     </thead>
     <tbody>
       {% for tutorial_id in group.tutorials %}
-        {% assign group_items = site.tutorials | where: "layout", "tutorial_hands_on" | where: "slug", tutorial_id %}
+        {% assign group_items = site.tutorials | where: "layout", "tutorial_hands_on" | where_exp: "item", "item.path contains tutorial_id" %}
         {% assign sorted_versions = group_items | sort: "version" %}
         {% assign first = sorted_versions[0] %}
         {% if first %}
@@ -51,8 +49,7 @@ permalink: /tutorials/
           <td>{{ first.title }}</td>
           <td>
             {% for version in sorted_versions %}
-              <a href="{{ version.url | relative_url }}">{{ version.version }}</a>{% unless forloop.last %}, {% endunless %}
-            {% endfor %}
+              <a href="{{ version.url | relative_url }}">{{ version.version }}</a>{% unless forloop.last %}<br>{% endunless %}    {% endfor %}
           </td>
           <td>
             {% capture slide_links %}{% endcapture %}

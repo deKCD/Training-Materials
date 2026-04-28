@@ -1,10 +1,40 @@
 - title: Unix
-  description: Our Core Curriculum consists of the lessons in the table below.
+  description: Tutorials focused on basic Unix / Linux commands and shell usage.
   tutorials:
     - unix-course
+    - simplevmworkshop
 
 - title: Cloud computing
-  description: Tutorials focused on ...
+  description: Tutorials focused on using the de.NBI Cloud infrastructure and project types.
   tutorials:
     - simpleVMWorkshop
     - bibigrid
+
+- title: Machine Learning on Cloud infrastructure
+  description: Tutorials focused on setting up machine learning toolkits and applications on cloud infrastructure.
+  tutorials:
+    - ml-fastapi
+    - ml-streamlit
+
+- title: PATCH Tutorials
+  description: Tutorials in this group contain learning material about the tools contained inside the pangenomics toolbox PATCH
+  tutorials:
+    - corer
+    - panbench
+
+- title: Metagenomics
+  description: Tutorials focused on handling of metagenomics sequencing data
+  tutorials:
+    - mgworkshop_assembly
+    - basicsAmpliconQC
+
+- title: Data Management on the Cloud
+  description: Tutorials focused on data management best practices, solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
+  tutorials:
+    - DM_in_the_deNBI_cloud
+    - dm_repository_use
+
+- title: Incubator
+  description: Tutorials in this group are under review.
+  tutorials:
+    - data-dashboard-webapp

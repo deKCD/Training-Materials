@@ -9,6 +9,7 @@ gem "jekyll-theme-cayman", "~> 0.2.0"
 gem "minimal-mistakes-jekyll", "~> 4.24.0"
 
 gem "jekyll-last-modified-at"
+gem "jekyll-sitemap"
 
 gem "reveal-jekyll", "~> 0.0.2"
 
