@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
-slug: unix-course
 time_estimation: 2H
 questions:
   - "What is a command shell and why would I use one?"

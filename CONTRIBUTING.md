@@ -72,7 +72,6 @@ Example:
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
-slug: unix-course
 time_estimation: 2H30M
 level: "Educational level"
 keywords: [list of keywords]
@@ -102,7 +101,6 @@ The following fields are mandatory unless stated otherwise:
 * `layout`: use `tutorial_hands_on` as the default layout.
 * `title`: tutorial title as displayed on the tutorial collection page.
 * `description`: a concise summary of the tutorial content. 
-* `slug`: 
 * `time_estimation`: estimated duration of the tutorial. This must conform to the following pattern:
       ```/^(?:([0-9]+)[Hh])?(?:([0-9]+)[Mm])?(?:([0-9.]+)[Ss])?$/```
 * `level`: the learners level of ability in the topic being taught according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Examples of skill levels include ***beginner***, ***intermediate*** or ***advanced***.

@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: SimpleVM Workshop
 description: "FIXME"
-slug: simplevmworkshop
 time_estimation: "FIXME"
 level: beginner
 keywords: [FIXME]

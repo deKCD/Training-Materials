@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: BiBiGrid Hands-on
 description: FIXME
-slug: bibigrid
 time_estimation: FIXME
 level: FIXME
 keywords: [FIXME]

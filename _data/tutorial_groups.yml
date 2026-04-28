@@ -35,6 +35,6 @@
     - dm_repository_use
 
 - title: Incubator
-  description: Location for new tutorials, for review
+  description: Tutorials in this group are under review.
   tutorials:
     - data-dashboard-webapp

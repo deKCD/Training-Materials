@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Basics of Amplicon Quality Processing
 description: Basic steps to do manually quality processing of 16S data step by step with individual tools instead of using integrated solutions like qiime2 / dada2 / deblur.
-slug: basicsAmpliconQC
 time_estimation: HM
 level: FIXME
 keywords: [FIXME]

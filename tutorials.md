@@ -41,7 +41,7 @@ permalink: /tutorials/
     </thead>
     <tbody>
       {% for tutorial_id in group.tutorials %}
-        {% assign group_items = site.tutorials | where: "layout", "tutorial_hands_on" | where: "slug", tutorial_id %}
+        {% assign group_items = site.tutorials | where: "layout", "tutorial_hands_on" | where_exp: "item", "item.path contains tutorial_id" %}
         {% assign sorted_versions = group_items | sort: "version" %}
         {% assign first = sorted_versions[0] %}
         {% if first %}

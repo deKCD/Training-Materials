@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Metagenomic Assembly
 description: "This tutorial will guide you through the typical steps of metagenome assembly. "
-slug: mgworkshop_assembly
 time_estimation: 6H
 level: FIXME
 keywords: [FIXME]

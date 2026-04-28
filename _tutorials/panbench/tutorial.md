@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: PanBench
 description: Introduction to using the web interface of panbench.eu
-slug: panbench
 time_estimation: 10m
 questions:
   - How do I download an example dataset?

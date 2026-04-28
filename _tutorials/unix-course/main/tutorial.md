@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
-slug: unix-course
 time_estimation: 2H
 level: beginner
 keywords: ["shell", "simplevm"]
@@ -120,9 +119,6 @@ Participants need a web browser and an active ELIXIR account.
 {% include _tutorials/unix-course/main/part2.md %}
 
 {% include _tutorials/unix-course/main/part3.md %}
-
-{% include _tutorials/unix-course/main/part4.md %}
-
 
 
 
