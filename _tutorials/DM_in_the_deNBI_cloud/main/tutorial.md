@@ -14,15 +14,19 @@ objectives:
   - Be able to use object storage on the de.NBI Cloud.
   - Be able to use advanced object storage operations and SSH-based transfers (parallel transfers, mirroring, resume interrupted transfers).
 key_points:
-  - Use the de.NBI Cloud for superior performance for all your research projects.
-  - Key points will appear at the end of the tutorial.
+  - SimpleVM provides a guided interface for launching VMs with pre-installed tool stacks via Conda; OpenStack Horizon exposes the underlying primitives for more control.
+  - Object storage (Swift/S3) is project-scoped, so containers are visible to all project members; use unique, DNS-compatible names.
+  - The MinIO client (`mc`) covers most day-to-day object-storage tasks, including bulk transfers, mirroring, and anonymous-access policies.
+  - For SSH-based transfers, prefer `rsync` for incremental sync and `parallel` with `scp` to saturate bandwidth on many small files.
 version: main
 life_cycle: alpha
 contributions:
   authorship:
     - Abhijeet Shah
-    - Sebastian Juenemann
-  editing: AS & SJ
+    - Sebastian Jünemann
+  editing:
+    - Abhijeet Shah
+    - Sebastian Jünemann
   funding: deKCD/BMBF
 ---
 
@@ -57,20 +61,22 @@ able to log in to the de.NBI Cloud Portal:
     de.NBI Cloud wiki regarding SSH keys:
     <https://cloud.denbi.de/wiki/portal/user_information/#ssh-key>
 
-![Key]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/key.png" | relative_url }}){: .responsive-img }
+    ![Key]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/key.png" | relative_url }}){: .responsive-img }
 
-3. (optional) If you already have a personal SSH key-pair, you can also
-   upload your *public* key here instead of generating one.
+3.  (optional) If you already have a personal SSH key-pair, you can
+    also upload your *public* key here instead of generating one.
 
 ## 1.3 Join the *ib2025workshop1* Project
 
 If you have not done yet, please click on the following link to request
 access to the project:
 
-[ib2025workshop
-invitation](https://simplevm.denbi.de/portal/webapp/#/workshops/invitation/faecbc35ec5648e890f6510f583e2b38)
+[ib2025workshop invitation](https://simplevm.denbi.de/portal/webapp/#/workshops/invitation/faecbc35ec5648e890f6510f583e2b38)
 
-The above invitation link will not work after October 2025.
+**Note:** Workshop invitation links are valid only for the duration of
+the running cohort and expire shortly after the workshop ends. If the
+link above is no longer active, ask the workshop organizers
+(Sebastian Jünemann, Abhijeet Shah) for the current invitation URL.
 
 If you have been invited to join a SimpleVM project on the de.NBI Cloud via a link, you may now click on the link and follow the instructions to join the project.
 
@@ -81,7 +87,9 @@ in your VM through conda environments:
 
 -   **mash**: A fast genome and metagenome distance estimation tool
 -   **parallel**: GNU parallel for running jobs in parallel
--   **fasterq-dump**: Part of the SRA Toolkit for converting SRA data
+-   **fasterq-dump**: A tool for converting SRA data, provided by the
+    **sra-tools** conda package (the package you select in Section 1.6
+    is `sra-tools`; the binary on `$PATH` is `fasterq-dump`)
 
 **Note**: These tools will be available after activating the conda environment
 with `conda activate denbi` (covered later in this workshop).
@@ -92,8 +100,11 @@ features but is not required for this workshop.
 
 ## 1.5 Select your project
 
-You start this tutorial from your profile page
-(<https://simplevm.denbi.de>).
+You start this tutorial from your SimpleVM profile page at
+<https://simplevm.denbi.de>. This is the dedicated SimpleVM portal; it
+is reachable from the main de.NBI Cloud portal
+(<https://cloud.denbi.de/portal/>) under the **SimpleVM** menu and uses
+the same login.
 
 1.  Click on the `New Instance` tab.
 
@@ -118,25 +129,30 @@ You start this tutorial from your profile page
 
 3.  In the image section, please click on the *Research Environments*
     tab and select the **Guacamole** image based on **Ubuntu 24.04**.
+
     ![Research Environment Selection]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/resenv.png" | relative_url }}){: .responsive-img }
 
 4.  Select the Conda tab and choose the following tools with their
     version numbers given below for installation via Conda:
 
-    -   parallel (20220922)
-    -   sra-tools (3.1.1)
-    -   mash (2.2)
-        ![Conda Tool Selection]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/conda.png" | relative_url }}){: .responsive-img }
+    -   parallel (20260122)
+    -   sra-tools (3.4.1)
+    -   mash (2.3)
+
+    ![Conda Tool Selection]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/conda.png" | relative_url }}){: .responsive-img }
 
     You will learn in the next sections how to apply these tools.
 
 5.  Grant access to the workshop organizers (**Sebastian Jünemann** and **Abhijeet Shah**), or your collaborators. This
     way these members get ssh access to your VM and can help you in case
     something does not work as expected.
+
     ![Additional Users]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/additional_users.png" | relative_url }}){: .responsive-img }
 
 6.  Optional: Modify the URL path for Guacamole. You will access this VM
-    via this URL. ![Research Environment URL]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/resenv_url.png" | relative_url }}){: .responsive-img }
+    via this URL.
+
+    ![Research Environment URL]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/resenv_url.png" | relative_url }}){: .responsive-img }
 
 7.  Confirm the checkboxes and click on Start.
 
@@ -162,14 +178,18 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     have been automatically redirected to the **Instance Overview**
     page. Now click on the dropdown of your machine. Click on the
     Guacamole URL which opens a new browser tab.
+
     ![VM State]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/vm_state.png" | relative_url }}){: .responsive-img }
 
 2.  Log into the virtual desktop environment using the credentials:
-    `denbi` `denbi` ![VM Login]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/vm_login.png" | relative_url }}){: .responsive-img }
+    `denbi` `denbi`.
+
+    ![VM Login]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/vm_login.png" | relative_url }}){: .responsive-img }
 
     And choose the correct keyboard layout for you.
 
 3.  Right click on background and select `Open Terminal Here`.
+
     ![Open Terminal]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/open_terminal.png" | relative_url }}){: .responsive-img }
 
 4.  Inspect the VM before starting to work with it. Let's check whether
@@ -191,7 +211,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     free -h
     ```
 
-    You can also check what kind of processes are running on your VM by
+    You can also check what kind of processes are running on your VM bynproc
     executing `top` or `htop`.
 
     ``` bash
@@ -211,6 +231,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
     -   `mash -h`
     -   `parallel -h`
+    -   `fasterq-dump -h`
 
     If there is an error reported, then something went wrong, and we
     have to either repeat the conda installation manually or install it
@@ -243,7 +264,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
     Install the command-line client for OpenStack
 
     ``` bash
-    sudo apt install python3-openstackclient
+    sudo apt install -y python3-openstackclient
     ```
 
 # Section 3: Using Horizon OpenStack Interface
@@ -262,24 +283,24 @@ the openstack interface.
 
 ## 3.2 Create a new Key Pair
 
-2.  Click on the `Key Pairs` entry under the `Compute` menu and select
-    `Create Key Pair`
+1.  Click on the `Key Pairs` entry under the `Compute` menu and select
+    `Create Key Pair`.
 
-![Key Pair Creation Step 1]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/keypair1.png" | relative_url }}){: .responsive-img }
+    ![Key Pair Creation Step 1]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/keypair1.png" | relative_url }}){: .responsive-img }
 
-3.  Enter any name and select `SSH Key` as the Key Type.
+2.  Enter any name and select `SSH Key` as the Key Type.
 
-![Key Pair Creation Step 2]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/keypair2.png" | relative_url }}){: .responsive-img }
+    ![Key Pair Creation Step 2]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/keypair2.png" | relative_url }}){: .responsive-img }
 
-4.  The private key will be downloaded automatically to your SimpleVM
+3.  The private key will be downloaded automatically to your SimpleVM
     instance. This instance can be accessed only by you, however,
     private keys should always have restricted access, which is
     currently not the case. We will change this now:
 
-``` bash
-mv ~/Downloads/*.pem ~/.ssh
-chmod 600 ~/.ssh/*.pem
-```
+    ``` bash
+    mv ~/Downloads/*.pem ~/.ssh
+    chmod 600 ~/.ssh/*.pem
+    ```
 
 ## 3.3 Start a new instance
 
@@ -290,31 +311,31 @@ openstack horizon.
 1.  Under the `Compute` menu, select the `Instances` entry and click on
     `Launch Instance`.
 
-![New Instance Step 1]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance1.png" | relative_url }}){: .responsive-img }
+    ![New Instance Step 1]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance1.png" | relative_url }}){: .responsive-img }
 
 2.  In the first section, you just need to provide an instance name.
     Please choose your name so that we can identify your VM.
 
-![New Instance Step 2]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance2.png" | relative_url }}){: .responsive-img }
+    ![New Instance Step 2]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance2.png" | relative_url }}){: .responsive-img }
 
 3.  Then, we need to select a bootable image. In the drop down menu
     `Select Boot Source` select the entry `Instance Snapshot` upon which
     the image `RDM Meets Cloud Workshop` will appear in the list below.
     Click the right up-arrow on that image so that it will be selected.
 
-![New Instance Step 3]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance3.png" | relative_url }}){: .responsive-img }
+    ![New Instance Step 3]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance3.png" | relative_url }}){: .responsive-img }
 
 4.  Next the flavor, i.e. physical virtualization, needs to be chosen.
     Here, select the `de.NBI default` flavor.
 
-![New Instance Step 4]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance4.png" | relative_url }}){: .responsive-img }
+    ![New Instance Step 4]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance4.png" | relative_url }}){: .responsive-img }
 
 5.  The last option that needs to be selected is the key pair that will
     be used for the ssh connection. Select the `Key Pair` menu entry and
     choose the key pair that you just created in the previous section
     3.2.
 
-![New Instance Step 5]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance5.png" | relative_url }}){: .responsive-img }
+    ![New Instance Step 5]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/newinstance5.png" | relative_url }}){: .responsive-img }
 
 6.  You can now `Launch the Instance`.
 
@@ -323,26 +344,26 @@ openstack horizon.
 1.  Locate your running instance in the List of instances and note
     (write down) the last part of the IP address.
 
-![IP Address]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/ipaddress.png" | relative_url }}){: .responsive-img }
+    ![IP Address]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/ipaddress.png" | relative_url }}){: .responsive-img }
 
-Add 30000 to this number (in this example this would be the number
-30051). This will be the port that you will be using for the ssh
-connection.
+    Add 30000 to this number (in this example this would be the number
+    30199). This will be the port that you will be using for the ssh
+    connection.
 
 2.  In the Guacamole environment, open a terminal (or use any running
     terminal session) and type the following command:
 
-``` bash
-ssh -i ~/.ssh/*.pem ubuntu@129.70.51.199 -p YOUR_PORT
-```
+    ``` bash
+    ssh -i ~/.ssh/*.pem ubuntu@129.70.51.199 -p YOUR_PORT
+    ```
 
-**Note:** You need to replace YOUR_PORT with the actual port number you
-got in the step above!
+    **Note:** You need to replace YOUR_PORT with the actual port number you
+    got in the step above!
 
-If everything went without any issue, you should see the following
-prompt:
+    If everything went without any issue, you should see the following
+    prompt:
 
-![Instance Login]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/instance_login.png" | relative_url }}){: .responsive-img }
+    ![Instance Login]({{ "/tutorials/DM_in_the_deNBI_cloud/main/tutorial/figures/instance_login.png" | relative_url }}){: .responsive-img }
 
 Here, we will create a new folder called `data_remote`:
 
@@ -392,6 +413,12 @@ source ~/.config/openstack/app-cred*.sh
 If you have `OpenstackClient` installed and `openstack subnet list` runs
 without error, you are ready to proceed.
 
+**Note:** The OpenStack-side project (`ib2025openstack1`) is a separate
+project from the SimpleVM workshop project (`ib2025workshop1`)
+introduced in Section 1.3. They share members but exist independently
+on the OpenStack and SimpleVM sides; from here on, we work against the
+OpenStack project.
+
 ``` bash
 openstack project list
 openstack project show ib2025openstack1
@@ -430,20 +457,38 @@ SimpleVM instance, type:
 cd /mnt/volume
 ```
 
-We will download some more data to play around with:
+We will download some more data to play around with. The `sra` and
+`aws` MinIO aliases used in the commands below come pre-configured on
+the workshop VM image and point at public read-only S3 mirrors of the
+ENA/SRA archives. You can confirm they are available with `mc alias list`.
 
 ``` bash
 mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_1.fastq.gz .
 mc cp sra/ftp.era.ebi.ac.uk/vol1/fastq/SRR398/008/SRR3984908/SRR3984908_2.fastq.gz .
 ```
 
-Next, we are going to create a new object storage container, a so-called
-bucket. For this, we will use the Horizon interface for the first time.
-Navigate to the **Container** entry under the **Object Store** menu
-entry. Note: All containers here are visible to all project members, as
-those containers in openstack are bound to the project.
+Next, we are going to create a new object storage container — a
+so-called bucket. For this, we will use the Horizon interface for the
+first time:
 
-This container is empty, but we can show it nevertheless on the command
+1.  In Horizon, expand the **Object Store** menu in the left sidebar
+    and click **Containers**.
+2.  Click **+ Container**.
+3.  Enter a container name. Pick something unique to you (e.g. include
+    your initials or username), since all containers in this project
+    are visible to all project members. Container names must be
+    DNS-compatible: lowercase letters, digits, and hyphens only.
+4.  Leave the access policy at its default (private) and click
+    **Submit**.
+
+The new container will appear in the container list. From now on, refer
+to it as `YOUR_CONTAINER_NAME` in the commands below.
+
+**Note:** All containers in this project are visible to every project
+member because OpenStack object storage is scoped to the project, not
+the individual user.
+
+The container is currently empty, but we can list it from the command
 line using the MinIO client:
 
 ``` bash
@@ -477,7 +522,6 @@ Here are some additional useful object storage operations:
 1.  **Copy data between buckets:**
 
     ``` bash
-    touch YOUR_NAME.txt
     wget https://loremipsum.de/downloads/original.txt -O YOUR_NAME.txt
     mc cp YOUR_NAME.txt ibworkshop/YOUR_CONTAINER_NAME/
     mc cp ibworkshop/YOUR_CONTAINER_NAME/YOUR_NAME.txt ibworkshop/example/
@@ -558,7 +602,7 @@ error handling.
 
 ``` bash
 # Upload multiple file types with wildcards
-mc cp /mount/volume/*.{fastq,fna,fa} ibworkshop/YOUR_CONTAINER_NAME/raw_data/
+mc cp /mnt/volume/*.{fastq,fna,fa} ibworkshop/YOUR_CONTAINER_NAME/raw_data/
 
 # Download files matching specific patterns
 mc find ibworkshop/YOUR_CONTAINER_NAME --name "*.fastq.gz" --exec "mc cp {} ~/downloads/"
@@ -588,7 +632,7 @@ efficient for incremental backups and dataset updates.
 
 ``` bash
 # Sync directories between instances
-rsync -avz -e "ssh -p YOUR_PORT" ubuntu@YOUR_VM_IP:/mnt/volume/data/  ubuntu@YOUR_OTHER_VM_IP:/PATH/TO/data
+rsync -avz -e "ssh -p YOUR_PORT" /PATH/TO/local_data  ubuntu@YOUR_VM_IP:/PATH/TO/data
 
 # Transfer with compression and progress
 rsync -avzP -e "ssh -p YOUR_PORT" ~/large_dataset/ ubuntu@YOUR_VM_IP:/mnt/volume/
