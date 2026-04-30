@@ -8,3 +8,5 @@ Gemfile.lock
 .jekyll-cache
 .jekyll-metadata
 .ipynb_checkpoints
+.claude/
+.cursor/
