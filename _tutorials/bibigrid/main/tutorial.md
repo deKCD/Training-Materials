@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: BiBiGrid Hands-on
-description: "FIXME"
+description: "The goal of this material is to set up a small HPC cluster consisting of 3 nodes (1 master, 2 on demand workers) using BiBiGrid with Slurm (workload manager), Network File System (allows file sharing between servers) and Theia (Web IDE). This tutorial targets users running BiBiGrid on de.NBI cloud."
 slug: bibigrid
-time_estimation: "FIXME"
+time_estimation: "2h"
 questions:
   - "FIXME"
 objectives:
