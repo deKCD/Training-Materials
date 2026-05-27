@@ -19,10 +19,9 @@ body {
     --dekcd-light-grey: #E2E2E2;
     --dekcd-white: #FFFFFF;
     --dekcd-black: #0e0e0e;
-    --dekcd-lifecycle-stable: #b2dba1;;
-    --dekcd-lifecycle-alpha: #f5e79e;;
-    --dekcd-lifecycle-beta: #9acfea;;
-    --dekcd-lifecycle-deprecated: #dca7a7;;
+    --dekcd-lifecycle-active: #b2dba1;
+    --dekcd-lifecycle-draft: #9acfea;
+    --dekcd-lifecycle-archived: #dca7a7;
 }
 
 .bg-image {
@@ -773,20 +772,20 @@ td {
   margin-bottom: 1em;
 }
 
-.lifecycle-stable {
-  background: var(--dekcd-lifecycle-stable);
+.lifecycle-active {
+  background: var(--dekcd-lifecycle-active);
 }
 
-.lifecycle-beta {
-  background: var(--dekcd-lifecycle-beta);
+.lifecycle-draft {
+  background: var(--dekcd-lifecycle-draft);
 }
 
-.lifecycle-alpha {
-  background: var(--dekcd-lifecycle-alpha);
+.lifecycle-archived {
+  background: var(--dekcd-lifecycle-archived);
 }
 
 .lifecycle-unknown {
-  background: var(--dekcd-lifecycle-deprecated);
+  background: var(--dekcd-lifecycle-archived);
 }
 
 /* to place the image within the text width */

@@ -145,7 +145,7 @@ $codeblock-padding: 0.35em !default;
 .code-out h3
 
 // GTN compatible
-//.key_points{ @include bkSetup($color-key_points, "\e101", "key_points"); }
+//.key_points{ @include bkSetup($color-key_points, "\e101", "key_points-title"); }
 .hands-on,
 .hands_on { @include bkSetup($color-hands-on, "\270f", "hands-on-title"); }
 .question{ @include bkSetup($color-question, "\e085", "question-title"); }

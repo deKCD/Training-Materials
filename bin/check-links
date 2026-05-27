@@ -1,0 +1,109 @@
+#!/bin/bash
+# Check Markdown links in tutorials
+# This script validates all markdown links in the _tutorials/ directory
+
+set -e
+
+# Script configuration
+QUIET_MODE="${1:-no}"
+VERBOSE_MODE="${2:-no}"
+USE_IGNORE_FILE="${3:-yes}"
+CONFIG_FILE="${4:-.github/workflows/link-check-config.json}"
+FOLDER_PATH="${5:-_tutorials/}"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Initialize counters
+BROKEN_LINKS=0
+CHECKED_LINKS=0
+
+if [[ "$QUIET_MODE" != "yes" ]]; then
+    echo "Starting markdown link check..."
+    echo "Folder: $FOLDER_PATH"
+fi
+
+# Find all markdown files and check links
+while IFS= read -r file; do
+    # Extract all markdown links: [text](url)
+    while IFS= read -r line; do
+        if [[ $line =~ \]\(([^)]+)\) ]]; then
+            url="${BASH_REMATCH[1]}"
+            
+            # Skip external HTTPS/HTTP URLs and mailto links
+            if [[ $url == https://* ]] || [[ $url == http://* ]] || [[ $url == mailto: ]]; then
+                if [[ "$VERBOSE_MODE" == "yes" ]]; then
+                    echo -e "${GREEN}✓ External URL in $file: $url${NC}"
+                fi
+                continue
+            fi
+            
+            ((CHECKED_LINKS++))
+            
+            # Handle Jekyll liquid tag pattern for images: {{ "/tutorials/..." | relative_url }}
+            if [[ $url =~ \{\{\ \"([^\"]+)\"\ \|\ relative_url\ \}\} ]]; then
+                image_path="${BASH_REMATCH[1]}"
+                # Remove leading slash if present
+                image_path="${image_path#/}"
+                
+                if [[ $image_path =~ ^tutorials/[^/]+/.+\.(png|jpg|jpeg|gif|webp|svg)$ ]]; then
+                    if ! [[ -f "$image_path" ]]; then
+                        if [[ "$VERBOSE_MODE" == "yes" ]]; then
+                            echo -e "${RED}✗ Broken Jekyll image link in $file: $url${NC}"
+                        fi
+                        ((BROKEN_LINKS++))
+                    elif [[ "$VERBOSE_MODE" == "yes" ]]; then
+                        echo -e "${GREEN}✓ Jekyll image link in $file: $image_path${NC}"
+                    fi
+                fi
+                continue
+            fi
+            
+            # Check if file reference exists (basic check)
+            if [[ $url == *"#"* ]]; then
+                local_file="${url%#*}"
+            else
+                local_file="$url"
+            fi
+            
+            if [[ -n "$local_file" ]] && [[ "$local_file" != "." ]]; then
+                # Check if it's an image reference within tutorial folder
+                if [[ $local_file =~ \.(png|jpg|jpeg|gif|webp|svg)$ ]]; then
+                    if ! [[ -f "$local_file" ]]; then
+                        if [[ "$VERBOSE_MODE" == "yes" ]]; then
+                            echo -e "${RED}✗ Broken image link in $file: $url${NC}"
+                        fi
+                        ((BROKEN_LINKS++))
+                    elif [[ "$VERBOSE_MODE" == "yes" ]]; then
+                        echo -e "${GREEN}✓ Image link in $file: $url${NC}"
+                    fi
+                else
+                    # Regular file or directory link
+                    if ! [[ -f "$local_file" || -d "$local_file" ]]; then
+                        if [[ "$VERBOSE_MODE" == "yes" ]]; then
+                            echo -e "${RED}✗ Broken link in $file: $url${NC}"
+                        fi
+                        ((BROKEN_LINKS++))
+                    elif [[ "$VERBOSE_MODE" == "yes" ]]; then
+                        echo -e "${GREEN}✓ Valid link in $file: $url${NC}"
+                    fi
+                fi
+            fi
+        fi
+    done < <(grep -o '\[.*\]([^)]*)' "$file" 2>/dev/null || true)
+done < <(find "$FOLDER_PATH" -name "*.md" -type f 2>/dev/null || true)
+
+if [[ "$QUIET_MODE" != "yes" ]]; then
+    echo "Checked $CHECKED_LINKS links"
+    if [[ $BROKEN_LINKS -gt 0 ]]; then
+        echo -e "${RED}Found $BROKEN_LINKS broken links${NC}"
+        exit 1
+    else
+        echo -e "${GREEN}All links are valid${NC}"
+    fi
+fi
+
+exit 0

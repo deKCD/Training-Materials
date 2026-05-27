@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: Setting up ML project in the cloud infrastructure
 description: "FIXME"
-slug: ml-streamlit
 time_estimation: 2H
 questions:
   - "How does TabICL simplify the training process compared to traditional machine learning models?"

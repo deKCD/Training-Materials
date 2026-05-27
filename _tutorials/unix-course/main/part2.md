@@ -13,7 +13,7 @@ Please run the following command before we can proceed:
 sudo apt-get install wamerican-small
 ```
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Please move to your home directory. *(1 command)*
 > 2. Now create a directory called `fun_with_words` and enter the new directory. *(2 commands)*
 > 3. Filter the English words list for words ending in _…fully_ and save them to a file named `fully.txt` using the command below. The `$` sign inside the search string ensures that only word endings are matched.
@@ -21,7 +21,7 @@ sudo apt-get install wamerican-small
 > 5. Repeat the same for the words ending in _…ously_ as well as _…ably_ and save them to their corresponding files. *(2 commands)*
 > 6. Calculate the word counts of all three files. *(1 command)*
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > mkdir fun_with_words
@@ -38,7 +38,7 @@ sudo apt-get install wamerican-small
 
 #### **08 - Processing the extracted data**
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Convert all the adverbs inside the three files from the previous section into adjectives. Name the resulting files `able.txt`, `ful.txt` and `ous.txt` _(3 commands)_
 >
 >    | adverb | adjective |
@@ -50,7 +50,7 @@ sudo apt-get install wamerican-small
 > 2. Concatenate the contents of `able.txt`, `ful.txt` and `ous.txt` into a single file called `adjectives.sorted.txt`. Sort the lines alphabetically before saving. _(2 commands with a pipe in between)_
 > 3. Take a look at the results. _(1 command)_
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > sed 's/ably/able/' ably.txt > able.txt
 > > sed 's/fully/ful/' fully.txt > ful.txt
@@ -75,13 +75,13 @@ One can compress/decompress files in place:
 
 Alternatively, both `gzip` and `gunzip` can output their results to standard out using `-c` flag:
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Please move to your home directory. *(1 command)*
 > 2. Now, download the file at [seqs.fasta](https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta) to the current directory using a network downloader. *(1 command)*
 > 3. Take a look at the contents of the file. *(1 command)*
 > 4. The downloaded file is an uncompressed text file of 30 Kilobytes in size. Please apply compression to the file so that it takes less disk space and check the effectiveness of the compression. *(2 commands)*
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > wget "https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta"
@@ -95,7 +95,7 @@ Alternatively, both `gzip` and `gunzip` can output their results to standard out
 
 #### **10 - Cleaning up**
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Please enter your home and list its contents. *(2 commands)*
 > 2. Please list the contents of the directory `fun_with_words` without moving into it. *(1 command)*
 > 3. Now, delete all the files inside the directory `fun_with_words`. *(1 command)*
@@ -105,7 +105,7 @@ Alternatively, both `gzip` and `gunzip` can output their results to standard out
 > 7. Remove the compressed text file. *(1 command)*
 > 8. That's it! Congratulations! You have mastered the Unix command-line essentials!
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > ls

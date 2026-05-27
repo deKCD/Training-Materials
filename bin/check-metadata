@@ -1,0 +1,64 @@
+#!/bin/bash
+# Check Tutorial Metadata
+# Validates that all tutorials have required metadata fields
+
+set -e
+
+# Script configuration
+QUIET_MODE="${1:-no}"
+VERBOSE_MODE="${2:-no}"
+FOLDER_PATH="${3:-_tutorials/}"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# Required metadata fields
+REQUIRED_FIELDS=("title" "objectives" "time_estimation" "key_points" "contributors")
+
+# Initialize counters
+ISSUES=0
+CHECKED_FILES=0
+
+if [[ "$QUIET_MODE" != "yes" ]]; then
+    echo "Starting metadata check..."
+    echo "Folder: $FOLDER_PATH"
+fi
+
+# Find all tutorial directories with index.md
+while IFS= read -r dir; do
+    index_file="$dir/index.md"
+    
+    if [[ ! -f "$index_file" ]]; then
+        continue
+    fi
+    
+    ((CHECKED_FILES++))
+    
+    # Extract YAML front matter (between --- markers)
+    yaml_content=$(sed -n '/^---$/,/^---$/p' "$index_file" 2>/dev/null | head -n -1 | tail -n +2 || true)
+    
+    # Check for required fields
+    for field in "${REQUIRED_FIELDS[@]}"; do
+        if ! echo "$yaml_content" | grep -q "^$field:"; then
+            if [[ "$VERBOSE_MODE" == "yes" ]]; then
+                echo -e "${YELLOW}Missing field '$field' in $index_file${NC}"
+            fi
+            ((ISSUES++))
+        fi
+    done
+done < <(find "$FOLDER_PATH" -maxdepth 1 -type d ! -name "_*" ! -name "." 2>/dev/null || true)
+
+if [[ "$QUIET_MODE" != "yes" ]]; then
+    echo "Checked $CHECKED_FILES tutorial metadata entries"
+    if [[ $ISSUES -gt 0 ]]; then
+        echo -e "${RED}Found $ISSUES metadata issues${NC}"
+        exit 1
+    else
+        echo -e "${GREEN}All metadata is complete${NC}"
+    fi
+fi
+
+exit 0
