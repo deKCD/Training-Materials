@@ -5,7 +5,7 @@
 Instead of using a graphical user interface for editing files,
 you can directly manipulate files on the terminal.
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Please move to your home directory. *(1 command)*
 > 2. Download the sars-cov-2 genome again ([sars-cov-2-seq](https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta)). *(1 command)*
 > 3. Open the file in an editor. *(1 command)*
@@ -13,7 +13,7 @@ you can directly manipulate files on the terminal.
 > 5. Save the file and exit the editor. *(1 key combination and 2 keys)*
 > 6. Output just the first 10 lines to ensure that the fasta header contains only the id now. *(1 command)*
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > wget "https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta"

@@ -72,8 +72,9 @@ Example:
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
-slug: unix-course
 time_estimation: 2H30M
+level: "Educational level"
+keywords: [list of keywords]
 questions:
   - Which questions are addressed by the tutorial?
 objectives:
@@ -83,7 +84,7 @@ key_points:
  - They will appear at the end of the tutorial
 version:
  - main
-life_cycle: "Beta"
+life_cycle: "Creative work status"
 contributions:
   authorship:
   - author 1
@@ -102,12 +103,18 @@ The following fields are mandatory unless stated otherwise:
 * `description`: a concise summary of the tutorial content. 
 * `time_estimation`: estimated duration of the tutorial. This must conform to the following pattern:
       ```/^(?:([0-9]+)[Hh])?(?:([0-9]+)[Mm])?(?:([0-9.]+)[Ss])?$/```
+* `level`: the learners level of ability in the topic being taught according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Examples of skill levels include ***beginner***, ***intermediate*** or ***advanced***.
+* `keywords`: keywords or tags used to describe the content. Multiple entries in a keywords list are delimited by commas.
+  Example:
+  ```keywords: ["bioinformatics", "python"]```
 * `questions`: a list of key questions addressed by the tutorial.
 * `objectives`: a list of learning objectives.
 * `key_points`: summary points presented at the end of the tutorial.
 * `version`: specifies the tutorial version (e.g., `main`).
-* `life_cycle`: indicates the development status.
-* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/`.
+* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Options are ***active***, ***under development***, and ***archived***.
+
+  Example:
+  ```life_cycle: under development```
 
 > <details-title>Development status of tutorials</details-title>
 > Tutorials follow a structured development model aligned with best practices from [Carpentries](https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html).
@@ -117,6 +124,9 @@ The following fields are mandatory unless stated otherwise:
 > - **Deprecated:** the tutorial is no longer maintained and may be removed in the future.
 > 
 {: .details}
+
+* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/`.
+
 
 The following fields are optional but recommended where applicable:
 * `zenodo_link`: link to the input data for the tutorial on Zenodo.
@@ -155,7 +165,22 @@ If you have any data or images that you would like to add to the tutorial, pleas
 
 #### **Formatting tutorial content**
 
-This section outlines the standardized components used to structure tutorial content, including instructional boxes and image handling.
+This section outlines the standardized components used to structure tutorial content, including Table of Contents (TOC), instructional boxes and image handling.
+
+##### **TOC**
+
+To automatically generate a Table of Contents from your section headings, add the following snippet directly below the metadata section in your content:
+
+{% raw %}
+```markdown
+> <agenda-title>Table of Contents</agenda-title>
+> Your text (optional).
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+```
+{% endraw %}
 
 ##### **Boxes**
 
@@ -204,6 +229,8 @@ The following boxes are available and should be used consistently:
 * `{: .feedback}` learner feedback prompts
 * `{: .code-in}` input code blocks
 * `{: .code-out}` output or results
+
+Foldable box types (`solution`, `tip`, `comment`, `details`) allow you to show or hide the content on the same page. The title line of these boxes is always visible, making it easier to scan long explanatory boxes and reducing visual overload in tutorials.
 
 > <hands-on-title>Tasks</hands-on-title>
 > 1. Create each box and see how it looks.
@@ -269,7 +296,6 @@ Usage examples:
 Images must be referenced using the `relative_url` filter:
 ```
 ![figure-title]({{ "/tutorials/<tutorial-folder>/<image-folder>/<image>" | relative_url }}){: .responsive-img }
-
 ```
 * `![figure-title]()` this is standard Markdown image syntax. The text inside the brackets (`figure-title`) becomes the **alt text**, which improves accessibility and is displayed if the image fails to load.
 * `{{ "/path/to/image" | relative_url }}` the `relative_url` ensures that the correct `baseurl` defined in `_config.yml` is automatically prepended. This prevents broken links when the site is hosted in a subdirectory.
@@ -308,6 +334,9 @@ If no suitable group exists:
 Once your tutorial is ready to publish, create a new branch, commit your changes, submit a pull request for review. 
 You may optionally [open an issue](https://github.com/deKCD/Training-Materials/issues){:target="_blank"} to describe your contribution before or alongside your pull request.
 
+### Registering material in TeSS
+
+If all the required metadata fields are completed correctly, tutorials can be registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"} with minimal additional effort. Using the [Bioschemas TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"} ensures the metadata is machine-readable and interoperable, enabling automated harvesting, improving discoverability, and supporting seamless integration into the ELIXIR training ecosystem without manual curation.
 
 ## Create a new learning pathway
 ------------------------------------
@@ -345,3 +374,40 @@ editorial_board:
 The `layout` field must be set to `pathway` to ensure correct rendering of the pathway page. Each tutorial entry must include `name` (which must exactly match the corresponding tutorial folder name) and `version` (selected from the available versions of that tutorial).
 
 After defining the pathway, create a new branch, commit the pathway file, and submit a pull request for review.
+
+## Share Materials with the Galaxy Training Network (GTN)
+
+If you would like to contribute your training materials to the Galaxy Training Network (GTN), please follow the official guidelines for [creating a new tutorial](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/github-contribution/tutorial.html) and [formatting content](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html).
+
+This platform is fully compatible with GTN in terms of metadata structure and formatting conventions. This compatibility enables seamless transfer of materials between GTN and this platform. In practice, this means:
+
+* training materials developed here can be contributed to GTN with minimal adjustments.
+* GTN tutorials can be integrated into this platform without requiring reformatting, preserving both content and presentation.
+
+To incorporate specific GTN tutorials into this platform, you can use [git sparse-checkout](https://git-scm.com/docs/git-sparse-checkout) to efficiently retrieve only the required content:
+
+1. Clone the GTN repository with sparse checkout and blob filtering (lightweight clone into a temporary directory):
+```bash
+git clone --depth 1 --filter=blob:none --sparse https://github.com/galaxyproject/training-material.git temp-training
+```
+
+2. Navigate to the cloned repository:
+```bash
+cd temp-training
+```
+
+3. Select the specific tutorial directory. For example, to retrieve the [Classification in Machine Learning](https://galaxyproject.github.io/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html) tutorial:
+```bash
+git sparse-checkout set topics/statistics/tutorials/classification_machinelearning
+```
+
+4. Copy the tutorial into your local `_tutorials/` directory:
+```bash
+cp -r topics/statistics/tutorials/classification_machinelearning ../_tutorials/<tutorial_name>
+```
+
+5. Clean up the temporary files:
+```bash
+cd ..
+rm -rf temp-training
+```

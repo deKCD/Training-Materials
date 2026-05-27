@@ -59,7 +59,7 @@
           <div class="collapse navbar-collapse show" id="mainNavigation">
             <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav ">
               <li class="nav-item p-2">
-                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
+                <a class="nav-link" href="{{ site.dekcd_training }}">Home Page </a>
               </li>
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Calendar </a>
@@ -76,13 +76,7 @@
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ '/FAQ/' | relative_url }}">FAQs </a>
               </li>
-              <li class="dropdown nav-item p-2 my-1">
-                <a class="btn outline-dekcd nav-menu-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">German</a>
-                <ul class="dropdown-menu" style="position: absolute;">
-                  <li class="nav-item dropdown-item"><a class="nav-link" href="/">German</a></li>
-                  <li class="nav-item dropdown-item"><a class="nav-link" href="/en/">English</a></li>
-                </ul>
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -101,10 +95,10 @@
           <div class="navbar-collapse collapse sticky-top bg-white pt-3" id="navbarToggled" style="">
             <ul class="navbar-nav">
               <li class="nav-item p-2">
-                <a class="nav-link" href="{{ site.dekcd_training }}" target="_blank" rel="noopener">Home Page </a>
+                <a class="nav-link" href="{{ site.dekcd_training }}">Home Page</a>
               </li>
               <li class="nav-item p-2">
-                <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Kalender </a>
+                <a class="nav-link" href="{{ site.event_kalender }}" target="_blank" rel="noopener">Event-Kalender</a>
               </li>
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ site.frag_unsere_experten }}" target="_blank" rel="noopener">Frag unsere Experten </a>
@@ -118,13 +112,7 @@
               <li class="nav-item p-2">
                 <a class="nav-link" href="{{ '/FAQ/' | relative_url }}">FAQs </a>
               </li>
-              <li class="dropdown nav-item px-3">
-                <a class="btn outline-dekcd nav-menu-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">German</a>
-                <ul class="dropdown-menu" style="position: absolute;">
-                  <li class="nav-item dropdown-item"><a class="nav-link" href="/">German</a></li>
-                  <li class="nav-item dropdown-item"><a class="nav-link" href="/en/">English</a></li>
-                </ul>
-              </li>
+              
             </ul>
           </div>
         </div>
@@ -165,8 +153,17 @@
                 </thead>
                 <tbody>
                   {% for tutorial_ref in section.tutorials %}
-                    {% assign matching_tutorials = site.tutorials | where: "slug", tutorial_ref.name %}
-                    {% assign tutorial = matching_tutorials | where: "version", tutorial_ref.version | first %}
+                    {% assign tutorial = nil %}
+                    {% for t in site.tutorials %}
+                      {% assign path_parts = t.url | split: "/" | where_exp: "item", "item != ''" %}
+                      {% if path_parts.size >= 2 %}
+                        {% assign short_name = path_parts[1] %}
+                        {% assign version = path_parts[2] %}
+                        {% if short_name == tutorial_ref.name and version == tutorial_ref.version %}
+                          {% assign tutorial = t %}
+                        {% endif %}
+                      {% endif %}
+                    {% endfor %}
 
                     {% if tutorial %}
                     <!-- render tutorial row -->
