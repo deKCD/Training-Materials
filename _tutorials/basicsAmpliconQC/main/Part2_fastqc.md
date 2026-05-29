@@ -13,18 +13,20 @@ You can run FastQC interactively or via the command-line interface (CLI).
 
 ### Running FastQC
 
-To see all FastQC options, use:
-
-```bash
-fastqc --help
-```
+><code-in-title>To see all FastQC options, use:</code-in-title>
+>
+>```bash
+>fastqc --help
+>```
+{: .code-in}
 
 **Common usage:**
-
-```bash
-fastqc seqfile1 seqfile2 .. seqfileN
-fastqc [-o output_dir] [--(no)extract] [-f fastq|bam|sam] [-c contaminant file] seqfile1 .. seqfileN
-```
+><code-in-title>Code-in</code-in-title>
+>```bash
+>fastqc seqfile1 seqfile2 .. seqfileN
+>fastqc [-o output_dir] [--(no)extract] [-f fastq|bam|sam] [-c contaminant file] seqfile1 .. seqfileN
+>```
+{: .code-in}
 
 **Frequently used options:**
 

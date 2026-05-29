@@ -33,4 +33,5 @@ The higher the quality score, the lower the probability that the base call is in
 ><details-title>References</details-title>
 > 
 > **Images**: [CUNY OpenLab, Next-gen sequencing](https://openlab.citytech.cuny.edu/bio-oer/analyzing-dna/next-gen-sequencing/2/)
+>
 {: .details}

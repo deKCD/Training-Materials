@@ -20,16 +20,18 @@
 {% assign funders = page.contributions.funding %}
 {% endif %}
 
-<blockquote class="details">
-    <p class="details-title">Contributions</p>
-    {% if authors %}
-        <p><strong>Author(s):</strong> {{ authors | join: ", " }}</p>
-    {% endif %}
+<div class="faq-container">
+    <div class="faq-summary">Contributions</div>
+    <div class="faq-answer">
+        {% if authors %}
+            <p><strong>Author(s):</strong> {{ authors | join: ", " }}</p>
+        {% endif %}
 
     {% if editors %}
         <p><strong>Editor(s):</strong> {{ editors | join: ", " }}</p>
     {% endif %}
-</blockquote>
+    </div>
+</div>
 
 {% if funders %}
     <p><strong>Supported by:</strong></p>

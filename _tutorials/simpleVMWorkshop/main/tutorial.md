@@ -1,19 +1,16 @@
 ---
 layout: tutorial_hands_on
 title: SimpleVM Workshop
-description: "FIXME"
-time_estimation: "FIXME"
+description: "Tutorial shows how to identify pathogenic bacteria within publicly available metagenomic datasets and scale up a bioinformatics workflow using SimpleVM."
+time_estimation: 2H
 level: beginner
-keywords: [FIXME]
+keywords: [cloud]
 questions:
-  - "FIXME"
-  - "FIXME"
+  - How to scale up a bioinformatic workflows using simpleVM?
 objectives:
-  - "FIXME"
-  - "FIXME"
+  - Learn how to configure a virtual machine and scale it up with more resources.
 key_points:
-  - "FIXME"
-  - "FIXME"
+  - Always separate your computing nodes from your data storage; keeping your research results on independent, transferable volumes ensures they remain safe and reproducible long after your processing instances are destroyed.
 version:
   - main
 life_cycle: under development
@@ -21,20 +18,12 @@ contributions:
   authorship:
   - Peter Belmann
   - Nils Hoffmann
-  - dweinholz
+  - David Weinholz
   editing: 
   funding:
 ---
 
-> <agenda-title>Table of Contents</agenda-title>
->
-> In this tutorial we will deal with:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
+## Introduction
 This workshop demonstrates a typical workflow of a SimpleVM user.
 In this workshop your goal will be to identify pathogenic bacteria
 that were classified as "greatest threat to human health" by the 
@@ -135,7 +124,7 @@ Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
 > <hands-on-title>Verify VM properties and tools</hands-on-title>
 > 1. Click on the Instances tab (Overview -> Instances). After you have initiated the start-up of the machine, you should have been automatically redirected there.
->    Now > open the "How to connect"
+>    Now open the "How to connect"
 >    dropdown of your machine. Click on the Theia ide URL which opens a new browser tab.
 >    ![](/tutorials/simpleVMWorkshop/figures/howtoconnect.png){: .responsive-img }
 > 2. Click on `Terminal` in the upper menu and select `New Terminal`.
@@ -243,7 +232,7 @@ and scale up our analysis by providing more cores to mash.
 
 ### **3.2 Interact with the SRA Mirror and search for more datasets to analyse**
 
-> <hands-on-title></hands-on-title>
+> <hands-on-title>Interact with the SRA Mirror</hands-on-title>
 > 1. You are now on the `Instance Overview` page. You can delete your old VM which
 >    we used to create your snapshot. To do this, open the action selection of the old machine again
 >    by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
@@ -413,7 +402,7 @@ and scale up our analysis by providing more cores to mash.
 >    * `for sraid in $(ls -1 output/ | cut -f 1 -d '.');` iterates over all datasets found in the output
 >      directory.
 >    * `esearch` just looks up the scientific name and title of the SRA study.
->    * 'sed' adds the SRA ID to the output table. The first column is the SRA ID, the second column is 
+>    * `sed` adds the SRA ID to the output table. The first column is the SRA ID, the second column is 
 >       the scientific name and the third column is the study title.
 >    * All results are stored the `publications.tsv` file.
 >
@@ -598,7 +587,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    which will produce the following example output:
 
 
-> <code-out-title></code-out-title>
+> <code-out-title>Example output</code-out-title>
 > ```
 >    JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 >    212     debug basic.sh   ubuntu  R       0:03      1 bibigrid-worker-1-1-us6t5hdtlklq7h9
@@ -637,7 +626,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    Which is simply reading out the `SLURM_ARRAY_TASK_ID` variable and placing them in a file in an
    output directory:
 
-> <code-in-title></code-in-title>
+> <code-in-title>Code-in</code-in-title>
 >    ```bash
 >    #!/bin/bash
 >    
@@ -675,36 +664,36 @@ wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/search.sh
 ```
 
 > <details-title>This is the content of the script</details-title>
-> > ```bash
-> > #!/bin/bash
-> >
-> > #Create an output directory
-> > mkdir output_final
-> >
-> > #Use the conda environment you installed in your snapshot and activate it
-> > eval "$(conda shell.bash hook)"
-> > conda activate denbi
-> > 
-> > #Add S3 SRA OpenStack Config
-> > /vol/spool/mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
-> > 
-> > #Define search function you have already used in part 3
-> > search(){
-> >    left_read=$(echo $1 | cut -d ' '  -f 1);  
-> >    right_read=$(echo $1 | cut -d ' ' -f 2);
-> >    sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
-> >    /vol/spool/mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
-> >         | sed "s/^/${sra_id}\t/g"  \
-> >         | sed 's/\//\t/' > output_final/${sra_id}.txt ;
-> > }
-> > 
-> > #Create a variable for the array task id
-> > LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
-> > LINE=$(sed "${LINE_NUMBER}q;d" reads2.tsv)
-> > 
-> > #Search for the datasets
-> > search ${LINE} 
-> > ```
+>  ```bash
+>  #!/bin/bash
+> 
+>  #Create an output directory
+>  mkdir output_final
+> 
+>  #Use the conda environment you installed in your snapshot and activate it
+>  eval "$(conda shell.bash hook)"
+>  conda activate denbi
+>  
+>  #Add S3 SRA OpenStack Config
+>  /vol/spool/mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
+>  
+>  #Define search function you have already used in part 3
+>  search(){
+>     left_read=$(echo $1 | cut -d ' '  -f 1);  
+>     right_read=$(echo $1 | cut -d ' ' -f 2);
+>     sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
+>     /vol/spool/mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
+>          | sed "s/^/${sra_id}\t/g"  \
+>          | sed 's/\//\t/' > output_final/${sra_id}.txt ;
+>  }
+>  
+>  #Create a variable for the array task id
+>  LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
+>  LINE=$(sed "${LINE_NUMBER}q;d" reads2.tsv)
+>  
+>  #Search for the datasets
+>  search ${LINE} 
+>  ```
 >
 {: .details}
 

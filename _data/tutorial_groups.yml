@@ -2,7 +2,6 @@
   description: Tutorials focused on basic Unix / Linux commands and shell usage.
   tutorials:
     - unix-course
-    - simplevmworkshop
 
 - title: Cloud computing
   description: Tutorials focused on using the de.NBI Cloud infrastructure and project types.

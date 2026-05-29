@@ -1,15 +1,16 @@
 ---
 layout: tutorial_hands_on
 title: BiBiGrid Hands-on
-description: "The goal of this material is to set up a small HPC cluster consisting of 3 nodes (1 master, 2 on demand workers) using BiBiGrid with Slurm (workload manager), Network File System (allows file sharing between servers) and Theia (Web IDE). This tutorial targets users running BiBiGrid on de.NBI cloud."
-slug: bibigrid
-time_estimation: "2h"
+description: Tutorial shows how to provision and operate a small HPC cluster on OpenStack using BiBiGrid
+time_estimation: 2H
+level: intermediate
+keywords: [FIXME]
 questions:
-  - "FIXME"
+  - How does BiBiGrid translate a YAML configuration into a functional Slurm-based HPC cluster on OpenStack?
 objectives:
-  - "FIXME"
+  - Learn how to configure and deploy an HPC cluster using BiBiGrid on OpenStack infrastructure.
 key_points:
-  - "FIXME"
+  - BiBiGrid uses OpenStack credentials and a YAML configuration template to define compute nodes, images, flavors, and networking.
 version:
   - main
 life_cycle: under development
@@ -25,36 +26,33 @@ contributions:
 
 The goal of this session is to set up a small HPC cluster consisting of 3 nodes (1 master, 2 [on demand](https://github.com/BiBiServ/bibigrid/blob/master/documentation/markdown/features/configuration.md#workerinstances) workers) using BiBiGrid with [Slurm](https://slurm.schedmd.com/quickstart.html) (workload manager), [Network File System](https://linux.die.net/man/5/nfs) (allows file sharing between servers) and [Theia](https://theia-ide.org/docs/user_getting_started/) (Web IDE). This tutorial targets users running BiBiGrid on de.NBI cloud.
 
-> <agenda-title>Table of Contents</agenda-title>
+
+><details-title>Prerequisites</details-title>
 >
-> 1. TOC
-> {:toc}
+>- System base on Linux, OSX (tested) or Windows Subsystem for Linux (untested)
+>- required software packages 
+>  - Python >= 3.10
+>  - git (required)
+>  - openssh 
+>- Openstack API access
+{: .details}
+
+><hands-on-title>Clone bibigrid and bibigrid_clum</hands-on-title>
+>><code-in-title>Code-in</code-in-title>
+>>```shell
+>>git clone https://github.com/BiBiServ/bibigrid.git
+>>git clone https://github.com/deNBI/bibigrid_clum.git
+>>```
+>{: .code-in}
 >
-{: .agenda}
-
-
-## **Prerequisites**
-
-- System base on Linux, OSX (tested) or Windows Subsystem for Linux (untested)
-- required software packages 
-  - Python >= 3.10
-  - git (required)
-  - openssh 
-- Openstack API access
-
-## **Clone bibigrid and bibigrid_clum**
-
-```shell
-git clone https://github.com/BiBiServ/bibigrid.git
-git clone https://github.com/deNBI/bibigrid_clum.git
-```
-
-Your bibigrid folder should contain:
-
-```bash
-$ ls bibigrid
-bibigrid  bibigrid_rest.sh  bibigrid.sh  bibigrid.yaml  documentation  README.md  requirements-dev.txt  requirements-rest.txt  requirements.txt  resources  tests
-```
+>><code-out-title>Your bibigrid folder should contain:</code-out-title>
+>>```bash
+>>$ ls bibigrid
+>>
+>>bibigrid  bibigrid_rest.sh  bibigrid.sh  bibigrid.yaml  documentation  README.md  requirements-dev.txt  requirements-rest.txt  requirements.txt  resources  tests
+>>```
+>{: .code-out}
+{: .hands_on}
 
 ## **Preparation**
 
@@ -64,12 +62,15 @@ Use the prefilled configuration template [resources/bibigrid.yaml]({{ "/tutorial
 Later in this tutorial you will use [OpenStackClient](https://pypi.org/project/python-openstackclient/) or access 
 Openstack's dashboard manually to get all necessary configuration information from your project.
 
-Copy the [configuration template]({{ "/tutorials/bibigrid/resources/bibigrid.yaml" | relative_url }}) to `~/.config/bibigrid/`.
-
-```bash
-mkdir ~/.config/bibigrid
-cp /tutorials/bibigrid/resources/bibigrid.yaml ~/.config/bibigrid/bibigrid.yaml
-```
+><hands-on-title>Copy the configuration template</hands-on-title>
+> Copy the [configuration template]({{ "/tutorials/bibigrid/resources/bibigrid.yaml" | relative_url }}) to `~/.config/bibigrid/`.
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>mkdir ~/.config/bibigrid
+>>cp /tutorials/bibigrid/resources/bibigrid.yaml ~/.config/bibigrid/bibigrid.yaml
+>>```
+>{: .code-in}
+{: .hands_on}
 
 This premade template includes volume keys for both master and worker giving you a permanent volume for your master 
 that is shared via nfs (see `nfsShares`) and one semipermanent volume for each worker.
@@ -91,13 +92,17 @@ Pick a sensible expiration date.
 
 ![Download]({{ "/tutorials/bibigrid/images/ac_screen3.png" | relative_url }}){: .responsive-img }
 
-Save the downloaded `clouds.yaml` under `~/.config/openstack/` **and** `~/.config/bibigrid/`. That will allow both OpenstackClient and BiBiGrid to access it:
-
-```bash
-cp ~/Downloads/clouds.yaml ~/.config/bibigrid/clouds.yaml
-mkdir ~/.config/openstack
-cp ~/Downloads/clouds.yaml ~/.config/openstack/clouds.yaml
-```
+><hands-on-title>Save the downloaded `clouds.yaml` under `~/.config/openstack/` and `~/.config/bibigrid/`</hands-on-title>
+>That will allow both OpenstackClient and BiBiGrid to access it:
+>
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>cp ~/Downloads/clouds.yaml ~/.config/bibigrid/clouds.yaml
+>>mkdir ~/.config/openstack
+>>cp ~/Downloads/clouds.yaml ~/.config/openstack/clouds.yaml
+>>```
+>{: .code-in}
+{: .hands_on}
 
 > <question-title>Why not store BiBiGrids `clouds.yaml` in openstack and avoid the extra copy?</question-title>
 >
@@ -112,35 +117,48 @@ cp ~/Downloads/clouds.yaml ~/.config/openstack/clouds.yaml
 
 A virtual environment is something that gives you everything you need to run specific programs without altering your system.
 
-#### **Creating a [Virtual Python Environment](https://docs.python.org/3/library/venv.html)**
+><hands-on-title>Create a virtual environment</hands-on-title>
+>Creating a [Virtual Python Environment](https://docs.python.org/3/library/venv.html):
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>python3 -m venv ~/.venv/bibigrid
+>>```
+>{: .code-in}
+> If this command fails, you probably need to install python3-venv manually. 
+> For that first update `sudo apt update && sudo apt upgrade` and then `sudo apt install python3.??-venv` (use the correct version for your system).
+>
+{: .hands_on}
 
-```bash
-python3 -m venv ~/.venv/bibigrid
-```
+><hands-on-title>Sourcing Environments</hands-on-title>
+> In order to actually use the virtual environment we need to [source](https://www.theunixschool.com/2012/04/what-is-sourcing-file.html) that environment:
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>source ~/.venv/bibigrid/bin/activate
+>>```
+>{: .code-in}
+> Following [pip](https://manpages.ubuntu.com/manpages/bionic/en/man1/pip.1.html) installations will only affect the virtual environment.
+> The virtual environment is only `sourced` in the terminal where you executed the source command. Other terminals are not affected.
+>
+{: .hands_on}
 
-If this command fails, you probably need to install python3-venv manually. 
-For that first update `sudo apt update && sudo apt upgrade` and then `sudo apt install python3.??-venv` (use the correct version for your system).
-
-#### **Sourcing Environments**
-
-In order to actually use the virtual environment we need to [source](https://www.theunixschool.com/2012/04/what-is-sourcing-file.html) that environment:
-
-```bash
-source ~/.venv/bibigrid/bin/activate
-```
-
-Following [pip](https://manpages.ubuntu.com/manpages/bionic/en/man1/pip.1.html) installations will only affect the virtual environment.
-The virtual environment is only `sourced` in the terminal where you executed the source command. Other terminals are not affected.
-
-#### **Fulfilling Requirements**
-
-Now let's move into the bibigrid folder `cd bibigrid` we will stay in it unless explicitly mentioned otherwise.
-
-You will now install packages required by BiBiGrid within your newly created virtual environment. If you haven't `sourced` your environment yet, please go [back](#sourcing-environments). To install all BiBiGrid requirements, we simply install from the given requirements file:
-
-```bash
-pip install -r requirements.txt
-```
+><hands-on-title>Fulfilling Requirements</hands-on-title>
+> Now let's move into the bibigrid folder `cd bibigrid` we will stay in it unless explicitly mentioned otherwise.
+> 
+> You will now install packages required by BiBiGrid within your newly created virtual environment. If you haven't `sourced` your environment yet, please go [back](#sourcing-environments). 
+> To install all BiBiGrid requirements, we simply install from the given requirements file:
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>pip install -r requirements.txt
+>>```
+>{: .code-in}
+>
+>><code-in-title>Execute the following command within this environment:</code-in-title>
+>>```bash
+>>openstack subnet list --os-cloud=openstack
+>>```
+>{: .code-in}
+> If it runs without errors, you are ready to proceed. Otherwise you need to check your `clouds.yaml` and your virtual environment.
+{: .hands_on}
 
 Try executing `openstack subnet list --os-cloud=openstack` within this environment. If it runs without errors, you are ready to proceed. Otherwise you need to check your `clouds.yaml` and your virtual environment.
 
@@ -165,11 +183,13 @@ The [sshUser](https://www.redhat.com/sysadmin/access-remote-systems-ssh) depends
 
 ### **Network**
 
-We have created a subnet for this workshop for you. Determine your subnet's `Name` by running:
+We have created a subnet for this workshop for you. 
 
-```sh
-openstack subnet list --os-cloud=openstack
-```
+><code-in-title>Determine your subnet's `Name` by running:</code-in-title>
+>```sh
+>openstack subnet list --os-cloud=openstack
+>```
+{: .code-in}
 
 Set the template's `subnet` key to the result's `Name` key.
 
@@ -193,15 +213,17 @@ system of your server.
 Since [images](https://docs.openstack.org/image-guide/introduction.html) are often updated, you need to 
 look up the current active image using:
 
-```shell
-openstack image list --os-cloud=openstack | grep active
-```
+><code-in-title>Current active image</code-in-title>
+>```shell
+>openstack image list --os-cloud=openstack | grep active
+>```
+{: .code-in}
 
-Since we will use Ubuntu 22.04 you might as well use:
-
-```shell
-openstack image list --os-cloud=openstack | grep active | grep "Ubuntu 22.04"
-```
+><code-in-title>Since we will use Ubuntu 22.04 you might as well use:</code-in-title>
+>```shell
+>openstack image list --os-cloud=openstack | grep active | grep "Ubuntu 22.04"
+>```
+{: .code-in}
 
 Set the template's `image` key of all instances to the result's `ID`  **or** `NAME` entry of the Ubuntu 22.04 row. 
 All servers will share the same image.
@@ -220,9 +242,11 @@ Flavors are available hardware configurations.
 
 The following gives you a list of all flavors:
 
-```shell
-openstack flavor list --os-cloud=openstack
-```
+><code-in-title>List of flavors</code-in-title>
+>```shell
+>openstack flavor list --os-cloud=openstack
+>```
+{: .code-in}
 
 Set the template's `flavor` keys (provide an `ID` or `NAME` - we will use `NAME` in the following examples) to flavors of your choice - in this tutorial we will use `de.NBI medium` for our master and `de.NBI small` for our two workers. You can use a different flavor for the master and each worker-group.
 
@@ -246,35 +270,47 @@ Set the template's `flavor` keys (provide an `ID` or `NAME` - we will use `NAME`
 
 Some clouds run one or more post-launch services on every started instance, to finish the initialization after an 
 instance is available (e.g. to configure local proxy settings or local available repositories). That might interrupt 
-BiBiGrid setting up the node (via Ansible). Therefore, BiBiGrid needs to wait for your post-launch service(s) to finish. For that BiBiGrid needs the 
-services' names. Set the key `waitForServices` to the list of services you would like to wait for. For Bielefeld 
-this would be `de.NBI_Bielefeld_environment.service`. In the future you should be able to find post-launch service names by 
-taking a look at your location's [Computer Center Specific](https://cloud.denbi.de/wiki/) site - if 
-post-launch services exist at your location.
+BiBiGrid setting up the node (via Ansible). Therefore, BiBiGrid needs to wait for your post-launch service(s) to finish. For that BiBiGrid needs the services' names. Set the key `waitForServices` to the list of services you would like to wait for. For Bielefeld 
+this would be `de.NBI_Bielefeld_environment.service`. 
+
+In the future you should be able to find post-launch service names by taking a look at your location's [Computer Center Specific](https://cloud.denbi.de/wiki/) site - if post-launch services exist at your location.
 
 ```yaml
   waitForServices: 
     - de.NBI_Bielefeld_environment.service
 ```
 
-
-### **Check Your Configuration**
-Run `./bibigrid.sh -i bibigrid.yaml -ch -v` to check your configuration. The command line argument 
-`-v` allows for greater verbosity which will make it easier for you to fix issues.
+><code-in-title>Check Your Configuration</code-in-title>
+> Run the following command to check your configuration:
+>```bash
+> ./bibigrid.sh -i bibigrid.yaml -ch -v
+>```
+> The command line argument `-v` allows for greater verbosity which will make it easier for you to fix issues.
+>
+{: .code-in}
 
 ## **The Cluster**
 
-### **Starting the cluster**
+><hands-on-title>Starting the cluster</hands-on-title>
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>./bibigrid.sh -i bibigrid.yaml -c -vv
+>>```
+>{: .code-in} 
+> This creates the cluster with a verbose verbose output - great for us to see what's happening. 
+> Cluster creation time depends on the chosen flavor and the overall load of the cloud and will take up to 15 minutes.
+{: .hands_on}
 
-`./bibigrid.sh -i bibigrid.yaml -c -vv` creates the cluster with a verbose verbose output - great for us to see what's happening. Cluster creation time 
-depends on the chosen flavor and the overall load of the cloud and will take up to 15 minutes.
-
-### **List Running Cluster**
-
-Since several clusters can run simultaneously in a single project, listing all running clusters can be useful:
-
-Execute `./bibigrid.sh -i bibigrid.yaml -l`. You will receive a general overview of all clusters started 
-in your project.
+><hands-on-title>List Running Cluster</hands-on-title>
+>
+> Since several clusters can run simultaneously in a single project, listing all running clusters can be useful:
+>><code-in-title>List all running clusters:</code-in-title>
+>>```bash
+>>./bibigrid.sh -i bibigrid.yaml -l
+>>```
+>{: .code-in}
+> You will receive a general overview of all clusters started in your project.
+{: .hands_on}
 
 ### **Cluster SSH Connection**
 
@@ -348,10 +384,10 @@ In this section, you will execute the `resFinder` workflow to create a heatmap o
 
 After successfully connecting to Theia IDE, we will now run our first job on our cluster. Let's start with a "hello world".
 
-> <hands-on-title>Hands On: Run job on cluster</hands-on-title>
+> <hands-on-title>Run job on cluster</hands-on-title>
 > 1. Open a terminal
 > 2. Create a new shell script `nano /vol/spool/helloworld.sh`:
-> ```
+> ```bash
 > #!/bin/bash
 > echo Hello from $(hostname) !
 > sleep 10
@@ -466,8 +502,8 @@ Taking a look at `/vol/permanent/`, we can see that the `output` folder has been
 
 ## **Terminate a cluster**
 
-Execute `./bibigrid.sh -i bibigrid.yaml -t -cid [cluster-id] -v`. `./bibigrid.sh -i bibigrid.yaml -t` also does the trick, since BiBiGrid will fall 
-back on your last created cluster if no cluster-id is specified.
+Execute `./bibigrid.sh -i bibigrid.yaml -t -cid [cluster-id] -v`. 
+`./bibigrid.sh -i bibigrid.yaml -t` also does the trick, since BiBiGrid will fall back on your last created cluster if no cluster-id is specified.
 
 ## **Moving Forward**
 
@@ -479,12 +515,12 @@ You may want to take a look at the "real" `bibigrid.yaml` inside BiBiGrid's repo
 
 > <details-title>Additional resources</details-title>
 > 
-> **More BiBiGrid**
-> 
+> **More BiBiGrid**:
+>
 > If you would like to deepen your knowledge maybe give BiBiGrid's [Features](https://gitlab.ub.uni-bielefeld.de/bibiserv/bibigrid/bibigrid2/-/blob/main/documentation/markdown/bibigrid_feature_list.md) or the [Software](https://gitlab.ub.uni-bielefeld.de/bibiserv/bibigrid/bibigrid2/-/blob/main/documentation/markdown/bibigrid_software_list.md) used by BiBiGrid a read. If you would like to know more about the configuration file see [Configuration](https://github.com/BiBiServ/bibigrid/blob/master/documentation/markdown/features/configuration.md).
 >
-> **More Ansible**
-> 
+> **More Ansible**:
+>
 > You can learn more about Ansible here:
 > - [de.NBI Cloud's Ansible Course](https://gitlab.ub.uni-bielefeld.de/denbi/ansible-course)
 > - [Getting started with Ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html)

@@ -13,10 +13,10 @@ pathway:
   - section: "Module 2: Cloud Concepts"
     description: "Understand cloud architecture, providers, and services."
     tutorials:
-      - name: simplevmworkshop
+      - name: simpleVMWorkshop
         version: main
 editorial_board:
-  - name: FIXME
-    orcid: FIXME
+  - name: 
+    orcid: 
 ---
 

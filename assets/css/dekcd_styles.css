@@ -796,36 +796,59 @@ td {
   margin: 1em auto;
 }
 
-/* Drop-down for FAQ*/
-details {
+/* Drop-down for FAQ */
+.faq-container {
   margin: 1em 0;
   padding: 0.95em 1em;
   border: 0.5px solid var(--dekcd-accent-dark);
   border-radius: 6px;
   background: var(--dekcd-white);
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
-details:hover {
+.faq-container:hover {
   background: var(--dekcd-light-grey);
 }
 
-details summary {
+.faq-summary {
   cursor: pointer;
   font-weight: 300;
   font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-details[open] {
-  background: var(--dekcd-white);
-  border-color: var(--dekcd-accent-dark);
+.faq-summary::marker {
+  display: none;
 }
 
-details.answer-block summary {
-  font-weight: semi-bold;
+.faq-summary::after {
+  content: "▼";
+  font-size: 0.8em;
+  transition: transform 0.3s ease;
 }
 
-details.answer-block div {
+.faq-container[open] .faq-summary::after {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding-left: 15px;
+  margin-top: 5px;
+  font-size: 1em;
+  display: none;
+}
+
+.faq-container[open] .faq-answer {
+  display: block;
+}
+
+.faq-container.answer-block .faq-summary {
+  font-weight: 600; /* semi-bold is 600 */
+}
+
+.faq-container.answer-block .faq-answer {
   padding-left: 15px;
   margin-top: 5px;
   font-size: 1em;

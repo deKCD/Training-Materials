@@ -206,12 +206,12 @@ Before deploying to the cloud, it's important to test your application locally.
 >
 {: .hands_on}
 
-> <question-title></question-title>
+> <question-title>Question</question-title>
 >
 > 1. What happens when you run `streamlit run app.py`?
 > 2. How would you modify the app to display different data?
 >
-> > <solution-title></solution-title>
+> > <solution-title>Answer</solution-title>
 > >
 > > 1. Streamlit starts a local web server and opens your default browser to display the app, typically at `http://localhost:8501`
 > > 2. You can modify `data.csv` with your own data, as long as it's in CSV format that pandas can read
@@ -335,12 +335,12 @@ The containerfile tells Podman how to build your image.
 >
 {: .hands_on}
 
-> <question-title></question-title>
+> <question-title>Question</question-title>
 >
 > 1. What is the difference between building an image and running a container?
 > 2. Why do we need to specify port mapping with `-p 8501:8501`?
 >
-> > <solution-title></solution-title>
+> > <solution-title>Answer</solution-title>
 > >
 > > 1. Building creates the image (template), running creates a container (active instance) from that image
 > > 2. Port mapping connects the container's internal port 8501 to your computer's port 8501, allowing you to access the app through your browser
@@ -622,12 +622,12 @@ Now we'll create a YAML file that tells Kubernetes how to deploy your applicatio
 >
 {: .hands_on}
 
-> <question-title></question-title>
+> <question-title>Question</question-title>
 >
 > 1. What is the purpose of port-forwarding in Kubernetes?
 > 2. How would you update your app with new changes?
 >
-> > <solution-title></solution-title>
+> > <solution-title>Answer</solution-title>
 > >
 > > 1. Port-forwarding creates a tunnel from your local computer to the pod in Kubernetes, allowing you to test the app before making it publicly accessible
 > > 2. To update: modify your code, rebuild the container image with a new version number, push it to the registry, update the version in `deploy-image.yaml`, and run `kubectl apply -f deploy-image.yaml` again

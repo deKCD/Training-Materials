@@ -1,23 +1,25 @@
 ---
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
-description: "This is the introduction to the basic shell commands."
+description: This is the introduction to the basic shell commands.
 time_estimation: 2H
+level: beginner
+keywords: [shell]
 questions:
-  - "What is a command shell and why would I use one?"
-  - "How can I move around on my computer?"
-  - "How can I see what files and directories I have?"
-  - "How can I specify the location of a file or directory on my computer?"
+  - What is a command shell and why would I use one?
+  - How can I move around on my computer?
+  - How can I see what files and directories I have?
+  - How can I specify the location of a file or directory on my computer?
 objectives:
-  - "Describe key reasons for learning shell."
-  - "Navigate your file system using the command line."
-  - "Access and read help files for `bash` programs and use help files to identify useful command options."
-  - "Demonstrate the use of tab completion, and explain its advantages."
+  - Describe key reasons for learning shell.
+  - Navigate your file system using the command line.
+  - Access and read help files for `bash` programs and use help files to identify useful command options.
+  - Demonstrate the use of tab completion, and explain its advantages.
 key_points:
-  - "The shell gives you the ability to work more efficiently by using keyboard commands rather than a GUI."
-  - "Useful commands for navigating your file system include: `ls`, `pwd`, and `cd`."
-  - "Most commands take options (flags) which begin with a `-`."
-  - "Tab completion can reduce errors from mistyping and make work more efficient in the shell."
+  - The shell gives you the ability to work more efficiently by using keyboard commands rather than a GUI.
+  - Useful commands for navigating your file system include: `ls`, `pwd`, and `cd`.
+  - Most commands take options (flags) which begin with a `-`.
+  - Tab completion can reduce errors from mistyping and make work more efficient in the shell.
 version:
   - spring-school-2024
 life_cycle: "beta"
@@ -32,28 +34,6 @@ contributions:
   editing:
 ---
 
-## Table of Contents
-* [Unix course – Introduction to basic Unix commands](#unix-course--introduction-to-basic-unix-commands)
-    * [List of commands](#list-of-commands)
-    * [Tutorial](#tutorial)
-        * [Part 1](#part-1)
-            * [01 - Accessing SimpleVM](#01---accessing-simplevm)
-            * [02 - Opening a terminal window](#02---opening-a-terminal-window)
-            * [03 - Creating a directory to work in](#03---creating-a-directory-to-work-in)
-            * [04 - Running a simple program](#04---running-a-simple-program)
-            * [05 - Running in background and saving output](#05---running-in-background-and-saving-output)
-            * [06 - Inspecting and terminating a running program](#06---inspecting-and-terminating-a-running-program)
-        * [Part 2](#part-2)
-            * [07 - Extracting data from text files](#07---extracting-data-from-text-files)
-            * [08 - Processing the extracted data](#08---processing-the-extracted-data)
-            * [09 - Downloading and compressing files](#09---downloading-and-compressing-files)
-            * [10 - Cleaning up](#10---cleaning-up)
-        * [Part 3: Advanced Concepts](#part-3-advanced-concepts)
-            * [11 - Edit files](#11---edit-files)
-    * [Questions and discussion](#questions-and-discussion)
-    * [Remarks for the presenter](#remarks-for-the-presenter)
-
-
 On Unix, every user has a unique user name. When they log onto the system, they are placed in a home directory, which is a portion of the disk space reserved just for them. When you log onto a Unix system, your main interface to the system is  called the Unix Shell. This is the program that presents you with the dollar sign (`$`) prompt. This prompt means that the shell is ready to accept your typed commands. It is often preceded by the user name as well as the current directory.
 
 Unix commands are strings of characters typed in at the keyboard. To  run a command, you just type it in and press the *Enter* key. We will look at several of the most common commands below.
@@ -61,7 +41,7 @@ Commands often have _parameters_, e. g. a file to work on. Theses are typed in a
 
 In addition, Unix extends the power of commands by using special flags or *switches*. Switches are usually preceded with a dash (`-`), e. g. `ls -lh`.
 
-> ## List of commands
+><details-title>List of commands</details-title>
 > 
 > | Command             | Description                                                  |
 > | ------------------- | ------------------------------------------------------------ |
@@ -127,9 +107,9 @@ This tutorial is based on the [tutorial](https://gitlab.ub.uni-bielefeld.de/denb
 The first two sections (01 and 02) describe how to access the workshop environment for this tutorial.
 Participants need a web browser and an active ELIXIR account. 
 
-### **Part 1**
+## Part 1
 
-#### **01 - Accessing SimpleVM**
+### Accessing SimpleVM
 
 When accessing a Unix system running as a virtual machine in the cloud one would normally log into
 it via SSH and would be getting presented with a terminal.
@@ -163,7 +143,7 @@ If you see the following window. Just click on "x" to close it.
 
 ![Guacamole Window]({{ "/tutorials/unix-course/images/guaca_auth.png" | relative_url }}){: .responsive-img }
 
-#### **02 - Opening a terminal window**
+### Opening a terminal window
 
 On the bottom of the following screen you should see a terminal icon.
 Once you have clicked on the icon, a terminal window should pop up.
@@ -172,7 +152,7 @@ Once you have clicked on the icon, a terminal window should pop up.
 
 It is possible to have more than one terminal open at the same time.
 
-#### **03 - Creating a directory to work in**
+### Creating a directory to work in
 
 Before we actually start we will clone this github repository so we have all files in place we need for this small exercise:
 
@@ -183,7 +163,7 @@ git clone https://github.com/deNBI/unix-course.git
 This will create the directory `unix-course` within your user's home directory.
 We can now move on with the exercise.
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 
 > 1. Open the manual page of the command `pwd` by entering `man pwd`.
 > 2. Find out your current (working) directory. *(1 command)*
@@ -191,7 +171,7 @@ We can now move on with the exercise.
 > 4. Now create a directory called `pi_calculation` and enter the new directory. *(2 commands)*
 > 5. Confirm that your current directory has changed. *(1 command)*
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > pwd
 > > cd ~
@@ -203,18 +183,18 @@ We can now move on with the exercise.
 >
 {: .hands_on}
 
-#### **04 - Running a simple program**
+### Running a simple program
 
 A simple program that (slowly) approximates the number pi is available as a file at `~/unix-course/calculate_pi`.
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 1. Please copy this program into your current directory. *(1 command)*
 > 2. Inspect the file you just copied to get information about its file type. *(1 command)*
 > 3. Please make the file executable (for you as the owner only). *(1 command)*
 > 4. Now run the executable and watch how the pi approximation gets better over time. *(1 command)*
 > 5. Stop the running program by pressing the key combination `Ctrl+c`.
 >
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cp ~/unix-course/calculate_pi .
 > > file calculate_pi
@@ -226,17 +206,17 @@ A simple program that (slowly) approximates the number pi is available as a file
 {: .hands_on}
 
 
-#### **05 - Running in background and saving output**
+### Running in background and saving output
 
 We would like to save the results of the pi calculation program to a file instead of just displaying them on the screen.
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 
 > 1. Please run the pi executable again but this time send its output to a file called `pi_results.txt` in the same directory. *(1 command)*
 > 2. Open a second terminal and enter a command that allows you to watch the output lines being written to the results file. **Note:** Bear in mind that a new terminal always starts in your home directory. *(2 commands)*
 > 3. Stop following the results file. *(1 key combination)*
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > ./calculate_pi > pi_results.txt
 > > cd pi_calculation
@@ -247,11 +227,11 @@ We would like to save the results of the pi calculation program to a file instea
 >
 {: .hands_on}
 
-#### **06 - Inspecting and terminating a running program**
+### Inspecting and terminating a running program
 
 The pi approximation will probably run for about an hour but we would like to terminate it earlier.
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 
 > 1. List your own running programs. *(1 command)*
 > 2. Use the process ID (PID) of the still running pi calculation to terminate it. The PID is in the first column of the program list. *(1 command)*
@@ -260,7 +240,7 @@ The pi approximation will probably run for about an hour but we would like to te
 > 5. Check the file size of the results file. *(1 command)*
 > 6. Check the free disk space available on your file system. *(1 command)*
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > ps -x
 > > kill PROCESS_ID
@@ -273,20 +253,23 @@ The pi approximation will probably run for about an hour but we would like to te
 >
 {: .hands_on} 
 
-### **Part 2**
+## Part 2
 
-#### **07 - Extracting data from text files**
+### Extracting data from text files
 
 Let's extract adverbs from a list of English words available inside `/usr/share/dict/words`.
 
 For this we need to install a small ubuntu package that contains english and german dictionary words.
 Installing packages in ubuntu is fairly easy and can be done using the `apt-get install` command. However, we need root priviliges to install a package for the whole system.
 This can be done by granting ourself root priviliges for the execution of one single command with `sudo`. 
-Please run the following command before we can proceed:
 
-`sudo apt-get install wamerican-small`
+><code-in-title>Please run the following command before we can proceed:</code-in-title>
+>```bash
+>sudo apt-get install wamerican-small
+>```
+{: .code-in}
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 
 > 1. Please move to your home directory. *(1 command)*
 > 2. Now create a directory called `fun_with_words` and enter the new directory. *(2 commands)*
@@ -300,7 +283,7 @@ Please run the following command before we can proceed:
 > 5. Repeat the same for the words ending in _…ously_ as well as _…ably_ and save them to their corresponding files. *(2 commands)*
 > 6. Calculate the word counts of all three files. *(1 command)*
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > mkdir fun_with_words
@@ -315,9 +298,9 @@ Please run the following command before we can proceed:
 >
 {: .hands_on} 
 
-#### **08 - Processing the extracted data**
+### Processing the extracted data
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 
 > 1. Convert all the adverbs inside the three files from the previous section into adjectives. Name the resulting files `able.txt`, `ful.txt` and `ous.txt` _(3 commands)_
 > 
@@ -330,7 +313,7 @@ Please run the following command before we can proceed:
 > 1. Concatenate the contents of `able.txt`, `ful.txt` and `ous.txt` into a single file called `adjectives.sorted.txt`. Sort the lines alphabetically before saving. _(2 commands with a pipe in between)_
 > 2. Take a look at the results. _(1 command)_
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > sed 's/ably/able/' ably.txt > able.txt
 > > sed 's/fully/ful/' fully.txt > ful.txt
@@ -342,16 +325,16 @@ Please run the following command before we can proceed:
 >
 {: .hands_on} 
 
-#### **09 - Downloading and compressing files**
+### Downloading and compressing files
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 > 
 > 1. Please move to your home directory. *(1 command)*
 > 2. Now, download the file at [seqs.fasta](https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta) to the current directory using a network downloader. *(1 command)*
 > 3. Take a look at the contents of the file. *(1 command)*
 > 4. The downloaded file is an uncompressed text file of 30 Kilobytes in size. Please apply compression to the file so that it takes less disk space and check the effectiveness of the compression. *(2 commands)*
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > wget "https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta"
@@ -363,9 +346,9 @@ Please run the following command before we can proceed:
 >
 {: .hands_on} 
 
-#### **10 - Cleaning up**
+### Cleaning up
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 >
 > 1. Please enter your home and list its contents. *(2 commands)*
 > 2. Please list the contents of the directory `fun_with_words` without moving into it. *(1 command)*
@@ -376,7 +359,7 @@ Please run the following command before we can proceed:
 > 7. Remove the compressed text file. *(1 command)*
 > 8. That's it! Congratulations! You have mastered the Unix command-line essentials!
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > ls
@@ -391,14 +374,14 @@ Please run the following command before we can proceed:
 >
 {: .hands_on}
 
-### **Part 3: Advanced Concepts**
+## Part 3: Advanced Concepts
 
-#### **11 - Edit files**
+### Edit files
 
 Instead of using a graphical user interface for editing files,
 you can directly manipulate files on the terminal.
 
-> ## Tasks
+><hands-on-title>Tasks</hands-on-title>
 >
 > 1. Please move to your home directory. *(1 command)*
 > 2. Download the sars-cov-2 genome again ([sars-cov-2-seq](https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta)). *(1 command)*
@@ -408,7 +391,7 @@ the fasta id (>NC_045512.2). *(typing/removing text)*
 > 5. Save the file and exit the editor. *(1 key combination and 2 keys)*
 > 6. Output just the first 10 lines to ensure that the fasta header contains only the id now. *(1 command)*
 > 
-> > ## Solution
+> > <solution-title>Solution</solution-title>
 > > ```bash
 > > cd ~
 > > wget "https://openstack.cebitec.uni-bielefeld.de:8080/unix-course/seq.fasta"

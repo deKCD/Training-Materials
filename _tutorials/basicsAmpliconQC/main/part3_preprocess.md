@@ -31,36 +31,35 @@ For this exercise, we will use:
 - Quality scores at merged positions are recalculated as absolute difference
 
 > <hands-on-title>Merge first pair of reads</hands-on-title>
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>mkdir -p ~/workdir/flash
+>>cd ~/workdir/flash
+>>flash -r 300 ~/workdir/16Sdata/BGA1_1_R1.fastq ~/workdir/16Sdata/BGA1_1_R2.fastq -o BGA1_1
+>>```
+>{: .code-in}
 >
-> ```bash
-> mkdir -p ~/workdir/flash
-> cd ~/workdir/flash
-> flash -r 300 ~/workdir/16Sdata/BGA1_1_R1.fastq ~/workdir/16Sdata/BGA1_1_R2.fastq -o BGA1_1
-> ```
+>><code-out-title>Example output:</code-out-title>
+>>
+>>```
+>>[FLASH] Read combination statistics:
+>>[FLASH]     Total pairs:      8495
+>>[FLASH]     Combined pairs:   8388
+>>[FLASH]     Uncombined pairs: 107
+>>[FLASH]     Percent combined: 98.74%
+>>```
+>{: .code-out}
 >
-> Example output:
->
-> ```
-> [FLASH] Read combination statistics:
-> [FLASH]     Total pairs:      8495
-> [FLASH]     Combined pairs:   8388
-> [FLASH]     Uncombined pairs: 107
-> [FLASH]     Percent combined: 98.74%
-> ```
->
-> The merged paired-end reads have been written to:
->
-> ```
-> BGA1_1.extendedFrags.fastq
-> ```
+> The merged paired-end reads have been written to `BGA1_1.extendedFrags.fastq`
 >
 {: .hands_on}
 
 > <hands-on-title>Merge all pairs in batch</hands-on-title>
->
-> ```bash
-> parallel "flash -r 300 ~/workdir/16Sdata/{}_R1.fastq ~/workdir/16Sdata/{}_R2.fastq -o {}" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
-> ```
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>>parallel "flash -r 300 ~/workdir/16Sdata/{}_R1.fastq ~/workdir/16Sdata/{}_R2.fastq -o {}" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
+>>```
+>{: .code-in}
 >
 > If you have information on the amplified fragment, you can adjust min/max overlap, fragment length, and SD as necessary.
 >
@@ -77,12 +76,13 @@ First, identify the primer sequences used to amplify your region of interest:
 | Bacteria  | V4R    | GACTACHVGGGTATCTAATCC  |
 
 > <hands-on-title>Clip forward primer with cutadapt</hands-on-title>
->
-> ```bash
-> mkdir ~/workdir/cutadapt
-> cd ~/workdir/cutadapt
-> cutadapt -g ^CTACGGGNGGCWGCAG ../flash/BGA1_1.extendedFrags.fastq -e 0.2 -O 10 -o BGA1_1.trimmedf.fastq
-> ```
+>><code-in-title>Code-in</code-in-title>
+>> ```bash
+>> mkdir ~/workdir/cutadapt
+>> cd ~/workdir/cutadapt
+>> cutadapt -g ^CTACGGGNGGCWGCAG ../flash/BGA1_1.extendedFrags.fastq -e 0.2 -O 10 -o BGA1_1.trimmedf.fastq
+>> ```
+>{: .code-in}
 >
 > - `^` anchors the primer at the 5' end of the read
 > - `-e 0.2` sets a max error rate of 20%
@@ -92,48 +92,52 @@ First, identify the primer sequences used to amplify your region of interest:
 >
 {: .hands_on}
 
-Example cutadapt output:
-```
-=== Summary ===
-Total reads processed:                   8,388
-Reads with adapters:                     8,383 (99.9%)
-Reads written (passing filters):         8,388 (100.0%)
-Total basepairs processed:     3,808,321 bp
-Total written (filtered):      3,665,848 bp (96.3%)
-=== Adapter 1 ===
-Sequence: CTACGGGNGGCWGCAG; Type: anchored 5'; Length: 16; Trimmed: 8383 times.
-No. of allowed errors:
-0-4 bp: 0; 5-9 bp: 1; 10-14 bp: 2; 15 bp: 3
-
-```
+><code-out-title>Example cutadapt output:</code-out-title>
+>```
+>=== Summary ===
+>Total reads processed:                   8,388
+>Reads with adapters:                     8,383 (99.9%)
+>Reads written (passing filters):         8,388 (100.0%)
+>Total basepairs processed:     3,808,321 bp
+>Total written (filtered):      3,665,848 bp (96.3%)
+>=== Adapter 1 ===
+>Sequence: CTACGGGNGGCWGCAG; Type: anchored 5'; Length: 16; Trimmed: 8383 times.
+>No. of allowed errors:
+>0-4 bp: 0; 5-9 bp: 1; 10-14 bp: 2; 15 bp: 3
+>
+>```
+{: .code-out}
 
 > <hands-on-title>Clip reverse primer (reverse complement!)</hands-on-title>
 >
 > After merging, the reverse primer must be reverse complemented.
 >
-> 1. Reverse-complement the primer:
->    ```bash
->    cd ~/workdir
->    echo -e ">primer\nGACTACHVGGGTATCTAATCC" > revprimer.fas
->    revseq -sequence revprimer.fas -outseq revprimer_rc.fas
->    cat revprimer_rc.fas
->    ```
+>><code-in-title>1. Reverse-complement the primer:</code-in-title>
+>>    ```bash
+>>    cd ~/workdir
+>>    echo -e ">primer\nGACTACHVGGGTATCTAATCC" > revprimer.fas
+>>    revseq -sequence revprimer.fas -outseq revprimer_rc.fas
+>>    cat revprimer_rc.fas
+>>    ```
+>{: .code-in}
 >
-> 2. Use the reverse-complemented primer sequence with `cutadapt` at the 3' end:
->    ```bash
->    cd ~/workdir/cutadapt
->    cutadapt -a GGATTAGATACCCBDGTAGTC$ BGA1_1.trimmedf.fastq -e 0.2 -O 10 -o BGA1_1.trimmedfr.fastq
->    ```
+>><code-in-title>2. Use the reverse-complemented primer sequence with `cutadapt` at the 3' end:</code-in-title>
+>>    ```bash
+>>    cd ~/workdir/cutadapt
+>>    cutadapt -a GGATTAGATACCCBDGTAGTC$ BGA1_1.trimmedf.fastq -e 0.2 -O 10 -o BGA1_1.trimmedfr.fastq
+>>    ```
+>{: .code-in}
 >
 {: .hands_on}
 
-> <hands-on-title>Batch primer trimming</hands-on-title>
->
-> ```bash
-> cd ~/workdir/cutadapt
-> parallel "cutadapt -g ^CTACGGGNGGCWGCAG ../flash/{}.extendedFrags.fastq -e 0.2 -O 10 -o {}.trimmedf.fastq" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
-> parallel "cutadapt -a GGATTAGATACCCBDGTAGTC$ {}.trimmedf.fastq -e 0.2 -O 10 -o {}.trimmedfr.fastq" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
-> ```
+><hands-on-title>Batch primer trimming</hands-on-title>
+>><code-in-title>Code-in</code-in-title>
+>> ```bash
+>> cd ~/workdir/cutadapt
+>> parallel "cutadapt -g ^CTACGGGNGGCWGCAG ../flash/{}.extendedFrags.fastq -e 0.2 -O 10 -o {}.trimmedf.fastq" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
+>> parallel "cutadapt -a GGATTAGATACCCBDGTAGTC$ {}.trimmedf.fastq -e 0.2 -O 10 -o {}.trimmedfr.fastq" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
+>> ```
+>{: .code-in}
 >
 {: .hands_on}
 
@@ -144,11 +148,13 @@ Reads with very low quality often contain many miscalled bases, which can increa
 
 > <hands-on-title>Trim low-quality ends</hands-on-title>
 >
-> ```bash
-> mkdir -p ~/workdir/sickle
-> cd ~/workdir/sickle
-> sickle se -f ../cutadapt/BGA1_1.trimmedfr.fastq -t sanger -q20 -o BGA1_1.clipped.fastq
-> ```
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> mkdir -p ~/workdir/sickle
+>> cd ~/workdir/sickle
+>> sickle se -f ../cutadapt/BGA1_1.trimmedfr.fastq -t sanger -q20 -o BGA1_1.clipped.fastq
+>> ```
+>{: .code-in}
 >
 > - `-q 20` sets min average quality score to 20
 > - `-t sanger` applies Phred+33 scale
@@ -158,10 +164,12 @@ Reads with very low quality often contain many miscalled bases, which can increa
 
 > <hands-on-title>Batch quality trimming</hands-on-title>
 >
-> ```bash
-> cd ~/workdir/sickle
-> parallel "sickle se -f ../cutadapt/{}.trimmedfr.fastq -t sanger -q20 -o {}.clipped.fastq" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
-> ```
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> cd ~/workdir/sickle
+>> parallel "sickle se -f ../cutadapt/{}.trimmedfr.fastq -t sanger -q20 -o {}.clipped.fastq" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1, BGA4_2}
+>> ```
+>{: .code-in}
 {: .hands_on}
 
 
@@ -171,26 +179,29 @@ Filter out reads that are too short (or too long) for your expected amplicon siz
 
 > <hands-on-title>Plot and inspect read lengths</hands-on-title>
 >
-> ```bash
-> cd $CONDA_PREFIX/bin  
-> wget https://raw.githubusercontent.com/jueneman/16S-workshop-denbi/master/docs/qc/FastaStats.pl
-> chmod u+x FastaStats.pl
->
-> mkdir ~/workdir/length
-> cd  ~/workdir/length  
-> FastaStats.pl -q ../sickle/BGA1_1.clipped.fastq > BGA1_1.fastq.hist
-> head -n 10 BGA1_1.fastq.hist
-> ```
->
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> cd $CONDA_PREFIX/bin  
+>> wget https://raw.githubusercontent.com/jueneman/16S-workshop-denbi/master/docs/qc/FastaStats.pl
+>> chmod u+x FastaStats.pl
+>>
+>> mkdir ~/workdir/length
+>> cd  ~/workdir/length  
+>> FastaStats.pl -q ../sickle/BGA1_1.clipped.fastq > BGA1_1.fastq.hist
+>> head -n 10 BGA1_1.fastq.hist
+>> ```
+>{: .code-in}
 {: .hands_on}
 
 Now, trim reads to a defined length window (here, using 1.5 × IQR):
 
 > <hands-on-title>Filter by length with ea-utils (fastq-mcf)</hands-on-title>
 >
-> ```bash
-> fastq-mcf -0 -l 369 -L 461 n/a ../sickle/BGA1_1.clipped.fastq -o BGA1_1.fastq
-> ```
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> fastq-mcf -0 -l 369 -L 461 n/a ../sickle/BGA1_1.clipped.fastq -o BGA1_1.fastq
+>> ```
+>{: .code-in}
 >
 > - `-l 369` = lower length threshold
 > - `-L 461` = upper length threshold
@@ -200,15 +211,17 @@ Now, trim reads to a defined length window (here, using 1.5 × IQR):
 
 > <hands-on-title>Batch length filtering</hands-on-title>
 >
-> ```bash
-> parallel "FastaStats.pl -q ../sickle/{}.clipped.fastq > {}.fastq.hist" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
-> grep IQR *.hist
-> fastq-mcf -0 -l 369 -L 461 n/a ../sickle/BGA1_2.clipped.fastq -o BGA1_2.fastq
-> parallel "fastq-mcf -0 -l 372 -L 460 n/a ../sickle/{}.clipped.fastq -o {}.fastq" ::: {BGA2_1,BGA2_2}
-> parallel "fastq-mcf -0 -l 364 -L 464 n/a ../sickle/{}.clipped.fastq -o {}.fastq" ::: {BGA3_1,BGA3_2}
-> parallel "fastq-mcf -0 -l 377 -L 449 n/a ../sickle/{}.clipped.fastq -o {}.fastq" ::: {BGA4_1,BGA4_2}
-> ```
->
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> parallel "FastaStats.pl -q ../sickle/{}.clipped.fastq > {}.fastq.hist" ::: {BGA1_2,BGA2_1,BGA2_2,BGA3_1,BGA3_2,BGA4_1,BGA4_2}
+>>
+>> grep IQR *.hist
+>> fastq-mcf -0 -l 369 -L 461 n/a ../sickle/BGA1_2.clipped.fastq -o BGA1_2.fastq
+>> parallel "fastq-mcf -0 -l 372 -L 460 n/a ../sickle/{}.clipped.fastq -o {}.fastq" ::: {BGA2_1,BGA2_2}
+>> parallel "fastq-mcf -0 -l 364 -L 464 n/a ../sickle/{}.clipped.fastq -o {}.fastq" ::: {BGA3_1,BGA3_2}
+>> parallel "fastq-mcf -0 -l 377 -L 449 n/a ../sickle/{}.clipped.fastq -o {}.fastq" ::: {BGA4_1,BGA4_2}
+>> ```
+>{: .code-in}
 {: .hands_on}
 
 ## FastQC - Revisited
@@ -217,23 +230,25 @@ Now inspect how your quality treatment has improved the read quality:
 
 > <hands-on-title>Run FastQC on filtered files</hands-on-title>
 >
-> ```bash
-> cd ~/workdir/fastqc
-> fastqc -t 14 -o ~/workdir/fastqc/ ~/workdir/length/*.fastq
-> ```
->
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> cd ~/workdir/fastqc
+>> fastqc -t 14 -o ~/workdir/fastqc/ ~/workdir/length/*.fastq
+>> ```
+>{: .code-in}
 {: .hands_on}
 
 As one final step, group all high-quality files together:
 
 > <hands-on-title>Organize your high-quality reads</hands-on-title>
 >
-> ```bash
-> cd ~/workdir
-> mkdir HQ
-> cp length/*.fastq HQ/
-> ```
->
+>><code-in-title>Code-in</code-in-title>
+>>```bash
+>> cd ~/workdir
+>> mkdir HQ
+>> cp length/*.fastq HQ/
+>> ```
+>{: .code-in}
 {: .hands_on}
 
 

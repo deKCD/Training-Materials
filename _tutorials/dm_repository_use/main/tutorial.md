@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Using the cross-domain Data-Management Platform repository
 description: A step-by-step overview of how to use the repository.
 slug: dm_repository_use
-time_estimation: 40 minutes
+time_estimation: 40M
 level: beginner
 keywords: [FIXME]
 questions:
@@ -49,17 +49,19 @@ contributions:
 
 This tutorial is not a comprehensive guide to doing Data Management, but a "been-there-done-that" introduction followed by how to use the [DeKCD registry of FAIR data management platforms for the Cloud](https://dekcd.github.io/FAIR-DMP-Registry/). It is mostly on the technical side of Data Management.
 
-## **Prerequisites**
-
-To follow this tutorial:
-
-- Knowledge of what a Data Management Platform is,
-- Knowledge of the FAIR principles.
-
-For a good use of the repository:
-
-- Knowledge of Linux and Containers (Docker),
-- Knowledge of APIs.
+><details-title>Prerequisites</details-title>
+>
+> To follow this tutorial:
+> 
+> - Knowledge of what a Data Management Platform is,
+> - Knowledge of the FAIR principles.
+> 
+> For a good use of the repository:
+> 
+> - Knowledge of Linux and Containers (Docker),
+> - Knowledge of APIs.
+>
+{: .details}
 
 ## **Setting-up a Data Management Solution, a short overview**
 
@@ -103,49 +105,55 @@ This tutorial will guide you through using the repository, understanding its sco
 
 ## Hands-on: Using the Repository
 
-### Step 1: Access the Repository</hands-on-title>
+><hands-on-title>Step 1: Access the Repository</hands-on-title>
+>
+> 1. Open your browser and go to [https://dekcd.github.io/FAIR-DMP-Registry/](https://dekcd.github.io/FAIR-DMP-Registry/).
+> 2. Spend some time exploring the different menus; we will cover them later.  
+>     On the top header, the title and the Home link both return to the main page. *About* is a short description of the registry.  
+>     The left column shows the different pages, while the right column shows the topics in the current page.
+>
+{: .hands_on}
 
-1. Open your browser and go to [https://dekcd.github.io/FAIR-DMP-Registry/](https://dekcd.github.io/FAIR-DMP-Registry/).
-2. Spend some time exploring the different menus; we will cover them later.  
-    On the top header, the title and the Home link both return to the main page. *About* is a short description of the registry.  
-    The left column shows the different pages, while the right column shows the topics in the current page.
+><hands-on-title>Step 2: Understand the Main Goals</hands-on-title>
+>
+> The repository highlights platforms with:
+> - Reusability across domains,  
+> - Interoperability,  
+> - Affinity to cloud usage/set-ups,  
+> - Good documentation.
+> 
+> **Note:** While most platforms align with FAIR principles, not all do completely.
+> 
+{: .hands_on}
 
-### Step 2: Understand the Main Goals</hands-on-title>
- 
-The repository highlights platforms with:
-- Reusability across domains,  
-- Interoperability,  
-- Affinity to cloud usage/set-ups,  
-- Good documentation.
-
-**Note:** While most platforms align with FAIR principles, not all do completely.
-
-### Step 3: Using the repository
-
-#### Using the menus
-
-The menus are on the top, the left, and the right:
-- **Top Menu**: The Home page and the About page.
-- **Left Menu**: All pages of the repository.
-- **Right Menu**: The topics in the current page.
-
-The top menu will typically be used once or twice, to check the About page.
-
-![Image showing the top menu](../../images/About.png "The top menu"){: .responsive-img }
-
-The left menu will be used to select in which category to look for:
-
-![Image showing the left menu](../../images/MainDMPlatformMenu.png "The left menu"){: .responsive-img }
-
-The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopics that become visible in the menu when in the parent topic.
-
-![Image showing the right menu](../../images/RightMenu.png "The right menu"){: .responsive-img }
+><hands-on-title>Step 3: Using the repository</hands-on-title>
+> 
+> #### **Using the menus**
+> 
+> The menus are on the top, the left, and the right:
+> - **Top Menu**: The Home page and the About page.
+> - **Left Menu**: All pages of the repository.
+> - **Right Menu**: The topics in the current page.
+> 
+> The top menu will typically be used once or twice, to check the About page.
+> 
+> ![Image showing the top menu](../../images/About.png "The top menu"){: .responsive-img }
+> 
+> The left menu will be used to select in which category to look for:
+> 
+> ![Image showing the left menu](../../images/MainDMPlatformMenu.png "The left menu"){: .responsive-img }
+> 
+> The right menu will be used to go to a specific topic and most of the time to a specific domain. Some topics have subtopics that become visible > in the menu when in the parent topic.
+> 
+> ![Image showing the right menu](../../images/RightMenu.png "The right menu"){: .responsive-img }
+> 
+{: .hands_on}
 
 ><hands-on-title>Find a commercial DM platform for a domain</hands-on-title>
 >
 > From the Home Page, navigate to the Commercials subtopic of Geomatics in the list of Major Data Management platforms.
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title>Solution</solution-title>
 > > First click on the Major Data Management Platforms link in the left menu.  
 > > ![Selecting Major Data management in the left menu](../../images/MainDMPlatformMenu.png "Selecting Major Data management in the left menu"){: .responsive-img }  
 > > Then on Geomatics on the right menu, and finally on Commercials in the sub-menu.  
@@ -168,7 +176,7 @@ Not all entries are identical, as there is some extra information for some entri
 >
 > In the Major Data Management Platforms page, find the details about pyiron, which is in Materials Science. Check if it is cross-domain.
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title>Sokution</solution-title>
 > > Click on Materials Science on the right menu, then eventually scroll down to find the details about pyiron, including if it is cross-domain.  
 > > ![Selecting in the right menu](../../images/MaterialsScience.png "Selecting in the right menu"){: .responsive-img }
 > {: .solution}
@@ -187,15 +195,16 @@ Clicking on one result should lead to the paragraph containing the result. It is
 
 ![Finding the entry using the browser search](../../images/SearchIRODSInPage.png "Finding the entry using the browser search"){: .responsive-img }
 
-> <details-title></details-title>
+><details-title>Notes</details-title>
 > Depending on the size of the page, there could be 2 magnifying lenses. They have both the exact same function.
+>
 {: .details}
 
 > <hands-on-title>Find details about a specific entry</hands-on-title>
 >
 > Using the search, look for CIViC.
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title>Solution</solution-title>
 > > Click on the magnifying lens.  
 > > ![Clicking on the magnifying lense](../../images/SearchCIViC1.png "Clicking on the magnifying lense"){: .responsive-img }  
 > > Then type CIV in the search bar.  
@@ -208,17 +217,19 @@ Clicking on one result should lead to the paragraph containing the result. It is
 >
 {: .hands_on}
 
-##### Extras
-
-The repository also lists, in a simplified format:
-- **the major ontologies and thesauruses**,  
-![List of major ontologies and thesauruses](../../images/OntologiesThesauruses.png "List of major ontologies and thesauruses"){: .responsive-img }
-- **the major taxonomies and classifications**,  
-![List of major taxonomies and classifications](../../images/Taxonomies.png "List of major taxonomies and classifications"){: .responsive-img }
-- Some **useful tools and platforms for Data Management**, these are applications and tools that can be used together with Data Management platforms, such as central authority providers that can help set up a Single Sign On (SSO, login once for several applications) **or** used by Data Management platforms, such as an S3 implementation, to store data in a cloud environment.  
-![List of useful tools and platforms](../../images/UsefulTools.png "List of useful tools and platforms"){: .responsive-img }
-
-As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
+><details-title>Extras</details-title>
+>
+> The repository also lists, in a simplified format:
+> - **the major ontologies and thesauruses**,  
+> ![List of major ontologies and thesauruses](../../images/OntologiesThesauruses.png "List of major ontologies and thesauruses"){: .responsive-img }
+> - **the major taxonomies and classifications**,  
+> ![List of major taxonomies and classifications](../../images/Taxonomies.png "List of major taxonomies and classifications"){: .responsive-img }
+> - Some **useful tools and platforms for Data Management**, these are applications and tools that can be used together with Data Management platforms, such as central authority providers that can help set up a Single Sign On (SSO, login once for several applications) **or** used by Data Management platforms, such as an S3 implementation, to store data in a cloud environment.  
+> ![List of useful tools and platforms](../../images/UsefulTools.png "List of useful tools and platforms"){: .responsive-img }
+>
+> As for the Data Management Platforms, they do not pretend to be exhaustive and all contributions are welcome.
+>
+{: .details}
 
 ### Step 3: Generalists vs Specialists
 
@@ -235,7 +246,7 @@ While choosing a generalist platform might allow you to quickly start working an
 >
 > Then select a specific domain to find a Specialist platform.
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title>Solution</solution-title>
 > > Click on the Generalists in the right menu.  
 > >  
 > > The section lists the Generalist Data Management Platforms. The next section lists the Authority control platforms, which are generally online and also generalist, such as ORCID. The last list is for platforms which are not exactly a Data Management platform but can be used as one or used by another platform and lists, at the time of this writing, only NextCloud.  
@@ -249,7 +260,7 @@ While choosing a generalist platform might allow you to quickly start working an
 >
 > Your institution is already using NextCloud as a generic distributed storage facility. Inside a shared folder, you store many large microscopy images. You would like to have an online tool to visualise and work on these images.
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title>Solution</solution-title>
 > > Omero is an online imaging platform for microscopy outputs, and can be connected to other platforms using APIs. A central login is also possible using a central identity service (but this information is not part of the current registry).  
 > >  
 > > Using both NextCloud and Omero APIs, it is possible to bridge both, eventually with a small script fetching the images from NextCloud and pushing them to Omero. Omero also proposes specific import scenarios.
@@ -269,13 +280,19 @@ In both cases, it is important to know where the data will be stored, as both ar
 
 Some platforms will come with a Docker Compose or a Helm chart, and in that case the storage might be set up as part of the configuration. But generally not the backup.
 
+><comment-title>Note</comment-title>
 > A lack of containerized setup does not mean that the platform will be difficult to set up. But with a standard setup, it will always be necessary to consult the installation setup documentation and follow the given procedure.
+> 
+{: .comment}
 
 Finally, each entry tries to detail if there exists an API access, enabling interoperability and data extraction.
 
 Adding an API access is not a simple task, so the need to have one should be clarified before choosing a platform. This access can be via an HTTP REST API, generally easy to use, a CLI, which will generally be non-standard, or a language API: Python, Java, ... Interfacing using the same language will be easy, probably easier than through a REST API (or very similar in the case of Python), but interfacing with a different language might be difficult.
 
+><comment-title>Note</comment-title>
 > These technical aspects might give a security risk: if the platform is hard to update, if the API is too open, if the setup is too complex and might let some openings. In some cases, simpler is better, so it is possible to set up the platform with a reasonable level of security. If IT support is available, it is also advisable to involve them early.
+> 
+{: .comment}
 
 ### Step 5: Be Aware of What’s NOT Included
 
@@ -316,11 +333,11 @@ A typical entry should include:
 	+ **Not/Partly/Mostly/Fully** cross-domain: explanation on why.
 ```
 
-## Conclusion
+### Conclusion
 
 You now know how to use and navigate the **Data Management Platforms repository**.  
-It is a living resource focused on FAIR principles and cloud compatibility, and it depends on community contributions to grow and remain current.  
-
+It is a living resource focused on FAIR principles and cloud compatibility, and it depends on community contributions to grow and remain > current.  
+ 
 For questions or contributions, contact:  
 **Alain Becam** – [Alain.Becam@bioquant.uni-heidelberg.de](mailto:Alain.Becam@bioquant.uni-heidelberg.de)  
 Project site: [https://datenkompetenz.cloud/](https://datenkompetenz.cloud/)

@@ -12,18 +12,12 @@ $(document).ready(function() {
   // Initialize each foldable block
   $(foldableSelector).each(function() {
     var container = $(this);
-
+    
     // Hide all children except the title element
     $(">*:not(" + titleSelector + ")", container).hide();
 
     // Add fold/unfold icon to the title
-    $(titleSelector + ":first", container).append(
-      "<span class='fold-unfold glyphicon glyphicon-collapse-down'></span>"
-    );
-
-    // Optional: make cursor pointer
-    $(titleSelector + ":first", container).css("cursor", "pointer");
-  });
+    $(titleSelector + ":first", container).append("<i class='fold-unfold bi bi-chevron-expand float-end'></i>");});
 
   // Toggle on click (whole box fold/unfold)
   $(foldableSelector).on("click", function(event) {
@@ -35,13 +29,14 @@ $(document).ready(function() {
     var container = $(this);
     var title = container.children(titleSelector).first();
     var body = container.children(":not(" + titleSelector + ")");
-    var icon = title.children("span.fold-unfold");
+    var icon = title.children("i.fold-unfold");
 
     // Toggle all content except title
     body.toggle(400);
 
     // Toggle the icon class
-    icon.toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
+    //icon.toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
+    icon.toggleClass("bi-chevron-expand bi-chevron-contract");
   });
 
 });
@@ -81,4 +76,18 @@ $(window).scroll(function(){
             },100);
         }
     }
+});
+
+
+// Add this JavaScript to handle the click functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const faqContainers = document.querySelectorAll('.faq-container');
+  
+  faqContainers.forEach(container => {
+    const summary = container.querySelector('.faq-summary');
+    
+    summary.addEventListener('click', function() {
+      container.toggleAttribute('open');
+    });
+  });
 });

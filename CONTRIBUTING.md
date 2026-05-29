@@ -117,11 +117,9 @@ The following fields are mandatory unless stated otherwise:
   ```life_cycle: under development```
 
 > <details-title>Development status of tutorials</details-title>
-> Tutorials follow a structured development model aligned with best practices from [Carpentries](https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html).
-> - **Alpha:** early-stage development. Content may be incomplete, untested, and subject to significant changes. This status typically applies until a complete first draft is available.
-> - **Beta:** actively tested and reviewed. Feedback from pilot workshops is actively incorporated, and further revisions are likely.
-> - **Stable:** complete, reliable, and well-maintained tutorial. Only minor updates are expected.
-> - **Deprecated:** the tutorial is no longer maintained and may be removed in the future.
+> - **under development:** early-stage development. Content may be incomplete, untested, and subject to significant changes. This status typically applies until a complete first draft is available.
+> - **active:** complete, reliable, and well-maintained tutorial. Only minor updates are expected.
+> - **archived:** the tutorial is no longer maintained and may be removed in the future.
 > 
 {: .details}
 
@@ -376,7 +374,7 @@ The `layout` field must be set to `pathway` to ensure correct rendering of the p
 After defining the pathway, create a new branch, commit the pathway file, and submit a pull request for review.
 
 ## Share Materials with the Galaxy Training Network (GTN)
-
+---
 If you would like to contribute your training materials to the Galaxy Training Network (GTN), please follow the official guidelines for [creating a new tutorial](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/github-contribution/tutorial.html) and [formatting content](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html).
 
 This platform is fully compatible with GTN in terms of metadata structure and formatting conventions. This compatibility enables seamless transfer of materials between GTN and this platform. In practice, this means:

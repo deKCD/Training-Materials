@@ -24,4 +24,4 @@ RUN bundle install
 
 # Default command for serving the site
 # needs to be adjusted
-CMD bash run_docker.sh
+CMD ["bash", "run_docker.sh"]
