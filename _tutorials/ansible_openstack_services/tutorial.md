@@ -3,8 +3,9 @@ layout: tutorial_hands_on
 
 title: Using Ansible to Deploy and Operate (Web)Services on the de.NBI Cloud
 description: This tutorial teaches you how to use Ansible to deploy and manage (web)services on the de.NBI Cloud OpenStack infrastructure. It introduces you to the basics of Ansible and guides you through writing infrastructure-as-code to automate the deployment and operation of your services, using Docker and optionally Docker Swarm.
-slug: ansible_webservices_denbi_cloud
 time_estimation: 1H
+level: beginner
+keywords: [ansible, openstack, docker]
 questions:
   - Which questions are addressed by the tutorial?
 objectives:
@@ -15,7 +16,7 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 version: main
-life_cycle: alpha
+life_cycle: under development
 contributions:
   authorship:
   - Nils Hoffmann
@@ -23,13 +24,13 @@ contributions:
   funding: 
 ---
 
-# Tutorial: Setting up a Docker Swarm Project with Ansible on OpenStack (de.NBI Cloud, Bielefeld)
+## Tutorial: Setting up a Docker Swarm Project with Ansible on OpenStack (de.NBI Cloud, Bielefeld)
 
 ## Introduction
 
 This tutorial provides a step-by-step guide to setting up a Docker Swarm project using Ansible for automation and OpenStack integration on the de.NBI Cloud site in Bielefeld. The process involves preparing your local environment, configuring OpenStack resources, setting up Ansible, and deploying infrastructure and services.
 
-> ## Prerequisites
+><details-title>Prerequisites</details-title>
 > This tutorial assumes a familiarity with the following concepts:
 > - [Linux command line and SSH]( {% link _tutorials/unix-course/main/tutorial.md %} )
 > - [Basic knowledge of Ansible and YAML syntax](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html)
@@ -196,7 +197,7 @@ chmod o-rwx ~/.<your-project-shortname>/vault.pwd
 
 The main deployment configuration is located in `group_vars/openstack.yml`. This file defines the infrastructure topology, including VM flavors, network settings, and firewall rules. Adjust these settings to fit your project's requirements.
 
-> ## Customization of Deployment Configuration
+><details-title>Customization of Deployment Configuration</details-title>
 > Please note that the provided configurations are examples and should be tailored to your specific needs and to the OpenStack quotas and available flavors in your project. 
 > The flavors defined in the example are based on the de.NBI Cloud OpenStack environment at the Bielefeld cloud site.
 > 
