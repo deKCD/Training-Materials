@@ -18,6 +18,7 @@ $(document).ready(function() {
 
     // Add fold/unfold icon to the title
     $(titleSelector + ":first", container).append("<i class='fold-unfold bi bi-chevron-expand float-end'></i>");});
+    //$(titleSelector + ":first", container).append("<i class='fold-unfold glyphicon-collapse-down glyphicon-collapse-up float-end'></i>");});
 
   // Toggle on click (whole box fold/unfold)
   $(foldableSelector).on("click", function(event) {
