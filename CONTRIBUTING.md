@@ -64,7 +64,7 @@ Splitting content into smaller, logically coherent markdown files is strongly en
 
 #### **Metadata**
 
-All tutorials must define their metadata at the very top of the main file `tutorial.md` using YAML front matter. **Do not** place metadata in auxiliary Markdown files (e.g., part1.md, part2.md).
+All tutorials must define their metadata at the very top of the main file `tutorial.md` using YAML front matter. **Do not** place metadata in auxiliary Markdown files (e.g., `part1.md`, `part2.md`).
 
 Example:
 ```
@@ -179,6 +179,47 @@ To automatically generate a Table of Contents from your section headings, add th
 {: .agenda}
 ```
 {% endraw %}
+
+##### **Mathematical expressions**
+
+Mathematical expressions should be written in **LaTeX**. To render an equation, enclose the expression with double `$$` on both sides.
+
+Example (inline expression):
+```
+$$ a^2 + b^2 = c^2 $$
+```
+This will be rendered as:
+
+$$ a^2 + b^2 = c^2 $$
+
+You can also use standard LaTeX math environments (such as `equation`, `align`, `eqnarray`, etc.) inside the `$$ ... $$` delimiters to create more complex formulas and multi-line equations.
+
+Example (multi-line equation using `eqnarray`):
+```
+$$\begin{eqnarray}
+x' &=& &x \sin\phi &+& z \cos\phi \\
+z' &=& - &x \cos\phi &+& z \sin\phi \\
+\end{eqnarray}$$
+```
+
+This will be rendered as:
+
+$$\begin{eqnarray}
+x' &=& &x \sin\phi &+& z \cos\phi \\
+z' &=& - &x \cos\phi &+& z \sin\phi \\
+\end{eqnarray}$$
+
+
+><comment-title>Notes</comment-title>
+> * Use standard LaTeX syntax for all mathematical expressions.
+> * Equations are rendered by enclosing them in double dollar signs `$$ ... $$`, which can be used for both inline and display-style formulas.
+> * If an inline equation does not render correctly with `$$ ... $$`, use LaTeX inline math delimiters instead: `\( a^2 + b^2 = c^2 \)`
+> This will be rendered as: 
+> \\( a^2 + b^2 = c^2\\)
+> * LaTeX math environments (such as `equation`, `align`, `aligned`, `cases`, and `eqnarray`) should be enclosed within `$$ ... $$` to ensure proper rendering.
+> * Complex expressions, multi-line equations, and aligned formulas can be created using these environments.
+{: .comment}
+
 
 ##### **Boxes**
 
