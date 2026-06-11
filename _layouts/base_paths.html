@@ -12,6 +12,7 @@
     <script async="" src="https://piwik.cebitec.uni-bielefeld.de/matomo.js"></script>
     <script src="{{ '/assets/js/jquery/jquery-3.7.1.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/bootstrap5/bootstrap.bundle.min.js' | relative_url }}"></script>
+    <script id="MathJax-script" async src="{{ '/assets/mathjax/tex-mml-chtml.js' | relative_url }}"></script>
     <!-- Bootstrap core CSS -->
     <link href="{{ '/assets/css/bootstrap5/bootstrap.min.css' | relative_url }}" rel="stylesheet">
     <link href="{{ '/assets/css/dekcd_styles.css' | relative_url }}" rel="stylesheet">
@@ -132,7 +133,6 @@
           <h2 class="text-center">Learning Paths</h2>
           <div class="mx-auto p-2 width-padder my-1">
             <p class="card-text">{{ content }}</p>
-            {% include _includes/mathjax.html %}
           </div>
         </div>
       </div>

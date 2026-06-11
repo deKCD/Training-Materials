@@ -13,6 +13,7 @@
     <script src="{{ '/assets/js/jquery/jquery-3.7.1.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/bootstrap5/bootstrap.bundle.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/lesson.js' | relative_url }}"></script>
+    <script id="MathJax-script" async src="{{ '/assets/mathjax/tex-mml-chtml.js' | relative_url }}"></script>
     <!-- Bootstrap core CSS -->
     <link href="{{ '/assets/css/bootstrap5/bootstrap.min.css' | relative_url }}" rel="stylesheet">
     <link href="{{ '/assets/css/bootstrap-icons/bootstrap-icons.min.css' | relative_url }}" rel="stylesheet">
@@ -205,7 +206,6 @@
                                 {% include _includes/tutorial_lifecycle.html %}
                                 {% include _includes/tutorial_overview.html %}
                                 <p class="card-text">{{ content }}</p>
-                                {% include _includes/mathjax.html %}
                                 {% include _includes/tutorial_keypoints.html %}
                                 {% include _includes/tutorial_feedback.html %}
                                 {% include _includes/attributions.html %}
