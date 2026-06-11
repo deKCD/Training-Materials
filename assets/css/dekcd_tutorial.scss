@@ -187,3 +187,14 @@ blockquote :not(h2) + p {
     display: unset !important;
   }
 }
+
+// fix MathJax output in print
+mjx-container {
+  overflow: visible !important;
+  line-height: normal !important;
+  align-self: auto !important;
+}
+
+mjx-container[jax="CHTML"] {
+  padding: 2px 0;
+}
