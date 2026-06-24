@@ -445,8 +445,9 @@ def get_args():
 
 def main():
     options = get_args()
-    print("Training material validation")
-    
+    print(f"Content validation: {options.file_path}")
+    tutorial_name = options.file_path.split("_tutorials/")[1]
+
     result = []
     
     # load markdown file
@@ -464,15 +465,17 @@ def main():
     
     # collect error messages
     result.append({
+        "tutorial": tutorial_name,
         "metadata": metadata_errors,
         "blockquotes": blockquote_errors,
         "links": link_errors,
     })
 
+
     # validate files if present, e.g. part_01.md
     for i in links["file_links"]:
         subfile_link = i.get("file_path") # link to included file
-        subfile_path = Path(options.base_dir) / subfile_link
+        subfile_path = Path(options.base_dir) / Path(subfile_link)
         # load included file
         subfile = load_file(subfile_path)
         # validate blockquotes

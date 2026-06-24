@@ -3,7 +3,7 @@ import sys
 import yaml
 from pathlib import Path
 
-BASE_DIR = Path("..")
+BASE_DIR = Path(".")
 TUTORIALS_GROUP = BASE_DIR / "_data" / "tutorial_groups.yml"
 TUTORIALS_DIR = BASE_DIR / "_tutorials/"
 
