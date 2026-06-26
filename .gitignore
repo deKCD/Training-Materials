@@ -10,3 +10,6 @@ Gemfile.lock
 .ipynb_checkpoints
 .claude/
 .cursor/
+
+/.quarto/
+**/*.quarto_ipynb

@@ -103,7 +103,7 @@ The following fields are mandatory unless stated otherwise:
 * `description`: a concise summary of the tutorial content. 
 * `time_estimation`: estimated duration of the tutorial. This must conform to the following pattern:
       ```/^(?:([0-9]+)[Hh])?(?:([0-9]+)[Mm])?(?:([0-9.]+)[Ss])?$/```
-* `level`: the learners level of ability in the topic being taught according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Examples of skill levels include ***beginner***, ***intermediate*** or ***advanced***.
+* `level`: the learners level of ability in the topic being taught according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}. Examples of skill levels include ***beginner***, ***intermediate*** or ***advanced***.
 * `keywords`: keywords or tags used to describe the content. Multiple entries in a keywords list are delimited by commas.
   Example:
   ```keywords: ["bioinformatics", "python"]```
@@ -111,7 +111,7 @@ The following fields are mandatory unless stated otherwise:
 * `objectives`: a list of learning objectives.
 * `key_points`: summary points presented at the end of the tutorial.
 * `version`: specifies the tutorial version (e.g., `main`).
-* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE). Options are ***active***, ***under development***, and ***archived***.
+* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}. Options are ***active***, ***under development***, and ***archived***.
 
   Example:
   ```life_cycle: under development```
@@ -377,6 +377,121 @@ You may optionally [open an issue](https://github.com/deKCD/Training-Materials/i
 
 If all the required metadata fields are completed correctly, tutorials can be registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"} with minimal additional effort. Using the [Bioschemas TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"} ensures the metadata is machine-readable and interoperable, enabling automated harvesting, improving discoverability, and supporting seamless integration into the ELIXIR training ecosystem without manual curation.
 
+
+
+
+## Create and Deploy Quarto presentations
+------------------------------------
+This guide explains how to create presentation slides with Quarto and make them available on the training materials platform.
+
+### Overview
+Presentations in this repository are written in [Quarto](https://quarto.org/){:target="_blank"} and rendered as [RevealJS](https://revealjs.com/){:target="_blank"} slides. The generated slides are HTML files that can be viewed in a browser or exported to PDF for distribution.
+
+The typical workflow is:
+
+1. Create a `slides.qmd` file.
+2. Write your presentation content in Markdown.
+3. Render the presentation to HTML.
+4. Commit and push your changes to GitHub.
+5. Access the published slides from the [training materials platform](https://datenkompetenz.cloud/training/tutorials/){:target="_blank"}.
+
+><details-title>What is Quarto?</details-title>
+> Quarto is an open-source publishing system for scientific and technical content. It can generate many different output formats, including:
+> * Articles and reports
+> * Websites and books
+> * Dashboards and interactive documents
+> * Presentations
+{: .details}
+
+In this guide, we focus exclusively on creating presentations using the `revealjs` format.
+
+### Create a presentation file
+Create a file named `slides.qmd` in your tutorial directory: `_tutorials/<TUTORIAL-NAME>/<TUTORIAL-VERSION>/slides.qmd`
+
+A minimal presentation looks like this:
+```
+---
+title: "Your Presentation Title"
+subtitle: "Your Subtitle"
+author: "Your Name"
+date: "2026-06-26"
+format: 
+  revealjs:
+    theme: default
+    slide-number: true
+    chalkboard: true
+    logo: your-logo.png
+    footer: "Your Footer Text"
+    title-slide-attributes:
+      data-background-image: "background.svg"
+      data-background-size: "auto"
+      data-background-opacity: "0.3"
+      data-background-position: "bottom"
+---
+
+## Slide 1
+Your content here
+
+## Slide 2
+More content here
+```
+
+Shared presentation information—such as `title`, `author`, and `output` settings—is placed at the root level of your YAML block. For RevealJS format-specific metadta, please refer to this [documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html){:target="_blank"}. 
+
+
+### Add slides
+Slides are created using Markdown headings level 1 (`#`) or level 2 (`##`). You can also separate slides with a horizontal rule (`---`):
+```
+- Item 1
+- Item 2
+
+---
+
+- Item 1
+- Item 2
+```
+
+><tip></tip>
+>The best way to get a sense for the capabilities of Revealjs is this [demo](https://quarto.org/docs/presentations/revealjs/demo/){:target="_blank"} presentation.
+> Check out the [source code](https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd){:target="_blank"} for the demo to see how the slides were created.
+{: .tip}
+
+#### Learn more about RevealJS
+RevealJS provides many features, including incremental content, speaker notes, interactive elements, code highlightning, custom themes, and export to PDF. 
+The following resources are usefule when building presentations:
+
+><details-title>Resources</details-title>
+> * [Quarto Documentation](https://quarto.org/){:target="_blank"}
+> * [Quarto Presentations Guide](https://quarto.org/docs/presentations/){:target="_blank"}
+> * [RevealJS Documentation](https://revealjs.com/){:target="_blank"}
+> * [Creating slides using the `revealjs` format](https://quarto.org/docs/presentations/revealjs/){:target="_blank"}
+{: .details}
+
+
+### Render and preview the presentation
+While creating your slides, it is recommended to use Quarto's live preview mode:
+```bash
+quarto preview slides.qmd
+```
+This command automatically renders the presentation, starts a local web server, and opens the slides in your browser. Any changes you make to `slides.qmd` are automatically re-rendered and refreshed in the browser, making it easier to develop and test your presentation.
+
+Once your presentation is ready, generate the final HTML version by running:
+```bash
+quarto render slides.qmd --to revealjs
+```
+This command creates the final presentation file in the same directory, named `slides.html`.
+
+
+### Commit and Push to GitHub
+After verifying that the presentation renders correctly:
+1. Commit `slides.qmd` and any associated assets (images, logos, etc.).
+2. Push your changes to the repository.
+
+### Access the published presentation
+After a few minutes, your presentation will appear on the platform. Open the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page and look for for tutorial in the **Slides** column to access the published presentation.
+
+
+
 ## Create a new learning pathway
 ------------------------------------
 Learning pathwayss organize multiple tutorials into coherent, structured curricula. Each pathway defines a sequence of modules, where each module groups related tutorials under a shared theme.
@@ -416,14 +531,14 @@ After defining the pathway, create a new branch, commit the pathway file, and su
 
 ## Share Materials with the Galaxy Training Network (GTN)
 ---
-If you would like to contribute your training materials to the Galaxy Training Network (GTN), please follow the official guidelines for [creating a new tutorial](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/github-contribution/tutorial.html) and [formatting content](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html).
+If you would like to contribute your training materials to the Galaxy Training Network (GTN), please follow the official guidelines for [creating a new tutorial](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/github-contribution/tutorial.html){:target="_blank"} and [formatting content](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html){:target="_blank"}.
 
 This platform is fully compatible with GTN in terms of metadata structure and formatting conventions. This compatibility enables seamless transfer of materials between GTN and this platform. In practice, this means:
 
 * training materials developed here can be contributed to GTN with minimal adjustments.
 * GTN tutorials can be integrated into this platform without requiring reformatting, preserving both content and presentation.
 
-To incorporate specific GTN tutorials into this platform, you can use [git sparse-checkout](https://git-scm.com/docs/git-sparse-checkout) to efficiently retrieve only the required content:
+To incorporate specific GTN tutorials into this platform, you can use [git sparse-checkout](https://git-scm.com/docs/git-sparse-checkout){:target="_blank"} to efficiently retrieve only the required content:
 
 1. Clone the GTN repository with sparse checkout and blob filtering (lightweight clone into a temporary directory):
 ```bash
@@ -435,7 +550,7 @@ git clone --depth 1 --filter=blob:none --sparse https://github.com/galaxyproject
 cd temp-training
 ```
 
-3. Select the specific tutorial directory. For example, to retrieve the [Classification in Machine Learning](https://galaxyproject.github.io/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html) tutorial:
+3. Select the specific tutorial directory. For example, to retrieve the [Classification in Machine Learning](https://galaxyproject.github.io/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html){:target="_blank"} tutorial:
 ```bash
 git sparse-checkout set topics/statistics/tutorials/classification_machinelearning
 ```

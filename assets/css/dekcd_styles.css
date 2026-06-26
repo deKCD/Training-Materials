@@ -282,6 +282,15 @@ footer ul>li>a:hover {
     margin-left: 0; /* since sidebar already occupies space */
 }
 
+.toc-layout__content h2 {
+    margin-top: 4rem;
+    padding-top: 1rem;
+}
+
+.toc-layout__content h3 {
+    margin-top: 2.5rem;
+}
+
 .toc-list {
     list-style: none;
     padding: 0;
@@ -853,3 +862,4 @@ td {
   margin-top: 5px;
   font-size: 1em;
 }
+
