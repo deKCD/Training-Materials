@@ -27,6 +27,7 @@
     - mgworkshop_assembly
     - basicsAmpliconQC
     - nanopore
+    - mgtk_short
 
 - title: Data Management on the Cloud
   description: Tutorials focused on data management best practices, solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
