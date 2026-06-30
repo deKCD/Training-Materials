@@ -1,7 +1,7 @@
 #!/bin/bash
 # Check Tutorial Metadata
 # Validates that all tutorials have required metadata fields
-
+# It works but better to use the python script for more detailed validation and reporting
 set -e
 
 # Script configuration
@@ -16,7 +16,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Required metadata fields
-REQUIRED_FIELDS=("title" "objectives" "time_estimation" "key_points" "contributors")
+REQUIRED_FIELDS=("layout", "title", "description", "time_estimation", "level", "keywords", "questions", "objectives", "key_points", "version", "life_cycle", "contributions")
 
 # Initialize counters
 ISSUES=0

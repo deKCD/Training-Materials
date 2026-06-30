@@ -1,6 +1,7 @@
 #!/bin/bash
 # Check Markdown links in tutorials
 # This script validates all markdown links in the _tutorials/ directory
+# It works but better to use the python script for more detailed validation and reporting
 
 set -e
 

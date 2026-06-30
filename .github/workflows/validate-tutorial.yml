@@ -1,0 +1,34 @@
+name: Validate tutorial content
+
+on:
+  push:
+    paths: 
+        - _tutorials/**/*
+
+  schedule:
+    - cron: '0 9 * * 1'             
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.10'
+
+      - name: Check tutorial group
+        run: |
+          python3 bin/tutorial_group_validator.py
+
+      - name: Check tutorial formatting and metadata
+        run:  |
+          mkdir -p ./validation_results
+
+          find _tutorials/ -maxdepth 3 -name "tutorial.md" -type f | while read file; do
+            python3 bin/tutorial_content_validator.py --file_path="$file" --base_dir="." --outfile="./validation_results/output.json"
+          done    

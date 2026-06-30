@@ -1,0 +1,20 @@
+name: Check Markdown links
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 9 * * 1'
+
+jobs:
+  markdown-link-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with: 
+          args: --verbose --no-progress '_tutorials/**/*.md' './*.md'
+          fail: false

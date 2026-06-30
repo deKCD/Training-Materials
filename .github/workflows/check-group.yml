@@ -1,0 +1,24 @@
+name: Validate tutorial group name
+
+on:
+  push:
+    paths:
+      - "_tutorials/**"
+      - "_data/tutorial_groups.yaml"
+  pull_request:
+
+jobs:
+  group-name-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate tutorial names vs folders
+        run: python bin/tutorial_group_validator.py
