@@ -188,13 +188,14 @@ blockquote :not(h2) + p {
   }
 }
 
-// fix MathJax output in print
+
 mjx-container {
-  overflow: visible !important;
-  line-height: normal !important;
-  align-self: auto !important;
+    overflow: visible !important;
+    max-width: 100%;
 }
 
 mjx-container[jax="CHTML"] {
-  padding: 3.5px 0;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
