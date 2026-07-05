@@ -12,7 +12,7 @@ key_points:
 version:
   - main
 contributions:
-  authorship:
+  authorship:"FIXME"
   editing: 
   funding:
 ---
