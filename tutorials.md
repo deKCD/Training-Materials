@@ -52,13 +52,19 @@ permalink: /tutorials/
               <a href="{{ version.url | relative_url }}">{{ version.version }}</a>{% unless forloop.last %}<br>{% endunless %}    {% endfor %}
           </td>
           <td>
+            <!-- Capture tutorial slides -->
             {% capture slide_links %}{% endcapture %}
             {% assign first_slide = true %}
             {% for v in sorted_versions %}
-              {% if v.has_slides %}
+              {% assign base_dir = v.path | split: '/tutorial.md' | first %}
+              {% assign slides_path = base_dir | append: '/slides.html' %}
+              {% assign slides_url = v.url | replace: '/tutorial/', '/' | append: 'slides.html' %}
+              {% assign has_slides = site.static_files | where: "path", slides_path | size %}
+              {% if has_slides > 0 %}
                 {% capture link %}
-                  <a href="{{ v.slides_url | relative_url  }}">{{ v.version }}</a>
+                  <a href="{{ slides_url | relative_url }}">{{ v.version }}</a>
                 {% endcapture %}
+
                 {% if first_slide %}
                   {% capture slide_links %}{{ link | strip }}{% endcapture %}
                   {% assign first_slide = false %}
@@ -67,7 +73,7 @@ permalink: /tutorials/
                 {% endif %}
               {% endif %}
             {% endfor %}
-            {{ slide_links }}
+            {{ slide_links }}    
           </td>
           <td>{{ first.description }}</td>
           <td>

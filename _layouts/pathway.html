@@ -141,12 +141,14 @@
               <table>
                 <colgroup>
                   <col style="width: 20%;">
-                  <col style="width: 30%;">
-                  <col style="width: 40%;">
+                  <col style="width: 5%;">
+                  <col style="width: 25%;">
+                  <col style="width: 50%;">
                 </colgroup>
                 <thead>
                   <tr>
                     <th>Tutorial</th>
+                    <th>Slides</th>
                     <th>Description</th>
                     <th>Learning Objectives</th>  
                   </tr>
@@ -169,6 +171,18 @@
                     <!-- render tutorial row -->
                       <tr>
                           <td><a href="{{ tutorial.url | relative_url }}">{{ tutorial.title }}</a></td>
+                          <td>
+                            <!-- Capture tutorial slides -->
+                            {% assign base_dir = tutorial.path | split: '/tutorial.md' | first %}
+                            {% assign slides_path = base_dir | append: '/slides.html' %}
+                            {% assign slides_url = tutorial.url | replace: '/tutorial/', '/' | append: 'slides.html' %}
+                            {% assign has_slides = site.static_files | where: "path", slides_path | size %}
+                            {% if has_slides > 0 %}
+                              <a href="{{ slides_url | relative_url }}">
+                                {{ tutorial_ref.version}}
+                              </a>
+                            {% endif %}
+                          </td>
                           <td>{{ tutorial.description }}</td>
                           <td>
                               <ul>
