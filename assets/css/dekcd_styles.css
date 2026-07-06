@@ -325,6 +325,24 @@ footer ul>li>a:hover {
     text-decoration: none;
 }
 
+/* Active state for the current section in the table of contents */
+.toc-list a.active {
+    color: var(--dekcd-accent-2);
+    font-weight: 700;
+    border-left: 3px solid var(--dekcd-accent-2);
+}
+
+.toc-list a {
+    display: block;
+    padding: 0.2rem 0.5rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.toc-list li.active-parent > a {
+    font-weight: 600;
+}
+
 .toc-list ul {
     display: block;
     list-style: disc outside;

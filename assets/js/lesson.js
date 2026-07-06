@@ -92,3 +92,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+// Highlight the current section in the table of contents
+document.addEventListener("DOMContentLoaded", () => {
+    const headings = document.querySelectorAll("h2, h3, h4, h5");
+    const tocLinks = document.querySelectorAll(".toc-list a");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            const id = entry.target.id;
+
+            tocLinks.forEach(link => {
+                link.classList.toggle(
+                    "active",
+                    link.getAttribute("href") === "#" + id
+                );
+            });
+        });
+    }, {
+        rootMargin: "-120px 0px -60% 0px",
+        threshold: 0
+    });
+
+    headings.forEach(h => {
+        if (h.id) observer.observe(h);
+    });
+});
