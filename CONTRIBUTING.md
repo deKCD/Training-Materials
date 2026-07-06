@@ -451,7 +451,7 @@ Slides are created using Markdown headings level 1 (`#`) or level 2 (`##`). You 
 - Item 2
 ```
 
-><tip></tip>
+><tip-title></tip-title>
 >The best way to get a sense for the capabilities of Revealjs is this [demo](https://quarto.org/docs/presentations/revealjs/demo/){:target="_blank"} presentation.
 > Check out the [source code](https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd){:target="_blank"} for the demo to see how the slides were created.
 {: .tip}
