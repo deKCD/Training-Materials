@@ -150,8 +150,6 @@ Lesson materials are all available online, under a <a href="https://creativecomm
 </p>
 
 {% for tutorial_id in group.tutorials %} {% assign group_items = site.tutorials | where: “layout”, “tutorial_hands_on” | where_exp: “item”, “item.path contains tutorial_id” %} {% assign sorted_versions = group_items | sort: “version” %} {% assign first = sorted_versions[0] %} {% if first %}
-
-{% endif %} {% endfor %}
 <table>
 <colgroup>
 <col style="width: 40%;">
@@ -191,19 +189,30 @@ Estimated Time
 {% for version in sorted_versions %} <a href="{{ version.url | relative_url }}">{{ version.version }}</a>{% unless forloop.last %}<br>{% endunless %} {% endfor %}
 </td>
 <td>
-{% capture slide_links %}{% endcapture %} {% assign first_slide = true %} {% for v in sorted_versions %} {% if v.has_slides %} {% capture link %} <a href="{{ v.slides_url | relative_url  }}">{{ v.version }}</a> {% endcapture %} {% if first_slide %} {% capture slide_links %}{{ link | strip }}{% endcapture %} {% assign first_slide = false %} {% else %} {% capture slide_links %}{{ slide_links }}, {{ link | strip }}{% endcapture %} {% endif %} {% endif %} {% endfor %} {{ slide_links }}
-</td>
-<td>
-{{ first.description }}
-</td>
-<td>
-{% for contributor in first.contributions.authorship %} <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor }}</a>{% unless forloop.last %}, {% endunless %} {% endfor %}
-</td>
-<td>
-{{ first.time_estimation }}
-</td>
-</tr></tbody>
-</table>
+<!-- Capture tutorial slides -->
+<p>{% capture slide_links %}{% endcapture %} {% assign first_slide = true %} {% for v in sorted_versions %} {% assign base_dir = v.path | split: ‘/tutorial.md’ | first %} {% assign slides_path = base_dir | append: ‘/slides.html’ %} {% assign slides_url = v.url | replace: ‘/tutorial/’, ‘/’ | append: ‘slides.html’ %} {% assign has_slides = site.static_files | where: “path”, slides_path | size %} {% if has_slides &gt; 0 %} {% capture link %} <a href="{{ slides_url | relative_url }}">{{ v.version }}</a> {% endcapture %}</p>
+<pre><code>{% if first_slide %}
+              {% capture slide_links %}{{ link | strip }}{% endcapture %}
+              {% assign first_slide = false %}
+            {% else %}
+              {% capture slide_links %}{{ slide_links }}, {{ link | strip }}{% endcapture %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {{ slide_links }}    
+      &lt;/td&gt;
+      &lt;td&gt;{{ first.description }}&lt;/td&gt;
+      &lt;td&gt;
+        {% for contributor in first.contributions.authorship %}
+          &lt;a href="https://orcid.org/{{ contributor.orcid }}" target="_blank"&gt;{{ contributor }}&lt;/a&gt;{% unless forloop.last %}, {% endunless %}
+        {% endfor %}
+      &lt;/td&gt;
+      &lt;td&gt;{{ first.time_estimation }}&lt;/td&gt;
+    &lt;/tr&gt;
+    {% endif %}
+  {% endfor %}
+&lt;/tbody&gt;</code></pre>
+</td></tr></tbody></table>
 </section>
 <p>{% endfor %}</p>
 
