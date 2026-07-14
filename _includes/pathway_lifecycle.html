@@ -1,0 +1,29 @@
+{% comment %}
+    Display learning path's lifecycle.
+    Possible values: "under development", "active", "archived".
+    If not set, the learning path is considered "under development".
+{% endcomment %}
+
+{% if page.life_cycle == nil %}
+{% assign life_cycle = include.life_cycle %}
+{% else %}
+{% assign life_cycle = page.life_cycle %}
+{% endif %}
+
+{% if life_cycle == "under development" %}
+<div class="lifecycle lifecycle-draft">
+  <strong>Under development</strong>: This learning path is in an early stage of development and may change significantly.
+</div>
+{% elsif life_cycle == "active" %}
+<div class="lifecycle lifecycle-active">
+  <strong>Active</strong>: This learning path is actively maintained and updated.
+</div>
+{% elsif life_cycle == "archived" %}
+<div class="lifecycle lifecycle-archived">
+  <strong>Archived</strong>: This learning path is no longer actively maintained.
+</div>
+{% else %}
+<div class="lifecycle lifecycle-unknown">
+  <strong>Unknown</strong>: The lifecycle status of this learning path is not defined. Please <a href="mailto:{{ site.email }}">contact us</a> for more information.
+</div>
+{% endif %} 

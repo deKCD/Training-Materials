@@ -12,6 +12,7 @@
     <script async="" src="https://piwik.cebitec.uni-bielefeld.de/matomo.js"></script>
     <script src="{{ '/assets/js/jquery/jquery-3.7.1.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/bootstrap5/bootstrap.bundle.min.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/lesson.js' | relative_url }}"></script>
     <!-- Bootstrap core CSS -->
     <link href="{{ '/assets/css/bootstrap5/bootstrap.min.css' | relative_url }}" rel="stylesheet">
     <link href="{{ '/assets/css/dekcd_styles.css' | relative_url }}" rel="stylesheet">
@@ -131,6 +132,7 @@
         <div class="my-1">
           <h2 class="text-center" style="margin: 2rem 0;">{{ page.title }}</h2>
           <p class="text-center" style="font-size: large; margin-bottom: 2rem;"> {{ page.description }}</p>
+          {% include _includes/pathway_lifecycle.html %}
           <div class="mx-auto p-2 width-padder my-1">
             <div class="pathway-content tutorial-grop container">    
 
@@ -204,21 +206,9 @@
                 </tbody>
               </table>
               {% endfor %}
-
-              <p>This material is reviewed by our Editorial Board:</p>
-                  <ul>
-                      {% for editor in page.editorial_board %}
-                          {% if editor.orcid %}
-                          <a href="https://orcid.org/{{ editor.orcid }}" target="_blank">{{ editor.name }}</a>
-                          {% else %}
-                          {{ editor.name }}
-                          {% endif %}
-                      {% endfor %}
-                  </ul>
-
-                  {% include _includes/tutorial_feedback.html %}
-
-              </div>
+              {% include _includes/attributions.html %}
+              {% include _includes/tutorial_feedback.html %}
+              </div> 
             </div>
           </div>
         </div>
