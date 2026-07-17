@@ -9,6 +9,11 @@
     - simpleVMWorkshop
     - bibigrid
 
+- title: Cloud application deployment
+  description: Tutorials in this group offer hands-on experience in building, containerizing, and deploying applications from local development environments to the cloud.
+  tutorials:
+    - data-dashboard-webapp
+
 - title: Machine Learning on Cloud infrastructure
   description: Tutorials focused on setting up machine learning toolkits and applications on cloud infrastructure.
   tutorials:
@@ -38,4 +43,3 @@
 - title: Incubator
   description: Tutorials in this group are under review.
   tutorials:
-    - data-dashboard-webapp

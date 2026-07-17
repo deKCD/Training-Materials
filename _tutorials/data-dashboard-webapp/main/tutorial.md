@@ -5,7 +5,7 @@ title: Build a Simple Dataset Web App on EMBL Cloud Infrastructure
 description: Learn to create and deploy a web application using Python, Streamlit, Docker/Podman, and Kubernetes on EMBL cloud computing infrastructure
 time_estimation: 2H
 level: beginner
-keywords: [FIXME]
+keywords: [docker, kubernetes, streamlit]
 questions:
   - How do I create a simple web application for data visualization?
   - How do I containerize an application using Docker or Podman?
@@ -32,7 +32,7 @@ contributions:
   funding: 
 ---
 
-![People hiking in a row on the ice of Perito Moreno glacier, Los Glaciares national park, Santa Cruz province, Patagonia Argentina]({{ "/tutorials/data-dashboard-webapp/images/perito-moreno-glacier.jpg" | relative_url }}){: .responsive-img }
+
 
 ## Introduction
 
