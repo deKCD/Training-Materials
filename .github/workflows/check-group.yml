@@ -2,10 +2,14 @@ name: Validate tutorial groups
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "_tutorials/**"
       - "_data/tutorial_groups.yaml"
   pull_request:
+    branches:
+      - main
     paths:
       - "_tutorials/**"
       - "_data/tutorial_groups.yaml"
