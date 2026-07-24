@@ -33,4 +33,4 @@ jobs:
           pip install pyyaml
 
       - name: Run tutorial group validator
-        run: python bin/tutorial_group_validator.py
+        run: python bin/check-group.py
