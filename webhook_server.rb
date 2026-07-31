@@ -43,8 +43,8 @@ post '/webhook' do
     halt 400, "Unsupported event"
   end
 
-  # Do your git pull, etc.
-  output = `cd /srv/jekyll && git checkout #{TARGET_BRANCH} && git pull 2>&1`
+  # Pull latest and rebuild the static site so Rack serves fresh content.
+  output = `cd /srv/jekyll && git checkout #{TARGET_BRANCH} && git pull && JEKYLL_ENV=production bundle exec jekyll build 2>&1`
   status_code = $?.exitstatus
 
   if status_code == 0
