@@ -9,6 +9,7 @@ color_mode:
   
 # Sites
 url: "https://datenkompetenz.cloud"
+schema_url: "https://datenkompetenz.cloud/training"
 baseurl: "/training"
 repository_url: "https://github.com/deKCD/Training-Materials"
 dekcd: "https://datenkompetenz.cloud/"
