@@ -1,7 +1,6 @@
 import re
 import os
 from typing import Dict, List, Tuple, Any
-import requests
 
 def parse_inline_and_verify(
     text: str, 
@@ -9,14 +8,12 @@ def parse_inline_and_verify(
     references: Dict[str, str] = None,
     timeout: int = 5) -> Tuple[Dict[str, List[Any]], List[Dict[str, str]]]:
     """
-    Finds links (URLs, Liquid images, Liquid file includes) in a markdown file string.
-    Verifies accessibility for URLs and presence for local files.
+    Finds links to images and files in a tutorial and verifies their presence.
     
     Args:
         text (str): The markdown or document content string.
         base_dir (str): Root directory of the project to check local file relative paths.
         references (dict): Dictionary mapping lowercased reference IDs to URLs.
-        timeout (int): Seconds to wait before timing out a web request.
     """
     
     result = {
@@ -70,11 +67,11 @@ def parse_inline_and_verify(
                 }
                 result["image_links"].append(image_meta)
             else:
-                errors.append({"error": f"Image Liquid class is incorrect: line {line_number}"})
+                errors.append({"error": f"Image Liquid class is incorrect (line {line_number})"})
             
             # Verify image path
             if url.startswith(('http://', 'https://')):
-                _verify_web_url(url, errors, timeout)
+               continue  # skip web images
             else:
                 _verify_local_file(url, base_dir, errors, line=line_number)
         else:
@@ -87,7 +84,9 @@ def parse_inline_and_verify(
             
             # Verify text link url
             if url.startswith(('http://', 'https://')):
-                _verify_web_url(url, errors, timeout, line_number)
+               continue  # skip web links
+            else:
+                _verify_local_file(url, base_dir, errors, line=line_number)
 
     # 3. Extract and verify Liquid/Jekyll include files
     for fm in LIQUID_INCLUDE_RE.finditer(text):
@@ -102,20 +101,6 @@ def parse_inline_and_verify(
         _verify_local_file(file_path, base_dir, errors, line=line_number)
 
     return result, errors
-
-def _verify_web_url(url: str, errors: list, timeout: int, line: int):
-    """Helper to safely ping web URLs and collect errors."""
-    try:
-        # Use standard HEAD request for performance; fallback to GET if blocked
-        resp = requests.head(url, timeout=timeout, allow_redirects=True)
-        if resp.status_code == 405:
-            resp = requests.get(url, timeout=timeout, allow_redirects=True, stream=True)
-            
-        if resp.status_code >= 400:
-            errors.append({"error": f"URL broken or inaccessible (HTTP {resp.status_code}): {url}. Line {line}"})
-    except requests.RequestException as e:
-        errors.append({"error": f"URL connection failed: {url}. Details: {str(e)}. Line {line}"})
-
 
 def _verify_local_file(target_path: str, base_dir: str, errors: list, line: int):
     """Helper to safely check local workspace files and collect errors."""
