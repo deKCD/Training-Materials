@@ -438,6 +438,36 @@ More content here
 
 Shared presentation information—such as `title`, `author`, and `output` settings—is placed at the root level of your YAML block. For RevealJS format-specific metadta, please refer to this [documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html){:target="_blank"}. 
 
+#### Convert PDF slides into Quarto Markdown
+
+Existing presentation slides can be converted into a Quarto presentation. Export your presentation as a PDF (version 1.7) and run the conversion script:
+
+```bash
+# install PyMuPDF https://pymupdf.readthedocs.io/en/latest/installation.html
+pip install --upgrade pymupdf
+
+python bin/pdf2quarto.py --source slides.pdf --outfile slides.qmd --images slides_images
+```
+
+The converter will:
+* extract all embedded images into the specified directory (`slides_images`)
+* save the extracted images as JPEG files
+* generate a Quarto presentation (`slides.qmd`) with the required YAML front matter
+* preserve the extracted text and insert images with their original position and size so the generated presentation closely matches the layout of the source PDF.
+
+The generated Markdown uses Quarto-compatible image attributes, allowing the slides to be rendered with a layout similar to the original presentation.
+
+><details-title>Why PDF 1.7?</details-title>
+> PDF 1.7 supports important slide features such as transparency, layers, and improved image handling, which helps preserve the original slide appearance.
+>
+> Older PDF versions (such as PDF 1.4) do not support some of these features, which can result in missing images or layout differences after conversion.
+{: .details}
+
+><warning-title>Important</warning-title>
+> Always review the generated `slides.qmd` file before publishing it. 
+> 
+> Conversion preserves most of the original layout, but some elements may still require manual adjustment.
+{: .warning}
 
 ### Add slides
 Slides are created using Markdown headings level 1 (`#`) or level 2 (`##`). You can also separate slides with a horizontal rule (`---`):
@@ -489,7 +519,6 @@ After verifying that the presentation renders correctly:
 
 ### Access the published presentation
 After a few minutes, your presentation will appear on the platform. Open the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page and look for for tutorial in the **Slides** column to access the published presentation.
-
 
 
 ## Create a new learning pathway
