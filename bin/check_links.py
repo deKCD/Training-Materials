@@ -70,7 +70,7 @@ def parse_inline_and_verify(
                 errors.append({"error": f"Image Liquid class is incorrect (line {line_number})"})
             
             # Verify image path
-            if url.startswith(('http://', 'https://')):
+            if url.startswith(('http:', 'https:')):
                continue  # skip web images
             else:
                 _verify_local_file(url, base_dir, errors, line=line_number)
@@ -83,10 +83,11 @@ def parse_inline_and_verify(
             result["text_links"].append(item)
             
             # Verify text link url
-            if url.startswith(('http://', 'https://')):
+            if url.startswith(('http:', 'https:')) or url.startswith('mailto:'):
                continue  # skip web links
             else:
                 _verify_local_file(url, base_dir, errors, line=line_number)
+
 
     # 3. Extract and verify Liquid/Jekyll include files
     for fm in LIQUID_INCLUDE_RE.finditer(text):
@@ -107,5 +108,16 @@ def _verify_local_file(target_path: str, base_dir: str, errors: list, line: int)
     file_path = target_path.replace("/tutorials", "/_tutorials", 1).lstrip("/")
     full_path = base_dir / file_path
 
+    # ignore links that are references
+    if '#' in str(full_path):
+        return
+
+    # check link to tutorial.md file
+    if str(full_path).endswith("/tutorial"):
+        full_path = full_path.with_suffix(".md")
+
     if not os.path.exists(full_path):
-        errors.append({"error": f"Missing file at expected location: {full_path}. Line {line}"})
+        errors.append({
+            "error": f"Missing file at expected location: {full_path} (line {line})"
+            }
+        )

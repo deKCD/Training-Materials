@@ -93,14 +93,14 @@ def parse_markdown_metadata(markdown_text: str) -> Tuple[Dict[str, Any], List[Di
 
         value = metadata[field]
 
-        if value == "" or value is None or value == {}:
+        if value == "" or value is None or value == {} or value == []:
             errors.append({
                 "error": f"Field '{field}' is empty."
             })
             continue
 
         if field in LIST_FIELDS:
-            if not isinstance(value, list) or len(value) == 0:
+            if not isinstance(value, list) or len(value) == 0 or any(not isinstance(item, str) or item.strip() == "" for item in value):
                 errors.append({
                     "error": f"Field '{field}' is empty."
                 })

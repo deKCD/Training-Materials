@@ -3,12 +3,13 @@ import re
 from typing import Dict, List, Tuple, Any
 from pathlib import Path
 import argparse
-from pprint import pprint
+from pathlib import Path
 
 from check_metadata import parse_markdown_metadata
 from check_blockquote import parse_blockquotes, validate_blockquote_types
 from check_links import parse_inline_and_verify
 
+BASE_DIR = Path.cwd()
 
 def load_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -17,7 +18,7 @@ def load_file(file_path):
 
 def get_args():
     parser = argparse.ArgumentParser(
-        description="Training material validation. Example usage: python tutorial_content_validator.py --file_path=path/to/file.md --base_dir=~/Training-Materials"
+        description="Training material validation. Example usage: python tutorial_content_validator.py --file_path=path/to/file.md"
         )
     parser.add_argument(
         "-f", "--file_path",
@@ -25,16 +26,11 @@ def get_args():
         required=True,
         help="Path to markdown file"
     )
-    parser.add_argument(
-        "-b", "--base_dir",
-        type=str,
-        required=True,
-        help="Tutorial directory for local file validation"
-    )
     return parser.parse_args()
 
 def main():
     options = get_args()
+
     tutorial_name = options.file_path.split("_tutorials/")[1]
 
     result = []
@@ -50,7 +46,7 @@ def main():
     blockquote_errors = validate_blockquote_types(tokens)
     
     # validate links and file presence
-    links, link_errors = parse_inline_and_verify(file, base_dir=Path(options.base_dir), references=None, timeout=10)
+    links, link_errors = parse_inline_and_verify(file, base_dir=BASE_DIR, references=None, timeout=10)
     
     # collect error messages
     result.append({
@@ -64,14 +60,14 @@ def main():
     # validate "partial" files if present, e.g. part_01.md
     for i in links["file_links"]:
         subfile_link = i.get("file_path") # link to included file
-        subfile_path = Path(options.base_dir) / Path(subfile_link)
+        subfile_path = BASE_DIR / Path(subfile_link)
         # load included file
         subfile = load_file(subfile_path)
         # validate blockquotes
         tokens = parse_blockquotes(subfile)
         subfile_blockquote_errors = validate_blockquote_types(tokens)
         # validate file presence
-        subfile_links, subfile_link_errors = parse_inline_and_verify(subfile, base_dir=Path(options.base_dir), references=None, timeout=10)
+        subfile_links, subfile_link_errors = parse_inline_and_verify(subfile, base_dir=BASE_DIR, references=None, timeout=10)
 
         result[0]["links"].append({
             "subfile":subfile_link, 
@@ -86,12 +82,21 @@ def main():
             print("=" * 80)
             for section in ("metadata", "blockquotes", "links"):
                 issues = tutorial.get(section, [])
-                if not issues:
+
+                filtered_issues = []
+                for issue in issues:
+                    if "subfile" in issue:
+                        subfiles.append(issue)
+                    elif issue.get("error"):
+                        filtered_issues.append(issue)
+
+                if not filtered_issues:
                     continue
-                
+
                 print(f"\n{section.capitalize()}:")
                 n = 1
-                for issue in issues:
+
+                for issue in filtered_issues:
                     line = issue.get("line")
                     if "subfile" in issue:
                         subfiles.append(issue)
@@ -104,7 +109,6 @@ def main():
 
             # print subfile issues
             if subfiles:
-                print("\nSubfile validation:")
                 for subfile in subfiles:
                     has_issues = (
                         subfile.get("subfile_blockquotes") or subfile.get("subfile_links")
@@ -112,6 +116,10 @@ def main():
 
                     if not has_issues:
                         continue
+
+                    print("\nSubfile validation:")
+                    print("-" * len("Subfile validation:"))
+
                     print(f"\n {subfile['subfile']}")
                     if subfile["subfile_blockquotes"]:
                         print("    Blockquotes:")

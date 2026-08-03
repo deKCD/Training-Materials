@@ -13,11 +13,12 @@ def parse_blockquotes(markdown_text: str):
     """
 
     BLOCKQUOTE_RE = re.compile(r'^(>\s?)(.*)$') # learning box title
-    ATTRIBUTE_RE = re.compile(r'^\{:\s*\.([a-zA-Z0-9_-]+)\s*\}$') # learning box type
+    ATTRIBUTE_RE = re.compile(r'^\{:\s*\.([a-zA-Z0-9_-]+)\s*\}$') # learning box type)
 
     NESTED_BLOCKQUOTE_RE = re.compile(r'^(>>\s?)(.*)$') # nested learning box title
-    NESTED_ATTRIBUTE_RE = re.compile(r'^>\{:\s*\.([a-zA-Z0-9_-]+)\s*\}$') # nested learning box type
-    
+    #NESTED_ATTRIBUTE_RE = re.compile(r'^>\{:\s*\.([a-zA-Z0-9_-]+)\s*\}$') # nested learning box type
+    NESTED_ATTRIBUTE_RE = re.compile(r'^>?\s*\{:\s*\.([a-zA-Z0-9_-]+)\s*\}$') # nested learning box type
+
     lines = markdown_text.split('\n')
     length = len(lines)
     
@@ -26,59 +27,82 @@ def parse_blockquotes(markdown_text: str):
     
     pos = 0
     while pos < length:
-        start = pos
         line = lines[pos]
+        start = pos
 
-        # check nested blockquote first
-        if NESTED_BLOCKQUOTE_RE.match(line): 
-            nested_content_lines = []
-            blockquote_type = None
+        # ignore standalone attribute lines
+        if ATTRIBUTE_RE.match(line.strip()) or NESTED_ATTRIBUTE_RE.match(line.strip()):
+            pos += 1
+            continue
 
-            while pos < length and NESTED_BLOCKQUOTE_RE.match(lines[pos]):
-                nm = NESTED_BLOCKQUOTE_RE.match(lines[pos])
-                nested_content_lines.append(nm.group(2))
-                pos += 1
-
-            # check for trailing nested attribute
-            if pos < length:
-                n_am = NESTED_ATTRIBUTE_RE.match(lines[pos].strip())
-                if n_am:
-                    blockquote_type = n_am.group(1)
-                    pos += 1
-
-            nested_tokens.append({
-                "content": "\n".join(nested_content_lines), 
-                "blockquote_type": blockquote_type, 
-                "line": start + 1,
-            })
-
-        # check for standard blockquote
-        elif BLOCKQUOTE_RE.match(line):
+        # parse parent blockquote
+        if BLOCKQUOTE_RE.match(line) and not NESTED_BLOCKQUOTE_RE.match(line):
             content_lines = []
+            nested_blocks = []
             blockquote_type = None
-            # keep consuming standard blockquotes (stop if hit a nested one)
-            while pos < length and BLOCKQUOTE_RE.match(lines[pos]) and not NESTED_BLOCKQUOTE_RE.match(lines[pos]):
-                bm = BLOCKQUOTE_RE.match(lines[pos])
-                content_lines.append(bm.group(2))
-                pos += 1
 
-            # check for trailing standard attribute
-            if pos < length:
-                am = ATTRIBUTE_RE.match(lines[pos].strip())
+            while pos < length:
+                line = lines[pos]
+
+                # parent attribute closes the blockquote
+                am = ATTRIBUTE_RE.match(line.strip())
                 if am:
                     blockquote_type = am.group(1)
                     pos += 1
-                    
+                    break
+
+                # nested blockquote starts
+                if NESTED_BLOCKQUOTE_RE.match(line):
+                    nested_content = []
+                    nested_type = None
+
+                    while pos < length and NESTED_BLOCKQUOTE_RE.match(lines[pos]):
+                        nm = NESTED_BLOCKQUOTE_RE.match(lines[pos])
+                        nested_content.append(nm.group(2))
+                        pos += 1
+
+                    # nested attribute
+                    if pos < length:
+                        nam = NESTED_ATTRIBUTE_RE.match(lines[pos].strip())
+                        if nam:
+                            nested_type = nam.group(1)
+                            pos += 1
+
+                    nested_blocks.append({
+                        "content": "\n".join(nested_content),
+                        "blockquote_type": nested_type,
+                        "line": start + 1,
+                    })
+
+                    continue
+
+                # parent blockquote content
+                bm = BLOCKQUOTE_RE.match(line)
+                if bm:
+                    content_lines.append(bm.group(2))
+                    pos += 1
+                    continue
+
+                # continuation line:
+                # allows blockquote content without leading >
+                if line.strip() and not line.startswith('{:'):
+                    content_lines.append(line)
+                    pos += 1
+                    continue
+                # end of blockquote
+                break
+
+            # add parent blockquote to tokens
             tokens.append({
-                "content": "\n".join(content_lines), 
-                "blockquote_type": blockquote_type, 
+                "content": "\n".join(content_lines),
+                "blockquote_type": blockquote_type,
                 "line": start + 1,
             })
+
+            tokens.extend(nested_blocks)
+
         else:
             pos += 1
-
-    # merge final results
-    tokens.extend(nested_tokens)
   
     return tokens
 
