@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Introduction to Long-Read Metagenomics using the Metagenomics-Toolkit"
-description: "This tutorial will guide you through the first steps to run the Metagenmoics-Toolkit on ONT data"
+description: "This tutorial will guide you through the first steps to run the Metagenomics-Toolkit on ONT data"
 time_estimation: 1H
 level: beginner
 keywords: ONT, Nanopore, Metagenomics, Assembly, Classification, Binning, Annotation, Workflow, Nextflow
@@ -24,11 +24,12 @@ contributions:
   authorship:
   - Nils Kleinbölting
   editing: 
+  - Dilfuza Djamalova
   funding:
 ---
 
 This tutorial is a very short introduction to the Metagenomics-Toolkit which shows the main steps in analysing Nanopore long-read metagenomics data using the Metagenomics-Toolkit.
-A more detailed introduction and Tutorials can be found [here](https://metagenomics.github.io/metagenomics-tk/latest/). 
+A more detailed introduction and tutorials can be found [here](https://metagenomics.github.io/metagenomics-tk/latest/). 
 In this part you will learn how to configure and run the Toolkit and what the output of a Toolkit run looks like.
 
 ## Tutorial Scope and Requirements
@@ -39,21 +40,15 @@ sample separately (*per-sample*), and the second part runs a combined downstream
 While there are several optimizations for running the Toolkit on a cloud-based setup, 
 during this workshop you will run the Toolkit on a single machine.
 
-### Requirements
-
-* Basic Linux command-line usage
-
-* This tutorial has been tested on a machine with 28 CPUs and 64 GB of RAM with Ubuntu installed on it.
-
-* Docker: Install Docker by following the official Docker installation [instructions](https://docs.docker.com/engine/install/ubuntu/).
-
-* Java: In order to run Nextflow, you need to install Java on your machine, which can be achieved via `sudo apt install default-jre`.
-
-* Nextflow should be installed. Please check the official Nextflow [instructions](https://www.nextflow.io/docs/latest/install.html#install-nextflow).
-
-* Throughout the course we assume you are working on data downloaded to a volume under `/vol/longread/`, we create a link `~/workdir/` to that  folder, if you are working somewhere else, adjust the `~/workdir` link to that location and all commands should work as outlined in the course.
-
-* We also assume that you have a machine with **28 cores** and **64GB of RAM** available, if not - adjust the configuration that specifies a certain number of cores/memory accordingly.
+><details-title>Requirements</details-title>
+>* Please complete the [Unix/Linux introduction tutorial]({{ site.url }}{{ site.baseurl }}/tutorials/unix-course/main/tutorial/) before this tutorial.
+>* This tutorial has been tested on a machine with 28 CPUs and 64 GB of RAM with Ubuntu installed on it.
+>* Docker: Install Docker by following the official Docker installation [instructions](https://docs.docker.com/engine/install/ubuntu/).
+>* Java: In order to run Nextflow, you need to install Java on your machine, which can be achieved via `sudo apt install default-jre`.
+>* Nextflow should be installed. Please check the official Nextflow [instructions](https://www.nextflow.io/docs/latest/install.html#install-nextflow).
+>* Throughout the course we assume you are working on data downloaded to a volume under `/vol/longread/`, we create a link `~/workdir/` to that  folder, if you are working somewhere else, adjust the `~/workdir` link to that location and all commands should work as outlined in the course.
+>* We also assume that you have a machine with **28 cores** and **64GB of RAM** available, if not - adjust the configuration that specifies a certain number of cores/memory accordingly.
+{: .details}
 
 ### **Download the data and preparations**
 
@@ -63,14 +58,13 @@ First **(if not already done)**, create a link to `/vol/longread` (or the folder
 ln -s /vol/longread/ ~/workdir
 cd ~/workdir
 ```
+
 You might need to change the permissions of `/vol/longread`, for example (in the cloud setup we use for the on-site course) with:
 
 ```bash
+# Adjust accordingly to your setup
 sudo chown ubuntu:ubuntu /vol/longread/
 ```
-(Adjust accordingly to your setup)
-
----
 
 Next, we download our tutorial dataset (into a data folder):
 
@@ -79,7 +73,6 @@ cd ~/workdir
 mkdir mgtk_data
 cd ~/workdir/mgtk_data/
 wget https://s3.bi.denbi.de/cmg/mgcourses/mgtk_short/sample0_5p.fastq.gz
-cd ~/workdir
 ```
 
 ## Metagenomics-Toolkit Introduction
@@ -157,7 +150,7 @@ scratch: false
 
 
 > <tip-title>Computational Resources</tip-title>
-Please note that computational resources are also global parameters and will be handled in the third part of this configuration section. 
+> Please note that computational resources are also global parameters and will be handled in the third part of this configuration section. 
 {: .tip}
     
 
@@ -268,24 +261,24 @@ The Toolkit output fulfills the following schema:
 SAMPLE_NAME/RUN_ID/MODULE/MODULE_VERSION/TOOL
 ```
 
-* **RUN_ID:** The run ID will be part of the output path and allows to distinguish between different pipeline configurations that were used for the same dataset.
+* `RUN_ID`: The run ID will be part of the output path and allows to distinguish between different pipeline configurations that were used for the same dataset.
 
-* **MODULE** is the analysis that is executed by the Toolkit (e.g. qc, assembly, etc.). 
+* `MODULE` is the analysis that is executed by the Toolkit (e.g., qc, assembly, etc.). 
 
-* **MODULE_VERSION** is the version number of the module.
+* `MODULE_VERSION` is the version number of the module.
 
-* **TOOL** is the tool or method that is executed by the Toolkit.
+* `TOOL` is the tool or method that is executed by the Toolkit.
 
 Below you can see an example output structure configured for long-read data.
 Every output folder includes four log files:
 
-* **.command.err:** Contains the standard error.
+* `.command.err`: Contains the standard error.
 
-* **.command.out:** Contains the standard output. 
+* `.command.out`: Contains the standard output. 
 
-* **.command.log:** Contains the combined standard error and standard output.
+* `.command.log`: Contains the combined standard error and standard output.
 
-* **.command.sh:** Contains the command that was executed. 
+* `.command.sh`: Contains the command that was executed. 
 
 ```bash
 output/
@@ -336,7 +329,8 @@ cd ~/workdir
 gedit samples.tsv
 ```
 
-Then add the following content to the file:
+Then add the following content to the file.
+
 **Important:** Make sure there are actually tabs in between the columns! And adjust the path if your is not `/vol/longread/`.
 
 
@@ -442,7 +436,7 @@ NXF_VER=25.10.4 nextflow run main.nf \
 
 Then check the results in the `output` folder. Check the tutorials in the Metagenomics-Toolkit documentation for further information.
 
----
+
 ### APPENDIX: Reference Links for Metagenomics-Toolkit Tools
 
 * **Nextflow (Workflow Orchestration Engine):**
