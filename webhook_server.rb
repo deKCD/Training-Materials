@@ -74,5 +74,5 @@ post '/webhook' do
     tail = output.to_s.lines.last(5).join.strip
     notify_kuma(status: 'down', msg: "build failed: #{tail[0, 200]}")
     halt 500, { result: "Failure!", output: output }.to_json
-  ends
+  end
 end
