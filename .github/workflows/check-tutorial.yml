@@ -1,0 +1,82 @@
+name: Validate tutorial content
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "_tutorials/**"
+      - "_data/tutorial_groups.yaml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "_tutorials/**"
+      - "_data/tutorial_groups.yaml"
+
+jobs:
+  check-tutorial-group:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: x64
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run tutorial group validator
+        run: python3 bin/check_group.py
+  
+  check-tutorial-content:
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          architecture: x64
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run tutorial content validator
+        run: |
+          set -euo pipefail
+
+          find _tutorials \
+             -maxdepth 3 \
+             -name tutorial.md \
+             -type f \
+             -exec python3 bin/tutorial_content_validator.py --file_path {} \;
+
+  check-tutorial-urls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: URLs-checker
+        uses: urlstechie/urlchecker-action@master
+        with: 
+          subfolder: _tutorials/
+          file_types: .md
+          print_all: false
+          verbose: true
+          timeout: 5
+          retry_count: 3
+
