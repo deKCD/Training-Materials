@@ -9,5 +9,6 @@ services:
       - "4000:4000" # for the training-materials as such
       - "5000:5000" # for the webhook endpoint
     environment:
+      - KUMA_PUSH_URL # for sending status pushes after built/webhook trigger
       - TRAINING_MATERIAL_WEBHOOK_SECRET # the webhook secret one sets in the repository settings
       - TARGET_BRANCH # the branch the webhook endpoint shall "watch for" - if any changes or pull requests get merged or pushed in the branch referenced, the retrigger mechanismn will be used (webhook_server.rb) - "main" is the default
