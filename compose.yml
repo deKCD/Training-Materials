@@ -1,4 +1,4 @@
-# This compose file is for development use ONLY!
+# This compose file is for development use onlyY!
 
 # In order to preserve file ownership and permissions,
 # create a '.env' file containing DEKCD_TRAINING_UID and DEKCD_TRAINING_GID.
