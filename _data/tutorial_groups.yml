@@ -23,7 +23,6 @@
 - title: PATCH Tutorials
   description: Tutorials in this group contain learning material about the tools contained inside the pangenomics toolbox PATCH
   tutorials:
-    - corer
     - panbench
 
 - title: Genomics and Metagenomics
