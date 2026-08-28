@@ -42,3 +42,6 @@
 - title: Incubator
   description: Tutorials in this group are under review.
   tutorials:
+    - Microbial_RDM
+    - ansible
+
