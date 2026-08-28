@@ -19,8 +19,8 @@ permalink: /pathways/
       <p style="margin: 2rem 0">{{ pathway.description }}</p>
       {% if pathway.tags %}
         <div class="tags">
-          {% for tag in pathway.tags %}
-            <span>{{ tag }}</span>
+          {% for keyword in pathway.keywords %}
+            <span>{{ keyword }}</span>
           {% endfor %}
         </div>
       {% endif %}
