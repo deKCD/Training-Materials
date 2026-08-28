@@ -159,12 +159,12 @@ You might also specify who trained the model by adding the caption inside the si
 
 ```python
 st.divider()
-st.caption("<p style = 'text-align:center'>Developed by <a href='https://github.com/USERNAME'>YOUR_NAME</a></p>", unsafe_allow_html=True)
+st.caption("<p style = 'text-align:center'>Developed by <a href='https://github.com/USER'>YOUR_NAME</a></p>", unsafe_allow_html=True)
 ```
 In this example, we use an HTML snippet to format the caption:  
 
 - `<p style='text-align:center'>` centers the paragraph horizontally.  
-- `<a href='https://github.com/USERNAME'>YOUR NAME</a>` creates a hyperlink to the developer’s GitHub profile (replace `USERNAME` with your actual GitHub username).  
+- `<a href='https://github.com/USER'>YOUR NAME</a>` creates a hyperlink to the developer’s GitHub profile (replace `USER` with your actual GitHub username).  
 - `unsafe_allow_html=True` enables Streamlit to render the HTML content as-is. By default, Streamlit sanitizes HTML to prevent security risks; setting this parameter explicitly acknowledges the potential risks and allows custom HTML rendering.
 
 > ## Upload a dataset

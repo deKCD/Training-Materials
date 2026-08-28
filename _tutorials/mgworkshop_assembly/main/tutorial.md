@@ -357,7 +357,7 @@ file `final.contigs.fa`.
 
 SPAdes – St. Petersburg genome assembler – is an assembly toolkit
 containing various assembly pipelines. See the 
-[SPAdes home page](http://cab.spbu.ru/software/spades/) for more info.
+[SPAdes home page](https://github.com/ablab/spades) for more info.
 
 ><hands-on-title>Step 1: Run metaSPAdes</hands-on-title>
 > metaSPAdes can be run by the following command:

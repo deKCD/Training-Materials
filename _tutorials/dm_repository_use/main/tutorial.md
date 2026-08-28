@@ -326,7 +326,7 @@ A typical entry should include:
 - Cross-domain applicability (Not/Partly/Mostly/Fully).
 
 ```Markdown
-* [Name, quick description](https:URL of main web page)
+* [Name, quick description](URL of main web page)
 	+ Description and/or link to potential Docker image/Docker compose/Kubernetes manifest/…
 	+ Link to API(s), quick clarification on how well documented it is.
 	+ Interoperability **NONE/LOW/MEDIUM/HIGH** / No interoperability: explanation on why.

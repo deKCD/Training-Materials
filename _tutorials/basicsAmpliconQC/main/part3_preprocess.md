@@ -264,7 +264,7 @@ As one final step, group all high-quality files together:
 
 ><details-title>References</details-title>
 > 
-> - FastQC: [http://www.bioinformatics.babraham.ac.uk/projects/fastqc/](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+> - FastQC: [https://github.com/s-andrews/fastqc](https://github.com/s-andrews/fastqc)
 > - Sickle: [https://github.com/najoshi/sickle](https://github.com/najoshi/sickle)
 > - cutadapt: [https://github.com/marcelm/cutadapt](https://github.com/marcelm/cutadapt)
 > - FLASh: [http://ccb.jhu.edu/software/FLASH/](http://ccb.jhu.edu/software/FLASH/)
