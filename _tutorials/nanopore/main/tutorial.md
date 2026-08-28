@@ -1082,7 +1082,7 @@ Furthermore, EDGAR calculates average nucleotide identity (ANI) metrics and rend
   * **GitHub:** [https://github.com/tseemann/prokka](https://github.com/tseemann/prokka)
   * **Publication:** *Seemann, T. (2014). Prokka: rapid prokaryotic genome annotation. Bioinformatics.*
 * **Bakta (Next-generation Microbial Genome Annotation):**
-  * **GitHub:** [https://github.com/oschwenders/bakta](https://github.com/oschwenders/bakta)
+  * **GitHub:** [https://github.com/oschwengers/bakta](https://github.com/oschwengers/bakta)
   * **Publication:** *Schwengers, O. et al. (2021). Bakta: rapid and standardized annotation of bacterial genomes and plasmids. Microbial Genomics.*
 * **EDGAR (Comparative Genomics Framework):**
   * **Webserver Platform:** [http://edgar3.computational.bio](http://edgar3.computational.bio)
