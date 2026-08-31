@@ -47,7 +47,7 @@ It's quite complicated to install without conda/docker/singularity. Check out th
 * **Bakta:** A modern, next-generation annotation platform designed specifically for microbial genomes. Bakta addresses Prokka's database stagnation by utilizing a thoroughly curated, regularly updated SQLite database synchronized with NCBI RefSeq, UniProt, and specialized feature resources. It provides highly accurate protein names, precise cross-reference tags (DBXrefs), and native tracking of non-coding RNAs (ncRNAs), pseudogenes, and antimicrobial resistance (AMR) gene identifiers.
 
 > <tip-title>Optional: How to install Bakta</tip-title>
-It's quite complicated to install without conda/docker/singularity. Check out the [github repository](https://github.com/oschwenders/bakta) and use one of those methods.
+It's quite complicated to install without conda/docker/singularity. Check out the [github repository](https://github.com/oschwengers/bakta) and use one of those methods.
 {: .tip}
 ---
 
@@ -146,7 +146,7 @@ Furthermore, EDGAR calculates average nucleotide identity (ANI) metrics and rend
   * **GitHub:** [https://github.com/tseemann/prokka](https://github.com/tseemann/prokka)
   * **Publication:** *Seemann, T. (2014). Prokka: rapid prokaryotic genome annotation. Bioinformatics.*
 * **Bakta (Next-generation Microbial Genome Annotation):**
-  * **GitHub:** [https://github.com/oschwenders/bakta](https://github.com/oschwenders/bakta)
+  * **GitHub:** [https://github.com/oschwengers/bakta](https://github.com/oschwengers/bakta)
   * **Publication:** *Schwengers, O. et al. (2021). Bakta: rapid and standardized annotation of bacterial genomes and plasmids. Microbial Genomics.*
 * **EDGAR (Comparative Genomics Framework):**
   * **Webserver Platform:** [http://edgar3.computational.bio](http://edgar3.computational.bio)
