@@ -22,12 +22,12 @@ permalink: /tutorials/
 
   <table>
       <colgroup>
-          <col style="width: 40%;">
-          <col style="width: 15%;">
+          <col style="width: 30%;">
+          <col style="width: 7%;">
           <col style="width: 5%;">
           <col style="width: 40%;">
-          <col style="width: 30%;">
-          <col style="width: 10%;">
+          <col style="width: 40%;">
+          <col style="width: 7%;">
       </colgroup>
     <thead>
       <tr>
@@ -78,8 +78,23 @@ permalink: /tutorials/
           <td>{{ first.description }}</td>
           <td>
             {% for contributor in first.contributions.authorship %}
-              <a href="https://orcid.org/{{ contributor.orcid }}" target="_blank">{{ contributor }}</a>{% unless forloop.last %}, {% endunless %}
+              {% assign author_data = site.data.contributors | where: "name", contributor | first %}
+              {% assign author_url = author_data.ORCID %}
+              {% if author_data and author_url == nil or author_url == "" %}
+                {% assign author_url = author_data.Github %}
+              {% endif %}
+
+              <div>
+                {% if author_data and author_url %}
+                  <a href="{{ author_url }}" target="_blank">{{ contributor }}</a>
+                {% elsif author_data %}
+                  {{ contributor }}
+                {% else %}
+                  {{ contributor }}
+                {% endif %}
+              </div>
             {% endfor %}
+
           </td>
           <td>{{ first.time_estimation }}</td>
         </tr>

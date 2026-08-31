@@ -19,7 +19,7 @@ contributions:
   - Xaver Stiensmeier
   - Jan Krueger
   - Nils Hoffmann
-  - Alexander Walende
+  - Alex Walender
   editing: 
   funding: 
 ---
