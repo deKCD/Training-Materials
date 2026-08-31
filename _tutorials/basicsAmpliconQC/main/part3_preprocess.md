@@ -13,7 +13,7 @@
 
 ## Typical Workflow
 
-![Typical QC workflow](https://github.com/jueneman/16S-workshop-denbi/raw/master/docs/qc/pics/workflow.png)
+![Typical QC workflow](https://github.com/jueneman/16S-workshop-denbi/raw/master/docs/qc/pics/workflow.png){: .responsive-img }
 
 For this exercise, we will use:
 
@@ -250,17 +250,6 @@ As one final step, group all high-quality files together:
 >> ```
 >{: .code-in}
 {: .hands_on}
-
-
-## Final Remarks
-
-- **Know your data**: library prep, expected fragment/read length, possible adapters/primers
-- Consider the sequencer (Illumina vs. Ion Torrent, etc.)
-- Carefully inspect results at each step
-- Try different strategies (conservative vs. loose parameters)
-- Adapt the QC workflow to your research question (16S vs. read-based shotgun, etc.)
-- This is only one workflow; consider other tools or workflow order. Always examine your raw data!
-
 
 ><details-title>References</details-title>
 > 

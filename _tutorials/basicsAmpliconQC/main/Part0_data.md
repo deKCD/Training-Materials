@@ -1,6 +1,7 @@
 ## The Tutorial Data Set  
 
 The first thing you need to do is to connect to your virtual machine with the **X2Go Client**.  
+
 If you are working with your laptop and haven’t installed it yet, you can get it here:  
 
 <https://wiki.x2go.org/doku.php/download:start>

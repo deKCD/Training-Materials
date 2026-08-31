@@ -178,6 +178,14 @@ blockquote :not(h2) + p {
     padding-top: 0.7em;
 }
 
+//Allow bold and italics of text within blockquotes
+blockquote p em {
+    font-style: italic;
+}
+blockquote p strong {
+    font-weight: bold;
+}
+
 //------------------------------------------
 // Show solution while printing (Ctrl + P)
 // -----------------------------------------
