@@ -62,7 +62,7 @@ Before starting this tutorial, you will need:
 
 > <tip-title>Installing required software</tip-title>
 >
-> If bash, git, or Python are not installed on your system, try [this installation guide](https://pad.bio-it.embl.de/s/E-xvGYFfp#).
+> If bash, git, or Python are not installed on your system, try [this installation guide](FIXME).
 >
 {: .tip}
 
@@ -72,7 +72,7 @@ Version control is essential for tracking changes and sharing your code. We'll s
 
 > <hands-on-title>Set up Git repository</hands-on-title>
 >
-> 1. Go to [`https://git.embl.de/`](https://git.embl.de/)
+> 1. Go to [`https://git.embl.org/`](https://git.embl.org/)
 > 2. Click **New project**
 > 3. Select **Create blank project**
 > 4. Configure your project:
@@ -110,7 +110,7 @@ Now we'll clone the repository to your computer and set up the project structure
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > git clone https://git.embl.de/<username>/my-data-dashboard.git
+>    > git clone https://git.embl.org/<username>/my-data-dashboard.git
 >    > cd my-data-dashboard
 >    > ```
 >    {: .code-in}
@@ -355,7 +355,7 @@ Once your image works locally, upload it to the Git container registry so Kubern
 
 > <hands-on-title>Push image to registry</hands-on-title>
 >
-> 1. Navigate to your project at `https://git.embl.de/<username>/my-data-dashboard`
+> 1. Navigate to your project at `https://git.embl.org/<username>/my-data-dashboard`
 >
 > 2. Go to **Deploy** → **Container Registry**
 >
@@ -371,7 +371,7 @@ Once your image works locally, upload it to the Git container registry so Kubern
 >
 >    Replace `<username>` with your EMBL username.
 >
-> 4. Verify the upload at `https://git.embl.de/<username>/my-data-dashboard/container_registry`
+> 4. Verify the upload at `https://git.embl.org/<username>/my-data-dashboard/container_registry`
 >
 {: .hands_on}
 
@@ -391,7 +391,7 @@ The final step is deploying your application to the cloud using Kubernetes.
 
 > <hands-on-title>Configure kubectl</hands-on-title>
 >
-> 1. Log in to [https://kubeportal.embl.de/](https://kubeportal.embl.de/)
+> 1. Log in to [FIXME](FIXME)
 >
 >    > <comment-title>Remote access requirements</comment-title>
 >    >
@@ -410,7 +410,7 @@ The final step is deploying your application to the cloud using Kubernetes.
 >    {: .details}
 >
 > 3. Install kubectl:
->    1. Download [this setup script](https://git.embl.de/grp-itservices/k8s-tenant-setup/-/raw/main/setup-prod.sh?ref_type=heads&inline=false)
+>    1. Download [this setup script](https://git.embl.org/grp-itservices/k8s-tenant-setup/-/raw/main/setup-prod.sh?ref_type=heads&inline=false)
 >    2. Make it executable and run it:
 >
 >       > <code-in-title>Bash</code-in-title>
@@ -442,7 +442,7 @@ The final step is deploying your application to the cloud using Kubernetes.
 >    >
 >    {: .details}
 >
-> 6. Verify your namespace at [https://kubeportal.embl.de/tenants/tenants](https://kubeportal.embl.de/tenants/tenants)
+> 6. Verify your namespace at [FIXME](FIXME)
 >
 {: .hands_on}
 
@@ -462,7 +462,7 @@ Now we'll create a YAML file that tells Kubernetes how to deploy your applicatio
 >    > # <username> x6 times - your EMBL username
 >    > # <username2> x2 times - your supervisor's EMBL username
 >    > # <appname> x17 times - my-data-dashboard
->    > # After testing, create a ticket at https://itsupport.embl.de
+>    > # After testing, create a ticket at FIXME
 >    > # to enable www.my-data-dashboard.embl.de
 >    > ```
 >    {: .code-in}
@@ -542,7 +542,7 @@ Now we'll create a YAML file that tells Kubernetes how to deploy your applicatio
 >
 >    > <comment-title>Enabling the URL</comment-title>
 >    >
->    > To enable the URL `www.<appname>.embl.de`, you need to create a ticket at [https://itsupport.embl.de/](https://itsupport.embl.de/) requesting web support. The name might already be taken, so be prepared to choose an alternative.
+>    > To enable the URL `www.<appname>.embl.de`, you need to create a ticket at [ itsupport@embl.de]( itsupport@embl.de) requesting web support. The name might already be taken, so be prepared to choose an alternative.
 >    >
 >    {: .comment}
 >

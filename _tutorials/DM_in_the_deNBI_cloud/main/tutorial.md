@@ -609,7 +609,6 @@ box. You will need to modify them for your specific use case.
 > ``` bash
 > # Configure multiple regions (for example)
 > mc alias set UniBi https://openstack.cebitec.uni-bielefeld.de:8080/ <ACCESS-KEY> <SECRET-KEY>
-> mc alias set UniHe https://denbi-cloud.bioquant.uni-heidelberg.de:8080/ <ACCESS-KEY> <SECRET-KEY>
 > 
 > # Replicate data between regions
 > mc mirror ibworkshop/YOUR_CONTAINER_NAME UniHe/BACKUP_CONTAINER/

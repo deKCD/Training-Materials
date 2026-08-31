@@ -2,7 +2,7 @@
 $("table").addClass("table table-striped");
 
 
-// Handle foldable boxes (on click and at start)
+// Handle foldable boxes (on title click and at start)
 $(document).ready(function() {
 
   // Container selectors for foldable blocks
@@ -16,19 +16,23 @@ $(document).ready(function() {
     // Hide all children except the title element
     $(">*:not(" + titleSelector + ")", container).hide();
 
-    // Add fold/unfold icon to the title
-    $(titleSelector + ":first", container).append("<i class='fold-unfold bi bi-chevron-expand float-end'></i>");});
-    //$(titleSelector + ":first", container).append("<i class='fold-unfold glyphicon-collapse-down glyphicon-collapse-up float-end'></i>");});
-
-  // Toggle on click (whole box fold/unfold)
-  $(foldableSelector).on("click", function(event) {
-    // Do not toggle when clicking inside a nested box or external links/buttons
-    if (!$(event.target).closest(foldableSelector).is(this)) {
-      return;
-    }
-
-    var container = $(this);
+    // Add fold/unfold icon to the title (avoid duplicates)
     var title = container.children(titleSelector).first();
+    if (title.find(".fold-unfold").length === 0) {
+      title.append("<i class='fold-unfold bi bi-chevron-expand float-end'></i>");
+    }
+  });
+
+  // Remove previous handlers
+  $(foldableSelector).off("click");
+
+  // Toggle only when clicking the title
+  $(document).on("click", titleSelector, function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    var title = $(this);
+    var container = title.closest(foldableSelector);
     var body = container.children(":not(" + titleSelector + ")");
     var icon = title.children("i.fold-unfold");
 
@@ -36,12 +40,15 @@ $(document).ready(function() {
     body.toggle(400);
 
     // Toggle the icon class
-    //icon.toggleClass("glyphicon-collapse-down glyphicon-collapse-up");
     icon.toggleClass("bi-chevron-expand bi-chevron-contract");
   });
 
-});
+  // Prevent clicks inside the content from toggling
+  $(document).on("click", foldableSelector + " > :not(" + titleSelector + ")", function(event) {
+    event.stopPropagation();
+  });
 
+});
 
 // Handle searches.
 // Relies on document having 'meta' element with name 'search-domain'.

@@ -1,17 +1,20 @@
 ---
 layout: tutorial_hands_on
-title: Metagenomic Assembly
-description: "This tutorial will guide you through the typical steps of metagenome assembly. "
+title: "Metagenome Assembly: concepts and hands-on comparison of assemblers"
+description: "This tutorial introduces the principles and challenges of metagenome assembly, including de Bruijn graph-based approaches, k-mer selection, and metagenome-specific assembly strategies. You will apply several assemblers, including Velvet, MEGAHIT, metaSPAdes, IDBA-UD, and Ray, and compare their assembly performance."
 time_estimation: 6H
 level: beginner
-keywords: [FIXME]
+keywords: [metagenomics, genome assembly, OLC, de Bruijn graph, Velvet, MEGAHIT, metaSPAdes, IDBA-UD, Ray]
 questions:
-  - "How do I run a metagenome assembly?"
-  - "How do I compare metagenome assemblies?"
+  - "What are the main challenges of reconstructing genomes from metagenomic sequencing data?"
+  - "How do assembly algorithms differ?"
+  - "How do k-mer size, sequencing errors, repeats, and uneven coverage influence assembly quality?"
+  - "Which assembly strategies and tools are commonly used for complex metagenomic datasets?"
 objectives:
-  - 
+  - "Recognize common sources of assembly ambiguity, such as repeats, sequencing errors, and uneven species abundance."
+  - "Run multiple metagenome assemblers on sequencing reads and generate assembly statistics."
 key_points:
-  - 
+  - "No single assembler performs best for all datasets; tool selection depends on dataset complexity, accuracy requirements, and available computational resources."
 version:
   - main
 life_cycle: under development
@@ -21,12 +24,12 @@ contributions:
   - Alexander Sczyrba
   - Sebastian Jünemann
   editing: 
+  - Dilfuza Djamalova
   funding:
 ---
 
 ><details-title>Prerequisites</details-title>
->
-> - Please do the linux introduction before this tutorial. 
+> - Please complete the [Unix/Linux introduction tutorial]({{ site.url }}{{ site.baseurl }}/tutorials/unix-course/main/tutorial/) before this tutorial. 
 > - We assume you have successfully connected to an instance in the de.NBI cloud with the software pre-installed. Otherwise you will need to install the required tools on your own and make sure you have sufficient resources available. 
 {: .details}
 
@@ -54,7 +57,9 @@ Metagenome assembly resembles the process of solving a large jigsaw puzzle witho
 
 ### Classical Genome Sequencing Strategies
 
-Before short-read next-generation sequencing became dominant, genome assembly commonly relied on two main strategies: ordered shotgun sequencing and whole genome shotgun sequencing. In ordered shotgun sequencing, DNA fragments were cloned into vectors such as BACs and arranged into a physical map. This map provided positional information, making it possible to sequence clones individually and then piece them together with high confidence. The physical map served as a scaffold that guaranteed correct global arrangement, though generating it required significant laboratory effort.
+Before short-read next-generation sequencing became dominant, genome assembly commonly relied on two main strategies: ordered shotgun sequencing and whole genome shotgun sequencing. 
+
+In ordered shotgun sequencing, DNA fragments were cloned into vectors such as BACs and arranged into a physical map. This map provided positional information, making it possible to sequence clones individually and then piece them together with high confidence. The physical map served as a scaffold that guaranteed correct global arrangement, though generating it required significant laboratory effort.
 
 **Figure 4.** *Hierarchical (ordered) shotgun sequencing schematic adapted from Venter et al., Nature 2001 *  
 ![Hierarchical shotgun sequencing]({{ "/tutorials/mgworkshop_assembly/images/hierarchical_shotgun.png" | relative_url }}){: .responsive-img }
@@ -218,11 +223,11 @@ Metagenome assembly reconstructs genomic sequences from mixtures of organisms, r
 
 ---
 
-## **Tutorial**
+## **Hands-on tutorial**
 
 We are going to use different assemblers and compare the results.
 
-### **Data download**
+### **Download data**
 
 We have prepared a small toy data set for this tutorial. It's simulated data, so there is actually no need for quality control.
 
@@ -352,7 +357,7 @@ file `final.contigs.fa`.
 
 SPAdes – St. Petersburg genome assembler – is an assembly toolkit
 containing various assembly pipelines. See the 
-[SPAdes home page](http://cab.spbu.ru/software/spades/) for more info.
+[SPAdes home page](https://github.com/ablab/spades) for more info.
 
 ><hands-on-title>Step 1: Run metaSPAdes</hands-on-title>
 > metaSPAdes can be run by the following command:
@@ -469,7 +474,7 @@ contigs are located in `ray_51/Contigs.fasta` (and
 {: .hands_on}
 
 ><hands-on-title>Step 4: getN50</hands-on-title>
-> Now that you have run assemblies using Velvet, MEGAHIT, metaSPAdes, IDBA-UD and Ray, let's have a > quick look at the assembly statistics of all of them::
+> Now that you have run assemblies using Velvet, MEGAHIT, metaSPAdes, IDBA-UD and Ray, let's have a quick look at the assembly statistics of all of them:
 >><code-in-title>Code-in</code-in-title>
 >> ```bash
 >> cd /mnt/WGS-data

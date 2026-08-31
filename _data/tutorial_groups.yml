@@ -23,7 +23,6 @@
 - title: PATCH Tutorials
   description: Tutorials in this group contain learning material about the tools contained inside the pangenomics toolbox PATCH
   tutorials:
-    - corer
     - panbench
 
 - title: Genomics and Metagenomics
@@ -33,6 +32,8 @@
     - basicsAmpliconQC
     - nanopore
     - mgtk_short
+    - genome-annotation
+    - genome-assembly
 
 - title: Data Management on the Cloud
   description: Tutorials focused on data management best practices, solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
@@ -43,3 +44,6 @@
 - title: Incubator
   description: Tutorials in this group are under review.
   tutorials:
+    - Microbial_RDM
+    - ansible
+
