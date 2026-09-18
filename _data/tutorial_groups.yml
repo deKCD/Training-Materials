@@ -28,7 +28,11 @@
 - title: Genomics and Metagenomics
   description: Tutorials focused on handling of genomics and metagenomics sequencing data
   tutorials:
+    - mgworkshop_qc
     - mgworkshop_assembly
+    - mgworkshop_assembly_eval
+    - mgworkshop_binning_classification
+    - mgworkshop_toolkit_jupyter
     - basicsAmpliconQC
     - nanopore
     - mgtk_short
