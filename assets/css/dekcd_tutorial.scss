@@ -197,19 +197,22 @@ blockquote p strong {
 }
 
 
-mjx-container {
+mjx-container[jax="CHTML"] {
     overflow: visible !important;
-    line-height: normal !important;
 }
 
-mjx-container[display="true"] {
+/* Display equations */
+
+mjx-container[jax="CHTML"][display="true"] {
     display: block;
     margin: 1em 0;
-    max-width: 100%;
     overflow-x: auto;
     overflow-y: visible;
 }
 
-mjx-container svg {
-    max-width: none;
+/* Inline equations */
+
+mjx-container[jax="CHTML"]:not([display="true"]) {
+    display: inline-block;
+    overflow: visible !important;
 }
