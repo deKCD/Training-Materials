@@ -199,12 +199,17 @@ blockquote p strong {
 
 mjx-container {
     overflow: visible !important;
+    line-height: normal !important;
+}
+
+mjx-container[display="true"] {
+    display: block;
+    margin: 1em 0;
     max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
 }
 
-mjx-container[jax="CHTML"] {
-    line-height: 1 !important;
-    padding: 0 !important;
-    margin: 0 !important;
+mjx-container svg {
+    max-width: none;
 }
-
