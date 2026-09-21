@@ -2,6 +2,7 @@
 layout: base_contributing
 title: Contribution
 description: Guidelines for contributing, including adding new content or editing existing materials.
+permalink: /CONTRIBUTING/
 ---
 
 We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR (Findable, Accessible, Interoperable, Reusable)** principles for training materials. 

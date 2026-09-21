@@ -1,6 +1,7 @@
 ---
 layout: base_contributing
 title: FAQs
+permalink: /FAQ/
 ---
 
 ### General
