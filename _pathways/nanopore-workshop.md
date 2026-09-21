@@ -22,9 +22,6 @@ pathway:
   - section: "Module 3: Metagenomics assembly"
     description: "This module introduces genome assembly approaches for long-read and short-read sequencing data. You will learn how to assemble prokaryotic genomes from ONT and Illumina reads, evaluate assembly quality, improve assemblies through polishing and hybrid assembly strategies, and assess the final assembly results. The module also provides an introduction to metagenome assembly workflows using dedicated bioinformatics tools."
     tutorials:
-      - name: mgworkshop_assembly
-        version: main
-
       - name: genome-assembly
         version: main
 
