@@ -17,13 +17,10 @@
 - title: Machine Learning on Cloud infrastructure
   description: Tutorials focused on setting up machine learning toolkits and applications on cloud infrastructure.
   tutorials:
-    - ml-fastapi
-    - ml-streamlit
 
 - title: PATCH Tutorials
   description: Tutorials in this group contain learning material about the tools contained inside the pangenomics toolbox PATCH
   tutorials:
-    - panbench
 
 - title: Genomics and Metagenomics
   description: Tutorials focused on handling of genomics and metagenomics sequencing data
@@ -50,4 +47,7 @@
   tutorials:
     - Microbial_RDM
     - ansible
+    - ml-fastapi
+    - ml-streamlit
+    - panbench
 
