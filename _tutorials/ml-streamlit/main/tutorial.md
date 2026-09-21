@@ -4,6 +4,7 @@ title: Setting up ML project in the cloud infrastructure
 description: Transform a trained model into an online service with a UI using Streamlit.
 time_estimation: 5H
 level: intermediate
+keywords: ["streamlit"]
 questions:
   - How does TabICL simplify the training process compared to traditional machine learning models?
 objectives:

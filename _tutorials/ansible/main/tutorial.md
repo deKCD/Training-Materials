@@ -1,18 +1,22 @@
 ---
 layout: tutorial_hands_on
-title: FIXME
-description: "FIXME"
-time_estimation: FIXME
+title: Ansible
+description: 
+time_estimation: 
+level: 
+keywords: ["ansible"]
 questions:
-  - "FIXME"
+  - 
 objectives:
-  - "FIXME"
+  - 
 key_points:
-  - "FIXME"
+  - 
 version:
   - main
+life_cycle: under development
 contributions:
   authorship:
+  - Alex Walender
   editing: 
   funding:
 ---

@@ -1,9 +1,10 @@
 ---
 layout: tutorial_hands_on
-
 title: PanBench
 description: Introduction to using the web interface of panbench.eu
-time_estimation: 10m
+time_estimation: 10M
+level: beginner
+keywords: []
 questions:
   - How do I download an example dataset?
   - How do I sort & search the list of tools?
@@ -11,11 +12,11 @@ questions:
   - How do I run tools & monitor the progress?
   - How do I get the results? What's next?
 objectives:
-  - ...
+  - 
 key_points:
-  - ...
+  - 
 version: main
-life_cycle: alpha
+life_cycle: under development
 contributions:
   authorship:
   - Andreas Rempel

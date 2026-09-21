@@ -1,19 +1,20 @@
 ---
 layout: tutorial_hands_on
-title: Deploying ML workflow using FastAPI
-description: "FIXME"
-slug: ml-fastapi
+title: Deploying Machine Learning workflow using FastAPI
+description: 
 time_estimation: 3H
+level: beginner
+keywords: ["fastapi"]
 questions:
   - "How to create a synthetic datasets for future inference?"
   - "How to serve model with FastAPI?"
 objectives:
   - "Learn best practices to serve model with FastAPI and get predictions as a table."
 key_points:
-  - "FIXME"
+  - 
 version:
   - main
-life_cycle: "alpha"
+life_cycle: under development
 contributions:
   authorship:
   - Dilfuza Djamalova

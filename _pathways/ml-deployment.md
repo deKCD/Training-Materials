@@ -1,22 +1,21 @@
 ---
 layout: pathway
 title: "Machine Learning in Cloud Infrastructures"
-description: "FIXME"
-tags: [classification]
-life_cycle: "alpha"
+description: "Transform a trained model into web service with UI using Streamlit."
+keywords: [classification, streamlit, fastapi]
+level: intermediate
+life_cycle: under development
 pathway:
   - section: "Module 1: Introduction to basic Unix commands"
     description: "Learn the basic Unix shell commands used in cloud environments."
     tutorials:
       - name: unix-course
         version: main
-      - name: simpleVMWorkshop
-        version: main
 
   - section: "Module 2: Cloud Concepts"
     description: "Understand cloud architecture, providers, and services."
     tutorials:
-      - name: simplevmworkshop
+      - name: simpleVMWorkshop
         version: main
 
   - section: "Module 3: ML model deployment"
@@ -33,8 +32,10 @@ pathway:
   - section: "Module 5: ML monitoring, retraining, and automation"
 
   
-editorial_board:
-  - name: FIXME
-    orcid: FIXME
+contributions:
+  authorship:
+  - Dilfuza Djamalova
+  editing:
+  funding:
 ---
 
