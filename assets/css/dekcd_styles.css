@@ -750,6 +750,34 @@ td {
   border-radius: 4px;
 }
 
+/* Pathway lifecycle status */ 
+.pathway-status {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5em;
+}
+
+.status-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.status-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  border: 0.1px solid var(--dekcd-black);
+}
+
+.status-active i {
+  background: var(--dekcd-lifecycle-active);
+}
+
+.status-development i {
+  background: #d4a72c;
+}
+
 /* -------- Pathway Content Layout -------- */
 
 .pathway-content h2 {

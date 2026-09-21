@@ -14,16 +14,38 @@ permalink: /pathways/
 <div class="pathway-grid">
   {% assign pathways = site.pathways %}
   {% for pathway in pathways %}
-    <div class="pathway-card">
-      <h3><a href="{{ pathway.url | relative_url }}">{{ pathway.title }}</a></h3>
-      <p style="margin: 2rem 0">{{ pathway.description }}</p>
-      {% if pathway.tags %}
+    {% assign life_cycle = pathway.life_cycle | default: "under development" %}
+    <div class="pathway-card" pathway-{{ life_cycle }}>
+      <div class="pathway-status">
+        {% if life_cycle == "under development" %} 
+          <span class="status-dots status-development" aria-label="under development">
+            <i></i><i></i><i></i>
+          </span>
+        {% else %} 
+          <span class="status-dots status-active" aria-label="active">
+            <i></i><i></i><i></i>
+          </span>
+        {% endif %}
+      </div>
+
+      <h3>
+        <a href="{{ pathway.url | relative_url }}">
+          {{ pathway.title }}
+        </a>
+      </h3>
+
+      <p class="pathway-description">
+        {{ pathway.description }}
+      </p>
+
+      {% if pathway.keywords %}
         <div class="tags">
           {% for keyword in pathway.keywords %}
             <span>{{ keyword }}</span>
           {% endfor %}
         </div>
       {% endif %}
+
     </div>
   {% endfor %}
 </div>
