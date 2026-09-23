@@ -31,7 +31,7 @@ contributions:
   funding:
 ---
 
-This tutorial is a very short introduction to the Metagenomics-Toolkit which shows the main steps in analysing Nanopore long-read metagenomics data using the Metagenomics-Toolkit.
+This tutorial is a very short introduction to the Metagenomics-Toolkit which shows the main steps in analysing Illumina short-read metagenomics data using the Metagenomics-Toolkit.
 A more detailed introduction and tutorials can be found [here](https://metagenomics.github.io/metagenomics-tk/latest/). 
 In this part you will learn how to configure and run the Toolkit and what the output of a Toolkit run looks like.
 
@@ -187,12 +187,21 @@ scratch: false
 
 ##### Input Field
 
-The input field (line 3, snippet 1) specifies the type of input data to process (Nanopore, Illumina, data hosted on SRA or a mirror)
+The input field specifies the type of input data to process (Nanopore, Illumina, data hosted on SRA or a mirror)
 and you can find a dedicated wiki section [here](https://metagenomics.github.io/metagenomics-tk/latest/pipeline_input/). Regardless of which input type
 is used, the user must provide a file containing a list of datasets to be processed.
 The list can be a list of remote or local files and in the case of SRA, a list of SRA run IDs.
 
-Since you will work with Nanopore long-read data in this tutorial, your input sample sheet is flat and looks like this:
+Since you will work with Illumina read data in this tutorial, your input sample sheet contains forward and reverse reads and looks like this: 
+
+```bash
+SAMPLE    READS1  READS2
+sample1   /path/to/sample1_R1.fastq.gz  /path/to/sample1_R2.fastq.gz
+sample2   /path/to/sample2_R2.fastq.gz  /path/to/sample1_R2.fastq.gz
+```
+
+The first column (SAMPLE) specifies the unique name of the dataset. The second and third column (READS1/READS2) specifies the forward and reverse reads.
+When working with Nanopore long-read data, your input sample sheet would look like this:
 
 ```bash
 SAMPLE    READS
@@ -206,8 +215,8 @@ The first column (SAMPLE) specifies the unique name of the dataset. The second c
 
 Analyses (also called modules) that the Toolkit executes are placed directly under the **steps** attribute in the configuration file.
 In the example below, the modules **qc** and **assembly** are placed directly under the **steps** attribute. Any tools or methods
-that are used as part of the module can be considered a property of the module. For example, long-read assemblers like **Flye** (or metaFlye) are executed as part of the assembly module instead of short-read graph builders.
-The level below the tool names is for configuring the tools and methods. Each analysis is listed on the [modules page](../../modules/introduction.md). 
+that are used as part of the module can be considered a property of the module. For example, assemblers like **Flye** (or metaFlye), MEGAHIT etc. are executed as part of the assembly module.
+The level below the tool names is for configuring the tools and methods. Each analysis is listed on the [modules page](https://metagenomics.github.io/metagenomics-tk/latest/modules/introduction/).
 
 ```bash
 steps:
@@ -300,7 +309,7 @@ SAMPLE_NAME/RUN_ID/MODULE/MODULE_VERSION/TOOL
 
 * `TOOL` is the tool or method that is executed by the Toolkit.
 
-Below you can see an example output structure configured for long-read data.
+Below you can see an example output structure configured for short-read data.
 Every output folder includes four log files:
 
 * `.command.err`: Contains the standard error.
@@ -355,7 +364,7 @@ Then create the samplesheet file `samples.tsv` according to the dataset you down
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-DMC_BGA22_4_N	/vol/mgcourse/mgtk/WGS/DMC_BGA22_4_N_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/DMC_BGA22_4_N_R2.fastq.gz
+DMC_BGA22_4_N	/vol/mgcourse/mgtk/WGS/DMC_BGA22_4_N_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/DMC_BGA22_4_N_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -364,7 +373,7 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-DMC_BGA52_4_N	/vol/mgcourse/mgtk/WGS/DMC_BGA52_4_N_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/DMC_BGA52_4_N_R2.fastq.gz
+DMC_BGA52_4_N	/vol/mgcourse/mgtk/WGS/DMC_BGA52_4_N_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/DMC_BGA52_4_N_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -373,7 +382,7 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-LF_Silphie_R1	/vol/mgcourse/mgtk/WGS/LF_Silphie_R1_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/LF_Silphie_R1_R2.fastq.gz
+LF_Silphie_R1	/vol/mgcourse/mgtk/WGS/LF_Silphie_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/LF_Silphie_R1_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -382,7 +391,7 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-P2_F1_R1	/vol/mgcourse/mgtk/WGS/P2_F1_R1_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/P2_F1_R1_R2.fastq.gz
+P2_F1_R1	/vol/mgcourse/mgtk/WGS/P2_F1_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/P2_F1_R1_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -391,7 +400,7 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-P7_F1_R1	/vol/mgcourse/mgtk/WGS/P7-F1_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/P7-F1_R1_75MB_R2.fastq.gz
+P7_F1_R1	/vol/mgcourse/mgtk/WGS/P7-F1_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/P7-F1_R1_75MB_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -400,7 +409,7 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-PB22_180226	/vol/mgcourse/mgtk/WGS/PB22_180226_F1_R1_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/PB22_180226_F1_R1_R2.fastq.gz
+PB22_180226	/vol/mgcourse/mgtk/WGS/PB22_180226_F1_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/PB22_180226_F1_R1_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -409,7 +418,7 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-PB37_180322	/vol/mgcourse/mgtk/WGS/PB37_180322_F_R1_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/PB37_180322_F_R1_R2.fastq.gz
+PB37_180322	/vol/mgcourse/mgtk/WGS/PB37_180322_F_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/PB37_180322_F_R1_75MB_R2.fastq.gz
 EOF
 ```
 
@@ -418,10 +427,10 @@ EOF
 ```bash
 cat > samples.tsv << EOF
 SAMPLE	READS1	READS2
-P9_F1_T1	/vol/mgcourse/mgtk/WGS/P9_F1_T1_R1_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/P9_F1_T1_R1_R2.fastq.gz
+P9_F1_T1	/vol/mgcourse/mgtk/WGS/P9_F1_T1_R1_75MB_R1.fastq.gz	/vol/mgcourse/mgtk/WGS/P9_F1_T1_R1_75MB_R2.fastq.gz
 EOF
 ```
-
+P9_F1_T1_R1
 ---
 
 > <tip-title>Verify your samplesheet</tip-title>
@@ -529,8 +538,8 @@ Execute this command:
 cd ~/workdir/mgtk/
 NXF_VER=25.10.4 nextflow run main.nf \
 	  -profile standard \
-	  -params-file ~/workdir/mgtk/config.yml
-	  -entry wFullPipeline \
+	  -params-file ~/workdir/mgtk/config.yml \
+	  -entry wFullPipeline 
 ```
 
 Then check the results in the `output_test` folder. Check the tutorials in the Metagenomics-Toolkit documentation for further information.
@@ -546,27 +555,40 @@ ls -la
 
 Browse through the directory hierarchy — each sample has its own subfolder (e.g., `DMC_BGA22_4_N_1GB/1/`), and within each are subdirectories for `binning/`, `assembly/`, and `annotation/`.
 
-Try to find the binning and annotation results:
+Try to find the Assembly, binning and annotation results:
 
-1. **Binning:** Look inside the `binning` directory for individual bin files
-2. **Annotation:** Look inside the `annotation` directory for gene predictions and functional annotations from Prokka.
+1. **Assembly:** Look inside the `assembly` directory for individual bin files
+3. **Binning:** Look inside the `binning` directory for individual bin files
+4. **Annotation:** Look inside the `annotation` directory for gene predictions and functional annotations from Prokka.
 
 > <question-title>What files should you be looking for?</question-title>
+> - **Assembly output:** FASTA contig file from MEGAHIT (e.g., `*_contigs.fa.gz`).
 > - **Binning output:** Individual bin FASTA files from MetaBAT (e.g., `*_bin.1.fa`, `*_bin.2.fa`).
 > - **Annotation output:** Predicted gene annotations (GFF/GBK files), protein FASTA files, and summary tables.
 > 
 > > <solution-title>Solution</solution-title>
-> > In the `binning` output directory you will find individual `.fasta` or `.fa` bin files. The annotation results can be found under `annotation/`.
+> > In the `binning/0.7.1/metabat/` output directory you will find individual `.fa` bin files. The annotation results can be found under `assembly/1.2.3/megahit/`. And annotation from prokka in `annotation/2.0.1/prokka/`
 > {: .solution}
 >
 {: .question}
 
-> <tip-title>Why download pre-computed results?</tip-title>
-> Running the full Toolkit pipeline on complete datasets can take hours and requires tens of gigabytes of RAM and substantial disk space due to large databases. For this workshop, we provide pre-computed results as compressed tar archives (each ~3–5 GiB) that contain a representative subset of the output — enough to explore and visualize meaningful results without waiting for a full pipeline run. You can download **1–3 of the 8 available result sets** to compare different samples and their binning outcomes.
-> {: .tip}
+Next have a look on some specific features of your run.
+
+> <question-title>How successful was your assembly and binning?</question-title>
+> How many BINs got generated in this very small subsample? How is the assembly quality (length and N50?)?
+> 
+> > <solution-title>Solution</solution-title>
+> > You can just count the number of BINs in the BIN directory the assembly quality can be found in: `assembly/1.2.3/megahit/contigs_stats.tsv`.
+> {: .solution}
+>
+{: .question}
 
 
 #### Copy full results:
+
+> <tip-title>Why download pre-computed results?</tip-title>
+> Running the full Toolkit pipeline on complete datasets can take hours and requires tens of gigabytes of RAM and substantial disk space due to large databases. For this workshop, we provide pre-computed results as compressed tar archives (each ~3–5 GiB) that contain a representative subset of the output — enough to explore and visualize meaningful results without waiting for a full pipeline run. You can download **1–3 of the 8 available result sets** to compare different samples and their binning outcomes.
+> {: .tip}
 
 Select **1–3 result sets** corresponding to the datasets you used (or are interested in) and download them:
 
@@ -686,8 +708,16 @@ The example notebook demonstrates how to visualize and analyze the binning and M
 ```bash
 cd ~/workdir/mgtk/
 wget https://s3.bi.denbi.de/cmg/mgcourses/mg2026/mgtk_jupyter.tar
-tar -xvzf mgtk_jupyter.tar
+tar -xvf mgtk_jupyter.tar
 ```
+
+Also create a folder for plots to be stored:
+
+```bash
+cd ~/workdir/mgtk/
+mkdir mgtk_plots
+```
+
 
 This extracts a notebook called `mgtk_binning_mag_statistics.ipynb` and a python file `utils.py` into your working directory.
 
@@ -706,7 +736,7 @@ This registers the kernel so you can select **Python (mgtk_venv)** as the notebo
 Launch the Jupyter server in your working directory:
 
 ```bash
-cd ~/workdir
+cd ~/workdir/mgtk/
 jupyter lab --port=8889 --no-browser
 ```
 
@@ -732,7 +762,7 @@ In the JupyterLab interface:
 
 1. Navigate to your working directory (`~/workdir`) using the file browser on the left.
 2. Double-click `mgtk_binning_mag_statistics.ipynb` to open the notebook.
-3. In the top menu, select **Kernel → Change Kernel → Python (mgtk_venv)** to ensure you are using the virtual environment where the required Python packages are installed.
+3. In the top menu, select **Kernel → Change Kernel → Python (mgtk_venv)** to ensure you are using the virtual environment where the required Python packages will be installed.
 4. Run all cells by selecting **Kernel → Run All Cells** from the top menu, or by pressing **Shift + Enter** in each cell individually.
 
 > <tip-title>Automatic Package Installation</tip-title>
