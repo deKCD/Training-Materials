@@ -5,7 +5,7 @@ description: Guidelines for contributing, including adding new content or editin
 permalink: /CONTRIBUTING/
 ---
 
-We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR (Findable, Accessible, Interoperable, Reusable)** principles for training materials. 
+We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR** (**F**indable, **A**ccessible, **I**nteroperable, **R**eusable) principles for training materials. 
 
 ## Preview the website
 ---------------------------
@@ -20,7 +20,7 @@ You need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){:targe
 bundle install
 
 # Start the Jekyll server
-bundle exec jekyll serve --trace --livereload
+bundle exec jekyll serve --trace --livereload --port 4000
 ```
 
 Open `http://127.0.0.1:4000/training/` (`Server address`) in your browser to view the website.
@@ -45,21 +45,32 @@ Then open `http://127.0.0.1:4000/training/` in your browser.
 This section describes the required structure, conventions, and submission workflow for contributing a new tutorial. Please follow these guidelines to ensure consistency, reusability, and maintainability across the repository.
 
 ### Create the tutorial directory 
-All tutorials must reside within the `_tutorials` directory. Each tutorial should have its own dedicated subfolder:
+All tutorials **must** be stored in the `_tutorials` directory. Each tutorial must have its own subdirectory, organized by tutorial name and version:
 ```
-_tutorials/<tutorial-name>/
+_tutorials/<tutorial-name>/<tutorial-version>
 ```
 
-Within this folder, you may either:
-* provide a single, self-contained file (`tutorial.md`), or
-* organize the content into multiple smaller Markdown files (e.g., `part1.md`, `part2.md`)
+For example:
+```
+_tutorials/nanopore/main
+```
 
-**Recommended approach: modular structure**
+The tutorial version is typically named `main`, but you can use an event- or release-specific name, such as `summer-school-2026`.
 
-Splitting content into smaller, logically coherent markdown files is strongly encouraged. This enables:
-* reuse of content blocks across tutorials
-* easier maintenance and updates
-* reduced duplication
+Inside the version directory, choose one of the following structures:
+* **Single-file structure**: provide one self-contained Markdown file, `tutorial.md` by default.
+* **Modular structure**: split the tutorial into smaller, logically organized Markdown files (e.g. `part1.md` and `part2.md`). Link these files from the final `tutorial.md`. 
+
+
+**Recommended approach: use a modular structure**
+
+The modular structure is recommended because it:
+* makes content blocks easier to reuse
+* simplifies maintenance and updates
+* reduces duplication
+* keeps each file focused and easy to navigate.
+
+**Important**: The version directory must always contain a `tutorial.md` as the main file. This is the file that will be rendered as the tutorial.
 
 ### Composing tutorials
 
@@ -67,15 +78,15 @@ Splitting content into smaller, logically coherent markdown files is strongly en
 
 All tutorials must define their metadata at the very top of the main file `tutorial.md` using YAML front matter. **Do not** place metadata in auxiliary Markdown files (e.g., `part1.md`, `part2.md`).
 
-Example:
+Example metadata header:
 ```
 ---
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
 description: "This is the introduction to the basic shell commands."
 time_estimation: 2H30M
-level: "Educational level"
-keywords: [list of keywords]
+level: beginner
+keywords: ["shell"]
 questions:
   - Which questions are addressed by the tutorial?
 objectives:
@@ -83,15 +94,15 @@ objectives:
 key_points:
  - The take-home messages
  - They will appear at the end of the tutorial
-version:
- - main
-life_cycle: "Creative work status"
+version: main
+life_cycle: active
 contributions:
   authorship:
-  - author 1
-  - author 2
+  - Max Mustermann 
   editing: 
+  - Erika Mustermann 
   funding: 
+  - de.KCD
 ---
 
 ## Section title
@@ -111,7 +122,7 @@ The following fields are mandatory unless stated otherwise:
 * `questions`: a list of key questions addressed by the tutorial.
 * `objectives`: a list of learning objectives.
 * `key_points`: summary points presented at the end of the tutorial.
-* `version`: specifies the tutorial version (e.g., `main`).
+* `version`: specifies the tutorial version (`main` by default).
 * `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}. Options are ***active***, ***under development***, and ***archived***.
 
   Example:
@@ -124,7 +135,7 @@ The following fields are mandatory unless stated otherwise:
 > 
 {: .details}
 
-* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/`.
+* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/` folder.
 
 
 The following fields are optional but recommended where applicable:
@@ -160,7 +171,7 @@ _tutorials/
       tutorial.md
 ```
 
-If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
+If you have any data or images that you would like to add to the tutorial, please place them in the tutorial folder.
 
 #### **Formatting tutorial content**
 
@@ -342,7 +353,7 @@ Images must be referenced using the `relative_url` filter:
 * `{: .responsive-img }` CSS class ensures that images do not exceed content width and scale proportionally on smaller screens.
 
 > <details-title>Additional resources</details-title>
-> If you need an additional materials to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode.](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes){:target="_blank"}
+> If you need an additional material to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode.](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes){:target="_blank"}
 > 
 > Please also refer to the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet){:target="_blank"} to learn more how to use Markdown.
 > 
@@ -354,7 +365,7 @@ If your tutorial exists in multiple versions (e.g., adapted for different audien
 _tutorials/<tutorial-name>/
   main/
     tutorial.md
-  summer-school/
+  summer-school-2026/
     tutorial.md
 ```
 
@@ -362,13 +373,31 @@ Each version should be self-contained or consistently structured using `include`
 
 ### Assigning tutorial to a group
 Tutorials are categorized into thematic groups (e.g., Unix, Metagenomics) for navigation and discoverability.
+
 To register your tutorial:
-* add the exact folder name (e.g., `intro-python`) to the `_data/tutorial_groups.yml` file
+* add the exact folder name (e.g., `nanopore`) to the `_data/tutorial_groups.yml` file
 * place it under an appropriate existing group
 
 If no suitable group exists:
 * create a new group entry with a clear and concise description, or
 * temporarily assign the tutorial to the **incubator** group. Final group placement may be reviewed and adjusted by the editorial board.
+
+For example, if your tutorial is stored in a folder named `nanopore`, add it to the relevant group (or **incubator** for review) as follows:
+```
+- title: Incubator
+  description: Tutorials in this group are under review.
+  tutorials:
+    - nanopore
+```
+### Add yourself to the contributors list
+You can add your **name**, **ORCID**, and/or **GitHub** profile to the `_data/contributors.yml` file. Your ORCID will be used to identify and attribute your contribution when your tutorial is registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"}.
+
+For example: 
+```
+- name: Max Mustermann
+  ORCID: https://orcid.org/xxxx-xxxx-xxxx-xxxx
+  Github: https://github.com/max-mustermann
+```
 
 ### Submit tutorial
 Once your tutorial is ready to publish, create a new branch, commit your changes, submit a pull request for review. 
@@ -377,7 +406,6 @@ You may optionally [open an issue](https://github.com/deKCD/Training-Materials/i
 ### Registering material in TeSS
 
 If all the required metadata fields are completed correctly, tutorials can be registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"} with minimal additional effort. Using the [Bioschemas TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"} ensures the metadata is machine-readable and interoperable, enabling automated harvesting, improving discoverability, and supporting seamless integration into the ELIXIR training ecosystem without manual curation.
-
 
 
 
@@ -395,6 +423,8 @@ The typical workflow is:
 3. Render the presentation to HTML.
 4. Commit and push your changes to GitHub.
 5. Access the published slides from the [training materials platform](https://datenkompetenz.cloud/training/tutorials/){:target="_blank"}.
+
+**Important**: Name the Quarto slides `slides.qmd`. This file is rendered and linked from [training materials platform](https://datenkompetenz.cloud/training/tutorials/){:target="_blank"}.
 
 ><details-title>What is Quarto?</details-title>
 > Quarto is an open-source publishing system for scientific and technical content. It can generate many different output formats, including:
@@ -416,18 +446,7 @@ title: "Your Presentation Title"
 subtitle: "Your Subtitle"
 author: "Your Name"
 date: "2026-06-26"
-format: 
-  revealjs:
-    theme: default
-    slide-number: true
-    chalkboard: true
-    logo: your-logo.png
-    footer: "Your Footer Text"
-    title-slide-attributes:
-      data-background-image: "background.svg"
-      data-background-size: "auto"
-      data-background-opacity: "0.3"
-      data-background-position: "bottom"
+format: revealjs
 ---
 
 ## Slide 1
@@ -437,38 +456,36 @@ Your content here
 More content here
 ```
 
-Shared presentation information—such as `title`, `author`, and `output` settings—is placed at the root level of your YAML block. For RevealJS format-specific metadta, please refer to this [documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html){:target="_blank"}. 
+Shared presentation information—such as `title`, `author`, and `output` settings—is placed at the root level of your YAML block. For RevealJS format-specific metadata, please refer to this [documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html){:target="_blank"}. 
 
-#### Convert PDF slides into Quarto Markdown
+#### Convert PPTX slides into Quarto Markdown
 
-Existing presentation slides can be converted into a Quarto presentation. Export your presentation as a PDF (version 1.7) and run the conversion script:
-
+If you already have presentation slides in PowerPoint `.pptx` format, you can convert them to a Quarto Markdown `.qmd` file using [pandoc](https://github.com/jgm/pandoc){:target="_blank"}:
 ```bash
-# install PyMuPDF https://pymupdf.readthedocs.io/en/latest/installation.html
-pip install --upgrade pymupdf
+pandoc --from=pptx --to=markdown --output=slides.qmd --extract-media=images slides.pptx
+```
+Here, `--extract-media` extracts images and other media from the input file and saves them in the specified folder.
 
-python bin/pdf2quarto.py --source slides.pdf --outfile slides.qmd --images slides_images
+After running the command, you should have a `slides.qmd` file and `images` folder containing all extracted images. 
+
+Pandoc does not automatically create all the Quarto metadata required for your slides. Add the following YAML header to the top of `slides.qmd`:
+```
+---
+title: "Your Presentation Title"
+subtitle: "Your Subtitle"
+author: "Your Name"
+date: "2026-06-26"
+format: revealjs
+---
 ```
 
-The converter will:
-* extract all embedded images into the specified directory (`slides_images`)
-* save the extracted images as JPEG files
-* generate a Quarto presentation (`slides.qmd`) with the required YAML front matter
-* preserve the extracted text and insert images with their original position and size so the generated presentation closely matches the layout of the source PDF.
-
-The generated Markdown uses Quarto-compatible image attributes, allowing the slides to be rendered with a layout similar to the original presentation.
-
-><details-title>Why PDF 1.7?</details-title>
-> PDF 1.7 supports important slide features such as transparency, layers, and improved image handling, which helps preserve the original slide appearance.
->
-> Older PDF versions (such as PDF 1.4) do not support some of these features, which can result in missing images or layout differences after conversion.
-{: .details}
-
 ><warning-title>Important</warning-title>
-> Always review the generated `slides.qmd` file before publishing it. 
-> 
-> Conversion preserves most of the original layout, but some elements may still require manual adjustment.
+> Always review the generated `slides.qmd` before publishing it.
+>
+> Pandoc can preserve much of the content and structure of the original presentation, but the conversion is not always perfect. You may need to manually adjust lists and formatting. 
 {: .warning}
+
+After making any necessary changes, [render](#render-and-preview-the-presentation) the `slides.qmd` with Quarto to check that the final presentation looks as expected.
 
 ### Add slides
 Slides are created using Markdown headings level 1 (`#`) or level 2 (`##`). You can also separate slides with a horizontal rule (`---`):
@@ -482,10 +499,7 @@ Slides are created using Markdown headings level 1 (`#`) or level 2 (`##`). You 
 - Item 2
 ```
 
-><tip-title></tip-title>
->The best way to get a sense for the capabilities of Revealjs is this [demo](https://quarto.org/docs/presentations/revealjs/demo/){:target="_blank"} presentation.
-> Check out the [source code](https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd){:target="_blank"} for the demo to see how the slides were created.
-{: .tip}
+**Note**: The best way to get a sense for the capabilities of RevealJS is this [demo](https://quarto.org/docs/presentations/revealjs/demo/){:target="_blank"} presentation. Check out the [source code](https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd){:target="_blank"} for the demo to see how the slides were created.
 
 #### Learn more about RevealJS
 RevealJS provides many features, including incremental content, speaker notes, interactive elements, code highlightning, custom themes, and export to PDF. 
@@ -521,6 +535,11 @@ After verifying that the presentation renders correctly:
 ### Access the published presentation
 After a few minutes, your presentation will appear on the platform. Open the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page and look for for tutorial in the **Slides** column to access the published presentation.
 
+### Add PDF slides
+Alternatively, you can add your slides as PDF as `slides.pdf` and access them on the Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page in the **Slides** column. They will be available as `<tutorial_version> (PDF)`.
+You can click them and view in presentation mode via web browser.
+
+**Note**: in the case of PDF slides, they are difficult to maintain and update. But as a quick solution it might work. 
 
 ## Create a new learning pathway
 ------------------------------------
