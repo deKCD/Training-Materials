@@ -75,7 +75,7 @@
     {% for funder in funders %}
         {% assign contrib = site.data.contributions | where: "name", funder | first %}
         {% if contrib %}
-            <img src="{{ contrib.logo }}" alt="{{ contrib.name }} logo" style="max-height:50px; margin-right:10px;"/>
+            <img src="{{ '/training' | append: contrib.logo }}" alt="{{ contrib.name }} logo" style="max-height:50px; margin-right:10px;"/>
         {% endif %}
     {% endfor %}
 {% endif %}
