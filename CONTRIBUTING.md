@@ -536,10 +536,10 @@ After verifying that the presentation renders correctly:
 After a few minutes, your presentation will appear on the platform. Open the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page and look for for tutorial in the **Slides** column to access the published presentation.
 
 ### Add PDF slides
-Alternatively, you can add your slides as PDF as `slides.pdf` and access them on the Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page in the **Slides** column. They will be available as `<tutorial_version> (PDF)`.
-You can click them and view in presentation mode via web browser.
 
-**Note**: in the case of PDF slides, they are difficult to maintain and update. But as a quick solution it might work. 
+Alternatively, you can upload your slides as a PDF file named `slides.pdf`. The PDF will then be available on the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page in the **Slides** column. It will appear as `<tutorial_version> (PDF)`. You can click the file to open it and view the slides in presentation mode directly in your web browser.
+
+**Note**: PDF slides are more difficult to maintain and update than Quarto markdown. However, they can be a quick solution if you need to make the slides available without further editing.
 
 ## Create a new learning pathway
 ------------------------------------
