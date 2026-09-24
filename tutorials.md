@@ -53,16 +53,25 @@ permalink: /tutorials/
           </td>
           <td>
             <!-- Capture tutorial slides -->
+            <!-- Possible files: Quarto markdown and PDF -->
             {% capture slide_links %}{% endcapture %}
             {% assign first_slide = true %}
+
             {% for v in sorted_versions %}
               {% assign base_dir = v.path | split: '/tutorial.md' | first %}
-              {% assign slides_path = base_dir | append: '/slides.html' %}
-              {% assign slides_url = v.url | replace: '/tutorial/', '/' | append: 'slides.html' %}
-              {% assign has_slides = site.static_files | where: "path", slides_path | size %}
-              {% if has_slides > 0 %}
+
+              {% assign quarto_slides_path = base_dir | append: '/slides.html' %}
+              {% assign quarto_slides_url = v.url | replace: '/tutorial/', '/' | append: 'slides.html' %}
+
+              {% assign pdf_slides_path = base_dir | append: '/slides.pdf' %}
+              {% assign pdf_slides_url = v.url | replace: '/tutorial/', '/' | append: 'slides.pdf' %}
+
+              {% assign has_quarto_slides = site.static_files | where: "path", quarto_slides_path | size %}
+              {% assign has_pdf_slides = site.static_files | where: "path", pdf_slides_path | size %}
+
+              {% if has_quarto_slides > 0 %}
                 {% capture link %}
-                  <a href="{{ slides_url | relative_url }}">{{ v.version }}</a>
+                  <a href="{{ quarto_slides_url | relative_url }}" target="_blank">{{ v.version }} (Quarto)</a>
                 {% endcapture %}
 
                 {% if first_slide %}
@@ -72,9 +81,24 @@ permalink: /tutorials/
                   {% capture slide_links %}{{ slide_links }}, {{ link | strip }}{% endcapture %}
                 {% endif %}
               {% endif %}
+
+              {% if has_pdf_slides > 0 %}
+                {% capture link %}
+                  <a href="{{ pdf_slides_url | relative_url }}" target="_blank">{{ v.version }} (PDF)</a>
+                {% endcapture %}
+
+                {% if first_slide %}
+                  {% capture slide_links %}{{ link | strip }}{% endcapture %}
+                  {% assign first_slide = false %}
+                {% else %}
+                  {% capture slide_links %}{{ slide_links }}, {{ link | strip }}{% endcapture %}
+                {% endif %}
+              {% endif %} 
             {% endfor %}
+
             {{ slide_links }}    
           </td>
+          
           <td>{{ first.description }}</td>
           <td>
             {% for contributor in first.contributions.authorship %}
