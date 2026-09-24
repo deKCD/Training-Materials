@@ -422,6 +422,11 @@ footer ul>li>a:hover {
     color: var(--dekcd-black);
 }
 
+.card-text strong,
+.card-text b {
+    font-weight: 700 !important;
+}
+
 .feature-card .feature-img {
     max-width: 300px;
     max-height: 150px;
