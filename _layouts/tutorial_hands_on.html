@@ -33,6 +33,10 @@
       {% endif %}
     {% endfor %}
 
+    <!-- Select first paragraph as an abstract -->
+    {% assign paragraphs = page.content | markdownify | split: '</p>' %}
+    {% assign abstract = paragraphs | first | strip_html | strip_newlines | strip %}
+
     <!-- include bioschema markup -->
     <script type="application/ld+json">
       {
@@ -55,6 +59,7 @@
             "{{ kw | escape }}"{% unless forloop.last %},{% endunless %}
           {% endfor %}
         ],
+        "abstract": {{ abstract | jsonify }},
         "teaches": [
           {% for learning_objective in page.objectives %}
             "{{ learning_objective | escape }}"{% unless forloop.last %},{% endunless %}
@@ -74,15 +79,26 @@
           {% endfor %}
           ],
         {% endif %}
+        {% if page.contributions.editing %}
+        "contributor": [
+          {% for editor in page.contributions.editing %}
+            {
+              "@type": "Person",
+              "name": "{{ editor | escape }}",
+              "@id": "{{ site.data.contributors | where: 'name', editor | map: 'ORCID' | first }}"
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+          ],
+        {% endif %}
         "license": ["https://creativecommons.org/licenses/by/4.0/"],
         "timeRequired": "{{ page.time_estimation }}",
         "version": "{{ page.version }}",
         "creativeWorkStatus": "{{ page.life_cycle | escape }}",
+        "datePublished": "{{ page.date | escape }}",
         "dateModified": "{{ page.last_modified_at | escape }}",
         "isPartOf": {
           "@type": "CreativeWork",
           "name": "{{ group_title | default: 'Training Collection' | escape }}",
-          "description": "{{ group_description | default: '' | escape }}",
           "url": "https://datenkompetenz.cloud/training/tutorials/"
         }
       }

@@ -105,6 +105,8 @@ contributions:
   - de.KCD
 ---
 
+Short description that summarizes the tutorial.
+
 ## Section title
 
 Enter your tutorial content here.
@@ -143,6 +145,15 @@ The following fields are optional but recommended where applicable:
 * `follow_up_training`: a list of resources that the reader of the material could follow at the end of the tutorial.
 
 For extended metadata options and advanced patterns, please refer to the [Galaxy Training Network tutorial guidelines.](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html){:target="_blank"}
+
+> <warning-title>Add a concise summary of your tutorial</warning-title>
+> Please provide a brief abstract after the metadata section. The abstract should summarize the main topic, purpose, and scope of the tutorial in **2–3 concise sentences**. 
+> 
+> **Do not** add a heading or title for the abstract. This summary provides learners with a quick overview of the tutorial and is also used to populate the `abstract` metadata field in the Bioschemas [TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}.
+>
+{: .warning}
+
+
 
 
 #### **Modular structure**
