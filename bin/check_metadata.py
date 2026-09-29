@@ -1,6 +1,7 @@
 import os
 from typing import Dict, List, Tuple, Any
 import yaml
+from check_contributor import get_contributor_names, load_yaml
 
 def parse_markdown_metadata(markdown_text: str) -> Tuple[Dict[str, Any], List[Dict[str, str]]]:
     """
@@ -131,13 +132,25 @@ def parse_markdown_metadata(markdown_text: str) -> Tuple[Dict[str, Any], List[Di
                         "error": f"Field 'contributions: {sub_field}' is empty."
                     })
 
-                elif isinstance(value, list) and len(value) == 0:
+                elif isinstance(value, list):
                     # Empty lists are allowed for editing/funding
                     # but authorship must contain values
                     if sub_field == "authorship":
-                        errors.append({
+                        if len(value) == 0:
+                            errors.append({
                             "error": "Field 'contributions: authorship' is empty."
-                        })
+                            })
+                        else:
+                            # Validate authorship names in _data/contributors.yml
+                            contributor_names = set(get_contributor_names(load_yaml()))
+                            for author in value:
+                                if author not in contributor_names:
+                                    errors.append({
+                                        "error": (
+                                            f"Contributor '{author}' in 'autorship' field is not listed in _data/contributors.yml. "
+                                            f"Please, add '{author}' name, ORCID and/or Github profile to the _data/contributors.yml."
+                                        )
+                                    })
 
     else:
         errors.append({
