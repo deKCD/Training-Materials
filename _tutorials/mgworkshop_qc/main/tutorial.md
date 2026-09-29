@@ -126,7 +126,7 @@ Validate the effect by re-running FastQC on the trimmed output:
 fastqc forward_qc1.fastq reverse_qc1.fastq
 ```
 
-### Step 3: Removing Poly-G Tails
+### Step 3: Removing Poly-G Tails, adapters, low quality reads etc.
 
 Poly-G tails often appear in Illumina reads due to phasing issues or incomplete cluster generation. fastp handles this efficiently:
 
@@ -137,6 +137,7 @@ fastp \
   -o forward_qc2.fastq \
   -O reverse_qc2.fastq \
   --cut_tail -A -g --poly_g_min_len 5 -w 16
+  -f 5 -F 5 -l 30 --poly_g_min_len 5 -W 16 
 ```
 
 Re-evaluate the quality with FastQC:
@@ -168,7 +169,7 @@ The adapter sequence to be trimmed from our reads is:
 Feed these directly into Cutadapt, targeting the 3' ends:
 
 ```bash
-cutadapt -f fastq \
+cutadapt \
   -e 0.15 -O 10 -m 25 \
   -a CTGTCTCTTATACACATCT \
   -A CTGTCTCTTATACACATCT \
