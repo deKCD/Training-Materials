@@ -42,6 +42,16 @@ contributions:
 
 **FastQC** aims to provide a simple way to perform quality control checks on raw sequence data coming from high-throughput sequencing pipelines. It offers a modular set of analyses to give a quick impression of whether your data has any problems that should be addressed before downstream processing.
 
+### Download some example data (if not already done so or present as part of other tutorial sessions)
+
+First, we download our tutorial dataset and extract it:
+
+```bash
+cd ~/workdir
+wget https://openstack.cebitec.uni-bielefeld.de:8080/swift/v1/denbi-mg-course/WGS-data.tar
+tar xvf WGS-data.tar
+```
+
 ### Running FastQC
 
 To launch the quality assessment on your raw reads, simply navigate to your data directory and run:
