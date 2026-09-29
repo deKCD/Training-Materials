@@ -136,7 +136,6 @@ fastp \
   -I reverse.fastq \
   -o forward_qc2.fastq \
   -O reverse_qc2.fastq \
-  --cut_tail -A -g --poly_g_min_len 5 -w 16
   -f 5 -F 5 -l 30 --poly_g_min_len 5 -W 16 
 ```
 
