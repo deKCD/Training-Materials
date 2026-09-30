@@ -19,8 +19,7 @@ key_points:
   - "fastp performs efficient quality trimming, sliding window analysis, and adapter/poly-G removal in parallel."
   - "Cutadapt offers precise adapter trimming when fastp's built-in detection is insufficient."
   - "Always verify preprocessing results with FastQC before proceeding to assembly."
-version:
-  - main
+version: main
 life_cycle: under development
 contributions:
   authorship:
