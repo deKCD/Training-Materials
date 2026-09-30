@@ -81,3 +81,20 @@ jobs:
           retry_count: 5
           save: urlcheck-results.csv
           exclude_patterns: localhost,127.,0.0.0.0,[::1],<host>,<hostname>,<server>,<port>,{host},{hostname},{server},${HOST},${BASE_URL},git.embl.org,embl.org/internal-information/it-services/embl-user-accounts-heidelberg
+
+      - name: URL checker summary
+        if: always()
+        run: |
+          echo "## URL checker results" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```csv' >> "$GITHUB_STEP_SUMMARY"
+          cat urlcheck-results.csv >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload URL checker results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: urlcheck-results
+          path: urlcheck-results.csv
+
