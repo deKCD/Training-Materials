@@ -35,6 +35,7 @@ contributions:
 > - Familiarity with NGS data formats (FASTA, FASTQ, BAM, SAM).
 > - Raw paired-end sequencing reads (e.g., `read1.fq`, `read2.fq`).
 > - We assume you are working in a computational environment with sufficient CPU cores (e.g., 28). All commands specifying thread counts can be adjusted to match your available resources.
+>
 {: .details}
 
 ## FastQC: Assessing Raw Sequence Quality
