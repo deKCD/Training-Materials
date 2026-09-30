@@ -4,7 +4,7 @@ title: Metagenomic Quality Control & Preprocessing
 description: "This tutorial introduces the workflow for assessing sequencing quality with FastQC, trimming adapters, and removing low-quality bases using fastp and Cutadapt."
 time_estimation: 1H
 level: intermediate
-keywords: metagenomics, FastQC, fastp, Cutadapt, QC, quality trimming, adapters
+keywords: [metagenomics, FastQC, fastp, Cutadapt, QC, quality trimming, adapters]
 questions:
   - "How do I assess the quality of raw sequencing reads?"
   - "How do I trim adapters and low-quality bases using fastp?"
