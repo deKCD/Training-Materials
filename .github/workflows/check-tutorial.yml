@@ -79,4 +79,5 @@ jobs:
           verbose: true
           timeout: 5
           retry_count: 5
+          save: urlcheck-results.csv
           exclude_patterns: localhost,127.,0.0.0.0,[::1],<host>,<hostname>,<server>,<port>,{host},{hostname},{server},${HOST},${BASE_URL},git.embl.org,embl.org/internal-information/it-services/embl-user-accounts-heidelberg
