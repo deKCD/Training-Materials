@@ -79,7 +79,7 @@ The modular structure is recommended because it:
 All tutorials must define their metadata at the very top of the main file `tutorial.md` using YAML front matter. **Do not** place metadata in auxiliary Markdown files (e.g., `part1.md`, `part2.md`).
 
 Example metadata header:
-```
+```yaml
 ---
 layout: tutorial_hands_on
 title: Introduction to basic Unix commands
@@ -356,8 +356,8 @@ Usage examples:
 ##### **Working with images**
 
 Images must be referenced using the `relative_url` filter:
-```
-![figure-title]({{ "/tutorials/<tutorial-folder>/<image-folder>/<image>" | relative_url }}){: .responsive-img }
+```markdown
+![figure-title]({{ "/tutorials/tutorial-folder/image-folder/image.png" | relative_url }}){: .responsive-img }
 ```
 * `![figure-title]()` this is standard Markdown image syntax. The text inside the brackets (`figure-title`) becomes the **alt text**, which improves accessibility and is displayed if the image fails to load.
 * `{{ "/path/to/image" | relative_url }}` the `relative_url` ensures that the correct `baseurl` defined in `_config.yml` is automatically prepended. This prevents broken links when the site is hosted in a subdirectory.
@@ -404,7 +404,7 @@ For example, if your tutorial is stored in a folder named `nanopore`, add it to 
 You can add your **name**, **ORCID**, and/or **GitHub** profile to the `_data/contributors.yml` file. Your ORCID will be used to identify and attribute your contribution when your tutorial is registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"}.
 
 For example: 
-```
+```yaml
 - name: Max Mustermann
   ORCID: https://orcid.org/xxxx-xxxx-xxxx-xxxx
   Github: https://github.com/max-mustermann
@@ -451,7 +451,7 @@ In this guide, we focus exclusively on creating presentations using the `revealj
 Create a file named `slides.qmd` in your tutorial directory: `_tutorials/<TUTORIAL-NAME>/<TUTORIAL-VERSION>/slides.qmd`
 
 A minimal presentation looks like this:
-```
+```yaml
 ---
 title: "Your Presentation Title"
 subtitle: "Your Subtitle"
@@ -480,7 +480,7 @@ Here, `--extract-media` extracts images and other media from the input file and 
 After running the command, you should have a `slides.qmd` file and `images` folder containing all extracted images. 
 
 Pandoc does not automatically create all the Quarto metadata required for your slides. Add the following YAML header to the top of `slides.qmd`:
-```
+```yaml
 ---
 title: "Your Presentation Title"
 subtitle: "Your Subtitle"
