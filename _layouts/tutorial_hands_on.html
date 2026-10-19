@@ -37,6 +37,18 @@
     {% assign paragraphs = page.content | markdownify | split: '</p>' %}
     {% assign abstract = paragraphs | first | strip_html | strip_newlines | strip %}
 
+    <!-- Set author name-->
+    {% for author in page.contributions.authorship %}
+      {% assign author_name = author %}
+      {% assign author_orcid = site.data.contributors | where: 'name', author_name | map: 'ORCID' | first %}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+
+    <!-- Set editor name as contributor -->
+    {% for editor in page.contributions.editing %}
+      {% assign editor_name = editor %}
+      {% assign editor_orcid = site.data.contributors | where: 'name', editor_name | map: 'ORCID' | first %}{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+
     <!-- include bioschema markup -->
     <script type="application/ld+json">
       {
@@ -56,7 +68,7 @@
         "description": "{{ page.description | escape }}",
         "keywords": [
           {% for kw in page.keywords %}
-            "{{ kw | escape }}"{% unless forloop.last %},{% endunless %}
+            "{{ kw | jsonify }}"{% unless forloop.last %},{% endunless %}
           {% endfor %}
         ],
         "abstract": {{ abstract | jsonify }},
@@ -67,29 +79,29 @@
         ],
         "learningResourceType": "tutorial",
         "educationalUse": "training",
-        "educationalLevel": "{{ page.level | escape }}",
+        "educationalLevel": "{{ page.level | jsonify }}",
         {% if page.contributions.authorship %}
-        "author": [
-          {% for author in page.contributions.authorship %}
-            {
-              "@type": "Person",
-              "name": "{{ author | escape }}",
-              "@id": "{{ site.data.contributors | where: 'name', author | map: 'ORCID' | first }}"
-            }{% unless forloop.last %},{% endunless %}
-          {% endfor %}
-          ],
-        {% endif %}
+          "author": [
+            {% for author in page.contributions.authorship %}
+              {
+                "@type": "Person",
+                "name": "{{ author | escape }}",
+                "@id": "{{ site.data.contributors | where: 'name', author | map: 'ORCID' | first }}"
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+            ],
+        {% endif %},
         {% if page.contributions.editing %}
-        "contributor": [
-          {% for editor in page.contributions.editing %}
-            {
-              "@type": "Person",
-              "name": "{{ editor | escape }}",
-              "@id": "{{ site.data.contributors | where: 'name', editor | map: 'ORCID' | first }}"
-            }{% unless forloop.last %},{% endunless %}
-          {% endfor %}
-          ],
-        {% endif %}
+          "contributor": [
+            {% for editor in page.contributions.editing %}
+              {
+                "@type": "Person",
+                "name": "{{ editor | escape }}",
+                "@id": "{{ site.data.contributors | where: 'name', editor | map: 'ORCID' | first }}"
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+            ],
+        {% endif %},
         "license": ["https://creativecommons.org/licenses/by/4.0/"],
         "timeRequired": "{{ page.time_estimation }}",
         "version": "{{ page.version }}",
