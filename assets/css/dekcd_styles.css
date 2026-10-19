@@ -899,3 +899,43 @@ td {
   font-size: 1em;
 }
 
+/* Tutorial version button */
+.version-button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 3px 0;
+  background-color: var(--dekcd-white);
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.version-button:hover {
+  background-color: var(--dekcd-accent-3);
+  color: var(--dekcd-white) !important;
+}
+
+
+/* Justified text with support for inline formatting */
+.justify-text {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.justify-text p {
+  margin-bottom: 1rem;
+}
+
+.justify-text strong,
+.justify-text b {
+  font-weight: 700;
+}
+
+.justify-text em,
+.justify-text i {
+  font-style: italic;
+}
+
+.justify-text a {
+  text-decoration: underline;
+}
+

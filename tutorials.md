@@ -4,13 +4,26 @@ permalink: /tutorials/
 ---
 
 <div class="justify-text">
-<p>
-    Explore our curated collection of training materials covering a wide range of topics in cloud computing, bioinformatics, and data science. 
-    These tutorials are designed for hands-on learning and support both beginners and advanced users. 
-</p>
-<p>   
-    Lesson materials are all available online, under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY license</a>, for self-directed study or for adaptation and re-use in your own training sessions.
-</p>
+  <p>
+    Explore our curated collection of training materials covering a wide range of topics in
+    <strong>cloud computing, bioinformatics, and data science</strong>.
+    These tutorials are designed for hands-on learning and support both beginners and advanced users.
+  </p>
+
+  <p>
+    For some tutorials, <strong>multiple versions</strong> are available, allowing you to access
+    different iterations of the same lesson. By default, select the <strong>"main"</strong>
+    version to access the <strong>most up-to-date materials</strong>.
+    Other versions may be useful for following older course editions or reproducing previous training sessions.
+  </p>
+
+  <p>
+    Lesson materials are all available online under a
+    <a href="https://creativecommons.org/licenses/by/4.0/"
+       target="_blank"
+       rel="noopener noreferrer"><strong>CC BY 4.0 license</strong></a>,
+    for self-directed study or for <em>adaptation and re-use</em> in your own training sessions.
+  </p>
 </div>
 
 {% assign groups = site.data.tutorial_groups %}
@@ -49,7 +62,11 @@ permalink: /tutorials/
           <td>{{ first.title }}</td>
           <td>
             {% for version in sorted_versions %}
-              <a href="{{ version.url | relative_url }}">{{ version.version }}</a>{% unless forloop.last %}<br>{% endunless %}    {% endfor %}
+              <a href="{{ version.url | relative_url }}" class="version-button">
+                {{ version.version }}
+              </a>
+              {% unless forloop.last %}<br>{% endunless %}    
+            {% endfor %}
           </td>
           <td>
             <!-- Capture tutorial slides -->
@@ -71,7 +88,7 @@ permalink: /tutorials/
 
               {% if has_quarto_slides > 0 %}
                 {% capture link %}
-                  <a href="{{ quarto_slides_url | relative_url }}" target="_blank">{{ v.version }} (Quarto)</a>
+                  <a href="{{ quarto_slides_url | relative_url }}" class="version-button" target="_blank">{{ v.version }} (Quarto)</a>
                 {% endcapture %}
 
                 {% if first_slide %}
@@ -84,7 +101,7 @@ permalink: /tutorials/
 
               {% if has_pdf_slides > 0 %}
                 {% capture link %}
-                  <a href="{{ pdf_slides_url | relative_url }}" target="_blank">{{ v.version }} (PDF)</a>
+                  <a href="{{ pdf_slides_url | relative_url }}" class="version-button" target="_blank">{{ v.version }} (PDF)</a>
                 {% endcapture %}
 
                 {% if first_slide %}
