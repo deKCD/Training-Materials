@@ -8,32 +8,27 @@ body:
     id: material
     attributes:
       label: Which material are you commenting on?
-      description: Mention the specific tutorial and its version or learning path.
-      placeholder: "e.g., Introduction to basic Unix commands or tutorials/unix-course/main/tutorial.md"
+      description: Path to the tutorial or module. This field is automatically filled in and should not be edited.
     validations:
       required: true
 
   - type: dropdown
     id: category
     attributes:
-      label: Feedback category
+      label: 🏷️ Feedback category 
       description: Choose the area that best fits your feedback.
       options:
-        - Outdated content or references
-        - Content clarity or structure issues
+        - General feedback
+        - Outdated content
+        - Clarity or structure
         - Code example issue
         - Missing information
-        - Typos or grammar mistakes
-        - Broken links or images
-        - Formatting or layout
-        - Accessibility issues
-        - Difficulty level mismatch
-        - Unclear prerequisites
-        - Lack of exercises or hands-on tasks
+        - Typos or grammar
+        - Broken links/images
+        - Accessibility
+        - Difficulty/prerequisites
         - Examples not reproducible
-        - Visuals or diagrams needed
-        - Translation or localization issues
-        - Other (specific in feedback)
+        - Other
     validations:
       required: true
 
@@ -44,14 +39,7 @@ body:
       description: Explain what worked well and what could be improved.
       placeholder: "Describe your feedback here..."
     validations:
-      required: true
-
-  - type: textarea
-    id: suggestion
-    attributes:
-      label: 💡 Suggested improvement (optional)
-      description: If you have a specific idea or example, share it here.
-      placeholder: "e.g., Add more examples on X topic..."
+      required: false
 
   - type: dropdown
     id: rating
@@ -66,6 +54,13 @@ body:
       - "5 - Very great"
     validations:
       required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 💡 Suggested improvement (optional)
+      description: If you have a specific idea or example, share it here.
+      placeholder: "e.g., Add more examples on X topic..."
 
   - type: markdown
     attributes:

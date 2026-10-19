@@ -187,6 +187,109 @@ blockquote p strong {
 }
 
 //------------------------------------------
+// Copy code button
+// -----------------------------------------
+pre.highlight {
+  position: relative;
+  overflow: hidden;
+
+  /* Reserve space for the copy button */
+  padding-right: 3.5rem;
+}
+
+/* Make the code itself horizontally scrollable */
+pre.highlight > code {
+  display: block;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Copy button */
+.copy-code-button {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.5rem;
+
+  width: 2rem;
+  height: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 0;
+  border-radius: 0.35rem;
+
+  background: transparent;
+  color: inherit;
+
+  cursor: pointer;
+  opacity: 0.7;
+
+  /* Keep the button above the scrolling code */
+  z-index: 2;
+}
+
+/* The copy icon */
+.copy-code-button svg {
+  width: 1rem;
+  height: 1rem;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Tooltip */
+.copy-code-tooltip {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 0.25rem 0.45rem;
+  border-radius: 0.25rem;
+
+  background: #2B3033;
+  color: #FFFFFF;
+
+  font-family: sans-serif;
+  font-size: 0.7rem;
+  line-height: 1;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.15s ease,
+    visibility 0.15s ease;
+}
+
+/* Show "Copy" when hovering */
+.copy-code-button:hover .copy-code-tooltip,
+.copy-code-button:focus-visible .copy-code-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Slightly emphasize the button itself */
+.copy-code-button:hover {
+  opacity: 1;
+}
+
+/* "Copied!" remains visible after clicking */
+.copy-code-button.copied .copy-code-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+//------------------------------------------
 // Show solution while printing (Ctrl + P)
 // -----------------------------------------
 
