@@ -1,4 +1,4 @@
-FROM ruby:3.3.9-slim-bookworm
+FROM ruby:3.4.13-slim-trixie
 
 # Install needed OS packages for Jekyll and common gems (may tweak as needed)
 RUN apt-get update \
@@ -10,8 +10,6 @@ RUN apt-get update \
     openssl \
     git \
   && rm -rf /var/lib/apt/lists/*
-
-RUN gem install jekyll bundler sinatra rack
 
 # Set the working directory (inside container) for your Jekyll site
 WORKDIR /srv/jekyll
