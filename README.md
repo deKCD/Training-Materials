@@ -38,10 +38,10 @@ Then, open your web browser and navigate to `http://localhost:4000/Training-Mate
 
 ### Running the containerized version
 
-Currently images are being pushed to [quay.io](quay.io/dekcd/) by hand. 
+Currently images are being pushed to [de.NBI OCI](oci.bi.denbi.de/dekcd/) by hand. 
 Building and pushing of a new version after changes can be carried out as follows:
 ```
-docker build . -t quay.io/deckd/training-materials:VERSION_NUMBER --push
+docker build . -t oci.bi.denbi.de/deckd/training-materials:VERSION_NUMBER --push
 ```
 One can also run a local build by running `docker compose -f compose.dev.yml up -d` for testing.
 One would need to adjust the `compose.dev.yml` file accordingly.

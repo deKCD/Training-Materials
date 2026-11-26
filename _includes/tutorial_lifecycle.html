@@ -1,7 +1,7 @@
 {% comment %}
     Display tutorial's lifecycle.
-    Possible values: "alpha", "beta", "stable", "deprecated".
-    If not set, the tutorial is considered "alpha".
+    Possible values: "under development", "active", "archived".
+    If not set, the tutorial is considered "under development".
 {% endcomment %}
 
 {% if page.life_cycle == nil %}
@@ -10,24 +10,20 @@
 {% assign life_cycle = page.life_cycle %}
 {% endif %}
 
-{% if life_cycle == "alpha" %}
-<div class="alert alert-warning">
-  <strong>Alpha</strong>: This tutorial is in an early stage of development and may change significantly.
+{% if life_cycle == "under development" %}
+<div class="lifecycle lifecycle-draft">
+  <strong>Under development</strong>: This tutorial is in an early stage of development and may change significantly.
 </div>
-{% elsif life_cycle == "beta" %}
-<div class="alert alert-info">
-  <strong>Beta</strong>: This tutorial is in a testing phase. Feedback is welcome.
+{% elsif life_cycle == "active" %}
+<div class="lifecycle lifecycle-active">
+  <strong>Active</strong>: This tutorial is actively maintained and updated.
 </div>
-{% elsif life_cycle == "stable" %}
-<div class="alert alert-success">
-  <strong>Stable</strong>: This tutorial is considered complete and reliable.
-</div>
-{% elsif life_cycle == "deprecated" %}
-<div class="alert alert-danger">
-  <strong>Deprecated</strong>: This tutorial is no longer being maintained and may be removed in the future.
+{% elsif life_cycle == "archived" %}
+<div class="lifecycle lifecycle-archived">
+  <strong>Archived</strong>: This tutorial is no longer actively maintained.
 </div>
 {% else %}
-<div class="alert alert-danger">
+<div class="lifecycle lifecycle-unknown">
   <strong>Unknown</strong>: The lifecycle status of this tutorial is not defined. Please <a href="mailto:{{ site.email }}">contact us</a> for more information.
 </div>
 {% endif %} 

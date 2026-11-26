@@ -1,0 +1,22 @@
+{% comment %}
+  MathJax configuration for rendering LaTeX math expressions in the tutorials.
+  This configuration sets up the inline and display math delimiters, disables the MathJax menu,
+  and prevents loading extra UI/menu components.
+{% endcomment %}
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$$', '$$']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+   options: {
+    enableMenu: false
+  },
+  loader: {
+    load: []   // prevents loading extra UI/menu components
+  }
+};
+</script>
+
+<script src="{{ '/assets/mathjax/mathjax/tex-chtml.js' | relative_url }}" defer></script>

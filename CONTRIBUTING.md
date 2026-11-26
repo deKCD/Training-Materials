@@ -1,110 +1,260 @@
 ---
-layout: contributing
+layout: base_contributing
 title: Contribution
 description: Guidelines for contributing, including adding new content or editing existing materials.
+permalink: /CONTRIBUTING/
 ---
 
-We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR (Findable, Accessible, Interoperable, Reusable)** principles for training materials. 
+We highly recommend reading [Ten simple rules for making training materials FAIR](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1007854#abstract0){:target="_blank"} before creating a new training material and following the **FAIR** (**F**indable, **A**ccessible, **I**nteroperable, **R**eusable) principles for training materials. 
 
-## Table of Contents
-* [Add a new tutorial](#add-a-new-tutorial)
-    * [Edit the tutorial](#edit-the-tutorial)
-    * [Format the content](#format-the-content)
-        * [Boxes](#boxes)
-        * [Images](#images)
-* [Create a new learning pathway](#create-a-new-learning-pathway)
-* [Preview the website](#preview-the-website)
+## Preview the website
+---------------------------
+There are two options to run the website locally and preview your training materials before pushing them.
 
+**Option 1: Using Ruby and Bundler**
 
-## **Add a new tutorial**
--------------------------
-To add a new tutorial, create a new folder in `_tutorials` folder and  place the tutorial content in a single `tutorial.md` within the tutorial directory (or a subdirectory if you have multiple versions of the same tutorial).
+You need [Ruby](https://www.ruby-lang.org/en/documentation/installation/){:target="_blank"} and [Bundler](https://bundler.io/){:target="_blank"} installed. Then run:
 
-When creating a new tutorial, add the folder name (slug) to the `_data/tutorial_groups.yml` file. This links your tutorial to an existing tutorial group.
-If your tutorial belongs to a new category that does not yet exist, create a new group entry in `_data/tutorial_groups.yml` with a clear description of the group.
+```bash
+# Install required gems
+bundle install
 
-
-Then, commit the changes to the new branch and submit a pull request.
-
-Optionally you can also go to issues and "create an issue" with the format [add new tutorial](https://github.com/deKCD/Training-Materials/issues) that describes what you are adding.
-
-### **Edit the tutorial**
--------------------------
-The `tutorial.md` should have the following structure:
-
+# Start the Jekyll server
+bundle exec jekyll serve --trace --livereload --port 4000
 ```
+
+Open `http://127.0.0.1:4000/training/` (`Server address`) in your browser to view the website.
+
+**Option 2: Using Docker**
+
+Build and run the containerized version:
+
+```bash
+# Build the Docker image
+docker build . -t dekcd
+
+# Run the container
+docker run -it -p 4000:4000 dekcd
+```
+
+Then open `http://127.0.0.1:4000/training/` in your browser.
+
+
+## Add a new tutorial
+-------------------------
+This section describes the required structure, conventions, and submission workflow for contributing a new tutorial. Please follow these guidelines to ensure consistency, reusability, and maintainability across the repository.
+
+### Create the tutorial directory 
+All tutorials **must** be stored in the `_tutorials` directory. Each tutorial must have its own subdirectory, organized by tutorial name and version:
+```
+_tutorials/<tutorial-name>/<tutorial-version>
+```
+
+For example:
+```
+_tutorials/nanopore/main
+```
+
+The tutorial version is typically named `main`, but you can use an event- or release-specific name, such as `summer-school-2026`.
+
+Inside the version directory, choose one of the following structures:
+* **Single-file structure**: provide one self-contained Markdown file, `tutorial.md` by default.
+* **Modular structure**: split the tutorial into smaller, logically organized Markdown files (e.g. `part1.md` and `part2.md`). Link these files from the final `tutorial.md`. 
+
+
+**Recommended approach: use a modular structure**
+
+The modular structure is recommended because it:
+* makes content blocks easier to reuse
+* simplifies maintenance and updates
+* reduces duplication
+* keeps each file focused and easy to navigate.
+
+**Important**: The version directory must always contain a `tutorial.md` as the main file. This is the file that will be rendered as the tutorial.
+
+### Composing tutorials
+
+#### **Metadata**
+
+All tutorials must define their metadata at the very top of the main file `tutorial.md` using YAML front matter. **Do not** place metadata in auxiliary Markdown files (e.g., `part1.md`, `part2.md`).
+
+Example metadata header:
+```yaml
 ---
 layout: tutorial_hands_on
-
-title: Title of the tutorial
-description: Description of the tutorial
-slug: slugified title
-time_estimation: HM
+title: Introduction to basic Unix commands
+description: "This is the introduction to the basic shell commands."
+time_estimation: 2H30M
+level: beginner
+keywords: ["shell"]
 questions:
   - Which questions are addressed by the tutorial?
 objectives:
   - The learning objectives of the tutorial
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-version: tutorial version
-life_cycle: tutorial lifecycle
+ - The take-home messages
+ - They will appear at the end of the tutorial
+version: main
+life_cycle: active
 contributions:
   authorship:
-  - author 1
-  - author 2
+  - Max Mustermann 
   editing: 
+  - Erika Mustermann 
   funding: 
+  - de.KCD
 ---
+
+Short description that summarizes the tutorial.
 
 ## Section title
 
 Enter your tutorial content here.
 ```
-
-The tutorial requires the metadata to be included at the top:
-* keep the layout as `tutorial_hands_on` by default.
-* `title`: the title of the tutorial will appear on the **Collection of Tutorials** page.
-* `time_estimation`: the estimated time needed to complete the hands-on tutorial. It must match the following regular expression pattern:
+The following fields are mandatory unless stated otherwise:
+* `layout`: use `tutorial_hands_on` as the default layout.
+* `title`: tutorial title as displayed on the tutorial collection page.
+* `description`: a concise summary of the tutorial content. 
+* `time_estimation`: estimated duration of the tutorial. This must conform to the following pattern:
       ```/^(?:([0-9]+)[Hh])?(?:([0-9]+)[Mm])?(?:([0-9.]+)[Ss])?$/```
-* `questions`: a list of questions that will be addressed in the tutorial.
-* `objectives`: a list of learning objectives for the tutorial.
-* `key_points`: a list of take-home messages that will appear at the end of the tutorial.
-* `contributions`: a list of tutorial contributors broken down into broad categories to help contributors identify how they contributed to a specific tutorial. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`.
+* `level`: the learners level of ability in the topic being taught according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}. Examples of skill levels include ***beginner***, ***intermediate*** or ***advanced***.
+* `keywords`: keywords or tags used to describe the content. Multiple entries in a keywords list are delimited by commas.
+  Example:
+  ```keywords: ["bioinformatics", "python"]```
+* `questions`: a list of key questions addressed by the tutorial.
+* `objectives`: a list of learning objectives.
+* `key_points`: summary points presented at the end of the tutorial.
+* `version`: specifies the tutorial version (`main` by default).
+* `life_cycle`: indicates the development status of a training material according to the BioSchema [TrainingMaterial Profile 1.0-RELEASE](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}. Options are ***active***, ***under development***, and ***archived***.
 
-In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to the file and place the organization’s `logo` in `/assets/img/`.
+  Example:
+  ```life_cycle: under development```
 
-> ## Development status of tutorials
-> The development status of tutorials follows a framework similar to that of the [Carpentries](https://docs.carpentries.org/resources/curriculum/lesson-life-cycle.html). Training materials are classified into four categories: **alpha**, **beta**, **stable**, and **deprecated**.
-> 
-> - **Alpha:** the tutorial is in the early stages of development. Its content may be incomplete, untested, and subject to significant changes. This status typically applies until a complete first draft is available.
-> - **Beta:** the tutorial is in the testing phase, being reviewed and taught by other instructors. Feedback from pilot workshops is actively incorporated, and further revisions are likely.
-> - **Stable:** the tutorial is considered complete, reliable, and well-maintained. Only minor updates are expected, with no major changes anticipated. 
-> - **Deprecated:** the tutorial is no longer maintained and may be removed in the future.
+> <details-title>Development status of tutorials</details-title>
+> - **under development:** early-stage development. Content may be incomplete, untested, and subject to significant changes. This status typically applies until a complete first draft is available.
+> - **active:** complete, reliable, and well-maintained tutorial. Only minor updates are expected.
+> - **archived:** the tutorial is no longer maintained and may be removed in the future.
 > 
 {: .details}
 
-The following information can also be included in the tutorial metadata:
+* `contributions`: categorized list of contributors. Examples include `authorship`, `editing`, `funding`, `testing`, `infrastructure`, and `translation`. In the `funding` section, list the name of the organization that supported the training material. Ensure that the organization’s name matches an entry in `_data/contributions.yml`. If your organization is not listed, please add its `name` to `_data/contributions.yml` and place the organization’s `logo` in `/assets/img/` folder.
+
+
+The following fields are optional but recommended where applicable:
 * `zenodo_link`: link to the input data for the tutorial on Zenodo.
 * `follow_up_training`: a list of resources that the reader of the material could follow at the end of the tutorial.
 
-For additional information that could be included in the tutorial metadata, please refer to the [GTN tutorial.](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html){:target="_blank"}
+For extended metadata options and advanced patterns, please refer to the [Galaxy Training Network tutorial guidelines.](https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html){:target="_blank"}
+
+> <warning-title>Add a concise summary of your tutorial</warning-title>
+> Please provide a brief abstract after the metadata section. The abstract should summarize the main topic, purpose, and scope of the tutorial in **2–3 concise sentences**. 
+> 
+> **Do not** add a heading or title for the abstract. This summary provides learners with a quick overview of the tutorial and is also used to populate the `abstract` metadata field in the Bioschemas [TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"}.
+>
+{: .warning}
 
 
-If you have any data or images that you would like to add to the tutorial, please place them in the tutorial directory.
 
-### **Format the content**
 
-#### **Boxes**
+#### **Modular structure**
 
-To improve the learning experience in our tutorial, we define some boxes to highlight content. Below is an example of the "Task box with solutions":
+If you choose a modular structure, assemble the final tutorial using Jekyll’s `include` directive:
 
+{% raw %}
 ```markdown
-> ## Questions
+Your introductory text.
+
+{% include _tutorials/intro-python/main/part1.md %}
+
+Additional content.
+```
+{% endraw %}
+
+This approach allows flexible composition while keeping individual sections reusable.
+
+A typical modular tutorial may look like:
+```
+_tutorials/
+  intro-python/
+    main/
+      part1.md
+      part2.md
+      tutorial.md
+```
+
+If you have any data or images that you would like to add to the tutorial, please place them in the tutorial folder.
+
+#### **Formatting tutorial content**
+
+This section outlines the standardized components used to structure tutorial content, including Table of Contents (TOC), instructional boxes and image handling.
+
+##### **TOC**
+
+To automatically generate a Table of Contents from your section headings, add the following snippet directly below the metadata section in your content:
+
+{% raw %}
+```markdown
+> <agenda-title>Table of Contents</agenda-title>
+> Your text (optional).
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+```
+{% endraw %}
+
+##### **Mathematical expressions**
+
+Mathematical expressions should be written in **LaTeX**. To render an equation, enclose the expression with double `$$` on both sides.
+
+Example (inline expression):
+```
+$$ a^2 + b^2 = c^2 $$
+```
+This will be rendered as:
+
+$$ a^2 + b^2 = c^2 $$
+
+You can also use standard LaTeX math environments (such as `equation`, `align`, `eqnarray`, etc.) inside the `$$ ... $$` delimiters to create more complex formulas and multi-line equations.
+
+Example (multi-line equation using `eqnarray`):
+```
+$$\begin{eqnarray}
+x' &=& &x \sin\phi &+& z \cos\phi \\
+z' &=& - &x \cos\phi &+& z \sin\phi \\
+\end{eqnarray}$$
+```
+
+This will be rendered as:
+
+$$\begin{eqnarray}
+x' &=& &x \sin\phi &+& z \cos\phi \\
+z' &=& - &x \cos\phi &+& z \sin\phi \\
+\end{eqnarray}$$
+
+
+><comment-title>Notes</comment-title>
+> * Use standard LaTeX syntax for all mathematical expressions.
+> * Equations are rendered by enclosing them in double dollar signs `$$ ... $$`, which can be used for both inline and display-style formulas.
+> * If an inline equation does not render correctly with `$$ ... $$`, use LaTeX inline math delimiters instead: `\( a^2 + b^2 = c^2 \)`
+> This will be rendered as: 
+> \\( a^2 + b^2 = c^2\\)
+> * LaTeX math environments (such as `equation`, `align`, `aligned`, `cases`, and `eqnarray`) should be enclosed within `$$ ... $$` to ensure proper rendering.
+> * Complex expressions, multi-line equations, and aligned formulas can be created using these environments.
+{: .comment}
+
+
+##### **Boxes**
+
+To enhance the learning experience, tutorials use a set of predefined "boxes" implemented via styled blockquotes. These visually distinguish different types of content such as tasks, explanations, tips, and assessments.
+
+Example: Question and Solution Box
+```markdown
+> <question-title>Questions</question-title>
 > 1. Question 1
 > 2. Question 2
 >  
-> > ## Answers
+> > <solution-title>Answers</solution-title>
 > > 1. Answer 1
 > > 2. Answer 2
 > > 
@@ -112,13 +262,13 @@ To improve the learning experience in our tutorial, we define some boxes to high
 >
 {: .question}
 ```
-which will look like this:
 
-> ## Questions
+This structure creates a nested box where solutions are revealed within the question block:
+> <question-title>Questions</question-title>
 > 1. Question 1
 > 2. Question 2
 >  
-> > ## Answers
+> > <solution-title>Answers</solution-title>
 > > 1. Answer 1
 > > 2. Answer 2
 > > 
@@ -126,41 +276,54 @@ which will look like this:
 >
 {: .question}
 
-There are several boxes that you can use to format the content of your training material: `{: .overview}`, `{: .key_points}`, `{: .tip}`, `{: .warning}`, `{: .comment}`, `{: .hands_on}`, `{: .question}`, `{: .solution}`, `{: .details}`, `{: .feedback}`, `{: .code-in}`, and `{: .code-out}`.
+Box titles are defined using a custom HTML-like tag structure, such as <question-title>Your question title</question-title>, where the tag name specifies the box type and the enclosed text defines the displayed title.
 
-> ## Tasks
+The following boxes are available and should be used consistently:
+* `{: .overview}` summaries
+* `{: .key_points}` take-home messages
+* `{: .tip}` practical advice or shortcuts
+* `{: .warning}` important cautions
+* `{: .comment}` explanatory notes
+* `{: .hands_on}` or `{: .hands-on}` exercises or tasks
+* `{: .question}` assessment questions
+* `{: .solution}` answers to questions
+* `{: .details}` supplementary information
+* `{: .feedback}` learner feedback prompts
+* `{: .code-in}` input code blocks
+* `{: .code-out}` output or results
+
+Foldable box types (`solution`, `tip`, `comment`, `details`) allow you to show or hide the content on the same page. The title line of these boxes is always visible, making it easier to scan long explanatory boxes and reducing visual overload in tutorials.
+
+> <hands-on-title>Tasks</hands-on-title>
 > 1. Create each box and see how it looks.
 > 2. Create one with a nested box.
 > 
 {: .hands_on}
 
-### **Examples**
+Usage examples:
 
-> ## Tasks
+> <hands-on-title>Tasks</hands-on-title>
 > 1. List of tasks
 > 2. ...
 > 
 {: .hands_on}
 
-
-> ## Details
+> <details-title>Details</details-title>
 > Here put some text...
 > 
 {: .details}
 
-
-> ## Tip
+> <tip-title>Tip</tip-title>
 > Here put some useful information...
 > 
 {: .tip}
 
-
-> ## Comment
+> <comment-title>Comment</comment-title>
 > Here put some comments...
 > 
 {: .comment}
 
-> ## Code In
+> <code-in-title>Code In</code-in-title>
 > ```bash
 > ls -lh
 > ```
@@ -171,18 +334,18 @@ There are several boxes that you can use to format the content of your training 
 > 
 {: .code-in}
 
-> ## Code Out
+> <code-out-title>Code Out</code-out-title>
 > ```bash
 > # code output
 > ```
 > 
 {: .code-out}
 
-> ## Questions
+> <question-title>Questions</question-title>
 > 1. Question 1
 > 2. Question 2
 >  
-> > ## Answers
+> > <solution-title>Answers</solution-title>
 > > 1. Answer 1
 > > 2. Answer 2
 > > 
@@ -190,53 +353,275 @@ There are several boxes that you can use to format the content of your training 
 >
 {: .question}
 
-#### **Images**
+##### **Working with images**
 
-To create a proper inline image link, use `![figure-title](/tutorials/<tutorial-folder>/<image-folder>/<image>){: .responsive-img }`. Add `{: .responsive-img }` to place the image within the text width.
+Images must be referenced using the `relative_url` filter:
+```markdown
+![figure-title]({{ "/tutorials/tutorial-folder/image-folder/image.png" | relative_url }}){: .responsive-img }
+```
+* `![figure-title]()` this is standard Markdown image syntax. The text inside the brackets (`figure-title`) becomes the **alt text**, which improves accessibility and is displayed if the image fails to load.
+* `{{ "/path/to/image" | relative_url }}` the `relative_url` ensures that the correct `baseurl` defined in `_config.yml` is automatically prepended. This prevents broken links when the site is hosted in a subdirectory.
+* `{: .responsive-img }` CSS class ensures that images do not exceed content width and scale proportionally on smaller screens.
 
-
-> ## Additional resources
-> If you need an additional materials to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode.](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes){:target="_blank"}
+> <details-title>Additional resources</details-title>
+> If you need an additional material to learn how to format the tutorial content, *i.e.* to wrap parts of the text in the special block quotes, please refer to the Software Carpenters' [Formatting episode.](https://carpentries.github.io/lesson-example/04-formatting/index.html#special-blockquotes){:target="_blank"}
 > 
 > Please also refer to the [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet){:target="_blank"} to learn more how to use Markdown.
 > 
 {: .details}
 
+### Supporting multiple versions
+If your tutorial exists in multiple versions (e.g., adapted for different audiences or events), organize them using version-specific subdirectories:
+```
+_tutorials/<tutorial-name>/
+  main/
+    tutorial.md
+  summer-school-2026/
+    tutorial.md
+```
 
-## **Create a new learning pathway**
+Each version should be self-contained or consistently structured using `include`.
+
+### Assigning tutorial to a group
+Tutorials are categorized into thematic groups (e.g., Unix, Metagenomics) for navigation and discoverability.
+
+To register your tutorial:
+* add the exact folder name (e.g., `nanopore`) to the `_data/tutorial_groups.yml` file
+* place it under an appropriate existing group
+
+If no suitable group exists:
+* create a new group entry with a clear and concise description, or
+* temporarily assign the tutorial to the **incubator** group. Final group placement may be reviewed and adjusted by the editorial board.
+
+For example, if your tutorial is stored in a folder named `nanopore`, add it to the relevant group (or **incubator** for review) as follows:
+```
+- title: Incubator
+  description: Tutorials in this group are under review.
+  tutorials:
+    - nanopore
+```
+### Add yourself to the contributors list
+You can add your **name**, **ORCID**, and/or **GitHub** profile to the `_data/contributors.yml` file. Your ORCID will be used to identify and attribute your contribution when your tutorial is registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"}.
+
+For example: 
+```yaml
+- name: Max Mustermann
+  ORCID: https://orcid.org/xxxx-xxxx-xxxx-xxxx
+  Github: https://github.com/max-mustermann
+```
+
+### Submit tutorial
+Once your tutorial is ready to publish, create a new branch, commit your changes, submit a pull request for review. 
+You may optionally [open an issue](https://github.com/deKCD/Training-Materials/issues){:target="_blank"} to describe your contribution before or alongside your pull request.
+
+### Registering material in TeSS
+
+If all the required metadata fields are completed correctly, tutorials can be registered in [TeSS](https://tess.elixir-europe.org/){:target="_blank"} with minimal additional effort. Using the [Bioschemas TrainingMaterial Profile](https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE){:target="_blank"} ensures the metadata is machine-readable and interoperable, enabling automated harvesting, improving discoverability, and supporting seamless integration into the ELIXIR training ecosystem without manual curation.
+
+
+
+## Create and Deploy Quarto presentations
 ------------------------------------
-To add a new learning pathway, create `<pathway_title>.md` file in `_pathways` folder. The `<pathway_title>.md` should have the following structure:
+This guide explains how to create presentation slides with Quarto and make them available on the training materials platform.
 
+### Overview
+Presentations in this repository are written in [Quarto](https://quarto.org/){:target="_blank"} and rendered as [RevealJS](https://revealjs.com/){:target="_blank"} slides. The generated slides are HTML files that can be viewed in a browser or exported to PDF for distribution.
+
+The typical workflow is:
+
+1. Create a `slides.qmd` file.
+2. Write your presentation content in Markdown.
+3. Render the presentation to HTML.
+4. Commit and push your changes to GitHub.
+5. Access the published slides from the [training materials platform](https://datenkompetenz.cloud/training/tutorials/){:target="_blank"}.
+
+**Important**: Name the Quarto slides `slides.qmd`. This file is rendered and linked from [training materials platform](https://datenkompetenz.cloud/training/tutorials/){:target="_blank"}.
+
+><details-title>What is Quarto?</details-title>
+> Quarto is an open-source publishing system for scientific and technical content. It can generate many different output formats, including:
+> * Articles and reports
+> * Websites and books
+> * Dashboards and interactive documents
+> * Presentations
+{: .details}
+
+In this guide, we focus exclusively on creating presentations using the `revealjs` format.
+
+### Create a presentation file
+Create a file named `slides.qmd` in your tutorial directory: `_tutorials/<TUTORIAL-NAME>/<TUTORIAL-VERSION>/slides.qmd`
+
+A minimal presentation looks like this:
+```yaml
+---
+title: "Your Presentation Title"
+subtitle: "Your Subtitle"
+author: "Your Name"
+date: "2026-06-26"
+format: revealjs
+---
+
+## Slide 1
+Your content here
+
+## Slide 2
+More content here
+```
+
+Shared presentation information—such as `title`, `author`, and `output` settings—is placed at the root level of your YAML block. For RevealJS format-specific metadata, please refer to this [documentation](https://quarto.org/docs/reference/formats/presentations/revealjs.html){:target="_blank"}. 
+
+#### Convert PPTX slides into Quarto Markdown
+
+If you already have presentation slides in PowerPoint `.pptx` format, you can convert them to a Quarto Markdown `.qmd` file using [pandoc](https://github.com/jgm/pandoc){:target="_blank"}:
+```bash
+pandoc --from=pptx --to=markdown --output=slides.qmd --extract-media=images slides.pptx
+```
+Here, `--extract-media` extracts images and other media from the input file and saves them in the specified folder.
+
+After running the command, you should have a `slides.qmd` file and `images` folder containing all extracted images. 
+
+Pandoc does not automatically create all the Quarto metadata required for your slides. Add the following YAML header to the top of `slides.qmd`:
+```yaml
+---
+title: "Your Presentation Title"
+subtitle: "Your Subtitle"
+author: "Your Name"
+date: "2026-06-26"
+format: revealjs
+---
+```
+
+><warning-title>Important</warning-title>
+> Always review the generated `slides.qmd` before publishing it.
+>
+> Pandoc can preserve much of the content and structure of the original presentation, but the conversion is not always perfect. You may need to manually adjust lists and formatting. 
+{: .warning}
+
+After making any necessary changes, [render](#render-and-preview-the-presentation) the `slides.qmd` with Quarto to check that the final presentation looks as expected.
+
+### Add slides
+Slides are created using Markdown headings level 1 (`#`) or level 2 (`##`). You can also separate slides with a horizontal rule (`---`):
+```
+- Item 1
+- Item 2
+
+---
+
+- Item 1
+- Item 2
+```
+
+**Note**: The best way to get a sense for the capabilities of RevealJS is this [demo](https://quarto.org/docs/presentations/revealjs/demo/){:target="_blank"} presentation. Check out the [source code](https://github.com/quarto-dev/quarto-web/blob/main/docs/presentations/revealjs/demo/index.qmd){:target="_blank"} for the demo to see how the slides were created.
+
+#### Learn more about RevealJS
+RevealJS provides many features, including incremental content, speaker notes, interactive elements, code highlightning, custom themes, and export to PDF. 
+The following resources are usefule when building presentations:
+
+><details-title>Resources</details-title>
+> * [Quarto Documentation](https://quarto.org/){:target="_blank"}
+> * [Quarto Presentations Guide](https://quarto.org/docs/presentations/){:target="_blank"}
+> * [RevealJS Documentation](https://revealjs.com/){:target="_blank"}
+> * [Creating slides using the `revealjs` format](https://quarto.org/docs/presentations/revealjs/){:target="_blank"}
+{: .details}
+
+
+### Render and preview the presentation
+While creating your slides, it is recommended to use Quarto's live preview mode:
+```bash
+quarto preview slides.qmd
+```
+This command automatically renders the presentation, starts a local web server, and opens the slides in your browser. Any changes you make to `slides.qmd` are automatically re-rendered and refreshed in the browser, making it easier to develop and test your presentation.
+
+Once your presentation is ready, generate the final HTML version by running:
+```bash
+quarto render slides.qmd --to revealjs
+```
+This command creates the final presentation file in the same directory, named `slides.html`.
+
+
+### Commit and Push to GitHub
+After verifying that the presentation renders correctly:
+1. Commit `slides.qmd` and any associated assets (images, logos, etc.).
+2. Push your changes to the repository.
+
+### Access the published presentation
+After a few minutes, your presentation will appear on the platform. Open the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page and look for for tutorial in the **Slides** column to access the published presentation.
+
+### Add PDF slides
+
+Alternatively, you can upload your slides as a PDF file named `slides.pdf`. The PDF will then be available on the [Collection of Tutorials](https://datenkompetenz.cloud/training/tutorial/){:target="_blank"} page in the **Slides** column. It will appear as `<tutorial_version> (PDF)`. You can click the file to open it and view the slides in presentation mode directly in your web browser.
+
+**Note**: PDF slides are more difficult to maintain and update than Quarto markdown. However, they can be a quick solution if you need to make the slides available without further editing.
+
+## Create a new learning pathway
+------------------------------------
+Learning pathwayss organize multiple tutorials into coherent, structured curricula. Each pathway defines a sequence of modules, where each module groups related tutorials under a shared theme.
+
+To define a new pathway create a markdown file named `<pathway_title>.md` and place it in the `_pathways` directory. 
+
+Each pathway file must include YAML front matter describing its structure, modules, and associated tutorials.
+
+Template:
 ```markdown
 ---
 layout: pathway
 title: Title of the Learning Pathway
-description: Description of the Learning Pathway
-tags: []
+description: A concise summary of the pathway’s scope and objectives.
+tags: [a list of keywords]
 pathway:
-  - section: "Module 1: Title of the Module
-    description: Description of the Module
+  - section: "Module 1: The module title"
+    description: A short explanation of the module’s focus
     tutorials:
       - name: tutorial name
         version: main
 
-  - section: "Module 1: ..."
-    description: ...
+  - section: "Module 2: The module title"
+    description: A short explanation of the module’s focus
     tutorials:
-      - name: ...
-        version: ...
+      - name: another tutorial
+        version: main
 editorial_board:
-  - name: ...
-    orcid: ...
+  - name: contributor Name
+    orcid: contributor ORCID
 ---
 ```
 
-Keep the `layout: pathway` as default. Commit changes to the new branch and pull a request.
+The `layout` field must be set to `pathway` to ensure correct rendering of the pathway page. Each tutorial entry must include `name` (which must exactly match the corresponding tutorial folder name) and `version` (selected from the available versions of that tutorial).
 
-## **Preview the website**
---------------------------
-To preview your own training materials locally, use provided devcontainer. To use it, you need to have [Visual Studio Code](https://code.visualstudio.com/) installed. Open the repository in VS Code and it will prompt you to reopen the folder in the container. After that, you can run the Jekyll server as follows: 
+After defining the pathway, create a new branch, commit the pathway file, and submit a pull request for review.
 
+## Share Materials with the Galaxy Training Network (GTN)
+---
+If you would like to contribute your training materials to the Galaxy Training Network (GTN), please follow the official guidelines for [creating a new tutorial](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/github-contribution/tutorial.html){:target="_blank"} and [formatting content](https://galaxyproject.github.io/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html){:target="_blank"}.
+
+This platform is fully compatible with GTN in terms of metadata structure and formatting conventions. This compatibility enables seamless transfer of materials between GTN and this platform. In practice, this means:
+
+* training materials developed here can be contributed to GTN with minimal adjustments.
+* GTN tutorials can be integrated into this platform without requiring reformatting, preserving both content and presentation.
+
+To incorporate specific GTN tutorials into this platform, you can use [git sparse-checkout](https://git-scm.com/docs/git-sparse-checkout){:target="_blank"} to efficiently retrieve only the required content:
+
+1. Clone the GTN repository with sparse checkout and blob filtering (lightweight clone into a temporary directory):
 ```bash
-bundle exec jekyll serve --config _config.yml,_config_dev.yml
+git clone --depth 1 --filter=blob:none --sparse https://github.com/galaxyproject/training-material.git temp-training
+```
+
+2. Navigate to the cloned repository:
+```bash
+cd temp-training
+```
+
+3. Select the specific tutorial directory. For example, to retrieve the [Classification in Machine Learning](https://galaxyproject.github.io/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html){:target="_blank"} tutorial:
+```bash
+git sparse-checkout set topics/statistics/tutorials/classification_machinelearning
+```
+
+4. Copy the tutorial into your local `_tutorials/` directory:
+```bash
+cp -r topics/statistics/tutorials/classification_machinelearning ../_tutorials/<tutorial_name>
+```
+
+5. Clean up the temporary files:
+```bash
+cd ..
+rm -rf temp-training
 ```

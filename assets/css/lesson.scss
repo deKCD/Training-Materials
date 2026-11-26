@@ -356,41 +356,6 @@ img.image-with-shadow {
   box-shadow: 0 0.39em 1.56em 0 #888;
 }
 
-//----------------------------------------
-// Life cycle box
-//----------------------------------------
-
-div.life-cycle {
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    font-size: 1.2em;
-    text-align: center;
-    margin-bottom: -0.065em;
-    border-radius: 0;
-}
-
-.pre-alpha {
-    color: #a94442;
-    background: #f2dede;
-}
-
-.alpha {
-    color: #8a6d3b;
-    background: #fcf8e3;
-}
-
-.beta {
-    color: #31708f;
-    background: #d9edf7;
-}
-
-.published {
-    color: #354711;
-    background: #effbd7;
-}
-
 // Remove border around spans of text within code blocks
 // that the highlighter (rouge) failed to recognize.
 pre.highlight span.err {

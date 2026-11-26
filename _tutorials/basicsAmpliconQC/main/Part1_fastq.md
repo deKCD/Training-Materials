@@ -1,8 +1,8 @@
-# FASTQ Format
+## FASTQ Format
 
 Let's first have a look at what a FASTQ file looks like and how its format is defined:
 
-![Example of a FASTQ file](https://github.com/jueneman/16S-workshop-denbi/raw/master/docs/qc/pics/fastq.png)
+![Example of a FASTQ file](https://github.com/jueneman/16S-workshop-denbi/raw/master/docs/qc/pics/fastq.png){: .responsive-img }
 
 A FASTQ file contains four lines per sequence:
 
@@ -11,13 +11,11 @@ A FASTQ file contains four lines per sequence:
 3. **A separator line**, beginning with `+` (can optionally be followed by the identifier)
 4. **Quality string**, encoding per-base quality scores
 
----
-
-## Sequence Quality Scores
+### Sequence Quality Scores
 
 Sequence quality scores were first introduced by the phred base caller used for Sanger sequencing.
 
-![Sanger chromatogram and base calls](https://github.com/jueneman/16S-workshop-denbi/raw/master/docs/qc/pics/chromatogram.png)
+![Sanger chromatogram and base calls](https://github.com/jueneman/16S-workshop-denbi/raw/master/docs/qc/pics/chromatogram.png){: .responsive-img }
 
 Quality scores (Q-scores) are a log transformation of the error probability for each base:
 
@@ -32,8 +30,8 @@ Quality scores (Q-scores) are a log transformation of the error probability for 
 
 The higher the quality score, the lower the probability that the base call is incorrect.
 
----
-
-# References
-
-**Images**: [CUNY OpenLab, Next-gen sequencing](https://openlab.citytech.cuny.edu/bio-oer/analyzing-dna/next-gen-sequencing/2/)
+><details-title>References</details-title>
+> 
+> **Images**: [CUNY OpenLab, Next-gen sequencing](https://openlab.citytech.cuny.edu/bio-oer/analyzing-dna/next-gen-sequencing/2/)
+>
+{: .details}

@@ -20,22 +20,62 @@
 {% assign funders = page.contributions.funding %}
 {% endif %}
 
-<blockquote class="details">
-  <h2>Contributions</h2>
-  {% if authors %}
-      <p><strong>Author(s):</strong> {{ authors | join: ", " }}</p>
-  {% endif %}
-  {% if editors %}
-      <p><strong>Editor(s):</strong> {{ editors | join: ", " }}</p>
-  {% endif %}
-</blockquote>
+<div class="faq-container">
+    <div class="faq-summary">Contributions</div>
+    <div class="faq-answer">
+    {% if authors %}
+        <p>
+            <strong>Author(s):</strong>
+            {% for author in authors %}
+                {% assign author_data = site.data.contributors | where: "name", author | first %}
+                {% assign author_url = author_data.ORCID %}
+                {% if author_data and author_url == nil or author_url == "" %}
+                  {% assign author_url = author_data.Github %}
+                {% endif %}
+
+                {% if author_data and author_url %}
+                  <a href="{{ author_url }}" target="_blank" rel="noopener" style="color: #0e0e0e; text-decoration: none;">{{ author }}</a>
+                {% elsif author_data %}
+                  {{ author }}
+                {% else %}
+                  {{ author }}
+                {% endif %}
+                {% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    {% if editors %}
+        <p>
+            <strong>Editor(s):</strong>
+            {% for editor in editors %}
+                {% assign editor_data = site.data.contributors | where: "name", editor | first %}
+                {% assign editor_url = editor_data.ORCID %}
+                {% if editor_data and editor_url == nil or editor_url == "" %}
+                  {% assign editor_url = editor_data.Github %}
+                {% endif %}
+                
+                {% if editor_data and editor_url %}
+                    <a href="{{ editor_url }}" target="_blank" rel="noopener" style="color: #0e0e0e; text-decoration: none;">{{ editor }}</a>
+                {% elsif editor_data %}
+                    {{ editor }}
+                {% else %}
+                    {{ editor }}
+                {% endif %}
+                {% unless forloop.last %}, {% endunless %}
+            {% endfor %}
+
+        </p>
+    {% endif %}
+    </div>
+</div>
 
 {% if funders %}
     <p><strong>Supported by:</strong></p>
     {% for funder in funders %}
         {% assign contrib = site.data.contributions | where: "name", funder | first %}
         {% if contrib %}
-            <img src="{{ contrib.logo }}" alt="{{ contrib.name }} logo" style="max-height:50px; margin-right:10px;"/>
+            <img src="{{ '/training' | append: contrib.logo }}" alt="{{ contrib.name }} logo" style="max-height:50px; margin-right:10px;"/>
         {% endif %}
     {% endfor %}
 {% endif %}

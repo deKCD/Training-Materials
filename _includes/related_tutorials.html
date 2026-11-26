@@ -1,0 +1,31 @@
+{% comment %}
+    Recommend next related tutorial from tutorial_groups.yml
+{% endcomment %}
+
+{% assign related_tutorials = site.data.tutorial_groups | where: "group", page.tutorial_group | first %}
+
+{% if related_tutorials and related_tutorials.related %}
+    {% assign next_tutorial = related_tutorials.related | first %}
+    <div class="related-tutorials">
+        <h2>Related Tutorials</h2>
+        {% if next_tutorial %}
+            {% assign next_tutorial_page = site.pages | where: "path", next_tutorial.path | first %}
+            <div class="next-tutorial-card">
+                <span class="next-tutorial-label">Next tutorial:</span>
+                {% if next_tutorial_page %}
+                    <a href="{{ next_tutorial_page.url }}">{{ next_tutorial_page.title }}</a>
+                {% else %}
+                    <span>{{ next_tutorial.title | default: next_tutorial.path }}</span>
+                {% endif %}
+            </div>
+        {% endif %}
+        <ul>
+            {% for tutorial in related_tutorials.related %}
+                {% assign tutorial_page = site.pages | where: "path", tutorial.path | first %}
+                {% if tutorial_page %}
+                    <li><a href="{{ tutorial_page.url }}">{{ tutorial_page.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

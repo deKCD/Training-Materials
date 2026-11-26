@@ -1,49 +1,29 @@
 ---
 layout: tutorial_hands_on
 title: SimpleVM Workshop
-description: "FIXME"
-slug: simplevmworkshop
-time_estimation: "FIXME"
+description: "Tutorial shows how to identify pathogenic bacteria within publicly available metagenomic datasets and scale up a bioinformatics workflow using SimpleVM."
+time_estimation: 2H
+level: beginner
+keywords: [cloud]
 questions:
-  - "FIXME"
-  - "FIXME"
+  - How to scale up a bioinformatic workflows using simpleVM?
 objectives:
-  - "FIXME"
-  - "FIXME"
+  - Learn how to configure a virtual machine and scale it up with more resources.
 key_points:
-  - "FIXME"
-  - "FIXME"
+  - Always separate your computing nodes from your data storage; keeping your research results on independent, transferable volumes ensures they remain safe and reproducible long after your processing instances are destroyed.
 version:
   - main
+life_cycle: under development
 contributions:
   authorship:
   - Peter Belmann
   - Nils Hoffmann
-  - dweinholz
+  - David Weinholz
   editing: 
   funding:
 ---
 
-## Table of Contents
-* [Section 1: Big things start small](#section-1-big-things-start-small)
-    * [1.1 Create a de.NBI Cloud Account](#11-create-a-denbi-cloud-account)
-    * [1.2 Select the SimpleVMIntro23 project](#12-select-the-simplevmintro23-project)
-    * [1.3 Start a VM](#13-start-a-vm)
-* [Section 2: Verify your VM properties and tools](#section-2-verify-your-vm-properties-and-tools)
-* [Section 3: Scale up your analysis ](#section-3-scale-up-your-analysis)
-    * [3.1 Create a new VM based on your snapshot](#31-create-a-new-vm-based-on-your-snapshot)
-    * [3.2 Interact with the SRA Mirror and search for more datasets to analyse](#32-interact-with-the-sra-mirror-and-search-for-more-datasets-to-analyse)
-    * [3.3 Run commands with more cores and plot your result](#33-run-commands-with-more-cores-and-plot-your-results)
-* [Section 4: Inspect your generated data via a research environment](#section-4-inspect-your-generated-data-via-a-research-environment)
-    * [4.1 Create a VM based on a Research Environment](#41-create-a-vm-based-on-a-research-environment)
-    * [4.2 RStudio](#42-rstudio)
-    * [4.3 Provide your research data to a reviewer](#43-provide-your-research-data-to-a-reviewer)
-* [Section 5: ](#)
-    * [5.1 Create a Cluster](#51-create-a-cluster)
-    * [5.2 Investigate your cluster setup](#52-investigate-your-cluster-setup)
-    * [5.3 Scan the SRA for genomes](#53-scan-the-sra-for-genomes)
-
-
+## Introduction
 This workshop demonstrates a typical workflow of a SimpleVM user.
 In this workshop your goal will be to identify pathogenic bacteria
 that were classified as "greatest threat to human health" by the 
@@ -84,7 +64,7 @@ you should be able to log in to the [de.NBI Cloud Portal](https://cloud.denbi.de
 
 ### **1.2 Select the SimpleVMIntro23 project**
 
-> ## Hands On: Select the SimpleVMIntro23 project
+> <hands-on-title>Select the SimpleVMIntro23 project</hands-on-title>
 > 1. Click on the `New Instance` tab.
 > 
 > 2. If you are already member of a SimpleVM project then you are offered a drop down menu to select
@@ -101,7 +81,7 @@ you should be able to log in to the [de.NBI Cloud Portal](https://cloud.denbi.de
 
 ### **1.3 Start a VM**
 
-> ## Hands On: Start a VM
+> <hands-on-title>Start a VM</hands-on-title>
 > 1. Choose a name for your VM.
 > 2. Select **de.NBI default**.
 > 3. In the image section, please click on the *Research Environments* tab 
@@ -142,9 +122,9 @@ you scale up your analysis in the next section.
 
 Log in to the VM and verify that SimpleVM provisioned the VM correctly.
 
-> ## Hands On: Verify VM properties and tools
+> <hands-on-title>Verify VM properties and tools</hands-on-title>
 > 1. Click on the Instances tab (Overview -> Instances). After you have initiated the start-up of the machine, you should have been automatically redirected there.
->    Now > open the "How to connect"
+>    Now open the "How to connect"
 >    dropdown of your machine. Click on the Theia ide URL which opens a new browser tab.
 >    ![](/tutorials/simpleVMWorkshop/figures/howtoconnect.png){: .responsive-img }
 > 2. Click on `Terminal` in the upper menu and select `New Terminal`.
@@ -222,7 +202,7 @@ and scale up our analysis by providing more cores to mash.
 
 ### **3.1 Create a new VM based on your snapshot**
 
-> ## Hands On: Create a new VM based on snapshot
+> <hands-on-title>Create a new VM based on snapshot</hands-on-title>
 > 1. Click on `Overviews` -> `Snapshots` in left menu and check which status
 >    your snapshot has. You can also filter of the name in the top menu. 
 >    If it has the status `active`, you can 
@@ -252,7 +232,7 @@ and scale up our analysis by providing more cores to mash.
 
 ### **3.2 Interact with the SRA Mirror and search for more datasets to analyse**
 
-> ## Hands On
+> <hands-on-title>Interact with the SRA Mirror</hands-on-title>
 > 1. You are now on the `Instance Overview` page. You can delete your old VM which
 >    we used to create your snapshot. To do this, open the action selection of the old machine again
 >    by clicking on 'Show Actions' and select 'Delete VM'. Confirm the deletion of the machine.
@@ -315,7 +295,7 @@ and scale up our analysis by providing more cores to mash.
 >
 {: .hands_on}
 
-> ## Explanation
+> <details-title>Explanation</details-title>
 >    * `mc find` reports all files that have one of the following prefixes in their file name: `SRR6439511.`, `SRR6439513.`, `ERR3277263.`, `ERR929737.`, `ERR929724.`.
 >    *  `jq` uses the json that is produced by `mc find` and sums up the size of all files (`.size` field).
 >    * `numfmt` transforms the sum to a human-readable string.
@@ -361,7 +341,7 @@ and scale up our analysis by providing more cores to mash.
    }
    ```
    
-> ## Explanation
+> <details-title>Explanation</details-title>
 >   In order to understand what this function does let's take the following datasets as an example:
 > 
 > >```bash
@@ -418,11 +398,11 @@ and scale up our analysis by providing more cores to mash.
    done > publications.tsv
    ```
     
-> ## Explanation
+> <details-title>Explanation</details-title>
 >    * `for sraid in $(ls -1 output/ | cut -f 1 -d '.');` iterates over all datasets found in the output
 >      directory.
 >    * `esearch` just looks up the scientific name and title of the SRA study.
->    * 'sed' adds the SRA ID to the output table. The first column is the SRA ID, the second column is 
+>    * `sed` adds the SRA ID to the output table. The first column is the SRA ID, the second column is 
 >       the scientific name and the third column is the study title.
 >    * All results are stored the `publications.tsv` file.
 >
@@ -558,7 +538,7 @@ sinfo
 ```
 which will produce the following example output
 
-> ## Code Out
+> <code-out-title></code-out-title>
 > ```
 > PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 > debug*       up   infinite      2   idle bibigrid-worker-1-1-us6t5hdtlklq7h9,bibigrid-worker-1-2-us6t5hdtlklq7h9
@@ -607,7 +587,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    which will produce the following example output:
 
 
-> ## Code Out
+> <code-out-title>Example output</code-out-title>
 > ```
 >    JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 >    212     debug basic.sh   ubuntu  R       0:03      1 bibigrid-worker-1-1-us6t5hdtlklq7h9
@@ -625,7 +605,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    cat slurm-*.out
    ```
    
-> ## Code Out: Example output
+> <code-out-title>Example output</code-out-title>
 >    ```
 >    bibigrid-worker-1-1-us6t5hdtlklq7h9
 >    ```
@@ -646,7 +626,7 @@ or are just in `idle` state and the column `NODELIST` which is just a list of no
    Which is simply reading out the `SLURM_ARRAY_TASK_ID` variable and placing them in a file in an
    output directory:
 
-> ## Code In
+> <code-in-title>Code-in</code-in-title>
 >    ```bash
 >    #!/bin/bash
 >    
@@ -683,39 +663,39 @@ Please download the updated script by using wget:
 wget https://openstack.cebitec.uni-bielefeld.de:8080/simplevm-workshop/search.sh
 ```
 
-> ## This is the content of the script
-> > ```bash
-> > #!/bin/bash
-> >
-> > #Create an output directory
-> > mkdir output_final
-> >
-> > #Use the conda environment you installed in your snapshot and activate it
-> > eval "$(conda shell.bash hook)"
-> > conda activate denbi
-> > 
-> > #Add S3 SRA OpenStack Config
-> > /vol/spool/mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
-> > 
-> > #Define search function you have already used in part 3
-> > search(){
-> >    left_read=$(echo $1 | cut -d ' '  -f 1);  
-> >    right_read=$(echo $1 | cut -d ' ' -f 2);
-> >    sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
-> >    /vol/spool/mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
-> >         | sed "s/^/${sra_id}\t/g"  \
-> >         | sed 's/\//\t/' > output_final/${sra_id}.txt ;
-> > }
-> > 
-> > #Create a variable for the array task id
-> > LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
-> > LINE=$(sed "${LINE_NUMBER}q;d" reads2.tsv)
-> > 
-> > #Search for the datasets
-> > search ${LINE} 
-> > ```
+> <details-title>This is the content of the script</details-title>
+>  ```bash
+>  #!/bin/bash
+> 
+>  #Create an output directory
+>  mkdir output_final
+> 
+>  #Use the conda environment you installed in your snapshot and activate it
+>  eval "$(conda shell.bash hook)"
+>  conda activate denbi
+>  
+>  #Add S3 SRA OpenStack Config
+>  /vol/spool/mc config host add sra https://openstack.cebitec.uni-bielefeld.de:8080 "" ""
+>  
+>  #Define search function you have already used in part 3
+>  search(){
+>     left_read=$(echo $1 | cut -d ' '  -f 1);  
+>     right_read=$(echo $1 | cut -d ' ' -f 2);
+>     sra_id=$(echo ${left_read} | rev | cut -d '/' -f 1 | rev | cut -d '_' -f 1 | cut -d '.' -f 1);
+>     /vol/spool/mc cat $left_read $right_read | mash screen -p 3 genomes.msh - \
+>          | sed "s/^/${sra_id}\t/g"  \
+>          | sed 's/\//\t/' > output_final/${sra_id}.txt ;
+>  }
+>  
+>  #Create a variable for the array task id
+>  LINE_NUMBER=${SLURM_ARRAY_TASK_ID}
+>  LINE=$(sed "${LINE_NUMBER}q;d" reads2.tsv)
+>  
+>  #Search for the datasets
+>  search ${LINE} 
+>  ```
 >
-{: .keypoints}
+{: .details}
 
 2. The input for the script is a file containing fastq datasets (`reads.tsv`) and
 a file containing a sketch of the genomes.

@@ -1,4 +1,6 @@
-- name: deKCD
+- name: 
+  - deKCD
+  - de.KCD
   logo: /assets/img/deKCD.png
 
 - name: deNBI
@@ -51,3 +53,6 @@
 
 - name: uni-freiburg
   logo: /assets/img/uni-freiburg.svg
+
+- name: BMBF
+  logo: /assets/img/BMFTR_en_DTP_CMYK_gef_durch.width-400.jpg

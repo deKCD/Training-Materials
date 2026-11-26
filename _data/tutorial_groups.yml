@@ -1,37 +1,53 @@
 - title: Unix
-  description: Our Core Curriculum consists of the lessons in the table below.
+  description: Tutorials focused on basic Unix / Linux commands and shell usage.
   tutorials:
     - unix-course
 
 - title: Cloud computing
-  description: Tutorials focused on ...
+  description: Tutorials focused on using the de.NBI Cloud infrastructure and project types.
   tutorials:
     - simpleVMWorkshop
     - bibigrid
 
-- title: Machine Learning on Cloud infrastructure
-  description: Tutorials focused on ...
+- title: Cloud application deployment
+  description: Tutorials in this group offer hands-on experience in building, containerizing, and deploying applications from local development environments to the cloud.
   tutorials:
-    - ml-fastapi
-    - ml-streamlit
+    - data-dashboard-webapp
+
+- title: Machine Learning on Cloud infrastructure
+  description: Tutorials focused on setting up machine learning toolkits and applications on cloud infrastructure.
+  tutorials:
 
 - title: PATCH Tutorials
   description: Tutorials in this group contain learning material about the tools contained inside the pangenomics toolbox PATCH
   tutorials:
-    - corer
-    - panbench
 
-- title: Basic Data Management in the de.NBI Cloud
-  description: Tutorial focused on ...
+- title: Genomics and Metagenomics
+  description: Tutorials focused on handling of genomics and metagenomics sequencing data
   tutorials:
-    - DM_in_the_deNBI_cloud
-
-- title: Metagenomics
-  description: Tutorials focused on dealing with metagenomics seqeuncing data
-  tutorials:
+    - mgworkshop_qc
+    - mgworkshop_assembly
+    - mgworkshop_assembly_eval
+    - mgworkshop_binning_classification
+    - mgworkshop_toolkit_jupyter
     - basicsAmpliconQC
+    - nanopore
+    - mgtk_short
+    - genome-annotation
+    - genome-assembly
 
 - title: Data Management on the Cloud
-  description: Tutorials focused on Data Management solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
+  description: Tutorials focused on data management best practices, solutions on the Cloud, including how to adapt a solution to the cloud (Kubernetes and S3 storage)
   tutorials:
+    - DM_in_the_deNBI_cloud
     - dm_repository_use
+
+- title: Incubator
+  description: Tutorials in this group are under review.
+  tutorials:
+    - Microbial_RDM
+    - ansible
+    - ml-fastapi
+    - ml-streamlit
+    - panbench
+
